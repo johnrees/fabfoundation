@@ -8,7 +8,7 @@ gem 'sqlite3'
 gem "sorcery", github: 'NoamB/sorcery'
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 4.0.0'
-
+gem "carmen-rails"
 # Use Uglifier as compressor for JavaScript assets
 gem 'uglifier', '>= 1.3.0'
 
