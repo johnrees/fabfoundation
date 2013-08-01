@@ -45,6 +45,8 @@ describe "Labs" do
       user_login user
       click_link "Add a lab"
       fill_in "Name", with: "New Lab"
+      fill_in "Address", with: "Some Address"
+      fill_in "Address notes", with: "On the roof"
       click_button "Add Lab"
       expect(page).to have_selector("h1", text: "Thank you")
     end
