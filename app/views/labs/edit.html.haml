@@ -1,0 +1,18 @@
+= form_for @lab do |f|
+  .field
+    = f.label :name
+    = f.text_field :name
+
+  .field
+    = f.label :address
+    = f.text_area :address
+
+    = f.label :country_code
+    -# = f.country_select :country_code
+
+  .field
+    = f.label :address_notes
+    = f.text_field :address_notes
+
+  .actions
+    = f.submit

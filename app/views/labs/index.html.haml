@@ -1,2 +1,3 @@
 - @labs.each do |lab|
-  = link_to lab, lab
+  = content_tag_for :div, lab do
+    = link_to lab, lab

@@ -6,4 +6,15 @@ class ApplicationController < ActionController::Base
     redirect_to login_url, :alert => "First login to access this page."
   end
 
+private
+
+  def true_current_user
+    if current_user
+      current_user
+    else
+      User.new
+    end
+  end
+  helper_method :true_current_user
+
 end

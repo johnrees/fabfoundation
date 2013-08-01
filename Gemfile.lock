@@ -7,6 +7,14 @@ GIT
       oauth (~> 0.4.4)
       oauth2 (~> 0.8.0)
 
+GIT
+  remote: git://github.com/petergoldstein/carmen-rails.git
+  revision: 2923ea73d6c0626451032f2ccde9904e181a33b7
+  specs:
+    carmen-rails (1.0.0)
+      carmen (~> 1.0.0)
+      rails
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -37,6 +45,9 @@ GEM
     addressable (2.3.5)
     arel (4.0.0)
     atomic (1.1.10)
+    authority (2.7.0)
+      activesupport (>= 3.0.0)
+      rake (>= 0.8.7)
     bcrypt-ruby (3.0.1)
     builder (3.1.4)
     capybara (2.1.0)
@@ -47,9 +58,6 @@ GEM
       xpath (~> 2.0)
     carmen (1.0.0)
       unicode_utils (~> 1.4.0)
-    carmen-rails (1.0.0)
-      carmen (~> 1.0.0.beta2)
-      rails
     coderay (1.0.9)
     coffee-rails (4.0.0)
       coffee-script (>= 2.2.0)
@@ -211,8 +219,9 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  authority
   capybara
-  carmen-rails
+  carmen-rails!
   coffee-rails (~> 4.0.0)
   factory_girl_rails
   guard

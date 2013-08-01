@@ -1,4 +1,6 @@
 class Lab < ActiveRecord::Base
+  include Authority::Abilities
+  self.authorizer_name = 'LabAuthorizer'
 
   validates_presence_of :name
 
