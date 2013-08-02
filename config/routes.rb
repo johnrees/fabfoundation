@@ -1,6 +1,5 @@
 Fabfoundation::Application.routes.draw do
 
-
   get "labs/thank_you"
   get "static/home"
   get "static/secret"
