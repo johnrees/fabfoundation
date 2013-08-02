@@ -1,0 +1,6 @@
+%h1 Upcoming Events
+- @events.each do |event|
+  .day= event.starts_at.stamp("2nd August, 2013")
+  %h3= link_to event, event
+  at
+  = link_to event.lab, event.lab

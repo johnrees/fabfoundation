@@ -11,7 +11,20 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20130801233542) do
+ActiveRecord::Schema.define(version: 20130802002737) do
+
+  create_table "events", force: true do |t|
+    t.integer  "lab_id"
+    t.string   "name"
+    t.text     "details"
+    t.datetime "starts_at"
+    t.datetime "ends_at"
+    t.boolean  "all_day",    default: false, null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "events", ["lab_id"], name: "index_events_on_lab_id"
 
   create_table "labs", force: true do |t|
     t.string   "name"

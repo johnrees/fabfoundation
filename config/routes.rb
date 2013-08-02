@@ -1,4 +1,7 @@
 Fabfoundation::Application.routes.draw do
+
+  resources :events
+
   get "labs/thank_you"
   resources :labs
   get "static/home"
@@ -11,4 +14,5 @@ Fabfoundation::Application.routes.draw do
   resources :sessions
 
   root 'static#home'
+
 end
