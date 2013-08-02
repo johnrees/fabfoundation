@@ -4,6 +4,10 @@ class LabsController < ApplicationController
   authorize_actions_for Lab
   authority_actions thank_you: 'create'
 
+  def index
+    @labs = Lab.all
+  end
+
   def thank_you
   end
 
@@ -32,10 +36,6 @@ class LabsController < ApplicationController
     else
       render :new
     end
-  end
-
-  def index
-    @labs = Lab.all
   end
 
   def show

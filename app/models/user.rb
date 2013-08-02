@@ -6,4 +6,8 @@ class User < ActiveRecord::Base
   def to_s
     email
   end
+
+  def admin?
+    username == "admin"
+  end
 end

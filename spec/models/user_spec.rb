@@ -8,4 +8,9 @@ describe User do
     end
   end
 
+  it "has admin" do
+    expect(FactoryGirl.create(:user)).to_not be_admin
+    expect(FactoryGirl.create(:admin)).to be_admin
+  end
+
 end
