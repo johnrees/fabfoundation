@@ -1,4 +1,7 @@
 class Lab < ActiveRecord::Base
+
+  has_paper_trail
+
   include Authority::Abilities
   self.authorizer_name = 'LabAuthorizer'
 

@@ -8,6 +8,15 @@ GIT
       oauth2 (~> 0.8.0)
 
 GIT
+  remote: git://github.com/airblade/paper_trail.git
+  revision: c441a5de2d61042126bb042c3c18012fca3af32b
+  branch: rails4
+  specs:
+    paper_trail (2.7.2)
+      activerecord (~> 4.0)
+      railties (~> 4.0)
+
+GIT
   remote: git://github.com/petergoldstein/carmen-rails.git
   revision: 2923ea73d6c0626451032f2ccde9904e181a33b7
   specs:
@@ -230,6 +239,7 @@ DEPENDENCIES
   jbuilder (~> 1.2)
   jquery-rails
   launchy
+  paper_trail!
   rails (= 4.0.0)
   rb-fsevent
   rspec-rails

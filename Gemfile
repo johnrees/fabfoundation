@@ -11,7 +11,7 @@ gem 'sass-rails', '~> 4.0.0'
 gem "carmen-rails", github: 'petergoldstein/carmen-rails'
 # Use Uglifier as compressor for JavaScript assets
 gem 'uglifier', '>= 1.3.0'
-
+gem 'paper_trail', github: 'airblade/paper_trail', branch: 'rails4'
 # Use CoffeeScript for .js.coffee assets and views
 gem 'coffee-rails', '~> 4.0.0'
 

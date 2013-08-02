@@ -1,2 +1,3 @@
 Tests!
 Super Admin Area
+fix current_user to use nil and not false
