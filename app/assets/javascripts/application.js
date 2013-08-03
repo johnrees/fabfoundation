@@ -12,7 +12,9 @@
 //
 //= require jquery
 //= require jquery_ujs
+//= require foundation
 //= require moment.min
 //= require_tree .
 
 moment().format()
+$(document).foundation();
