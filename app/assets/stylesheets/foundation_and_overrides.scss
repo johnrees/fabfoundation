@@ -34,7 +34,7 @@
 // $success-color: #5da423;
 
 // We use these to make sure border radius matches unless we want it different.
-// $global-radius: 3px;
+$global-radius: 20px;
 // $global-rounded: 1000px;
 
 // We use these to control inset shadow shiny edges and depressions.
@@ -85,8 +85,8 @@
 //
 
 // We use these to control header font styles
-// $header-font-family: "Helvetica Neue", "Helvetica", Helvetica, Arial, sans-serif;
-// $header-font-weight: bold;
+$header-font-family: "cabin", "Helvetica Neue", "Helvetica", Helvetica, Arial, sans-serif;
+// $header-font-weight: normal;
 // $header-font-style: normal;
 // $header-font-color: #222;
 // $header-line-height: 1.4;
@@ -259,12 +259,12 @@
 // $button-function-factor: 10%;
 
 // We use these to control button border styles.
-// $button-border-width: 1px;
+$button-border-width: 0;
 // $button-border-style: solid;
 // $button-border-color: darken($primary-color, $button-function-factor);
 
 // We use this to set the default radius used throughout the core.
-// $button-radius: $global-radius;
+$button-radius: $global-radius;
 
 // We use this to set default opacity for disabled buttons.
 // $button-disabled-opacity: 0.6;
@@ -359,7 +359,7 @@
 // $alert-function-factor: 10%;
 
 // We use these to control border styles.
-// $alert-border-style: solid;
+$alert-border-style: none;
 // $alert-border-width: 1px;
 // $alert-border-color: darken($primary-color, $alert-function-factor);
 // $alert-bottom-margin: emCalc(20px);
@@ -971,8 +971,8 @@
 // $topbar-bg: #111;
 
 // Height and margin
-// $topbar-height: 45px;
-// $topbar-margin-bottom: emCalc(30px);
+$topbar-height: 70px;
+$topbar-margin-bottom: emCalc(20px);
 
 // Control Input height for top bar
 // $topbar-input-height: 2.45em;
@@ -982,13 +982,13 @@
 // $topbar-title-font-size: emCalc(17px);
 
 // Set the link colors and styles for top-level nav
-// $topbar-link-color: #fff;
-// $topbar-link-weight: bold;
-// $topbar-link-font-size: emCalc(13px);
+$topbar-link-color: #008FD5;
+$topbar-link-weight: normal;
+$topbar-link-font-size: emCalc(15px);
 
 // Style the top bar dropdown elements
-// $topbar-dropdown-bg: #333;
-// $topbar-dropdown-link-color: #fff;
+$topbar-dropdown-bg: #FFF;
+$topbar-dropdown-link-color: #AAA;
 // $topbar-dropdown-toggle-size: 5px;
 // $topbar-dropdown-toggle-color: #fff;
 // $topbar-dropdown-toggle-alpha: 0.5;
@@ -998,7 +998,7 @@
 // $topbar-menu-link-transform: uppercase;
 // $topbar-menu-link-font-size: emCalc(13px);
 // $topbar-menu-link-weight: bold;
-// $topbar-menu-link-color: #fff;
+$topbar-menu-link-color: #AAA;
 // $topbar-menu-icon-color: #fff;
 // $topbar-menu-link-color-toggled: #888;
 // $topbar-menu-icon-color-toggled: #888;

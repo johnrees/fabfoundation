@@ -1,5 +1,7 @@
-%h1= @event
-at
-= link_to @event.lab, @event.lab
+.row
+  .large-12.columns
+    %h1= @event
+    at
+    = link_to @event.lab, @event.lab
 
-= simple_format @event.details
+    = simple_format @event.details

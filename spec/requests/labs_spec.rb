@@ -16,13 +16,13 @@ describe "Labs" do
     it "requires authentication" do
       lab = FactoryGirl.create(:lab)
       visit edit_lab_path(lab)
-      expect(current_path).to eq(login_path)
+      expect(current_path).to eq(signin_path)
     end
 
     it "can be updated" do
       lab = FactoryGirl.create(:lab)
       user = FactoryGirl.create(:user)
-      user_login user
+      user_signin user
       visit lab_path(lab)
       click_link "Edit"
       fill_in "Name", with: "New Name"
@@ -37,12 +37,12 @@ describe "Labs" do
 
     it "requires authentication" do
       visit new_lab_path
-      expect(current_path).to eq(login_path)
+      expect(current_path).to eq(signin_path)
     end
 
     it "authenticated user can add a lab" do
       user = FactoryGirl.create(:user)
-      user_login user
+      user_signin user
       click_link "Add a lab"
       fill_in "Name", with: "New Lab"
       fill_in "Address", with: "Some Address"

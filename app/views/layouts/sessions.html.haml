@@ -1,0 +1,33 @@
+!!! 5
+/[if lt IE 7 ] <html class=\"ie6\" lang=\"en\">
+/[if IE 7 ]    <html class=\"ie7\" lang=\"en\">
+/[if IE 8 ]    <html class=\"ie8\" lang=\"en\">
+/[if IE 9 ]    <html class=\"ie9\" lang=\"en\">
+/[if (gt IE 9)|!(IE)] <!--> <html lang=\"en\">
+
+%head
+  %meta{ :charset => "utf-8" }/
+  %meta{ "http-equiv" => "X-UA-Compatible", :content => "IE=7" }/
+  %meta{ :name => "viewport", :content => "width=device-width, initial-scale=1.0" }/
+  %title= content_for?(:title) ? yield(:title) : "Fab Foundation World"
+
+  = stylesheet_link_tag "application", "http://fonts.googleapis.com/css?family=Cabin"
+  = javascript_include_tag "vendor/custom.modernizr"
+  = csrf_meta_tag
+
+%body.sessions
+  .row
+    .columns.large-12.text-right.account-yet
+      %p= yield("account-yet")
+  .row.hide-for-small
+    .columns.large-12.large-centered.text-center
+      = image_tag "small-fab.png", id: 'small-fab'
+  .row
+    .columns.large-5.large-centered
+      - flash.each do |name, msg|
+        = content_tag :div, "data-alert" => true, :id => "flash_#{name}", :class => "alert-box" do
+          = msg
+          = link_to "×", "#", class: 'close'
+
+  = yield
+  = javascript_include_tag "application"

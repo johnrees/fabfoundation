@@ -1,18 +1,21 @@
-= form_for @lab do |f|
-  .field
-    = f.label :name
-    = f.text_field :name
+.row
+  .large-12.columns
 
-  .field
-    = f.label :address
-    = f.text_area :address
+    = form_for @lab do |f|
+      .field
+        = f.label :name
+        = f.text_field :name
 
-    = f.label :country_code
-    -# = f.country_select :country_code
+      .field
+        = f.label :address
+        = f.text_area :address
 
-  .field
-    = f.label :address_notes
-    = f.text_field :address_notes
+        = f.label :country_code
+        -# = f.country_select :country_code
 
-  .actions
-    = f.submit
+      .field
+        = f.label :address_notes
+        = f.text_field :address_notes
+
+      .actions
+        = f.submit

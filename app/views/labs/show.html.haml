@@ -1,9 +1,11 @@
-= link_to "Edit", edit_lab_path(@lab) if true_current_user.can_update?(@lab)
+.row
+  .columns.large-12
+    = link_to "Edit", edit_lab_path(@lab) if true_current_user.can_update?(@lab)
 
-%h1= @lab.name
-= simple_format @lab.address
-= @lab.address_notes
-= @lab.country
+    %h1= @lab.name
+    = simple_format @lab.address
+    = @lab.address_notes
+    = @lab.country
 
 -# %h4 History
 -# - @lab.versions.each do |version|

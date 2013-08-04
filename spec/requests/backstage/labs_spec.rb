@@ -4,18 +4,18 @@ describe "Labs" do
 
   it "disallows unauthenticated users" do
     visit backstage_root_path
-    expect(current_path).to eq(login_path)
+    expect(current_path).to eq(signin_path)
   end
 
   it "disallows general users" do
-    user_login FactoryGirl.create(:user)
+    user_signin FactoryGirl.create(:user)
     visit backstage_root_path
     expect(current_path).to eq(root_path)
   end
 
   it "can edit" do
     FactoryGirl.create(:lab, name: 'newlab')
-    user_login FactoryGirl.create(:admin)
+    user_signin FactoryGirl.create(:admin)
     visit backstage_labs_path
     click_link 'newlab'
     fill_in "Name", with: "newerlab"

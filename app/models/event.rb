@@ -10,4 +10,8 @@ class Event < ActiveRecord::Base
     name
   end
 
+  def to_param
+    "#{id} #{name} at #{lab}".parameterize
+  end
+
 end

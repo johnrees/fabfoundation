@@ -1,0 +1,55 @@
+body {
+  font-family: 'cabin';
+}
+.image {
+  width: 90px;
+  float: left;
+  // padding: 2px;
+  // border: 1px solid #F4F4F4;
+  height: 90px;
+  margin-right: 10px;
+}
+
+#small-fab {
+  height: 120px;
+  margin-bottom: 20px;
+}
+
+header {
+
+  &.contain-to-grid, .top-bar {
+    background: none !important;
+  }
+
+
+    .top-bar-section a {
+      background: none !important;
+    }
+
+    .top-bar-section > ul > .divider {
+      border: none;
+    }
+  }
+
+body.sessions {
+
+  background: #f8f8f8;
+
+  .account-yet {
+    color: #AAA;
+    padding-top: 20px;
+  }
+
+  .field {
+    input {
+      font-size: 1.3em;
+      border-radius: 10px;
+      border: none;
+      // padding: 10px;
+    }
+    label {
+      display: none;
+    }
+  }
+
+}

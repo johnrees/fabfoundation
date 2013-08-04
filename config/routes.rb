@@ -3,8 +3,8 @@ Fabfoundation::Application.routes.draw do
   get "labs/thank_you"
   get "static/home"
   get "static/secret"
-  get "logout" => "sessions#destroy", :as => "logout"
-  get "login" => "sessions#new", :as => "login"
+  get "signout" => "sessions#destroy", :as => "logout"
+  get "signin" => "sessions#new", :as => "signin"
   get "signup" => "users#new", :as => "signup"
 
   resources :labs

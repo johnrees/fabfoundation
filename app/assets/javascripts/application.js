@@ -14,6 +14,7 @@
 //= require jquery_ujs
 //= require foundation
 //= require moment.min
+//= require holder
 //= require_tree .
 
 moment().format()

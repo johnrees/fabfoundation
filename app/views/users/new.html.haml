@@ -1,0 +1,25 @@
+- content_for("account-yet") do
+  Already registered? #{link_to "Sign in", signin_path}
+
+.row
+  .large-5.large-centered.columns
+    = form_for @user do |f|
+      - if @user.errors.any?
+        .error_messages
+          %h2 Form is invalid
+          %ul
+            - for message in @user.errors.full_messages
+              %li= message
+      .field
+        = f.label :email
+        = f.text_field :email, placeholder: 'Email'
+      .field
+        = f.label :username
+        = f.text_field :username, placeholder: 'Username'
+      .field
+        = f.label :password
+        = f.password_field :password, placeholder: 'Password'
+      .field
+        = f.label :password_confirmation
+        = f.password_field :password_confirmation, placeholder: 'Confirmation'
+      .actions= f.submit "Sign up", class: 'button '
