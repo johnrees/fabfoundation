@@ -3,6 +3,7 @@ class EventsController < ApplicationController
 
   def index
     @events = Event.all
+    @event_days = @events.group_by { |e| e.starts_at.beginning_of_day }
   end
 
   def show

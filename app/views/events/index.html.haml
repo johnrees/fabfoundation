@@ -1,22 +1,23 @@
 .row
   .columns.large-12
-    = link_to "Add Event", new_event_path
+    = link_to "Add Event", new_event_path, class: 'button'
 .row
   .columns.large-4
     .filters
       Filter by region
   .columns.large-8
-    - @events.each do |event|
+    - @event_days.sort.each do |day, events|
       .row
         .columns.large-12
           .day
-            %h4= event.starts_at.stamp("2nd August, 2013")
+            = day.stamp("2nd August, 2013")
+          - events.each do |event|
 
-      = content_tag_for :div, event, class: 'row' do
-        .columns.large-12
-          .image
-            = holder_tag 80
-          .details{style: "float: left"}
-            %h5= link_to event, event
-            at
-            = link_to event.lab, event.lab
+            = content_tag_for :div, event, class: 'row' do
+              .columns.large-12
+                .image
+                  = holder_tag 80
+                .details{style: "float: left"}
+                  %h5= link_to event, event
+                  at
+                  = link_to event.lab, event.lab
