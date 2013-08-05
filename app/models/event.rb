@@ -4,7 +4,7 @@ class Event < ActiveRecord::Base
   include Authority::Abilities
   self.authorizer_name = 'EventAuthorizer'
 
-  validates_presence_of :name, :starts_at, :lab
+  validates_presence_of :name#, :lab #:starts_at,
 
   def to_s
     name

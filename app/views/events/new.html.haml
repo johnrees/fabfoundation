@@ -1,0 +1,13 @@
+.row
+  .columns.large-12
+    = form_for @event do |f|
+      .field
+        = f.label :name
+        = f.text_field :name
+      .field
+        = f.label :details
+        = f.text_area :details
+      .field
+        = f.label :starts_at
+        = f.datetime_field :starts_at
+      = f.submit

@@ -4,6 +4,7 @@ source 'https://rubygems.org'
 gem 'rails', '4.0.0'
 gem 'authority'
 gem 'holder_rails'
+gem 'whenever', require: false
 # Use sqlite3 as the database for Active Record
 gem 'sqlite3'
 gem "sorcery", github: 'NoamB/sorcery'
@@ -19,7 +20,7 @@ gem 'stamp'
 gem 'zurb-foundation', '~> 4.0.0'
 # See https://github.com/sstephenson/execjs#readme for more supported runtimes
 # gem 'therubyracer', platforms: :ruby
-
+gem 'capistrano'
 # Use jquery as the JavaScript library
 gem 'jquery-rails'
 gem 'haml-rails'
