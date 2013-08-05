@@ -1,0 +1,15 @@
+= form_for event do |f|
+  .field
+    = f.label :lab_id, "Lab"
+    = f.collection_select :lab_id, Lab.all, :id, :name, include_blank: true
+  .field
+    = f.label :name
+    = f.text_field :name
+  .field
+    = f.label :starts_at
+    = f.datetime_select :starts_at
+  .field
+    = f.label :details
+    = f.text_area :details
+
+  = f.submit

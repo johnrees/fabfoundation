@@ -1,6 +1,12 @@
 .row
   .large-12.columns
     = form_for @lab do |f|
+      - if @lab.errors.any?
+        .error_messages
+          %h2 Form is invalid
+          %ul
+            - for message in @lab.errors.full_messages
+              %li= message
       .field
         = f.label :name
         = f.text_field :name

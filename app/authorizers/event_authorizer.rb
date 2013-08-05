@@ -4,6 +4,11 @@ class EventAuthorizer < ApplicationAuthorizer
     true
   end
 
+  def self.updatable_by?(user)
+    true
+  end
+
+
   def self.readable_by?(user)
     true
   end
