@@ -1,4 +1,6 @@
-= form_for [:backstage, @lab] do |f|
-  = f.label :name
-  = f.text_field :name
-  = f.submit
+.row
+  .columns.large-12
+    = form_for [:backstage, @lab] do |f|
+      = f.label :name
+      = f.text_field :name
+      = f.submit

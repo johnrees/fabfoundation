@@ -15,4 +15,13 @@ describe User do
     expect(FactoryGirl.create(:admin)).to be_admin
   end
 
+  it "has managable_labs" do
+    user = FactoryGirl.create(:user)
+    unmanaged = FactoryGirl.create(:lab)
+    managed = FactoryGirl.create(:lab, users: [user])
+    expect(user.managed_labs).to eq([managed])
+    expect(managed).to be_updatable_by(user)
+    expect(unmanaged).to_not be_updatable_by(user)
+  end
+
 end

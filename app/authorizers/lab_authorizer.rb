@@ -12,4 +12,8 @@ class LabAuthorizer < ApplicationAuthorizer
     user.persisted?
   end
 
+  def updatable_by?(user)
+    user.persisted? and user.labs.include? resource
+  end
+
 end

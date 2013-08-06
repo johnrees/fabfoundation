@@ -1,3 +1,6 @@
-%ul
-  - @labs.each do |lab|
-    %li= link_to lab, edit_backstage_lab_path(lab)
+.row
+  .columns.large-12
+    %table
+      - @labs.each do |lab|
+        %tr
+          %td= link_to lab, edit_backstage_lab_path(lab)

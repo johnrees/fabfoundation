@@ -7,6 +7,13 @@
     = @lab.address_notes
     = @lab.country
 
+
+.row
+  .columns.large-12
+    %h5 Humans
+    - @lab.humans.each do |human|
+      = link_to human.user, human.user
+
 -# %h4 History
 -# - @lab.versions.each do |version|
 -#   = User.find(version.whodunnit)

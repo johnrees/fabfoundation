@@ -6,13 +6,25 @@ describe Lab do
   it { should have_many(:humans) }
   it { should have_many(:users).through(:humans) }
 
-  it "has show page" do
-    name = "MIT Media Lab"
-    lab = FactoryGirl.create(:lab, name: name)
-    visit root_url
-    click_link "Labs"
-    click_link name
-    expect(page).to have_selector("h1", text: name)
+
+  describe "show page" do
+
+    it "has show page" do
+      name = "MIT Media Lab"
+      lab = FactoryGirl.create(:lab, name: name)
+      visit root_url
+      click_link "Labs"
+      click_link name
+      expect(page).to have_selector("h1", text: name)
+    end
+
+    it "shows humans" do
+      user = FactoryGirl.create(:user, username: 'donaldduck')
+      lab = FactoryGirl.create(:lab, users: [user])
+      visit lab_url(lab)
+      expect(page).to have_link('donaldduck')
+    end
+
   end
 
   describe "updating labs" do
@@ -24,8 +36,8 @@ describe Lab do
     end
 
     it "can be updated" do
-      lab = FactoryGirl.create(:lab)
       user = FactoryGirl.create(:user)
+      lab = FactoryGirl.create(:lab, users: [user])
       user_signin user
       visit lab_path(lab)
       click_link "Edit"

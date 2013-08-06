@@ -10,6 +10,10 @@ class User < ActiveRecord::Base
 
   validates_format_of :email, :with => /@/
 
+  def managed_labs
+    labs
+  end
+
   def to_s
     username
   end
