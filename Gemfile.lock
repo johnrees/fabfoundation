@@ -17,6 +17,14 @@ GIT
       railties (~> 4.0)
 
 GIT
+  remote: git://github.com/jigfox/bitmask_attributes.git
+  revision: 8eb9f8c2aa541c7584c7079d2b5ce80896e86198
+  branch: rails4
+  specs:
+    bitmask_attributes (0.4.0)
+      activerecord (>= 3.0, < 5)
+
+GIT
   remote: git://github.com/petergoldstein/carmen-rails.git
   revision: 2923ea73d6c0626451032f2ccde9904e181a33b7
   specs:
@@ -252,6 +260,7 @@ PLATFORMS
 
 DEPENDENCIES
   authority
+  bitmask_attributes!
   capistrano
   capybara
   carmen-rails!

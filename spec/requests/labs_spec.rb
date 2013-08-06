@@ -1,6 +1,10 @@
 require 'spec_helper'
 
-describe "Labs" do
+describe Lab do
+
+  it { should have_many(:events) }
+  it { should have_many(:humans) }
+  it { should have_many(:users).through(:humans) }
 
   it "has show page" do
     name = "MIT Media Lab"

@@ -27,6 +27,7 @@ gem 'haml-rails'
 # Turbolinks makes following links in your web application faster. Read more: https://github.com/rails/turbolinks
 gem 'turbolinks'
 
+gem 'bitmask_attributes', github: 'jigfox/bitmask_attributes', branch: 'rails4'
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 gem 'jbuilder', '~> 1.2'
 
