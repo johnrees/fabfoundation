@@ -28,9 +28,11 @@ describe "Events" do
     user_signin FactoryGirl.create(:user)
     click_link "Events"
     click_link "quiet party"
+    save_and_open_page
     click_link "Edit Event"
     fill_in "Name", with: "RAVE!"
     click_button "Update Event"
+
     page.should have_selector "h1", text: "RAVE!"
   end
 
