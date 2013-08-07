@@ -3,7 +3,7 @@ class Event < ActiveRecord::Base
   belongs_to :lab
   include Authority::Abilities
   self.authorizer_name = 'EventAuthorizer'
-
+  belongs_to :creator, class_name: "User"
   validates_presence_of :name, :lab, :starts_at
 
   def to_s

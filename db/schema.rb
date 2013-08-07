@@ -15,6 +15,7 @@ ActiveRecord::Schema.define(version: 20130805234349) do
 
   create_table "events", force: true do |t|
     t.integer  "lab_id"
+    t.integer  "creator_id"
     t.string   "name"
     t.text     "details"
     t.datetime "starts_at"
@@ -24,6 +25,7 @@ ActiveRecord::Schema.define(version: 20130805234349) do
     t.datetime "updated_at"
   end
 
+  add_index "events", ["creator_id"], name: "index_events_on_creator_id"
   add_index "events", ["lab_id"], name: "index_events_on_lab_id"
 
   create_table "humans", force: true do |t|
@@ -44,15 +46,35 @@ ActiveRecord::Schema.define(version: 20130805234349) do
     t.text     "address_notes"
     t.string   "state_code"
     t.string   "country_code"
+    t.integer  "creator_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
+  add_index "labs", ["creator_id"], name: "index_labs_on_creator_id"
+  add_index "labs", ["name"], name: "index_labs_on_name"
+
   create_table "users", force: true do |t|
-    t.string   "username",         null: false
-    t.string   "email"
+    t.string   "first_name"
+    t.string   "last_name"
+    t.string   "email",            null: false
     t.string   "crypted_password"
     t.string   "salt"
+    t.string   "phone"
+    t.string   "public_email"
+    t.string   "public_phone"
+    t.string   "location"
+    t.string   "country_code"
+    t.float    "latitude"
+    t.float    "longitude"
+    t.string   "url"
+    t.string   "gender"
+    t.date     "dob"
+    t.text     "bio"
+    t.string   "company"
+    t.string   "avatar"
+    t.string   "language"
+    t.string   "timezone"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

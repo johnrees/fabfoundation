@@ -1,6 +1,6 @@
 .row
   .columns.large-12
-    = link_to "Add Event", new_event_path, class: 'button'
+    = link_to "Add Event", new_event_path, class: 'button' if true_current_user.can_create? Event
 .row
   .columns.large-4
     .filters

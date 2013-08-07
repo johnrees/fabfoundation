@@ -16,12 +16,12 @@ class LabsController < ApplicationController
   end
 
   def edit
-    @lab = Lab.find(params[:id])
+    @lab = current_user.labs.find(params[:id])
     authorize_action_for(@lab)
   end
 
   def update
-    @lab = Lab.find(params[:id])
+    @lab = current_user.labs.find(params[:id])
     if @lab.update_attributes lab_params
       redirect_to lab_url(@lab), notice: "Lab Updated"
     else
@@ -30,7 +30,7 @@ class LabsController < ApplicationController
   end
 
   def create
-    @lab = Lab.create lab_params
+    @lab = current_user.labs.create lab_params
     if @lab.save
       redirect_to labs_thank_you_url
     else

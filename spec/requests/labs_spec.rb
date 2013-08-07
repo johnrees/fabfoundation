@@ -2,6 +2,7 @@ require 'spec_helper'
 
 describe Lab do
 
+  it { should belong_to :creator }
   it { should have_many(:events) }
   it { should have_many(:humans) }
   it { should have_many(:users).through(:humans) }
@@ -34,6 +35,8 @@ describe Lab do
       visit edit_lab_path(lab)
       expect(current_path).to eq(signin_path)
     end
+
+    pending "can only be updated by lab manager"
 
     it "can be updated" do
       user = FactoryGirl.create(:user)

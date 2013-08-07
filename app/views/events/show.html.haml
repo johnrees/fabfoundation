@@ -4,6 +4,6 @@
     at
     = link_to @event.lab, @event.lab
 
-    = link_to "Edit Event", edit_event_path(@event), class: 'button'
+    = link_to "Edit Event", edit_event_path(@event), class: 'button' if true_current_user.can_update?(@event)
 
     = simple_format @event.details

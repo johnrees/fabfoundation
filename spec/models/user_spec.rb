@@ -2,6 +2,7 @@ require 'spec_helper'
 
 describe User do
 
+  it { should have_many(:labs)} #creator
   it { should have_many(:labs).through(:humans) }
 
   it "validates email" do
