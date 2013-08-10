@@ -42,21 +42,13 @@ RSpec.configure do |config|
   #     --seed 1234
   config.order = "random"
   config.include Capybara::DSL
-  config.include Sorcery::TestHelpers::Rails
+  # config.include Sorcery::TestHelpers::Rails
 
-end
-
-
-module Sorcery
-  module TestHelpers
-    module Rails
-      def user_signin(user)
-        visit signin_path
-        fill_in "Username", with: user.username
-        fill_in "Password", with: "password"
-        click_button "Sign in"
-        # page.driver.post(sessions_url, { username: user.username, password: user.password})
-      end
-    end
+  def user_signin(user)
+    visit signin_path
+    fill_in "Email", with: user.email
+    fill_in "Password", with: "password"
+    click_button "Sign in"
+    # page.driver.post(sessions_url, { username: user.username, password: user.password})
   end
 end

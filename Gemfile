@@ -7,20 +7,30 @@ gem 'holder_rails'
 gem 'whenever', require: false
 # Use sqlite3 as the database for Active Record
 gem 'sqlite3'
-gem "sorcery", github: 'NoamB/sorcery'
+gem 'closure_tree'
+gem 'kaminari'
+gem 'cocoon'
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 4.0.0'
-gem "carmen-rails", github: 'petergoldstein/carmen-rails'
+# gem "carmen-rails", github: 'petergoldstein/carmen-rails'
+gem 'countries'
+gem 'country_select'
+gem 'simple_form'
+gem 'geocoder', github: 'alexreisner/geocoder'
+gem 'ancestry'
 # Use Uglifier as compressor for JavaScript assets
 gem 'uglifier', '>= 1.3.0'
 gem 'paper_trail', github: 'airblade/paper_trail', branch: 'rails4'
 # Use CoffeeScript for .js.coffee assets and views
 gem 'coffee-rails', '~> 4.0.0'
 gem 'stamp'
+gem 'state_machine'
 gem 'zurb-foundation', '~> 4.0.0'
+gem "ransack", github: "ernie/ransack"
 # See https://github.com/sstephenson/execjs#readme for more supported runtimes
 # gem 'therubyracer', platforms: :ruby
 gem 'capistrano'
+gem "font-awesome-rails", github: "bokmann/font-awesome-rails"
 # Use jquery as the JavaScript library
 gem 'jquery-rails'
 gem 'haml-rails'
@@ -38,6 +48,7 @@ end
 
 group :development do
   gem "letter_opener"
+  gem "quiet_assets"
 end
 
 group :development, :test do
@@ -52,7 +63,7 @@ group :development, :test do
   gem "factory_girl_rails"
 end
 # Use ActiveModel has_secure_password
-# gem 'bcrypt-ruby', '~> 3.0.0'
+gem 'bcrypt-ruby', '~> 3.0.0'
 
 # Use unicorn as the app server
 # gem 'unicorn'

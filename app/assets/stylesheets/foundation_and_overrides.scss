@@ -85,7 +85,7 @@ $global-radius: 20px;
 //
 
 // We use these to control header font styles
-$header-font-family: "cabin", "Helvetica Neue", "Helvetica", Helvetica, Arial, sans-serif;
+// $header-font-family: "cabin", "Helvetica Neue", "Helvetica", Helvetica, Arial, sans-serif;
 // $header-font-weight: normal;
 // $header-font-style: normal;
 // $header-font-color: #222;
@@ -951,16 +951,16 @@ $alert-border-style: none;
 // $has-tip-cursor-type: help;
 
 // $tooltip-padding: emCalc(8px);
-// $tooltip-bg: #000;
+$tooltip-bg: #222;
 // $tooltip-font-size: emCalc(15px);
 // $tooltip-font-weight: bold;
-// $tooltip-font-color: #fff;
+$tooltip-font-color: #FFF;//#fff;
 // $tooltip-line-height: 1.3;
 // $tooltip-close-font-size: emCalc(10px);
 // $tooltip-close-font-weight: normal;
 // $tooltip-close-font-color: #888;
 // $tooltip-font-size-sml: emCalc(14px);
-// $tooltip-radius: $global-radius;
+$tooltip-radius: 4px;//$global-radius;
 // $tooltip-pip-size: 5px;
 
 //
@@ -979,12 +979,12 @@ $topbar-margin-bottom: emCalc(20px);
 
 // Controlling the styles for the title in the top bar
 // $topbar-title-weight: bold;
-// $topbar-title-font-size: emCalc(17px);
+$topbar-title-font-size: emCalc(20px);
 
 // Set the link colors and styles for top-level nav
-$topbar-link-color: #008FD5;
+$topbar-link-color: #D8D8D8;
 $topbar-link-weight: normal;
-$topbar-link-font-size: emCalc(15px);
+$topbar-link-font-size: emCalc(16px);
 
 // Style the top bar dropdown elements
 $topbar-dropdown-bg: #FFF;

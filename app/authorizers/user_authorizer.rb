@@ -1,11 +1,20 @@
 class UserAuthorizer < ApplicationAuthorizer
 
-  def self.readable_by?(user)
+  def self.readable_by? user
     true
   end
 
-  def self.creatable_by?(user)
-    user.new_record?
+  def self.updatable_by? user
+    true
+  end
+
+  def updatable_by? user
+    user
+  end
+
+  def self.creatable_by? user
+    # !user
+    user
   end
 
 end

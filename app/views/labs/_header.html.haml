@@ -1,0 +1,16 @@
+.row
+  .columns.large-10.search-box.large-centered
+    .row
+      .columns.large-8.small-7
+        = search_form_for @q do |f|
+          = f.text_field :name_cont, placeholder: "Search..."
+      .columns.large-4.small-5.text-right
+        %ul.button-group.radius.even-2
+          %li
+            = link_to labs_path, class: "button #{'inactive' unless request.path == '/labs'}" do
+              = fa_icon "list"
+              List
+          %li
+            = link_to map_labs_path, class: "button #{'inactive' unless request.path == '/labs/map'}" do
+              = fa_icon "globe"
+              Map

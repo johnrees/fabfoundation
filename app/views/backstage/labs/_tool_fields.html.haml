@@ -1,0 +1,7 @@
+.nested-fields
+  %fieldset
+    = f.input_field :photo, :type => "filepicker-dragdrop", "data-fp-multiple" => true, class: 'photo-uploader'
+    = f.input :name
+    = f.input :description
+    = f.association :tool_type
+    = link_to_remove_association "remove tool", f

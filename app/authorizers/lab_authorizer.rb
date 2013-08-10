@@ -1,6 +1,6 @@
 class LabAuthorizer < ApplicationAuthorizer
 
-  def self.creatable_by?(user)
+  def self.creatable_by? user
     user.persisted?
   end
 
@@ -9,11 +9,11 @@ class LabAuthorizer < ApplicationAuthorizer
   end
 
   def self.updatable_by?(user)
-    user.persisted?
+    user
   end
 
   def updatable_by?(user)
-    user.persisted? and user.labs.include? resource
+    user and user.labs.include? resource
   end
 
 end

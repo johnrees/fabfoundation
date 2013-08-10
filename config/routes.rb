@@ -7,13 +7,27 @@ Fabfoundation::Application.routes.draw do
   get "signin" => "sessions#new", :as => "signin"
   get "signup" => "users#new", :as => "signup"
 
-  resources :labs
+  resources :labs do
+    collection do
+      get 'map'
+    end
+  end
+
   resources :events
-  resources :users
+  resources :users do
+    member do
+      patch 'register'
+    end
+  end
+
   resources :sessions
+
+  get "complete_registration/:token" => 'users#complete_registration', :as => 'complete_registration'
 
   namespace "backstage" do
     resources :labs
+    resources :users
+    resources :events
     root "labs#index"
   end
 

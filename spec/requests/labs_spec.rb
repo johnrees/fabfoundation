@@ -7,9 +7,17 @@ describe Lab do
   it { should have_many(:humans) }
   it { should have_many(:users).through(:humans) }
 
+  describe "map" do
+    it "lists all labs" do
+      visit root_path
+      click_link "Labs"
+      click_link "Map"
+      save_and_open_page
+      page.should have_css "#map"
+    end
+  end
 
   describe "show page" do
-
     it "has show page" do
       name = "MIT Media Lab"
       lab = FactoryGirl.create(:lab, name: name)
@@ -20,10 +28,10 @@ describe Lab do
     end
 
     it "shows humans" do
-      user = FactoryGirl.create(:user, username: 'donaldduck')
+      user = FactoryGirl.create(:user, first_name: 'Bart', last_name: 'Simpson')
       lab = FactoryGirl.create(:lab, users: [user])
       visit lab_url(lab)
-      expect(page).to have_link('donaldduck')
+      expect(page).to have_link('Bart Simpson')
     end
 
   end
@@ -69,6 +77,16 @@ describe Lab do
       click_button "Add Lab"
       expect(page).to have_selector("h1", text: "Thank you")
     end
+
+    it "confirmation email to creator after creating lab"
+    it "notification email to admins after creating lab"
+
+  end
+
+  describe "approving labs" do
+
+    it "unapproved labs are not visible"
+    it "approved labs are visible"
 
   end
 

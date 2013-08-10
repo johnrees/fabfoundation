@@ -1,0 +1,43 @@
+
+-# - if Lab.creatable_by? authority_user
+-#   = link_to "Add a lab", new_lab_path, class: 'button'
+
+- if action_name == 'index'
+  %fieldset
+    %legend= link_to "Map", map_labs_path
+    #map{"data-lat" => 51.505, "data-lng" => -0.09, "data-zoom" => 2}
+
+= search_form_for @q do |f|
+  %fieldset
+    %legend Equipment
+    %table
+      - ToolType.all.each do |tool|
+        %tr
+          %td
+            = check_box_tag tool
+            %label.has-tip.tip-right{"data-tooltip" => true, :title => tool.description }
+              = tool
+          %td.hint= (rand() * 100).to_i
+
+  %fieldset
+    %legend Type
+    %table
+      %tr
+        %td
+          = check_box_tag :kind_eq
+          All
+        %td.hint= @labs.try(:total_count) ? @labs.total_count : @labs.size
+      - %w(supernode fab_lab mini_fab_lab planned_fab_lab).each do |type|
+        %tr
+          %td
+            = check_box_tag type
+            %label.has-tip.tip-right{"data-tooltip" => true, :title => "A Supernode is a Fab Lab that helps to coordinate other Fab Labs associated with it"}
+              = type.humanize.titleize
+          %td.hint= @labs.with_kind(type).size
+    -# = f.select :type_eq
+  -# %fieldset
+  -#   = f.label :name_cont
+  -#   = f.text_field :name_cont
+
+  -# /= f.select :kind_eq, [:all, :planned, :mini, :fab_lab]
+  -# = f.submit

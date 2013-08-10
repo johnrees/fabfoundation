@@ -8,6 +8,7 @@ class CreateEvents < ActiveRecord::Migration
       t.datetime :starts_at
       t.datetime :ends_at
       t.boolean :all_day, default: false, null: false
+      t.string :image
       t.timestamps
     end
     add_index :events, :lab_id

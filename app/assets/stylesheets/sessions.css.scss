@@ -1,6 +1,4 @@
-body {
-  font-family: 'cabin';
-}
+
 .image {
   width: 90px;
   float: left;
@@ -18,6 +16,13 @@ body {
 header {
 
   &.contain-to-grid, .top-bar {
+    // background: none !important;
+    background: #333;
+  }
+  &.contain-to-grid {
+    margin-bottom: 20px;
+  }
+  ul {
     background: none !important;
   }
 

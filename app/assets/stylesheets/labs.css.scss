@@ -1,3 +1,190 @@
-.lab.row {
-  margin-bottom: 0.5em;
+.c-labs {
+  span.kind {
+    font-size: 0.9em;
+    margin-left: 0.2em;
+  }
+  legend, legend a {
+    color: #888;
+  }
+  legend {
+    font-weight: normal;
+    font-size: 0.9em;
+  }
+  a.inactive {
+    background: #DDD;
+  }
+  img {
+    float: right;
+  }
+  .sort a {
+    margin-left: 0.5em;
+  }
+  .search-box {
+    padding: 15px 10px 0;
+    background: #F6F6F6;
+    margin-bottom: 20px;
+    border-radius: 8px;
+    input {
+      border: none;
+      font-size: 1.1em;
+    }
+  }
+  .lab.row {
+    min-height: 90px;
+    border-bottom: 1px solid #EEE;
+    margin-bottom: 10px;
+  }
+  .sidebar {
+    label {
+      font-weight: normal;
+      display: inline;
+      font-size: 1em;
+    }
+    fieldset {
+      padding: 5px 8px 0;
+    }
+    table {
+      border: none;
+    }
+    tr {
+      background: none;
+    }
+  }
+  .sort {
+    margin-bottom: 1em;
+  }
+
+  img.tool {
+    padding: 6px;
+    border: 8px solid #FFF;
+    margin-top: 10px;
+  }
+
+  img.tool-icon {
+    margin-right: 5px;
+  }
+
+  .name {
+    line-height: 40px;
+  }
+  #sticky {
+    background: rgba(255,255,255,0.97);
+  }
+
+  .sidebar {
+    #map {
+      height: 200px;
+    }
+  }
+
+  .a-map {
+    #map {
+      height: 550px;
+    }
+  }
+
+  #map {
+    height: 400px;
+    margin-bottom: 20px;
+  }
+
+  .people {
+    line-height: 1em;
+  }
+
+  #head {
+    margin-bottom: 20px;
+  }
+
+  .image {
+    display: block;
+    height: 90px;
+  }
+
+  #equipment ul {
+    &, & li {
+    list-style: none;
+    margin: 0;
+    }
+  }
+  .leaflet-top, .leaflet-bottom {
+    z-index: 100 !important;
+  }
+  span.count {
+    background: #444;
+    color: #FFF;
+    display: inline;
+    padding: 4px;
+    border-radius: 4px;
+    font-size: 0.7em;
+  }
+  table.opening-hours {
+    th {
+      text-align: right;
+      font-weight: bold;
+    }
+  }
+  .description {
+    margin-top: 20px;
+  }
+
+  h1 {
+    margin: 0;
+  }
+
+  #image {
+    float: left;
+    width: 130px;
+  }
+
+  .details {
+    float: left;
+  }
+
+  li.user {
+    display: block;
+  }
+
+  .country, .hours, .phone {
+    float: left;
+    margin-right: 20px;
+    margin-bottom: 0.5em;
+  }
+
+  .phone {
+    clear: left;
+  }
+
+  #head {
+    overflow: hidden;
+  }
+
+  .websites {
+    list-style: none;
+  }
+
+  #location {}
+
+  .row {
+    // border-bottom: 1px dashed #EEE;
+  }
+
+  #sticky {
+    font-size: 1.2em;
+    dd {
+      margin: 0 20px 0 0;
+    }
+    a {
+      color: #999;
+    }
+  }
+  .hint {
+    color: #999;
+  }
+  .name {
+    font-weight: bold;
+  }
+  table {
+    width: 100%;
+  }
 }

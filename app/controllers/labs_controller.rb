@@ -3,9 +3,20 @@ class LabsController < ApplicationController
   before_filter :require_login, except: [:index, :show]
   authorize_actions_for Lab
   authority_actions thank_you: 'create'
+  authority_actions map: 'read'
+
+  def map
+    @q = Lab.search(params[:q])
+    @labs = @q.result(distinct: true)
+  end
 
   def index
-    @labs = Lab.all
+    @q = Lab.search(params[:q])
+    @labs = @q.result(distinct: true).page(params[:page])
+    respond_to do |format|
+      format.html
+      format.json { render json: @labs = Lab.all.to_json }
+    end
   end
 
   def thank_you
@@ -40,6 +51,8 @@ class LabsController < ApplicationController
 
   def show
     @lab = Lab.find(params[:id])
+    @lab.geocode
+    @days = %w(monday tuesday wednesday thursday friday saturday sunday)
   end
 
 private

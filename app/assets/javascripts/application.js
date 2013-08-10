@@ -15,6 +15,8 @@
 //= require foundation
 //= require moment.min
 //= require holder
+//= require cocoon
+//= require leaflet.markercluster
 //= require_tree .
 
 moment().format()

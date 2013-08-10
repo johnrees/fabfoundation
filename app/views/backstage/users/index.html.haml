@@ -1,0 +1,24 @@
+.row
+  .columns.large-12
+    = search_form_for [:backstage, @q] do |f|
+      = f.text_field :first_name_cont
+      = f.submit
+
+.row
+  .columns.large-12
+    %table
+      %thead
+        %tr
+          %th.id= sort_link @q, :id
+          %th
+            = sort_link @q, :first_name, "First"
+            = sort_link @q, :last_name, "Last"
+          %th= sort_link @q, :email
+          %th= sort_link @q, :phone
+      %tbody
+        - @users.each do |user|
+          %tr
+            %td= user.id
+            %td= link_to user.full_name, edit_backstage_user_path(user)
+            %td= mail_to user.email
+            %td= user.phone

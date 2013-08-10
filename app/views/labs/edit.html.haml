@@ -1,21 +1,25 @@
 .row
   .large-12.columns
 
-    = form_for @lab do |f|
-      .field
-        = f.label :name
-        = f.text_field :name
+    = simple_form_for @lab do |f|
+      %fieldset
+        .field
+          = f.input :name
 
-      .field
-        = f.label :address
-        = f.text_area :address
+        .row
+          .columns.large-6
+            = f.input :address
+          .columns.large-6
+            = f.input :address_notes
 
-        = f.label :country_code
-        -# = f.country_select :country_code
+      %fieldset
+        = f.label :country_code, "Country"
+        = f.country_select :country_code
 
-      .field
-        = f.label :address_notes
-        = f.text_field :address_notes
+      #tools
+        = f.simple_fields_for :tools do |tool|
+          = render 'backstage/tool_fields', :f => tool
+        .links
+          = link_to_add_association 'add tool', f, :tools
 
-      .actions
-        = f.submit class: 'button'
+      = f.submit class: 'button'

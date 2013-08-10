@@ -1,0 +1,20 @@
+.badges {
+  li {
+    display: block;
+    padding: 10px;
+    .badge {
+      background: #CCC;
+      height: 100px;
+      padding: 10px;
+    }
+  }
+}
+
+.comments {
+  list-style: none;
+  li {
+    margin-bottom: 5px;
+    border-bottom: 1px solid #CCC;
+    padding: 10px;
+  }
+}

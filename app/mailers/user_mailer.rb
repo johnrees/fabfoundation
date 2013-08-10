@@ -7,6 +7,11 @@ class UserMailer < ActionMailer::Base
     mail(to: "#{user} <#{user.email}>", subject: "Welcome aboard!")
   end
 
+  def complete_registration(user)
+    @user = user
+    mail(to: "#{user} <#{user.email}>", subject: "Complete your registration")
+  end
+
   def lab_submission_confirmation(lab)
     @lab = lab
     @user = lab.creator

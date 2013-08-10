@@ -1,0 +1,19 @@
+.row
+  .columns.large-12
+    = link_to "Add Event", new_backstage_event_path, class: 'button'
+.row
+  .columns.large-12
+    %table
+      %thead
+        %tr
+          %th.id ID #
+          %th Name
+          %th Lab
+          %th Creator
+      - @events.each do |event|
+        %tr
+          %td= event.id
+          %td= link_to event, edit_backstage_event_path(event)
+          %td= link_to event.name, event.name
+          %td= link_to event.lab ,event.lab
+          %td= link_to event.creator, event.creator

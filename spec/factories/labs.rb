@@ -7,5 +7,6 @@ FactoryGirl.define do
     address_notes "At MIT"
     state_code "MA"
     country_code "US"
+    kind [:supernode]
   end
 end

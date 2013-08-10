@@ -2,8 +2,12 @@ class Backstage::LabsController < Backstage::BackstageController
 
   authorize_actions_for Lab
 
+  def show
+  end
+
   def index
-    @labs = Lab.all
+    @q = Lab.search(params[:q])
+    @labs = @q.result(distinct: true)
   end
 
   def edit
@@ -19,10 +23,16 @@ class Backstage::LabsController < Backstage::BackstageController
     end
   end
 
+  def destroy
+    @lab = Lab.find(params[:id])
+    @lab.delete
+    redirect_to backstage_labs_url, notice: "Lab Deleted"
+  end
+
 private
 
   def lab_params
-    params.require(:lab).permit(:name, :address)
+    params.require(:lab).permit!#(:name, :address, :country_code)
   end
 
 end

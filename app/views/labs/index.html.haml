@@ -1,9 +1,31 @@
+= render "header"
 .row
-  .columns.large-12
+  .columns.large-3.sidebar
+    = render "sidebar"
+  .columns.large-9.labs
+    - if action_name == 'index'
+      .row
+        .columns.large-8.push-4.text-right
+          .sort
+            Sort by:
+            = sort_link @q, :name
+            = sort_link @q, :created_at, "Date Added"
     - @labs.each do |lab|
       = content_tag_for :div, lab, class: 'row' do
         .columns.large-12
-          .image{style: 'width: 90px; float: left'}
-            = holder_tag 80
-          .details{style: 'float: left'}
-            = link_to lab, lab
+          .row
+            .columns.large-2
+              - if lab.avatar.blank?
+                = holder_tag 80
+              - else
+                = image_tag lab.avatar, width: 80, height: 80
+
+            .columns.large-10.details
+              .name
+                = link_to lab, lab
+                %span.kind= lab.kind.first.try(:humanize) ? "" : lab.kind.first.to_s.humanize.titleize
+              .address.hint
+                = fa_icon "map-marker"
+                = lab.address
+
+    = paginate @labs

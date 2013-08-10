@@ -3,6 +3,7 @@
 
 .row
   .large-5.large-centered.columns
+
     = form_for @user do |f|
       - if @user.errors.any?
         .error_messages
@@ -10,16 +11,28 @@
           %ul
             - for message in @user.errors.full_messages
               %li= message
-      .field
-        = f.label :email
-        = f.text_field :email, placeholder: 'Email'
+      .row
+        .field
+          = f.label :first_name
+          = f.text_field :first_name, placeholder: 'First Name', autofocus: true
+        .field
+          = f.text_field :last_name, placeholder: 'Last Name'
+      .row
+        .columns-12
+          .field
+            = f.label :email
+            = f.text_field :email, placeholder: 'Email'
 
-      .field
-        = f.label :password
-        = f.password_field :password, placeholder: 'Password'
+          -#   .field
+          -#     = f.label :email
+          -#     = f.text_field :email, placeholder: 'Email'
 
-      .field
-        = f.label :password_confirmation
-        = f.password_field :password_confirmation, placeholder: 'Confirmation'
+          -#   .field
+          -#     = f.label :password
+          -#     = f.password_field :password, placeholder: 'Password'
+
+          -#   .field
+          -#     = f.label :password_confirmation
+          -#     = f.password_field :password_confirmation, placeholder: 'Confirmation'
 
       .actions= f.submit "Sign up", class: 'button '

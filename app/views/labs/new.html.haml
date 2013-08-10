@@ -1,23 +1,94 @@
 .row
-  .large-12.columns
-    = form_for @lab do |f|
-      - if @lab.errors.any?
-        .error_messages
-          %h2 Form is invalid
-          %ul
-            - for message in @lab.errors.full_messages
-              %li= message
-      .field
-        = f.label :name
-        = f.text_field :name
-      .row
+  .columns-12.large
+    %h1 Add a Fab Lab
+    = simple_form_for @lab do |f|
+      %fieldset
+        %legend Fab Lab Details
+        .row
+          .large-10.columns
+            = f.input :name, label: 'Fab Lab Name'
+      %fieldset
+        %legend Address
         .columns.large-6
           .field
-            = f.label :address
-            = f.text_area :address
+            = f.input :address, as: 'text'
         .columns.large-6
           .field
-            = f.label :address_notes
-            = f.text_area :address_notes
+            = f.input :address_notes, as: 'text', placeholder: 'For example, Use the back door.'
+
+      %fieldset
+        %legend
+        .columns.large-6
+          .field
+            = f.input :parent_id, as: 'select', collection: Lab.all, hint: "Will you be associated with a Supernode? If so, which one?"
       .actions
         = f.submit "Add Lab", class: 'button large'
+
+
+-# %fieldset
+-#   %legend Fab Lab Details
+-#   .row
+-#     .large-10.columns
+-#       = f.input :name, label: 'Fab Lab Name'
+-#     .large-2.columns
+-#       = f.input :kind, collection: Lab::KINDS, include_blank: false#, as: :radio
+
+-# %fieldset
+-#   %legend Address
+-#   = f.fields_for :address do |a|
+-#     = text_field_tag :address_search
+
+-#     .details
+-#       .row
+-#         .large-8.columns
+-#           #map_canvas
+-#         .large-4.columns
+-#           = a.input :formatted, label: "Formatted Address", input_html: { rows: 6, data: { geo: 'formatted_address' }}, as: :text
+-#         .large-4.columns
+-#           = a.input :country, { input_html: { data: { geo: 'country_short' }}}
+-#         .large-4.columns
+-#           = a.input :latitude, { input_html: { data: { geo: 'lat' }}}
+-#         .large-4.columns
+-#           = a.input :longitude, { input_html: { data: { geo: 'lng' }}}
+
+-# %fieldset
+-#   %legend Contacts
+-#   = f.fields_for :contacts do |c|
+-#     %fieldset
+-#       .row
+-#         .large-6.columns
+-#           = c.input :name
+-#         .large-6.columns
+-#           = c.input :role, label: 'Role/Job-Title'
+-#       .row
+-#         .large-12.columns
+-#           = c.input :email
+-#         .large-12.columns
+-#           = c.input :phone
+-#         .large-9.columns
+-#           = c.input :fax
+-#         .large-3.columns
+-#           = c.link_to_remove "Remove this contact", class: 'button alert small'
+-#   = f.link_to_add "Add a contact", :contacts, class: 'button tiny secondary'
+
+-# %fieldset
+-#   %legend Websites
+-#   = f.fields_for :websites do |w|
+-#     %fieldset
+-#       .row
+-#         .large-4.columns
+-#           = w.input :name
+-#         .large-5.columns
+-#           = w.input :url, placeholder: 'http://'
+-#         .large-3.columns
+-#           = w.link_to_remove "Remove this website", class: 'button alert small'
+-#   = f.link_to_add "Add a website", :websites, class: 'button tiny secondary'
+
+-# %fieldset
+-#   %legend More Information
+-#   = f.input :hours, as: :text, label: "Opening Hours"
+-#   = f.input :collaborators, as: :text
+-#   = f.input :comments, as: :text
+
+
+-# = f.button :submit, class: 'large button expand'

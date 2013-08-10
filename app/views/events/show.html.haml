@@ -1,9 +1,23 @@
+.row.text-right
+  .large-12.columns
+    = link_to "Edit Event", edit_event_path(@event), class: 'button' if @event.updatable_by? current_user
 .row
   .large-12.columns
     %h1= @event
     at
     = link_to @event.lab, @event.lab
+    created by
+    = link_to @event.creator, @event.creator
 
-    = link_to "Edit Event", edit_event_path(@event), class: 'button' if true_current_user.can_update?(@event)
+.row
+  .large-12.columns
+    = image_tag @event.image
 
     = simple_format @event.details
+
+.row
+  .large-12.columns
+    %h4 Other events at #{@event.lab}
+    - @event.lab.events.each do |event|
+      %ul
+        %li= link_to event, event

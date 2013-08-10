@@ -1,1 +1,31 @@
-backstage.html.haml
+!!! 5
+/[if lt IE 7 ] <html class=\"ie6\" lang=\"en\">
+/[if IE 7 ]    <html class=\"ie7\" lang=\"en\">
+/[if IE 8 ]    <html class=\"ie8\" lang=\"en\">
+/[if IE 9 ]    <html class=\"ie9\" lang=\"en\">
+/[if (gt IE 9)|!(IE)] <!--> <html lang=\"en\">
+
+%head
+  %meta{ :charset => "utf-8" }/
+  %meta{ "http-equiv" => "X-UA-Compatible", :content => "IE=7" }/
+  %meta{ :name => "viewport", :content => "width=device-width, initial-scale=1.0" }/
+  %title= content_for?(:title) ? yield(:title) : "Backstage"
+  = stylesheet_link_tag "backstage"
+  = javascript_include_tag "vendor/custom.modernizr"
+  = csrf_meta_tag
+
+%body
+
+  - flash.each do |name, msg|
+    = content_tag :div, msg, id: "flash_#{name}", class: name
+  %header
+    = link_to "Fab Foundation", root_path
+    = link_to "Labs", backstage_labs_path
+    = link_to "Users", backstage_users_path
+    = link_to "Events", backstage_events_path
+  #main{role: 'main'}
+    = yield
+
+  :javascript
+    (function(a){if(window.filepicker){return}var b=a.createElement("script");b.type="text/javascript";b.async=!0;b.src=("https:"===a.location.protocol?"https:":"http:")+"//api.filepicker.io/v1/filepicker.js";var c=a.getElementsByTagName("script")[0];c.parentNode.insertBefore(b,c);var d={};d._queue=[];var e="pick,pickMultiple,pickAndStore,read,write,writeUrl,export,convert,store,storeUrl,remove,stat,setKey,constructWidget,makeDropPane".split(",");var f=function(a,b){return function(){b.push([a,arguments])}};for(var g=0;g<e.length;g++){d[e[g]]=f(e[g],d._queue)}window.filepicker=d})(document);
+  = javascript_include_tag "http://cdn.leafletjs.com/leaflet-0.6.4/leaflet.js", "application"

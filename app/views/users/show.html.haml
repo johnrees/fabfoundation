@@ -1,3 +1,44 @@
+
 .row
-  .columns.large-12
-    %h1= @user
+
+  .columns.large-3
+    = image_tag @user.avatar_image, width: 200
+    %h1= @user.full_name
+    = link_to edit_user_path(@user), class: 'button' do
+      = fa_icon "edit"
+      Edit Profile
+
+    = @user.location
+
+    - if @user.bio.present?
+      = simple_format "“#{@user.bio}”"
+
+    %p
+      = fa_icon "map-marker"
+      Barcelona, Spain
+    %p
+      = fa_icon "envelope-alt"
+      = mail_to @user.email
+    %p
+      = fa_icon "home"
+      = link_to "http://www.johnre.es/" do
+        johnre.es
+
+  -# .columns.large-6
+  -#   %h4 Labs
+  -#   - @labs.each do |lab|
+  .columns.large-6
+    %h4 Comments (10)
+    %ul.comments
+      %li Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmo tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+
+  .columns.large-3
+    %h4 Badges (10)
+
+    %ul.badges.small-block-grid-2
+      %li
+        .badge Fab Academy Student
+      %li
+        .badge Fab 9 Attendee
+
+

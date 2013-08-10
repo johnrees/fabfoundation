@@ -1,0 +1,23 @@
+.row
+  .columns.large-12
+    = simple_form_for @user do |f|
+      .field
+        - if @user.avatar.present?
+          = image_tag @user.avatar, width: 100
+      .field
+        = f.label :avatar
+        %input{:type => "filepicker-dragdrop", :"data-fp-multiple" => true, :name => "user[avatar]", :value => @user.avatar }
+
+      .row
+        .columns.large-6
+          = f.input :first_name
+        .columns.large-6
+          = f.input :last_name
+      .row
+        .columns.large-12
+          = f.input :email
+      .row
+        .columns.large-12
+          = f.input :bio
+
+          = f.submit "Update", class: 'button'

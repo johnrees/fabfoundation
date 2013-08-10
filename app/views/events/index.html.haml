@@ -1,10 +1,42 @@
 .row
   .columns.large-12
-    = link_to "Add Event", new_event_path, class: 'button' if true_current_user.can_create? Event
+    - if Event.creatable_by? current_user
+      = link_to new_event_path, class: 'button' do
+        = fa_icon "plus"
+        Add Event
+
+-# .row
+-#   .columns.large-8.push-4
+-#     %dl.sub-nav
+-#       %dt View as:
+-#       %dd.active
+-#         %a{:href => "#"}
+-#           = fa_icon "list"
+-#           List
+-#       %dd
+-#         %a{:href => "#"}
+-#           = fa_icon "calendar"
+-#           Calendar
+
 .row
-  .columns.large-4
+  .columns.large-3
     .filters
-      Filter by region
+      %h5 Filter
+      %h6
+        = fa_icon "globe"
+        Region
+      %ul
+        %li All
+        %li Africa
+        %li Asia
+        %li Europe
+        %li USA
+      %h6 Type
+      %ul
+        %li All
+        %li Workshop
+        %li Meeting
+
   .columns.large-8
     - @event_days.sort.each do |day, events|
       .row
@@ -16,8 +48,11 @@
             = content_tag_for :div, event, class: 'row' do
               .columns.large-12
                 .image
-                  = holder_tag 80
+                  -# = holder_tag 80
+                  = image_tag event.image, width: 80, height: 80
                 .details{style: "float: left"}
                   %h5= link_to event, event
-                  at
+                  = fa_icon "time"
+                  3PM - 8PM
+                  = fa_icon "map-marker"
                   = link_to event.lab, event.lab

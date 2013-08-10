@@ -1,0 +1,22 @@
+.row
+  .columns.large-12
+    = simple_form_for [:backstage, @user] do |f|
+      = f.input :admin
+      = f.input :first_name
+      = f.input :last_name
+      = f.input :email
+      = f.input :public_email
+      = f.input :phone
+      = f.input :public_phone
+      = f.input :location
+      = f.input :country_code
+      = f.input :latitude
+      = f.input :longitude
+      = f.input :url
+      -# = f.input :twitter_username
+      -# = f.input :dob
+      = f.input :bio
+      = f.input :avatar
+      = f.input :locale
+      = f.input :timezone
+      = f.submit
