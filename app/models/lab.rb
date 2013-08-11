@@ -63,7 +63,7 @@ class Lab < ActiveRecord::Base
   #   end
   # end
 
-  default_scope { with_state(:approved) }
+  # default_scope { with_state(:approved) }
 
   Kinds = %w[planned_fab_lab mini_fab_lab fab_lab supernode]
   # bitmask :kind, :as => [:planned_fab_lab, :mini_fab_lab, :fab_lab, :supernode]
