@@ -9,15 +9,19 @@ User.create!(first_name: 'Joe', last_name: 'Public', email: 'regular@mail.com', 
 
 Lab.delete_all
 Lab.after_save.clear
-labs = JSON.parse( File.read('labs.json') )
+Lab.skip_callback(:create)
+labs = JSON.parse( File.read('public/oldlabs.json') )
 labs.each do |lab|
-  Lab.create!(
-    name: lab['name'],
-    country_code: lab['address']['country_code'],
-    address: lab['address']['formatted'],
-    latitude: lab['address']['latitude'],
-    longitude: lab['address']['longitude'],
-    urls: (lab['websites'].map{|m| m['url']}.join("\n") if lab['websites']),
-    kind: [(lab['kind'] == "fab_lab" ? lab['kind'] : "#{lab['kind']}_fab_lab")]
-  )
+  if lab['address'].present?
+    Lab.create!(
+      name: lab['name'],
+      street_address_1: lab['address']['building'],
+      city: lab['address']['city'],
+      country_code: lab['address']['country'].downcase,
+      latitude: lab['address']['latitude'],
+      longitude: lab['address']['longitude'],
+      urls: (lab['websites'].map{|m| m['url']}.join("\n") if lab['websites']),
+      kind: Lab::Kinds.index(lab['kind'] == "fab_lab" ? lab['kind'] : "#{lab['kind']}_fab_lab")
+    )
+  end
 end

@@ -2,24 +2,9 @@
   .large-12.columns
 
     = simple_form_for @lab do |f|
-      %fieldset
-        .field
-          = f.input :name
-
-        .row
-          .columns.large-6
-            = f.input :address
-          .columns.large-6
-            = f.input :address_notes
-
-      %fieldset
-        = f.label :country_code, "Country"
-        = f.country_select :country_code
-
-      #tools
-        = f.simple_fields_for :tools do |tool|
-          = render 'backstage/tool_fields', :f => tool
-        .links
-          = link_to_add_association 'add tool', f, :tools
+      = render 'labs/form_modules/basic_details', f: f
+      = render 'labs/form_modules/location', f: f
+      = render 'labs/form_modules/opening_hours', f: f
+      = render 'labs/form_modules/tools', f: f
 
       = f.submit class: 'button'

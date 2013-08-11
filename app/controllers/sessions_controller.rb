@@ -1,6 +1,7 @@
 class SessionsController < ApplicationController
 
   layout 'sessions'
+  skip_before_filter :current_user
 
   def create
     user = User.find_by email: params[:email]

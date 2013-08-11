@@ -1,0 +1,139 @@
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS and SCSS file within this directory, lib/assets/stylesheets, vendor/assets/stylesheets,
+ * or vendor/assets/stylesheets of plugins, if any, can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the top of the
+ * compiled file, but it's generally better to create a new file per style scope.
+ *
+ *= require_self
+ *= require foundation_and_overrides
+ *= require font-awesome
+ *= require selectize
+ *= require MarkerCluster.Default
+ *= require_tree .
+ */
+
+// body {
+//   background-color: #F2F2F2 !important;
+//   #main .row {
+//     background-color: white;
+//   }
+// }
+
+label a {
+  color: #222;
+}
+
+.field_with_errors {
+  background: pink;
+}
+
+ legend i {
+  color: #CCC;
+ }
+
+ .input.date {
+  select {
+    width: 70px;
+  }
+ }
+
+.selectize-control {
+  width: 100%;
+}
+
+fieldset {
+  border-radius: 4px;
+}
+
+.hint {
+  display: block;
+  color: #CCC;
+  font-size: 0.9em;
+}
+
+.input span.hint {
+  font-size: 0.8em;
+  margin-top: 0;
+}
+.input {
+  input, textarea, select {
+    margin-bottom: 0.2em !important;
+  }
+}
+div.input {
+  margin-bottom: 1em;
+}
+
+body.c-users li.users a,
+body.c-events li.events a,
+body.c-labs li.labs a {
+  color: #FFF !important;
+}
+
+header {
+  .top-bar-section .divider {
+    border: 1px solid #353535 !important;
+  }
+
+  a#sign-out:hover {
+    color: pink !important;
+  }
+
+  img#header-avatar {
+    width: 30px;
+    margin-right: 10px;
+    position: relative;
+    top: 10px;
+  }
+
+
+
+  li a:hover {
+    color: #FFF !important;
+  }
+
+  h1#logo {
+    padding-left: 20px !important;
+    background: image-url('logo.png') no-repeat 13px center;
+  }
+
+  .dropdown {
+    background: #333 !important;
+    border-radius: 0 0 4px 4px;
+  }
+
+  .top-bar .title-area .name h1 a {
+    color: #F7F7F7;
+  }
+}
+
+footer {
+  height: 200px;
+  margin-top: 50px;
+  background: #FFF;
+  display: none;
+}
+
+
+body a {
+  color: #008FD5;
+}
+
+.button {
+  border-radius: 5px;
+}
+
+#flash_notice {
+  text-align: center;
+  padding: 10px;
+  background: #F2DEDE;
+  color: #B94A48;
+}
+
+/*i {
+  color: #888 !default;
+}*/

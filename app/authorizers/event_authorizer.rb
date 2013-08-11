@@ -1,8 +1,8 @@
 class EventAuthorizer < ApplicationAuthorizer
 
-  def self.creatable_by?(user)
-    user and !user.labs.empty?
-  end
+  # def self.creatable_by?(user)
+  #   user and !user.labs.empty?
+  # end
 
   def creatable_by?(user)
     user.admin?

@@ -1,43 +1,71 @@
-
--# - if Lab.creatable_by? authority_user
--#   = link_to "Add a lab", new_lab_path, class: 'button'
-
-- if action_name == 'index'
-  %fieldset
-    %legend= link_to "Map", map_labs_path
-    #map{"data-lat" => 51.505, "data-lng" => -0.09, "data-zoom" => 2}
-
 = search_form_for @q do |f|
-  %fieldset
-    %legend Equipment
-    %table
-      - ToolType.all.each do |tool|
-        %tr
-          %td
-            = check_box_tag tool
-            %label.has-tip.tip-right{"data-tooltip" => true, :title => tool.description }
-              = tool
-          %td.hint= (rand() * 100).to_i
 
-  %fieldset
-    %legend Type
-    %table
-      %tr
-        %td
-          = check_box_tag :kind_eq
-          All
-        %td.hint= @labs.try(:total_count) ? @labs.total_count : @labs.size
-      - %w(supernode fab_lab mini_fab_lab planned_fab_lab).each do |type|
-        %tr
-          %td
-            = check_box_tag type
-            %label.has-tip.tip-right{"data-tooltip" => true, :title => "A Supernode is a Fab Lab that helps to coordinate other Fab Labs associated with it"}
-              = type.humanize.titleize
-          %td.hint= @labs.with_kind(type).size
-    -# = f.select :type_eq
-  -# %fieldset
-  -#   = f.label :name_cont
-  -#   = f.text_field :name_cont
+  - if action_name == 'index' and !@continents.empty?
+    %fieldset
+      %legend
+        = fa_icon "globe"
+        = link_to "Region", map_labs_path
+      #map{"data-lat" => 51.505, "data-lng" => -0.09, "data-zoom" => 2}
+      %table
 
-  -# /= f.select :kind_eq, [:all, :planned, :mini, :fab_lab]
-  -# = f.submit
+        %tr.all
+          %td
+            %label
+              = check_box_tag "q[region_in][]", '', (params[:q].blank? or params[:q][:region_in].reject(&:blank?).empty?)
+              All
+
+          %td.hint= @labs.total_count
+        -# - Country.all.map{|name,c| Country[c].continent.to_s }.reject!(&:blank?).uniq.sort.each do |continent|
+
+        -# - @continents.sort.each do |continent, count|
+        -#   %tr
+        -#     %td
+        -#       %label
+        -#         = check_box_tag continent
+        -#         = continent
+        -#     %td.hint= count
+        - @regions.each do |region, count|
+          %tr
+            %td
+              %label
+                = check_box_tag "q[region_in][]", region, (params[:q][:region_in].include? region if params[:q])
+                = region
+            %td.hint= count
+
+  - unless @tool_types.empty?
+    %fieldset
+      %legend
+        = fa_icon "cogs"
+        Equipment
+      %table
+        - @tool_types.each do |tool_type, count|
+          %tr
+            %td
+              = check_box_tag tool_type
+              %label.has-tip.tip-right{"data-tooltip" => true, :title => 'tool.description' }
+                = tool_type
+            %td.hint= count
+
+  - unless @lab_kinds.empty?
+    %fieldset
+      %legend
+        = fa_icon "building"
+        Fab Lab Type
+      %table
+        %tr.all
+          %td
+            %label
+              = check_box_tag "q[kind_in][]", '', (params[:q].blank? or params[:q][:kind_in].reject(&:blank?).empty?)
+              All
+          %td.hint= @labs.try(:total_count) ? @labs.total_count : @labs.size
+
+        - %w(supernode fab_lab mini_fab_lab planned_fab_lab).each do |kind, index|
+          -# - if @lab_kinds[kind] > 0
+          %tr
+            %td
+              %label
+                = check_box_tag "q[kind_in][]", Lab::Kinds.index(kind), (params[:q][:kind_in].include? Lab::Kinds.index(kind).to_s if params[:q])
+                %span.has-tip.tip-right{"data-tooltip" => true, :title => "A Supernode is a Fab Lab that helps to coordinate other Fab Labs associated with it"}= kind.humanize.titleize
+            %td.hint= @lab_kinds[kind]
+
+  = f.submit "Filter", class: 'button expand filter-button'

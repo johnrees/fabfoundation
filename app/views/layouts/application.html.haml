@@ -25,29 +25,43 @@
     %nav.top-bar
       %ul.title-area
         %li.name
-          %h1= link_to "Fab Foundation", root_path
+          %h1#logo= link_to "Fab Foundation", root_path
         %li.toggle-topbar.menu-icon
           %a{:href => "#"} menu
       %section.top-bar-section
         / Left Nav Section
         %ul.left
           %li.divider
-          %li.active= link_to "Labs", labs_path
+          %li.labs= link_to "Labs", labs_path
           %li.divider
-          %li= link_to "Events", events_path
-          %li.divider
-          %li= link_to "Users", users_path
-          %li.divider
+          -# %li.events= link_to "Events", events_path
+          -# %li.divider
+          -# %li.users= link_to "Users", users_path
+          -# %li.divider
         %ul.right
           %li.divider
           -  if current_user
-            %li= link_to "#{current_user} ▼", current_user
+            %li.has-dropdown
 
-            - if current_user.admin?
-              %li= link_to "Backstage", backstage_root_path
-            -# %li= link_to "Sign out", logout_path
+              = link_to current_user do
+                = image_tag current_user.avatar_image, id: 'header-avatar'
+                = current_user
+              %ul.dropdown
+                %li
+                  = link_to edit_user_path(current_user) do
+                    = fa_icon "cog", text: "Settings", class: 'icon-fixed-width'
+                - if current_user.admin?
+                  %li
+                    = link_to backstage_root_path do
+                      = fa_icon "gamepad", text: "Backstage", class: 'icon-fixed-width'
+                %li.divider
+                %li
+                  = link_to logout_path, id: 'sign-out' do
+                    = fa_icon "power-off", text: "Sign out", class: 'icon-fixed-width'
+
           - else
             %li= link_to "Sign In", signin_path
+            %li= link_to "Sign Up", signup_path
 
   #main{role: 'main'}
 

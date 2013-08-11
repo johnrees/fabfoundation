@@ -6,16 +6,16 @@ class Backstage::LabsController < Backstage::BackstageController
   end
 
   def index
-    @q = Lab.search(params[:q])
+    @q = Lab.unscoped.search(params[:q])
     @labs = @q.result(distinct: true)
   end
 
   def edit
-    @lab = Lab.find(params[:id])
+    @lab = Lab.unscoped.find(params[:id])
   end
 
   def update
-    @lab = Lab.find(params[:id])
+    @lab = Lab.unscoped.find(params[:id])
     if @lab.update_attributes lab_params
       redirect_to backstage_labs_url, notice: "Lab Updated"
     else
@@ -24,7 +24,7 @@ class Backstage::LabsController < Backstage::BackstageController
   end
 
   def destroy
-    @lab = Lab.find(params[:id])
+    @lab = Lab.unscoped.find(params[:id])
     @lab.delete
     redirect_to backstage_labs_url, notice: "Lab Deleted"
   end
@@ -32,7 +32,7 @@ class Backstage::LabsController < Backstage::BackstageController
 private
 
   def lab_params
-    params.require(:lab).permit!#(:name, :address, :country_code)
+    params.require(:lab).permit!
   end
 
 end

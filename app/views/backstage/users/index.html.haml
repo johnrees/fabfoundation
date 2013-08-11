@@ -1,8 +1,12 @@
 .row
   .columns.large-12
-    = search_form_for [:backstage, @q] do |f|
-      = f.text_field :first_name_cont
-      = f.submit
+    .panel
+      = search_form_for [:backstage, @q], builder: SimpleForm::FormBuilder do |f|
+        .row
+          .columns.large-8
+            = f.input :first_name_or_last_name_cont, label: "Name"
+          .columns.large-4
+            = f.submit "Search", class: 'button expand'
 
 .row
   .columns.large-12

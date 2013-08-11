@@ -1,0 +1,30 @@
+%fieldset.address
+  %legend= fa_icon "map-marker", text: "Location and Lab Contact Details"
+  %p.hint Please enter your address to add a marker to the map, then fill out the rest of the address details below.
+  = text_field_tag :address, "", placeholder: "Search for your address here...", id: 'geocomplete', name: nil
+  %hr/
+  .row
+    .columns.large-6
+      .input
+        #geocomplete-map
+        %span.hint
+          = fa_icon "map-marker", text: "Drag the marker to pinpoint your Fab Lab's exact location"
+    .columns.large-6
+      %fieldset{style: 'margin-top: 0'}
+        %legend Address
+        -# = f.input :address, as: 'text', input_html: { rows: 6 }
+        = f.input :country_code, label: 'Country', input_html: { data: {geo: "country_short"}}, iso_codes: true
+        %hr/
+        = f.input :street_address_1, label: "Street Address", input_html: { data: {geo: "street-address"}}
+        = f.input :street_address_2, label: false
+
+        = f.input :latitude, input_html: { data: {geo: "lat"}}, as: 'hidden'
+        = f.input :longitude, input_html: { data: {geo: "lng"}}, as: 'hidden'
+        .row
+          .columns.large-4= f.input :city, label: 'City/Town', input_html: { data: {geo: "locality"}}
+          .columns.large-4= f.input :region, label: 'Region/State', input_html: { data: {geo: "state"}}
+          .columns.large-4= f.input :postal_code, label: 'Postal/ZIP Code', input_html: { data: {geo: "postal_code"}}
+
+      = f.input :address_notes, as: 'text', placeholder: 'e.g. Enter the building via the back door.', hint: 'Any extra details that can help people find your Fab Lab'
+      = f.input :phone, hint: "A general enquiries phone number for your Fab Lab", placeholder: "e.g. +34 (0)1234 56789", input_html: { data: {geo: "international_phone_number"}}
+      = f.input :time_zone

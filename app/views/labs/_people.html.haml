@@ -1,0 +1,14 @@
+.row.staff#people
+  .columns.large-12
+    %h4
+      People
+      %span.count= User.count
+    %ul.large-block-grid-7.small-block-grid-2.people
+      - User.all.each do |user|
+        = content_tag_for :li, user do
+          = image_tag user.avatar_image, width: 90, height: 90
+          .name= link_to user, user
+          .role.hint Person
+          -# .email= link_to user.email
+    -# - lab.humans.each do |human|
+    -#   = link_to human.user, human.user

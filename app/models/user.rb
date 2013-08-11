@@ -3,7 +3,6 @@ class User < ActiveRecord::Base
   include Authority::UserAbilities
   include Authority::Abilities
   self.authorizer_name = 'UserAuthorizer'
-
   has_secure_password validations: false
 
   has_many :humans
@@ -20,6 +19,14 @@ class User < ActiveRecord::Base
 
   before_create { generate_token(:action_token) }
   after_create :complete_registration
+
+  def location
+    "#{city}, #{country}"
+  end
+
+  def country
+    country_code.present? ? country_code : ""
+  end
 
   def managed_labs
     labs

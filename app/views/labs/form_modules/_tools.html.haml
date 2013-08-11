@@ -1,0 +1,8 @@
+%fieldset#tools
+  %legend= fa_icon "cogs", text: "Lab Equipment"
+  = f.simple_fields_for :tools do |tool|
+    = render 'backstage/labs/tool_fields', :f => tool
+  .links.text-right
+    = link_to_add_association f, :tools, partial: 'backstage/labs/tool_fields', class: 'button small' do
+      = fa_icon "plus"
+      Add another tool

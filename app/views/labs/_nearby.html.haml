@@ -1,0 +1,9 @@
+- if lab.geocoded?
+  .row.nearby-labs#nearby-labs
+    .columns.large-12
+      - lab.nearbys(500).limit(5).each do |lab|
+        .lab
+          = link_to lab, lab
+          .hint
+            = lab.bearing
+            = lab.distance.ceil

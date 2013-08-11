@@ -17,6 +17,15 @@ class Backstage::EventsController < Backstage::BackstageController
     @event = Event.find(params[:id])
   end
 
+  def create
+    @event = Event.create event_params
+    if @event.save
+      redirect_to backstage_events_path, notice: "Event Added"
+    else
+      render :new
+    end
+  end
+
   def update
     @event = Event.find(params[:id])
     if @event.update_attributes event_params
@@ -29,7 +38,7 @@ class Backstage::EventsController < Backstage::BackstageController
 private
 
   def event_params
-    params.require(:event).permit(:name, :address)
+    params.require(:event).permit!
   end
 
 end

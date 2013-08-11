@@ -15,9 +15,12 @@
 //= require foundation
 //= require moment.min
 //= require holder
+//= require jquery.geocomplete
 //= require cocoon
+//= require selectize
 //= require leaflet.markercluster
 //= require_tree .
 
 moment().format()
 $(document).foundation();
+// $('select').selectize();

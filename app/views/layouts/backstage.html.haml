@@ -14,15 +14,35 @@
   = javascript_include_tag "vendor/custom.modernizr"
   = csrf_meta_tag
 
-%body
+%body.backstage
 
   - flash.each do |name, msg|
     = content_tag :div, msg, id: "flash_#{name}", class: name
-  %header
-    = link_to "Fab Foundation", root_path
-    = link_to "Labs", backstage_labs_path
-    = link_to "Users", backstage_users_path
-    = link_to "Events", backstage_events_path
+
+
+  %header.contain-to-grid
+    %nav.top-bar
+      %ul.title-area
+        %li.name
+          %h1#logo= link_to "Backstage", backstage_root_path
+        %li.toggle-topbar.menu-icon
+          %a{:href => "#"} menu
+      %section.top-bar-section
+        %ul.left
+          %li.divider
+          %li.labs= link_to "Labs", backstage_labs_path
+          %li.divider
+          %li.users= link_to "Users", backstage_users_path
+          %li.divider
+          -# %li.events= link_to "Events", backstage_events_path
+          -# %li.divider
+
+        %ul.right
+          %li.divider
+          %li.foundation-site= link_to "Fab Foundation Site", root_path
+          %li.divider
+
+
   #main{role: 'main'}
     = yield
 

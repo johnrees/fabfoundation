@@ -1,23 +1,58 @@
+= javascript_include_tag "http://maps.googleapis.com/maps/api/js?sensor=false&libraries=places"
 .row
   .columns.large-12
+    %h1 Edit Settings
+
     = simple_form_for @user do |f|
-      .field
-        - if @user.avatar.present?
-          = image_tag @user.avatar, width: 100
-      .field
-        = f.label :avatar
-        %input{:type => "filepicker-dragdrop", :"data-fp-multiple" => true, :name => "user[avatar]", :value => @user.avatar }
+      .row.collapse
+        .columns.large-12
+          %fieldset
+            %legend Your Details
+            .columns.large-3
+              = f.input :first_name
+            .columns.large-3
+              = f.input :last_name
+            .row
+              .columns.large-12
+                = f.input :email, hint: "This will never be made public, we will only use it to contact you."
+                = f.input :dob, label: "Date of Birth", hint: "We just want this for anonymous data collection, it's no problem if you don't want to share it.", order: [:day, :month, :year], include_blank: true, selected: nil, start_year: Time.now.year - 90, end_year: Time.now.year - 2
+
+      %fieldset
+        %legend Avatar
+        %p.hint This is the image that will be appear next to your name on the site.
+        .row
+          .columns.large-2
+            = image_tag @user.avatar_image, width: 100
+          .columns.large-10
+            %input{:type => "filepicker-dragdrop", :name => "user[avatar]", :value => @user.avatar }
 
       .row
-        .columns.large-6
-          = f.input :first_name
-        .columns.large-6
-          = f.input :last_name
-      .row
         .columns.large-12
-          = f.input :email
-      .row
-        .columns.large-12
-          = f.input :bio
+          %fieldset
+            %legend Profile Details
+
+            = f.input :bio, hint: "A little bit about yourself. Perhaps why you joined the Fab Foundation network."
+            %fieldset
+              %legend Public Contact Details
+              %p.hint These can be different to your email and phone number above, they will be displayed publicly on your profile page. They are completely optional.
+
+              = f.input :public_email
+              = f.input :public_phone
+            .row.address
+              .columns.large-12
+                = label_tag :address, 'Location'
+                = text_field_tag :address, "", placeholder: "City, Country", id: 'geocomplete', name: nil
+
+              = f.input :city, label: 'City/Region', input_html: { data: {geo: "locality"}}, as: 'hidden'
+              = f.input :country_code, label: 'Country', input_html: { data: {geo: "country"}}, as: 'hidden'
+              -# .columns.large-3
+              -#   = link_to "#" do
+              -#     = fa_icon "map-marker", text: "Locate Me", style: 'line-height: 60px;'
+
+            .row
+              .columns.large-12
+                = f.input :country_code, as: 'hidden'
+                = f.input :url, label: 'Website', hint: "Have you got a website/URL that you'd like to share?"
+                = f.input :twitter_username, input_html: { placeholder: 'e.g. @fabfoundation' }
 
           = f.submit "Update", class: 'button'

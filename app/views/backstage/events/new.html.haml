@@ -1,0 +1,7 @@
+.row
+  .columns-12.large
+    = simple_form_for [:backstage, @event] do |f|
+      = f.input :name
+      = f.association :lab
+      = f.input :starts_at
+      = f.submit

@@ -1,7 +1,12 @@
 .nested-fields
   %fieldset
-    = f.input_field :photo, :type => "filepicker-dragdrop", "data-fp-multiple" => true, class: 'photo-uploader'
-    = f.input :name
-    = f.input :description
-    = f.association :tool_type
-    = link_to_remove_association "remove tool", f
+    .row
+      .columns.large-4
+        = f.label :photo
+        = f.input_field :photo, :type => "filepicker-dragdrop", "data-fp-multiple" => true, class: 'photo-uploader'
+      .columns.large-8
+        = f.association :tool_type, label: 'Type'
+        = f.input :name, input_html: { placeholder: 'e.g. MakerBot 2', validate: false}
+        = f.input :description
+
+    = link_to_remove_association "Remove tool", f, class: 'button small alert'

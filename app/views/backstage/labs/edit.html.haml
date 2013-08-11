@@ -1,26 +1,33 @@
 .row
   .columns.large-12
+    = link_to "View Lab", @lab, class: 'button'
     = link_to "Delete Lab", [:backstage, @lab], method: 'delete', confirm: "Are you sure?", class: 'button alert'
 .row
   .columns.large-12
     = simple_form_for [:backstage, @lab] do |f|
-      %fieldset
-        = f.input :name
-        = f.input :address, as: 'text', input_html: { rows: 6 }
-        = f.input :address_notes
-        = f.label :avatar
-        = f.input_field :avatar, :type => "filepicker-dragdrop", "data-fp-multiple" => true
-        = f.input :latitude
-        = f.input :longitude
-        = f.input :country_code
-        = f.input :kind, collection: Lab.values_for_kind
-        = f.association :lab, label: t(".lab"), collection: Lab.tree(@lab.id), include_blank: false, input_html: { multiple: false }
-        -# = f.input :creator
+      -# = f.input :ancestry
+      = f.input :state
+      = f.input :name
+      = f.input :description
+      = f.input :phone
+      = f.input :email
+      = f.input :kind
+      = f.input :street_address_1
+      = f.input :street_address_2
+      = f.input :street_address_3
+      = f.input :city
+      = f.input :postal_code
+      = f.input :country_code
+      = f.input :region
+      = f.input :subregion
+      = f.input :latitude
+      = f.input :longitude
+      = f.input :time_zone
+      = f.input :address_notes
+      = f.input :opening_hours_notes
+      = f.input :application_notes
+      = f.input :avatar
+      = f.input :urls
+      = f.association :creator
 
-        #tools
-          = f.simple_fields_for :tools do |tool|
-            = render 'tool_fields', :f => tool
-          .links
-            = link_to_add_association 'add tool', f, :tools
-
-        = f.submit class: 'button'
+      = f.submit class: 'button'

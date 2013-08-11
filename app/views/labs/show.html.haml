@@ -1,7 +1,5 @@
 .row
   .columns.large-12
-    = link_to "Edit", edit_lab_path(@lab), class: 'button' if @lab.updatable_by? current_user
-
     #head
       #image
         = image_tag @lab.avatar, width: 110, height: 110
@@ -9,123 +7,32 @@
         %h1= @lab.name
         .country.hint
           = fa_icon "map-marker"
-          = @lab.address
-        .phone.hint
-          = fa_icon "phone"
-          (+34) 019319 4234 2323
+          = @lab.short_address
+        - if @lab.phone.present?
+          .phone.hint
+            = fa_icon "phone"
+            = @lab.phone
         -# .hours.hint
         -#   = fa_icon "time"
         -#   Open Today 10:00-14:00
 
+    .buttons
+      = link_to "Edit", edit_lab_path(@lab), class: 'button small' if @lab.updatable_by? current_user
+      - if authority_user.admin?
+        = link_to "Edit Backstage", edit_backstage_lab_path(@lab), class: 'button small'
 .row
   .columns.large-12
-
     %div#sticky{"data-magellan-expedition" => "fixed"}
       %dl.sub-nav
-        - %w(location equipment people).each do |nav|
-          %dd{"data-magellan-arrival" => nav}
-            = link_to nav.capitalize, "##{nav}"
+        - @sections.each do |section|
+          %dd{"data-magellan-arrival" => section}
+            = link_to section.titleize, "##{section}"
 
-.row
-  .columns.large-7
-    .description
-      %p Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+= render 'description', lab: @lab
 
-  .columns.large-5
-    %p
-      %ul.websites
-      - @lab.websites.each do |url|
-        %li= link_to url, url
+- @sections.each do |section|
+  = render section, lab: @lab
 
-
-
-    -# %div{"data-magellan-expedition" => "fixed"}
-    -#   %ul.sub-nav
-    -#     - %w(equipment media staff location).each do |nav|
-    -#       %li{"data-magellan-arrival" => "##{nav}"}
-    -#         %a{:href => "##{nav}"}= nav
-
-
-.row.location#location
-  .columns.large-12
-    %h4 Location
-  .columns.large-8
-    #map{data: { lat: @lab.latitude, lng: @lab.longitude, zoom: 12 }}
-  .columns.large-4
-    %h5
-      = fa_icon "map-marker"
-      Address
-    = simple_format @lab.address
-    .hint= simple_format @lab.address_notes
-
-    %h5
-      = fa_icon "time"
-      Opening Hours
-    %table.opening-hours
-      - @days.each do |day|
-        %tr
-          %th= day.capitalize
-          %td 9:00
-          %td -
-          %td 17:00
-    %p.hint quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-
-- if @lab.geocoded?
-  .row.nearby-labs#nearby-labs
-    .columns.large-12
-      - @lab.nearbys(500).limit(5).each do |lab|
-        .lab
-          = link_to lab, lab
-          .hint
-            = lab.bearing
-            = lab.distance.ceil
-
-- unless @lab.tools.empty?
-  .row.equipment#equipment
-    .columns.large-12
-      %h4 Equipment
-      %ul.large-block-grid-3.small-block-grid-2.tools
-        - @lab.tools.each do |tool|
-          %li.tool
-            .details
-              = image_tag "tools/precision-milling.svg", width: 15, height: 15, style: 'float: left; width: 40px', class: 'tool-icon'
-              .name.has-top{"data-tooltip" => true, :title => "Tooltips are awesome, you should totally use them!"}= tool
-              %ul.clearing-thumbs.clearing-feature{"data-clearing" => true}
-                %li.clearing-featured-img
-                  = image_tag tool.photo
-                  -# %a{:href => "http://acmeindustrialthinking.com/shopbot5.jpg"}
-                  -#   %img{:src => "http://acmeindustrialthinking.com/shopbot5.jpg", "data-caption" => "caption here..."}/
-              -# %p.hint Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.
-
-
--# .row.media#media
--#   .columns.large-12
--#     %h4 Media
-
-.row.staff#people
-  .columns.large-12
-    %h4
-      People
-      %span.count 8
-    %ul.large-block-grid-7.small-block-grid-2.people
-      - User.all.each do |user|
-        = content_tag_for :li, user do
-          = image_tag user.avatar_image, width: 90, height: 90
-          .name= link_to user, user
-          .role.hint Person
-          -# .email= link_to user.email
-    -# - @lab.humans.each do |human|
-    -#   = link_to human.user, human.user
-
-    -# %h4 History
-    -# - @lab.versions.each do |version|
-    -#   = User.find(version.whodunnit)
-
-
--# .row.events
--#   .columns.large-12
--#     %h4 Upcoming Events
--#     %ul
--#       - Event.all.each do |event|
--#         = content_tag_for :li, event do
--#           %li= link_to event, event
+-# %h4 History
+-# - @lab.versions.each do |version|
+-#   = User.find(version.whodunnit)

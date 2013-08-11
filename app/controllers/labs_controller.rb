@@ -1,34 +1,58 @@
 class LabsController < ApplicationController
 
-  before_filter :require_login, except: [:index, :show]
+  before_filter :require_login, except: [:index, :show, :map]
   authorize_actions_for Lab
-  authority_actions thank_you: 'create'
-  authority_actions map: 'read'
 
-  def map
-    @q = Lab.search(params[:q])
-    @labs = @q.result(distinct: true)
-  end
+  [:map, :index].each do |method|
+    define_method method do
+      @q = Lab.includes(:tools => :tool_type).search(params[:q])
+      @labs = @q.result(distinct: true)
 
-  def index
-    @q = Lab.search(params[:q])
-    @labs = @q.result(distinct: true).page(params[:page])
-    respond_to do |format|
-      format.html
-      format.json { render json: @labs = Lab.all.to_json }
+      @continents = Hash.new(0)
+      @regions = Hash.new(0)
+      @tool_types = Hash.new(0)
+      @lab_kinds = Hash.new(0)
+
+      @labs.each do |lab|
+
+        if Country[lab.country_code].try(:continent)
+          @continents[ Country[lab.country_code].continent ] += 1
+        end
+
+        if lab.region.present?
+          @regions[lab.region] += 1
+        end
+
+        lab.tools.map(&:tool_type).each do |tool_type|
+          @tool_types[tool_type.name] += 1
+        end
+
+        @lab_kinds[Lab::Kinds[lab.kind]] += 1
+      end
+
+      @labs = @labs.page(params[:page])
+
+      respond_to do |format|
+        format.html
+        format.json { render json: @labs = Lab.all.to_json }
+      end
     end
   end
+  authority_actions map: 'read'
 
   def thank_you
   end
+  authority_actions thank_you: 'create'
 
   def new
     @lab = Lab.new
+    @lab.tools.build
   end
 
   def edit
     @lab = current_user.labs.find(params[:id])
     authorize_action_for(@lab)
+    @lab.tools.build
   end
 
   def update
@@ -51,14 +75,25 @@ class LabsController < ApplicationController
 
   def show
     @lab = Lab.find(params[:id])
-    @lab.geocode
     @days = %w(monday tuesday wednesday thursday friday saturday sunday)
+
+    @sections = %w(location)
+    @sections.push 'equipment' unless @lab.tools.empty?
+    @sections.push 'people'# unless @lab.humans.empty?
   end
 
 private
 
   def lab_params
-    params.require(:lab).permit(:name, :address)
+    params.require(:lab).permit(
+      #referees
+      :name, :kind, :description,
+      :urls, :email, :parent_id,
+      :country_code, :street_address_1, :street_address_2,
+      :city, :region, :postal_code, :address_notes, :phone,
+      :latitude, :longitude, :opening_hours_notes, :application_notes,
+      tools_attributes: [:id, :tool_type_id, :name, :description, :photo, :_destroy]
+    )
   end
 
 end

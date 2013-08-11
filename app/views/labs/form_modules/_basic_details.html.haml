@@ -1,0 +1,14 @@
+%fieldset
+  %legend= fa_icon "building", text: "Lab Details"
+  .row.collapse
+    .large-8.columns
+      = f.input :name, label: 'Fab Lab Name'
+    .large-3.columns
+      = f.input :kind, collection: Lab::Kinds, hint: "If you are unsure, leave this blank"
+
+  = f.input :description, hint: "A brief overview of your Fab Lab", input_html: { rows: 5 }
+
+  .row.collapse
+    .columns.large-5
+      = f.input :urls, placeholder: "e.g. http://twitter.com/fablabx", label: "Website URLs", hint: "Any websites for your fablab, enter one website URL per line"
+  = f.input :email, hint: "A general enquiries email address for your Fab Lab"

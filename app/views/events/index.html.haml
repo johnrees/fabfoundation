@@ -27,10 +27,9 @@
         Region
       %ul
         %li All
-        %li Africa
-        %li Asia
-        %li Europe
-        %li USA
+        - Country.all.map{|name,c| Country[c].continent.to_s }.reject!(&:blank?).uniq.sort.each do |continent|
+          %li= continent
+
       %h6 Type
       %ul
         %li All

@@ -5,11 +5,13 @@ gem 'rails', '4.0.0'
 gem 'authority'
 gem 'holder_rails'
 gem 'whenever', require: false
+gem 'timezone'
 # Use sqlite3 as the database for Active Record
 gem 'sqlite3'
 gem 'closure_tree'
 gem 'kaminari'
 gem 'cocoon'
+gem 'friendly_id', github: 'FriendlyId/friendly_id', branch: '4.0-stable'
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 4.0.0'
 # gem "carmen-rails", github: 'petergoldstein/carmen-rails'

@@ -31,6 +31,6 @@ Fabfoundation::Application.routes.draw do
     root "labs#index"
   end
 
-  root 'static#home'
+  root "labs#index"
 
 end

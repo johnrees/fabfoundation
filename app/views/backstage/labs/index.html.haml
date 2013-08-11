@@ -1,8 +1,16 @@
 .row
   .columns.large-12
-    = search_form_for [:backstage, @q] do |f|
-      = f.text_field :name_cont
-      = f.submit
+    .panel
+      = search_form_for [:backstage, @q], builder: SimpleForm::FormBuilder do |f|
+        = f.input :name_or_city_cont, label: "Name"
+        .row
+          .columns.large-4
+            = f.input :country_code_eq, as: 'country', label: 'Country'
+          .columns.large-4
+            = f.input :state_eq, collection: Lab::States, label: 'State'
+          .columns.large-4
+
+            = f.submit "Search", class: 'button expand'
 
 .row
   .columns.large-12
@@ -12,7 +20,7 @@
           %th.id= sort_link @q, :id
           %th= sort_link @q, :name
           %th= sort_link @q, :state
-          %th= sort_link @q, :country
+          %th= sort_link @q, :country_code, 'Country'
           %th= sort_link @q, :created_at
           %th= sort_link @q, :updated_at
       %tbody
@@ -20,7 +28,7 @@
         %tr
           %td= lab.id
           %td= link_to lab, edit_backstage_lab_path(lab)
-          %td= lab.state
-          %td= lab.country
+          %td= Lab::States.invert[lab.state]
+          %td= "#{lab.country_code.upcase} - #{lab.country}"
           %td= lab.created_at.stamp('13 Jun 99')
           %td= lab.updated_at.stamp('13 Jun 99')

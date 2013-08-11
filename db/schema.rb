@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20130810115351) do
+ActiveRecord::Schema.define(version: 20130810172705) do
 
   create_table "events", force: true do |t|
     t.integer  "lab_id"
@@ -43,16 +43,27 @@ ActiveRecord::Schema.define(version: 20130810115351) do
 
   create_table "labs", force: true do |t|
     t.string   "ancestry"
-    t.string   "state"
+    t.integer  "state"
     t.string   "name"
+    t.text     "description"
+    t.string   "phone"
+    t.string   "email"
     t.integer  "kind"
-    t.string   "address"
-    t.text     "address_notes"
-    t.string   "state_code"
-    t.string   "avatar"
+    t.string   "street_address_1"
+    t.string   "street_address_2"
+    t.string   "street_address_3"
+    t.string   "city"
+    t.string   "postal_code"
+    t.string   "country_code"
+    t.string   "region"
+    t.string   "subregion"
     t.float    "latitude"
     t.float    "longitude"
-    t.string   "country_code"
+    t.string   "time_zone"
+    t.text     "address_notes"
+    t.text     "opening_hours_notes"
+    t.text     "application_notes"
+    t.string   "avatar"
     t.text     "urls"
     t.integer  "creator_id"
     t.datetime "created_at"
@@ -62,6 +73,7 @@ ActiveRecord::Schema.define(version: 20130810115351) do
   add_index "labs", ["ancestry"], name: "index_labs_on_ancestry"
   add_index "labs", ["creator_id"], name: "index_labs_on_creator_id"
   add_index "labs", ["name"], name: "index_labs_on_name"
+  add_index "labs", ["state"], name: "index_labs_on_state"
 
   create_table "opening_times", force: true do |t|
     t.integer  "lab_id"
@@ -72,6 +84,16 @@ ActiveRecord::Schema.define(version: 20130810115351) do
   end
 
   add_index "opening_times", ["lab_id"], name: "index_opening_times_on_lab_id"
+
+  create_table "referees", force: true do |t|
+    t.integer  "lab_id"
+    t.integer  "applicant_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "referees", ["applicant_id"], name: "index_referees_on_applicant_id"
+  add_index "referees", ["lab_id"], name: "index_referees_on_lab_id"
 
   create_table "tool_types", force: true do |t|
     t.string   "name"
@@ -103,7 +125,7 @@ ActiveRecord::Schema.define(version: 20130810115351) do
     t.string   "phone"
     t.string   "public_email"
     t.string   "public_phone"
-    t.string   "location"
+    t.string   "city"
     t.string   "country_code"
     t.float    "latitude"
     t.float    "longitude"

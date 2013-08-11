@@ -13,7 +13,7 @@ class CreateUsers < ActiveRecord::Migration
       t.string :public_email
       t.string :public_phone
 
-      t.string :location
+      t.string :city
       t.string :country_code
 
       t.float  :latitude

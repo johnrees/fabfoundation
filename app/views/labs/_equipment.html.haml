@@ -1,0 +1,17 @@
+- unless lab.tools.empty?
+  .row.equipment#equipment
+    .columns.large-12
+      %h4 Equipment
+      %ul.large-block-grid-3.small-block-grid-2.tools
+        - lab.tools.each do |tool|
+          %li.tool
+            .details
+              = image_tag "tools/precision-milling.svg", width: 15, height: 15, style: 'float: left; width: 40px', class: 'tool-icon'
+              .name.has-top{"data-tooltip" => true, :title => "Tooltips are awesome, you should totally use them!"}= tool
+              %ul.clearing-thumbs.clearing-feature{"data-clearing" => true}
+                %li.clearing-featured-img
+                  = image_tag tool.photo
+                  = simple_format tool.description
+                  -# %a{:href => "http://acmeindustrialthinking.com/shopbot5.jpg"}
+                  -#   %img{:src => "http://acmeindustrialthinking.com/shopbot5.jpg", "data-caption" => "caption here..."}/
+              -# %p.hint Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.

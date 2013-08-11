@@ -1,9 +1,11 @@
 .row
   .columns.large-12
-
     - @users.each do |user|
       = content_tag_for :div, user do
-        = image_tag user.avatar_image, width: 50, height: 50
-        .details
-          .name= link_to user, user
-          .location= user.location
+        .row
+          .columns.large-1
+            = image_tag user.avatar_image, width: 50, height: 50
+          .columns.large-11
+            .details
+              .name= link_to user, user
+              .location= user.location

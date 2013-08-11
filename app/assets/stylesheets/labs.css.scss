@@ -1,21 +1,50 @@
-.c-labs {
+#geocomplete-map {
+  embed, img, object { max-width: none; }
+}
+
+#geocomplete-map {
+  height: 440px;
+  width: 100%;
+  background: #CCC;
+}
+input#lab_name {
+  font-size: 1.4em;
+  font-weight: bold;
+}
+th {
+  text-align: right;
+}
+
+.c-labs #main {
+
+  table.opening-hours {
+    border: none;
+    width: 200px !important;
+  }
+
+  .all td {
+    border-bottom: 1px solid #CCC;
+  }
+  td.hint {
+    text-align: right;
+  }
   span.kind {
     font-size: 0.9em;
     margin-left: 0.2em;
   }
-  legend, legend a {
-    color: #888;
-  }
-  legend {
-    font-weight: normal;
-    font-size: 0.9em;
-  }
+  // legend, legend a {
+  //   color: #888;
+  // }
+  // legend {
+  //   font-weight: normal;
+  //   font-size: 0.9em;
+  // }
   a.inactive {
     background: #DDD;
   }
-  img {
-    float: right;
-  }
+  // img {
+  //   float: right;
+  // }
   .sort a {
     margin-left: 0.5em;
   }
@@ -39,6 +68,9 @@
       font-weight: normal;
       display: inline;
       font-size: 1em;
+      span {
+        font-weight: normal;
+      }
     }
     fieldset {
       padding: 5px 8px 0;
@@ -142,7 +174,9 @@
   }
 
   li.user {
-    display: block;
+    .name {
+      clear: both;
+    }
   }
 
   .country, .hours, .phone {
