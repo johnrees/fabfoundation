@@ -1,5 +1,6 @@
 require "bundler/capistrano"
 require "dotenv/capistrano"
+load 'deploy/assets'
 
 server "fabfoundation.johnre.es", :web, :app, :db, primary: true
 
@@ -36,6 +37,7 @@ namespace :deploy do
     sudo "ln -nfs #{current_path}/config/unicorn_init.sh /etc/init.d/unicorn_#{application}"
     run "mkdir -p #{shared_path}/config"
     put File.read("config/database.example.yml"), "#{shared_path}/config/database.yml"
+    put File.read("config/initializers/secret_token.rb"), "#{shared_path}/config/secret_token.rb"
     puts "Now edit the config files in #{shared_path}."
   end
   after "deploy:setup", "deploy:setup_config"
@@ -43,6 +45,7 @@ namespace :deploy do
   task :symlink_config, roles: :app do
     # db
     run "ln -nfs #{shared_path}/config/database.yml #{release_path}/config/database.yml"
+    run "ln -nfs #{shared_path}/config/secret_token.rb #{release_path}/config/initializers/secret_token.rb"
     # uploads dir
     run "ln -nfs #{shared_path}/uploads #{release_path}/public/uploads"
   end

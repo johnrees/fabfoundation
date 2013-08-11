@@ -33,7 +33,7 @@ gem 'haml-rails'
 gem 'bitmask_attributes', github: 'jigfox/bitmask_attributes', branch: 'rails4'
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 gem 'jbuilder', '~> 1.2'
-
+gem 'holder_rails'
 group :doc do
   # bundle exec rake doc:rails generates the API under doc/api.
   gem 'sdoc', require: false
@@ -46,7 +46,6 @@ end
 group :development do
   gem "letter_opener"
   gem "quiet_assets"
-  gem 'holder_rails'
 end
 
 group :development, :test do
