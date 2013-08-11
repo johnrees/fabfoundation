@@ -117,9 +117,6 @@ GEM
     country_select (1.2.0)
     currencies (0.4.2)
     diff-lcs (1.2.4)
-    dotenv (0.8.0)
-    dotenv-rails (0.8.0)
-      dotenv (= 0.8.0)
     erubis (2.7.0)
     execjs (1.4.0)
       multi_json (~> 1.0)
@@ -129,6 +126,9 @@ GEM
       factory_girl (~> 4.2.0)
       railties (>= 3.0.0)
     ffi (1.9.0)
+    figaro (0.7.0)
+      bundler (~> 1.0)
+      rails (>= 3, < 5)
     formatador (0.2.4)
     guard (1.8.2)
       formatador (>= 0.2.4)
@@ -307,8 +307,8 @@ DEPENDENCIES
   coffee-rails (~> 4.0.0)
   countries
   country_select
-  dotenv-rails
   factory_girl_rails
+  figaro
   font-awesome-rails!
   friendly_id!
   geocoder!

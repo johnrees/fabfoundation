@@ -28,6 +28,7 @@ gem 'capistrano'
 gem "font-awesome-rails", github: "bokmann/font-awesome-rails"
 gem 'jquery-rails'
 gem 'haml-rails'
+gem "figaro"
 # gem 'turbolinks'
 
 gem 'bitmask_attributes', github: 'jigfox/bitmask_attributes', branch: 'rails4'
@@ -50,7 +51,6 @@ end
 
 group :development, :test do
   gem 'sqlite3'
-  gem 'dotenv-rails'
   gem "rspec-rails"
   gem "timecop"
   gem "rb-fsevent"

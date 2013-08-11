@@ -1,5 +1,4 @@
 require "bundler/capistrano"
-require "dotenv/capistrano"
 load 'deploy/assets'
 
 server "fabfoundation.johnre.es", :web, :app, :db, primary: true
@@ -26,6 +25,18 @@ after "deploy", "deploy:cleanup" # keep only the last 5 releases
 
 namespace :deploy do
 
+  namespace :figaro do
+    desc "SCP transfer figaro configuration to the shared folder"
+    task :setup do
+      transfer :up, "config/application.yml", "#{shared_path}/application.yml", :via => :scp
+    end
+
+    desc "Symlink application.yml to the release path"
+    task :finalize do
+      run "ln -sf #{shared_path}/application.yml #{release_path}/config/application.yml"
+    end
+  end
+
   #http://stackoverflow.com/questions/9016002/speed-up-assetsprecompile-with-rails-3-1-3-2-capistrano-deployment
   namespace :assets do
     task :precompile, :roles => :web, :except => { :no_release => true } do
@@ -46,11 +57,12 @@ namespace :deploy do
   end
 
   task :setup_config, roles: :app do
-    sudo "ln -nfs #{current_path}/config/nginx.conf /etc/nginx/sites-enabled/#{application}"
-    sudo "ln -nfs #{current_path}/config/unicorn_init.sh /etc/init.d/unicorn_#{application}"
-    run "mkdir -p #{shared_path}/config"
-    put File.read("config/database.example.yml"), "#{shared_path}/config/database.yml"
-    put File.read("config/initializers/secret_token.rb"), "#{shared_path}/config/secret_token.rb"
+    # sudo "ln -nfs #{current_path}/config/nginx.conf /etc/nginx/sites-enabled/#{application}"
+    # sudo "ln -nfs #{current_path}/config/unicorn_init.sh /etc/init.d/unicorn_#{application}"
+    # run "mkdir -p #{shared_path}/config"
+    # put File.read("config/database.example.yml"), "#{shared_path}/config/database.yml"
+    # put File.read("config/initializers/secret_token.rb"), "#{shared_path}/config/secret_token.rb"
+    put File.read(".env"), "#{shared_path}/.env"
     puts "Now edit the config files in #{shared_path}."
   end
   after "deploy:setup", "deploy:setup_config"
@@ -63,6 +75,7 @@ namespace :deploy do
     run "ln -nfs #{shared_path}/uploads #{release_path}/public/uploads"
   end
   after "deploy:finalize_update", "deploy:symlink_config"
+  after "deploy:symlink_config", "deploy:figaro:finalize"
 
   desc "Make sure local git is in sync with remote."
   task :check_revision, roles: :web do
