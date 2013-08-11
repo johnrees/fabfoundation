@@ -1,4 +1,5 @@
 require "bundler/capistrano"
+require "dotenv/capistrano"
 
 server "fabfoundation.johnre.es", :web, :app, :db, primary: true
 
@@ -37,12 +38,9 @@ namespace :deploy do
 
   task :symlink_config, roles: :app do
     # db
-    # run "ln -nfs #{shared_path}/config/database.yml #{release_path}/config/database.yml"
-    # env vars
-    # run "ln -nfs #{shared_path}/config/_env_vars.rb #{release_path}/config/initializers/_env_vars.rb"
+    run "ln -nfs #{shared_path}/config/database.yml #{release_path}/config/database.yml"
     # uploads dir
     run "ln -nfs #{shared_path}/uploads #{release_path}/public/uploads"
-    run "ln -nfs #{shared_path}/flash #{release_path}/public/flash"
   end
   after "deploy:finalize_update", "deploy:symlink_config"
 
