@@ -24,6 +24,9 @@
       = f.input :longitude
       = f.input :time_zone
       = f.input :address_notes
+
+      = render 'labs/form_modules/opening_hours_bitmask', f: f
+
       = f.input :opening_hours_notes
       = f.input :application_notes
       = f.input :avatar

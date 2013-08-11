@@ -4,24 +4,12 @@
 
     = simple_form_for @user, url: register_user_path(@user) do |f|
       %fieldset
+        = f.label :first_name, "Name"
+        = f.input_field :first_name
+        = f.input_field :last_name
 
-        .field
-          = f.label :first_name, "Name"
-          = f.input_field :first_name
-          = f.input_field :last_name
+        = f.input :email
 
-        .field
-          = f.input :email
-
-        .field
-          = f.input :password
-
-        .field
-          = f.input :location
-
-        -# .field
-        -#   -# = f.label :country_code, "Country"
-        -#   -# = f.country_select :country_code, nil, iso_codes: true
-        -#   = country_select("user", "country_code", nil, {iso_codes: true, include_blank: true})
+        = f.input :password
 
       = f.submit "Finish Registration", class: 'button'

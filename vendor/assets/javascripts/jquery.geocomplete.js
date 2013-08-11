@@ -341,8 +341,9 @@
       // Create a simplified version of the address components.
       $.each(result.address_components, function(index, object){
         var name = object.types[0];
+
         data[name] = object.long_name;
-        data[name + "_short"] = object.short_name;
+        data[name + "_short"] = object.short_name.toLowerCase();
       });
 
       // Add properties of the places details.

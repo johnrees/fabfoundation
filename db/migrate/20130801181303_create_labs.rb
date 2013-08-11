@@ -23,6 +23,8 @@ class CreateLabs < ActiveRecord::Migration
       t.float :latitude
       t.float :longitude
 
+      t.text :opening_hours_bitmask
+
       t.string :time_zone
       t.text :address_notes
 

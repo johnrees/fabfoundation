@@ -22,7 +22,48 @@ class Lab < ActiveRecord::Base
     UserMailer.lab_approval_notification(lab).deliver
   end
 
-  # default_scope { with_state(:approved) }
+
+  # class BitwiseHours
+
+  #   def load(text)
+  #     return unless text
+  #     text.unpack('m').first
+  #   end
+
+  #   def dump(text)
+  #     b = Bitwise.new
+  #     %w(monday tuesday wednesday thursday friday saturday sunday).each do |day|
+  #       b.indexes << opening_hours[day][0]
+  #       b.indexes << opening_hours[day][1]
+  #     end
+  #     self.opening_hours_bitmask = b.bits
+  #   end
+
+  # end
+
+  # serialize :opening_hours_bitmask, BitwiseHours.new
+
+  # def opening_hours=(opening_hours)
+  #   b = Bitwise.new
+  #   %w(monday tuesday wednesday thursday friday saturday sunday).each do |day|
+  #     b.indexes << opening_hours[day][0]
+  #     b.indexes << opening_hours[day][1]
+  #   end
+  #   self.opening_hours_bitmask = b.bits
+  # end
+
+  # def opening_hours
+  #   if opening_hours
+  #     b = Bitwise.new
+  #     %w(monday tuesday wednesday thursday friday saturday sunday).each do |day|
+  #       opening_hours[day][0] =
+  #       b.indexes << opening_hours[day][1]
+  #     end
+  #     self.opening_hours_bitmask = b.bits
+  #   end
+  # end
+
+  default_scope { with_state(:approved) }
 
   Kinds = %w[planned_fab_lab mini_fab_lab fab_lab supernode]
   # bitmask :kind, :as => [:planned_fab_lab, :mini_fab_lab, :fab_lab, :supernode]
@@ -52,8 +93,8 @@ class Lab < ActiveRecord::Base
     :join_table => 'referees'
 
   validates_inclusion_of :time_zone, in: ActiveSupport::TimeZone.zones_map(&:name), allow_blank: true
-  # validates_presence_of :name, :kind, :country_code, :city
-  # validates_uniqueness_of :name
+  validates_presence_of :name, :country_code, :city
+  validates_uniqueness_of :name
 
   def address
     [street_address_1, street_address_2, city, postal_code, country].reject!(&:blank?).join("\n")

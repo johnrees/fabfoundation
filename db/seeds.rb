@@ -9,7 +9,7 @@ User.create!(first_name: 'Joe', last_name: 'Public', email: 'regular@mail.com', 
 
 Lab.delete_all
 Lab.after_save.clear
-Lab.skip_callback(:create)
+# Lab.skip_callback(:create)
 labs = JSON.parse( File.read('public/oldlabs.json') )
 labs.each do |lab|
   if lab['address'].present?

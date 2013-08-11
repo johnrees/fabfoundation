@@ -6,6 +6,7 @@ class CreateUsers < ActiveRecord::Migration
       t.string :first_name
       t.string :last_name
 
+      t.string :state
       t.string :email
       t.string :password_digest
 
@@ -30,7 +31,7 @@ class CreateUsers < ActiveRecord::Migration
       t.string :avatar
 
       t.string :locale
-      t.string :timezone
+      t.string :time_zone
 
       t.string :action_token
 

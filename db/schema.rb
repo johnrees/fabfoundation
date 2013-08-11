@@ -59,6 +59,7 @@ ActiveRecord::Schema.define(version: 20130810172705) do
     t.string   "subregion"
     t.float    "latitude"
     t.float    "longitude"
+    t.text     "opening_hours_bitmask"
     t.string   "time_zone"
     t.text     "address_notes"
     t.text     "opening_hours_notes"
@@ -79,6 +80,8 @@ ActiveRecord::Schema.define(version: 20130810172705) do
     t.integer  "lab_id"
     t.time     "start_time"
     t.time     "end_time"
+    t.integer  "start_day"
+    t.integer  "end_day"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -120,6 +123,7 @@ ActiveRecord::Schema.define(version: 20130810172705) do
   create_table "users", force: true do |t|
     t.string   "first_name"
     t.string   "last_name"
+    t.string   "state"
     t.string   "email"
     t.string   "password_digest"
     t.string   "phone"
@@ -135,7 +139,7 @@ ActiveRecord::Schema.define(version: 20130810172705) do
     t.text     "bio"
     t.string   "avatar"
     t.string   "locale"
-    t.string   "timezone"
+    t.string   "time_zone"
     t.string   "action_token"
     t.boolean  "admin",            default: false, null: false
     t.datetime "created_at"

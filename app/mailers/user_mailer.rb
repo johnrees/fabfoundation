@@ -1,6 +1,6 @@
 class UserMailer < ActionMailer::Base
 
-  default from: "Fab Foundation Notifications <notifications@fabfoundation.org>"
+  default from: "Fab Foundation Notifications <notifications@fabfoundationworld.org>"
 
   def welcome(user)
     @user = user

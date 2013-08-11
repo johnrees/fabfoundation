@@ -11,14 +11,19 @@ class User < ActiveRecord::Base
   has_many :labs, foreign_key: 'creator_id'
   has_many :events, foreign_key: 'creator_id'
 
-  validates_length_of :password, minimum: 5, allow_blank: true
+  validates :password,
+    :presence     => true,
+    :length       => { :minimum => 5 },
+    :on => :update
+    # :if           => :password
   # validates :password, allow_blank: true, on: :create
 
   validates_presence_of :first_name, :last_name, :email, on: 'create'
   validates :email, uniqueness: true, format: /@/
 
-  before_create { generate_token(:action_token) }
+  before_save { generate_token(:action_token) }
   after_create :complete_registration
+  before_create { generate_token(:password_digest) }
 
   def location
     "#{city}, #{country}"

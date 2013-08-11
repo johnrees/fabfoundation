@@ -3,41 +3,33 @@ source 'https://rubygems.org'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.0.0'
 gem 'authority'
-gem 'holder_rails'
 gem 'whenever', require: false
 gem 'timezone'
-# Use sqlite3 as the database for Active Record
+gem 'bitwise'
+gem "aws-ses", "~> 0.5.0", :require => 'aws/ses'
 gem 'sqlite3'
 gem 'closure_tree'
 gem 'kaminari'
 gem 'cocoon'
 gem 'friendly_id', github: 'FriendlyId/friendly_id', branch: '4.0-stable'
-# Use SCSS for stylesheets
 gem 'sass-rails', '~> 4.0.0'
-# gem "carmen-rails", github: 'petergoldstein/carmen-rails'
 gem 'countries'
 gem 'country_select'
 gem 'simple_form'
 gem 'geocoder', github: 'alexreisner/geocoder'
 gem 'ancestry'
-# Use Uglifier as compressor for JavaScript assets
 gem 'uglifier', '>= 1.3.0'
 gem 'paper_trail', github: 'airblade/paper_trail', branch: 'rails4'
-# Use CoffeeScript for .js.coffee assets and views
 gem 'coffee-rails', '~> 4.0.0'
 gem 'stamp'
 gem 'state_machine'
 gem 'zurb-foundation', '~> 4.0.0'
 gem "ransack", github: "ernie/ransack"
-# See https://github.com/sstephenson/execjs#readme for more supported runtimes
-# gem 'therubyracer', platforms: :ruby
 gem 'capistrano'
 gem "font-awesome-rails", github: "bokmann/font-awesome-rails"
-# Use jquery as the JavaScript library
 gem 'jquery-rails'
 gem 'haml-rails'
-# Turbolinks makes following links in your web application faster. Read more: https://github.com/rails/turbolinks
-gem 'turbolinks'
+# gem 'turbolinks'
 
 gem 'bitmask_attributes', github: 'jigfox/bitmask_attributes', branch: 'rails4'
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
@@ -51,9 +43,11 @@ end
 group :development do
   gem "letter_opener"
   gem "quiet_assets"
+  gem 'holder_rails'
 end
 
 group :development, :test do
+  gem 'dotenv-rails'
   gem "rspec-rails"
   gem "timecop"
   gem "rb-fsevent"
