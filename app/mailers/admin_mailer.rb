@@ -1,6 +1,6 @@
 class AdminMailer < ActionMailer::Base
 
-  default from: "Fab Foundation Admin Notifications <adminnotifications@fabfoundation.org>"
+  default from: "Fab Foundation Admin Notifications <adminbot@fabfoundationworld.org>"
 
   def new_lab_added(lab)
     @lab = lab
