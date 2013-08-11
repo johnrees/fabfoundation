@@ -16,6 +16,7 @@ gem 'countries'
 gem 'country_select'
 gem 'simple_form'
 gem 'geocoder', github: 'alexreisner/geocoder'
+gem "sentry-raven", :git => "https://github.com/getsentry/raven-ruby.git"
 gem 'ancestry'
 gem 'uglifier', '>= 1.3.0'
 gem 'paper_trail', github: 'airblade/paper_trail', branch: 'rails4'

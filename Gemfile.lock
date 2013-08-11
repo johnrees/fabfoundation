@@ -44,6 +44,15 @@ GIT
     bitmask_attributes (0.4.0)
       activerecord (>= 3.0, < 5)
 
+GIT
+  remote: https://github.com/getsentry/raven-ruby.git
+  revision: 7123787ed5d72b022afa8180da40500b5bc6de73
+  specs:
+    sentry-raven (0.6.0)
+      faraday (>= 0.7.6)
+      hashie (>= 1.1.0)
+      uuidtools
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -125,6 +134,8 @@ GEM
     factory_girl_rails (4.2.1)
       factory_girl (~> 4.2.0)
       railties (>= 3.0.0)
+    faraday (0.8.8)
+      multipart-post (~> 1.2.0)
     ffi (1.9.0)
     figaro (0.7.0)
       bundler (~> 1.0)
@@ -146,6 +157,7 @@ GEM
       activesupport (>= 3.1, < 4.1)
       haml (>= 3.1, < 4.1)
       railties (>= 3.1, < 4.1)
+    hashie (2.0.5)
     highline (1.6.19)
     hike (1.2.3)
     holder_rails (2.0.0)
@@ -179,6 +191,7 @@ GEM
     mini_portile (0.5.1)
     minitest (4.7.5)
     multi_json (1.7.9)
+    multipart-post (1.2.0)
     net-scp (1.1.2)
       net-ssh (>= 2.6.5)
     net-sftp (2.1.2)
@@ -279,6 +292,7 @@ GEM
       kgio (~> 2.6)
       rack
       raindrops (~> 0.7)
+    uuidtools (2.1.4)
     whenever (0.8.4)
       activesupport (>= 2.3.4)
       chronic (>= 0.6.3)
@@ -330,6 +344,7 @@ DEPENDENCIES
   rspec-rails
   sass-rails (~> 4.0.0)
   sdoc
+  sentry-raven!
   shoulda-matchers
   simple_form
   sqlite3
