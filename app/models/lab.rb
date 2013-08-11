@@ -129,7 +129,7 @@ private
   end
 
   def country_stuff
-    self.country_code.upcase!
+    self.country_code.downcase!
     self.region = Country[country_code].try(:region) ? Country[country_code].region : nil
     self.subregion = Country[country_code].try(:subregion) ? Country[country_code].subregion : nil
   end
