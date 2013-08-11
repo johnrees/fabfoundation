@@ -1,9 +1,9 @@
 GIT
   remote: git://github.com/FriendlyId/friendly_id.git
-  revision: b9ef3ddd3c65f6da8f067c77460aec832118a2d1
+  revision: 311fe05318d28b25176be11e47d3c015b25f2b97
   branch: 4.0-stable
   specs:
-    friendly_id (4.0.10.beta.1)
+    friendly_id (4.0.10)
 
 GIT
   remote: git://github.com/airblade/paper_trail.git
@@ -22,16 +22,16 @@ GIT
 
 GIT
   remote: git://github.com/bokmann/font-awesome-rails.git
-  revision: 50d0eabe362f26bf0dad99b1ccae24d4bc22f7f1
+  revision: fe0ff5a7b558b52debc8b954f0d4bcb0e8e6dac5
   specs:
-    font-awesome-rails (3.2.1.2)
+    font-awesome-rails (3.2.1.3)
       railties (>= 3.2, < 5.0)
 
 GIT
   remote: git://github.com/ernie/ransack.git
-  revision: ed5fc717e0de09dfae48be521637ad4a1e437e38
+  revision: 7df31415e7253871e1e979b93f1e18b5bc4db502
   specs:
-    ransack (0.7.3)
+    ransack (1.0.0)
       actionpack (>= 3.0)
       activerecord (>= 3.0)
       polyamorous (~> 0.6.0)
@@ -166,7 +166,7 @@ GEM
       addressable (~> 2.3)
     letter_opener (1.1.2)
       launchy (~> 2.2)
-    listen (1.2.2)
+    listen (1.2.3)
       rb-fsevent (>= 0.9.3)
       rb-inotify (>= 0.9)
       rb-kqueue (>= 0.2)
@@ -178,7 +178,7 @@ GEM
     mime-types (1.23)
     mini_portile (0.5.1)
     minitest (4.7.5)
-    multi_json (1.7.8)
+    multi_json (1.7.9)
     net-scp (1.1.2)
       net-ssh (>= 2.6.5)
     net-sftp (2.1.2)
@@ -217,7 +217,7 @@ GEM
     raindrops (0.11.0)
     rake (10.1.0)
     rb-fsevent (0.9.3)
-    rb-inotify (0.9.0)
+    rb-inotify (0.9.1)
       ffi (>= 0.5.0)
     rb-kqueue (0.2.0)
       ffi (>= 0.5.0)
@@ -228,9 +228,9 @@ GEM
       rspec-expectations (~> 2.14.0)
       rspec-mocks (~> 2.14.0)
     rspec-core (2.14.4)
-    rspec-expectations (2.14.0)
+    rspec-expectations (2.14.1)
       diff-lcs (>= 1.1.3, < 2.0)
-    rspec-mocks (2.14.2)
+    rspec-mocks (2.14.3)
     rspec-rails (2.14.0)
       actionpack (>= 3.0)
       activesupport (>= 3.0)
@@ -271,9 +271,6 @@ GEM
     treetop (1.4.14)
       polyglot
       polyglot (>= 0.3.1)
-    turbo-sprockets-rails3 (0.2.9)
-      railties (>= 3.1.0)
-      sprockets (>= 2.0.0)
     tzinfo (0.3.37)
     uglifier (2.1.2)
       execjs (>= 0.3.0)
@@ -340,7 +337,6 @@ DEPENDENCIES
   state_machine
   timecop
   timezone
-  turbo-sprockets-rails3
   uglifier (>= 1.3.0)
   unicorn
   whenever

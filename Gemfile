@@ -28,7 +28,6 @@ gem 'capistrano'
 gem "font-awesome-rails", github: "bokmann/font-awesome-rails"
 gem 'jquery-rails'
 gem 'haml-rails'
-gem 'turbo-sprockets-rails3'
 # gem 'turbolinks'
 
 gem 'bitmask_attributes', github: 'jigfox/bitmask_attributes', branch: 'rails4'
