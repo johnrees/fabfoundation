@@ -11,7 +11,8 @@
  *= require_self
  *= require foundation_and_overrides
  *= require font-awesome
- *= require selectize
+ *= require select2
+// *= require selectize
  *= require MarkerCluster.Default
  *= require_tree .
  */
@@ -22,6 +23,11 @@
 //     background-color: white;
 //   }
 // }
+
+.select2-container {
+  width: 100%;
+  margin-bottom: 0.3em !important;
+}
 
 label a {
   color: #222;

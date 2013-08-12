@@ -17,11 +17,15 @@
 //= require holder
 //= require jquery.geocomplete
 //= require cocoon
-//= require selectize
-//= require filter
-//= require leaflet.markercluster
+//= require select2
+
+//=// require selectize
+//=// require filter
+//=// require leaflet.markercluster
+
 //= require_tree .
 
 moment().format()
 $(document).foundation();
+
 // $('select').selectize();

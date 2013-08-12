@@ -14,6 +14,8 @@
 
 jQuery ->
 
+  $(".c-labs select").select2();
+
   $('#flash_notice').delay(2000).slideUp('fast')
 
   # fJS = filterInit()
@@ -34,6 +36,7 @@ jQuery ->
 
   $('#tools').on 'cocoon:after-insert', (e, insertedItem) ->
     filepicker.constructWidget $(insertedItem).find('input.photo-uploader')
+    $(insertedItem).find("select").select2();
 
 
   $('tr .closed').change ->
