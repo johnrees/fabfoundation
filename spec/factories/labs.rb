@@ -2,10 +2,9 @@
 
 FactoryGirl.define do
   factory :lab do
-    name "MIT Media Lab"
-    address "Boston"
+    sequence(:name) { |n| "MIT Media Lab #{n}" }
     address_notes "At MIT"
-    state_code "MA"
+    city "Boston"
     country_code "US"
     kind [:supernode]
   end

@@ -12,7 +12,6 @@ describe Lab do
       visit root_path
       click_link "Labs"
       click_link "Map"
-      save_and_open_page
       page.should have_css "#map"
     end
   end
@@ -48,12 +47,13 @@ describe Lab do
 
     it "can be updated" do
       user = FactoryGirl.create(:user)
-      lab = FactoryGirl.create(:lab, users: [user])
+      lab = FactoryGirl.create(:lab, creator: user)
       user_signin user
       visit lab_path(lab)
       click_link "Edit"
-      fill_in "Name", with: "New Name"
+      fill_in "Fab Lab Name", with: "New Name"
       click_button "Update Lab"
+      lab.reload
       expect(current_path).to eq lab_path(lab)
       expect(page).to have_selector("h1", text: "New Name")
     end
@@ -70,10 +70,11 @@ describe Lab do
     it "authenticated user can add a lab" do
       user = FactoryGirl.create(:user)
       user_signin user
-      click_link "Add a lab"
-      fill_in "Name", with: "New Lab"
-      fill_in "Address", with: "Some Address"
+      click_link "Add a Lab"
+      fill_in "Fab Lab Name", with: "New Lab"
+      fill_in "City", with: "A City"
       fill_in "Address notes", with: "On the roof"
+      select "United Kingdom", from: "Country"
       click_button "Add Lab"
       expect(page).to have_selector("h1", text: "Thank you")
     end

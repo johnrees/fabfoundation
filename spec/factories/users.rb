@@ -5,15 +5,16 @@ FactoryGirl.define do
   factory :user do
     sequence(:email) { |n| "user#{n}@gmail.com"}
     first_name 'John'
-    last_name 'Rees'
+    sequence(:last_name) { |n| "Rees#{n}" }
     password "password"
   end
 
   factory :admin, class: "User" do
     sequence(:email) { |n| "admin#{n}@gmail.com"}
     first_name 'John'
-    last_name 'Rees'
+    sequence(:last_name) { |n| "Rees#{n}" }
     password "password"
+    admin true
   end
 
 end

@@ -1,8 +1,10 @@
 .row
   .columns.large-7
-    %fieldset
-      %legend Description
-      .description= simple_format lab.description
+    - if @lab.description.present?
+      %fieldset
+        %legend Description
+        .description= simple_format lab.description
+
   .columns.large-5
     %fieldset
       %legend Websites
