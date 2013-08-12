@@ -1,0 +1,11 @@
+.nested-fields
+  %fieldset
+    .row
+      .columns.large-4
+        = f.association :user
+      .columns.large-8
+        = f.input :details
+        -# = f.input :roles
+
+    = link_to_remove_association f, class: 'remove' do
+      = fa_icon 'remove', text: "Remove human"

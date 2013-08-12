@@ -1,7 +1,7 @@
 %fieldset.address
   %legend= fa_icon "map-marker", text: "Location and Lab Contact Details"
   %p.hint Please enter your address to add a marker to the map, then fill out the rest of the address details below.
-  = text_field_tag :address, "", placeholder: "Search for your address here...", id: 'geocomplete', name: nil
+  = text_field_tag :address, "", placeholder: "Search for your address here...", id: 'geocomplete', name: nil, data: { latlng: "#{f.object.latitude}, #{f.object.longitude}"}
   %hr/
   .row
     .columns.large-6

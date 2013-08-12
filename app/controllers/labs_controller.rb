@@ -49,8 +49,10 @@ class LabsController < ApplicationController
 
   def edit
     @lab = current_user.labs.find(params[:id])
-    authorize_action_for(@lab)
     @lab.tools.build
+    @lab.humans.build
+    authorize_action_for(@lab)
+
   end
 
   def update
@@ -90,7 +92,8 @@ private
       :country_code, :street_address_1, :street_address_2,
       :city, :region, :postal_code, :address_notes, :phone,
       :latitude, :longitude, :opening_hours_notes, :application_notes,
-      tools_attributes: [:id, :tool_type_id, :name, :description, :photo, :_destroy]
+      tools_attributes: [:id, :tool_type_id, :name, :description, :photo, :_destroy],
+      humans_attributes: [:id, :user_id, :details, :_destroy]
     )
   end
 

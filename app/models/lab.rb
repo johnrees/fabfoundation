@@ -49,7 +49,7 @@ class Lab < ActiveRecord::Base
     end
   end
 
-  # default_scope { with_state(:approved) }
+  default_scope { with_state(:approved) }
 
   Kinds = %w[planned_fab_lab mini_fab_lab fab_lab supernode]
   # bitmask :kind, :as => [:planned_fab_lab, :mini_fab_lab, :fab_lab, :supernode]
@@ -57,16 +57,21 @@ class Lab < ActiveRecord::Base
   has_paper_trail
   has_ancestry
 
+
   belongs_to :creator, class_name: "User"
   has_many :events
-  has_many :humans
+
   has_many :tools
   has_many :opening_times
   accepts_nested_attributes_for :tools,
     :reject_if => proc { |a| a['name'].blank? },
     :allow_destroy => true
 
+  has_many :humans
   has_many :users, through: :humans
+  accepts_nested_attributes_for :humans,
+    :reject_if => proc { |a| a['user_id'].blank? },
+    :allow_destroy => true
 
   # geocoded_by :address
   # after_validation :geocode

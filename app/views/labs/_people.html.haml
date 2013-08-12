@@ -2,14 +2,15 @@
   .columns.large-12
     %fieldset
       %legend
-        People
-        %span.count= User.count
+        Staff
+        %span.count= @lab.humans.count
       %ul.large-block-grid-7.small-block-grid-2.people
-        - User.all.each do |user|
-          = content_tag_for :li, user do
-            = image_tag user.avatar_image, width: 90, height: 90
-            .name= link_to user, user
-            .role.hint Person
+        - @lab.humans.each do |human|
+          = content_tag_for :li, human do
+            = link_to human.user do
+              = image_tag human.user.avatar_image, width: 90, height: 90
+              .name= human.user
+              .role.hint= human.details
             -# .email= link_to user.email
       -# - lab.humans.each do |human|
       -#   = link_to human.user, human.user

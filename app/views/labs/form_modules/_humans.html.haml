@@ -1,0 +1,9 @@
+%fieldset#humans
+  %legend= fa_icon "group", text: "Staff"
+  %p.hint People listed here will be shown on the Fab Lab profile page
+  = f.simple_fields_for :humans do |human|
+    = render 'backstage/labs/human_fields', :f => human
+  .links.text-right
+    = link_to_add_association f, :humans, partial: 'backstage/labs/human_fields', class: 'button small' do
+      = fa_icon "plus"
+      Add another Staff Member

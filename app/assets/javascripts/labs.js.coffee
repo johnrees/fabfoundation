@@ -13,9 +13,7 @@
 #   FilterJS(services, "#service_list", view, settings)
 
 jQuery ->
-
-  $(".c-labs select").select2();
-
+  $(".c-labs select, .backstage select").select2()
   $('#flash_notice').delay(2000).slideUp('fast')
 
   # fJS = filterInit()
@@ -38,6 +36,9 @@ jQuery ->
     filepicker.constructWidget $(insertedItem).find('input.photo-uploader')
     $(insertedItem).find("select").select2();
 
+  $('#humans').on 'cocoon:after-insert', (e, insertedItem) ->
+    $(insertedItem).find("select").select2();
+
 
   $('tr .closed').change ->
     $(this).parents('tr').find('.hide-if-closed *').toggle( !$(this).is(":checked") )
@@ -47,6 +48,7 @@ jQuery ->
     details: ".address"
     detailsAttribute: "data-geo"
     map: "#geocomplete-map"
+    location: $('#geocomplete').data('latlng')
     markerOptions:
       draggable: true
 

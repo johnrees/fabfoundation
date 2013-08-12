@@ -26,6 +26,13 @@
         = link_to @user.url do
           = @user.url
 
+    %ul
+      - @user.humans.each do |human|
+        %li
+          = link_to human.lab, human.lab
+          = human.details
+
+
   -# .columns.large-6
   -#   %h4 Labs
   -#   - @labs.each do |lab|

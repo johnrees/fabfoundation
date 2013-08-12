@@ -1,10 +1,20 @@
+= javascript_include_tag "http://maps.googleapis.com/maps/api/js?sensor=false&libraries=places"
+.row
+  .columns.large-12
+    %div#sticky{"data-magellan-expedition" => "fixed"}
+      %dl.sub-nav
+        - %w(details location equipment staff).each do |section|
+          %dd{"data-magellan-arrival" => section}
+            = link_to section.titleize, "##{section}"
+
 .row
   .large-12.columns
 
     = simple_form_for @lab do |f|
       = render 'labs/form_modules/basic_details', f: f
       = render 'labs/form_modules/location', f: f
-      = render 'labs/form_modules/opening_hours', f: f
+      -# = render 'labs/form_modules/opening_hours', f: f
       = render 'labs/form_modules/tools', f: f
+      = render 'labs/form_modules/humans', f: f
 
       = f.submit class: 'button'
