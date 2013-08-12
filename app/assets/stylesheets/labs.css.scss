@@ -7,6 +7,13 @@
   width: 100%;
   background: #CCC;
 }
+
+.sidebar legend {
+  &, a {
+    font-weight: normal;
+    color: #999;
+  }
+}
 input#lab_name {
   font-size: 1.4em;
   font-weight: bold;
@@ -70,7 +77,7 @@ th {
   }
   .sidebar {
     label {
-      font-weight: normal;
+      font-weight: normal !important;
       display: inline;
       font-size: 1em;
       span {

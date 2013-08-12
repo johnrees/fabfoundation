@@ -34,9 +34,9 @@
             .columns.large-4
               - 3.times do |index|
                 - if lab.humans[index]
-                  = image_tag lab.humans[index].user.avatar_image, width: 70
+                  = image_tag lab.humans[index].user.avatar_image, width: 55, class: 'has-tip', data: {tooltip: true}, title: "#{lab.humans[index].user.full_name} - #{lab.humans[index].details}"
                 - else
-                  = holder_tag 70
+                  = holder_tag 55
     = paginate @labs
 
 

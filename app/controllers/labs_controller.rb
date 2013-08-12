@@ -87,6 +87,7 @@ private
   def lab_params
     params.require(:lab).permit(
       #referees
+      :avatar,
       :name, :kind, :description,
       :urls, :email, :parent_id,
       :country_code, :street_address_1, :street_address_2,

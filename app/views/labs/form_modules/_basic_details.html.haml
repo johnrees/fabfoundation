@@ -3,6 +3,10 @@
   .row.collapse
     .large-8.columns
       = f.input :name, label: 'Fab Lab Name'
+
+      = f.label :avatar
+      = f.input_field :avatar, :type => "filepicker-dragdrop", :value => f.object.avatar
+
     .large-3.columns
       = f.input :kind, collection: Lab::Kinds, hint: "If you are unsure, leave this blank"
 
