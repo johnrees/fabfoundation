@@ -4,6 +4,7 @@
 .row
   .columns.large-5.large-centered
     = form_tag sessions_path do
+      = hidden_field_tag :goto, params[:goto]
       .field
         = label_tag :email
         = text_field_tag :email, params[:email], placeholder: 'Email', autofocus: true, autocapitalize: "off", autocorrect: "off"

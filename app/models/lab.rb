@@ -3,8 +3,6 @@ class Lab < ActiveRecord::Base
   include Authority::Abilities
   self.authorizer_name = 'LabAuthorizer'
 
-  validates :email, format: /@/, allow_blank: true
-
   state_machine :initial => :new do
     event :approve do
       transition :new => :approved
@@ -80,9 +78,10 @@ class Lab < ActiveRecord::Base
     :class_name => 'Lab',
     :join_table => 'referees'
 
-  # validates_inclusion_of :time_zone, in: ActiveSupport::TimeZone.zones_map(&:name), allow_blank: true
-  # validates_presence_of :name, :country_code, :city
-  # validates_uniqueness_of :name
+  validates :email, format: /@/, allow_blank: true
+  validates_inclusion_of :time_zone, in: ActiveSupport::TimeZone.zones_map(&:name), allow_blank: true
+  validates_presence_of :name, :country_code, :city
+  validates_uniqueness_of :name
 
   def kind_string
     Kinds[kind] ? Kinds[kind] : ""

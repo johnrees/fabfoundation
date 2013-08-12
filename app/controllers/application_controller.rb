@@ -8,7 +8,7 @@ class ApplicationController < ActionController::Base
 
   def require_login
     if current_user.nil?
-      redirect_to signin_url, :alert => "You must first sign in to access this page"
+      redirect_to signin_url(goto: request.path), :alert => "You must first sign in to access this page"
     end
   end
 

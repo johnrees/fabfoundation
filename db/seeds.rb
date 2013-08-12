@@ -13,7 +13,7 @@ Lab.after_save.clear
 labs = JSON.parse( File.read('public/oldlabs.json') )
 labs.each do |lab|
   if lab['address'].present?
-    Lab.create(
+    Lab.create!(
       name: lab['name'],
       street_address_1: lab['address']['building'],
       city: lab['address']['city'],
@@ -21,7 +21,8 @@ labs.each do |lab|
       latitude: lab['address']['latitude'],
       longitude: lab['address']['longitude'],
       urls: (lab['websites'].map{|m| m['url']}.join("\n") if lab['websites']),
-      kind: Lab::Kinds.index(lab['kind'] == "fab_lab" ? lab['kind'] : "#{lab['kind']}_fab_lab")
+      kind: Lab::Kinds.index(lab['kind'] == "fab_lab" ? lab['kind'] : "#{lab['kind']}_fab_lab"),
+      state: :approved
     )
   end
 end
