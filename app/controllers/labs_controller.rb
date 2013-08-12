@@ -77,7 +77,7 @@ class LabsController < ApplicationController
     @lab = Lab.find(params[:id])
     @days = %w(monday tuesday wednesday thursday friday saturday sunday)
 
-    @sections = %w(location)
+    @sections = %w(location events)
     @sections.push 'equipment' unless @lab.tools.empty?
     @sections.push 'people'# unless @lab.humans.empty?
   end

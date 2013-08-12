@@ -1,7 +1,9 @@
--# .row.events
--#   .columns.large-12
--#     %h4 Upcoming Events
--#     %ul
--#       - Event.all.each do |event|
--#         = content_tag_for :li, event do
--#           %li= link_to event, event
+.row.staff#people
+  .columns.large-12
+    %fieldset
+      %legend
+        Upcoming Events
+      %ul
+        - lab.events.each do |event|
+          = content_tag_for :li, event do
+            %h5= link_to event, event
