@@ -42,16 +42,16 @@
 
               = f.input :public_email
               = f.input :public_phone
-            .row.address
-              .columns.large-12
-                = label_tag :address, 'Location'
-                = text_field_tag :address, "", placeholder: "City, Country", id: 'geocomplete', name: nil
+            -# .row.address
+            -#   .columns.large-12
+            -#     = label_tag :address, 'Location'
+            -#     -# = text_field_tag :address, "", placeholder: "City, Country", id: 'geocomplete', name: nil
 
-              = f.input :city, label: 'City/Region', input_html: { data: {geo: "locality"}}, as: 'hidden'
-              = f.input :country_code, label: 'Country', input_html: { data: {geo: "country"}}, as: 'hidden'
-              -# .columns.large-3
-              -#   = link_to "#" do
-              -#     = fa_icon "map-marker", text: "Locate Me", style: 'line-height: 60px;'
+            -#   = f.input :city, label: 'City/Region', input_html: { data: {geo: "locality"}}, as: 'hidden'
+            -#   = f.input :country_code, label: 'Country', input_html: { data: {geo: "country"}}, as: 'hidden'
+            -#   -# .columns.large-3
+            -#   -#   = link_to "#" do
+            -#   -#     = fa_icon "map-marker", text: "Locate Me", style: 'line-height: 60px;'
 
             .row
               .columns.large-12

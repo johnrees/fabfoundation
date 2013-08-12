@@ -43,7 +43,6 @@ jQuery ->
   $("input#geocomplete").geocomplete
     details: ".address"
     detailsAttribute: "data-geo"
-
     map: "#geocomplete-map"
     markerOptions:
       draggable: true
@@ -53,6 +52,8 @@ jQuery ->
   $("#geocomplete").bind "geocode:dragged", (event, latLng) ->
     $("input#lab_latitude").val latLng.lat()
     $("input#lab_longitude").val latLng.lng()
+
+
 
   # $('.filter-button').hide()
   # $('input').change ->

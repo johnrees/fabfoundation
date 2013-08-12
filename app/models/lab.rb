@@ -110,7 +110,11 @@ class Lab < ActiveRecord::Base
   end
 
   def country
-    country_code.present? ? Country[country_code].name : ""
+    if country_code.present? and Country[country_code]
+      Country[country_code].name
+    else
+      ""
+    end
   end
 
 private
