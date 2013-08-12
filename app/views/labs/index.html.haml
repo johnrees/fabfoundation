@@ -1,8 +1,9 @@
 = render "header"
 .row
   .columns.large-3.sidebar
-    = render "sidebar"
+    = render "js_sidebar"
   .columns.large-9.labs
+
     -# - if action_name == 'index'
     -#   .row
     -#     .columns.large-8.push-4.text-right
@@ -10,6 +11,7 @@
     -#         Sort by:
     -#         = sort_link @q, :name
     -#         = sort_link @q, :created_at, "Date Added"
+
     - @labs.each do |lab|
       = content_tag_for :div, lab, class: 'row' do
         .columns.large-12
@@ -23,9 +25,15 @@
             .columns.large-12.details
               .name
                 = link_to lab, lab
-                %span.kind= Lab::Kinds[lab.kind]
+                %span.kind
+                  - if lab.kind.present?
+                    = Lab::Kinds[lab.kind]
 
               .address.hint= fa_icon "map-marker", text: lab.short_address, class: 'icon-fixed-width'
               -# .times.hint= fa_icon "time", text: 'Open 10:00 - 14:00', class: 'icon-fixed-width'
 
     = paginate @labs
+
+
+-# %script#template{:type => "text/html"}
+-#   <a title="" href="/labs/"><span class="fs_head"></span></a>

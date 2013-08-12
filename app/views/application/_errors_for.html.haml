@@ -1,0 +1,5 @@
+- unless resource.errors.empty?
+  .field_with_errors
+    %ul
+      - resource.errors.full_messages.each do |error|
+        %li= error

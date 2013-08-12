@@ -1,9 +1,6 @@
 = render "header"
-
--# = @labs.to_json
-
 .row
   .columns.large-3.sidebar
-    = render "sidebar"
+    = render "js_sidebar"
   .columns.large-9
     #map{"data-lat" => 51.505, "data-lng" => -0.09, "data-zoom" => 2}

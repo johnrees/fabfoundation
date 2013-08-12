@@ -5,7 +5,7 @@ class CreateLabs < ActiveRecord::Migration
     create_table :labs do |t|
 
       t.string :ancestry
-      t.integer :state
+      t.string :state
       t.string  :name
       t.text    :description
       t.string  :phone

@@ -3,27 +3,15 @@ class Lab < ActiveRecord::Base
   include Authority::Abilities
   self.authorizer_name = 'LabAuthorizer'
 
-  States = {
-    :new => 0,
-    :approved => 1
-  }
+  validates :email, format: /@/, allow_blank: true
 
   state_machine :initial => :new do
-    States.each do |name, value|
-      state name, value: value
-    end
-
     event :approve do
-      transition all => :approved
+      transition :new => :approved
     end
   end
 
-  def after_approve(lab, transition)
-    UserMailer.lab_approval_notification(lab).deliver
-  end
-
-
-  # class BitwiseHours
+  # class BitwiseOpeningTimes
 
   #   def load(text)
   #     return unless text
@@ -43,25 +31,25 @@ class Lab < ActiveRecord::Base
 
   # serialize :opening_hours_bitmask, BitwiseHours.new
 
-  # def opening_hours=(opening_hours)
-  #   b = Bitwise.new
-  #   %w(monday tuesday wednesday thursday friday saturday sunday).each do |day|
-  #     b.indexes << opening_hours[day][0]
-  #     b.indexes << opening_hours[day][1]
-  #   end
-  #   self.opening_hours_bitmask = b.bits
-  # end
+  def opening_hours=(opening_hours)
+    b = Bitwise.new
+    %w(monday tuesday wednesday thursday friday saturday sunday).each do |day|
+      b.indexes << opening_hours[day][0]
+      b.indexes << opening_hours[day][1]
+    end
+    self.opening_hours_bitmask = b.bits
+  end
 
-  # def opening_hours
-  #   if opening_hours
-  #     b = Bitwise.new
-  #     %w(monday tuesday wednesday thursday friday saturday sunday).each do |day|
-  #       opening_hours[day][0] =
-  #       b.indexes << opening_hours[day][1]
-  #     end
-  #     self.opening_hours_bitmask = b.bits
-  #   end
-  # end
+  def opening_hours
+    if opening_hours
+      b = Bitwise.new
+      %w(monday tuesday wednesday thursday friday saturday sunday).each do |day|
+        opening_hours[day][0] =
+        b.indexes << opening_hours[day][1]
+      end
+      self.opening_hours_bitmask = b.bits
+    end
+  end
 
   # default_scope { with_state(:approved) }
 
@@ -95,6 +83,10 @@ class Lab < ActiveRecord::Base
   validates_inclusion_of :time_zone, in: ActiveSupport::TimeZone.zones_map(&:name), allow_blank: true
   validates_presence_of :name, :country_code, :city
   validates_uniqueness_of :name
+
+  def kind_string
+    Kinds[kind]
+  end
 
   def address
     [street_address_1, street_address_2, city, postal_code, country].reject!(&:blank?).join("\n")
@@ -132,6 +124,10 @@ private
     self.country_code.downcase!
     self.region = Country[country_code].try(:region) ? Country[country_code].region : nil
     self.subregion = Country[country_code].try(:subregion) ? Country[country_code].subregion : nil
+  end
+
+  def after_approve(lab, transition)
+    UserMailer.lab_approval_notification(lab).deliver
   end
 
 end

@@ -13,7 +13,7 @@
 <%= link_to "Events", events_path %>
 
 <% if current_user %>
-  Logged in as <%= current_user.email %>.
+  Signed in as <%= current_user.email %>.
   <%= link_to "Add a lab", new_lab_path %>
   <% if current_user.admin? %>
     <%= link_to "Backstage", backstage_root_path %>

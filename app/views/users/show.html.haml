@@ -11,7 +11,7 @@
     = @user.location
 
     - if @user.bio.present?
-      = simple_format "“#{@user.bio}”"
+      = simple_format @user.bio
 
     - if @user.location.present?
       = fa_icon "map-marker", text: @user.location

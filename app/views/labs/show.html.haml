@@ -1,8 +1,8 @@
 .row
   .columns.large-12
     #head
-      #image
-        = image_tag @lab.avatar, width: 110, height: 110
+      -# #image
+      -#   = image_tag @lab.avatar, width: 110, height: 110
       .details
         %h1= @lab.name
         .country.hint
@@ -20,6 +20,17 @@
       = link_to "Edit", edit_lab_path(@lab), class: 'button small' if @lab.updatable_by? current_user
       - if authority_user.admin?
         = link_to "Edit Backstage", edit_backstage_lab_path(@lab), class: 'button small'
+
+.row
+  .columns.large-12
+    - if @lab.parent.present?
+      Supernode: #{link_to @lab.parent, @lab.parent}
+    - if @lab.has_children?
+      Subnodes:
+      %ul
+        - @lab.children.each do |child|
+          %li= link_to child, child
+
 .row
   .columns.large-12
     %div#sticky{"data-magellan-expedition" => "fixed"}

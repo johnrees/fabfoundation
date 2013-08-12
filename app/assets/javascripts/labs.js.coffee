@@ -1,4 +1,22 @@
+# filterInit = ->
+#   template = Mustache.compile($.trim($("#template").html()))
+#   view = (service) ->
+#     return template(service)
+#   settings = {
+#     filter_criteria: {
+#       amount: ['#price_filter .TYPE.range', 'amount'],
+#       status: ['#status :checkbox', 'status']
+#     },
+#     search: {input: '#search_box' },
+#     and_filter_on: true,
+#   }
+#   FilterJS(services, "#service_list", view, settings)
+
 jQuery ->
+
+  $('#flash_notice').delay(2000).slideUp('fast')
+
+  # fJS = filterInit()
 
   if $('#map').length > 0 and $('#map').data('lat')
     markers = new L.MarkerClusterGroup

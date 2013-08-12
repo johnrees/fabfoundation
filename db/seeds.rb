@@ -1,11 +1,11 @@
-# ToolType.delete_all
-# %w(laser_engraving 3d_printing cnc_router precision_cnc robot vinyl_cutting).each do |type|
-#   ToolType.create!(name: type.humanize.capitalize, slug: type)
-# end
+ToolType.delete_all
+%w(laser_engraving 3d_printing cnc_router precision_cnc robot vinyl_cutting).each do |type|
+  ToolType.create!(name: type.humanize.capitalize, slug: type)
+end
 
-# User.delete_all
-# User.create!(first_name: 'John', last_name: 'Rees', admin: true, email: 'john@bitsushi.com', password: 'password')
-# User.create!(first_name: 'Joe', last_name: 'Public', email: 'regular@mail.com', password: 'password')
+User.delete_all
+User.create!(first_name: 'John', last_name: 'Rees', admin: true, email: 'john@bitsushi.com', password: 'password')
+User.create!(first_name: 'Joe', last_name: 'Public', email: 'regular@mail.com', password: 'password')
 
 Lab.delete_all
 Lab.after_save.clear

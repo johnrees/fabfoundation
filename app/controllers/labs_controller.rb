@@ -27,15 +27,13 @@ class LabsController < ApplicationController
           @tool_types[tool_type.name] += 1
         end
 
-        @lab_kinds[Lab::Kinds[lab.kind]] += 1
+        if lab.kind.present?
+          @lab_kinds[Lab::Kinds[lab.kind]] += 1
+        end
+
       end
 
       @labs = @labs.page(params[:page])
-
-      respond_to do |format|
-        format.html
-        format.json { render json: @labs = Lab.all.to_json }
-      end
     end
   end
   authority_actions map: 'read'

@@ -3,6 +3,7 @@
   .columns-12.large
     %h1 Add a Fab Lab
     = simple_form_for @lab do |f|
+      = render 'errors_for', resource: @lab
 
       = render 'labs/form_modules/basic_details', f: f
       = render 'labs/form_modules/relationships', f: f

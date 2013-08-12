@@ -5,10 +5,10 @@
       - [1,2,3,4,5,6,0].each_with_index do |index,count|
         %tr
           %th= I18n.t('date.day_names')[index]
-          %td.hide-if-closed= bitmask_time_input "#{I18n.t('date.day_names')[index].downcase}_opens_at", index, (9.hours unless count > 4)
+          %td.hide-if-closed= bitmask_time_input "lab[opening_times][#{index}][0]", index, (9.hours unless count > 4)
           %td.hide-if-closed.text-center
             %span to
-          %td.hide-if-closed= bitmask_time_input "#{I18n.t('date.day_names')[index].downcase}_closes_at", index, (17.hours unless count > 4)
+          %td.hide-if-closed= bitmask_time_input "lab[opening_times][#{index}][1]", index, (17.hours unless count > 4)
           %td
             = label_tag do
               = check_box_tag :Closed, "", (count > 4), class: 'closed'

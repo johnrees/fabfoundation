@@ -5,32 +5,38 @@
 .row
   .columns.large-12
     = simple_form_for [:backstage, @lab] do |f|
-      -# = f.input :ancestry
-      = f.input :state
-      = f.input :name
-      = f.input :description
-      = f.input :phone
-      = f.input :email
-      = f.input :kind
-      = f.input :street_address_1
-      = f.input :street_address_2
-      = f.input :street_address_3
-      = f.input :city
-      = f.input :postal_code
-      = f.input :country_code
-      = f.input :region
-      = f.input :subregion
-      = f.input :latitude
-      = f.input :longitude
-      = f.input :time_zone
-      = f.input :address_notes
+      %ul
+        - @lab.errors.full_messages.each do |msg|
+          %li= msg
 
-      = render 'labs/form_modules/opening_hours_bitmask', f: f
+      %fieldset
+        -# = f.input :ancestry
+        = f.input :parent_id, label: 'Supernode', collection: Lab.all
+        -# = f.input :state, collection: @lab.state_paths.to_states
+        = f.input :name
+        = f.input :description
+        = f.input :phone
+        = f.input :email
+        = f.input :kind
+        = f.input :street_address_1
+        = f.input :street_address_2
+        = f.input :street_address_3
+        = f.input :city
+        = f.input :postal_code
+        = f.input :country_code, iso_codes: true
+        = f.input :region
+        = f.input :subregion
+        = f.input :latitude
+        = f.input :longitude
+        = f.input :time_zone
+        = f.input :address_notes
 
-      = f.input :opening_hours_notes
-      = f.input :application_notes
-      = f.input :avatar
-      = f.input :urls
-      = f.association :creator
+        -# = render 'labs/form_modules/opening_hours_bitmask', f: f
+
+        -# = f.input :opening_hours_notes
+        = f.input :application_notes
+        = f.input :avatar
+        = f.input :urls
+        = f.association :creator
 
       = f.submit class: 'button'

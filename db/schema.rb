@@ -43,7 +43,7 @@ ActiveRecord::Schema.define(version: 20130810172705) do
 
   create_table "labs", force: true do |t|
     t.string   "ancestry"
-    t.integer  "state"
+    t.string   "state"
     t.string   "name"
     t.text     "description"
     t.string   "phone"

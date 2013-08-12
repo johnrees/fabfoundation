@@ -5,6 +5,8 @@
 
     = simple_form_for @user do |f|
 
+      = render 'errors_for', resource: @user
+
       .row.collapse
         .columns.large-12
           %fieldset
@@ -16,7 +18,8 @@
             .row
               .columns.large-12
                 = f.input :email, hint: "This will never be made public, we will only use it to contact you."
-                = f.input :dob, label: "Date of Birth", hint: "We just want this for anonymous data collection, it's no problem if you don't want to share it.", order: [:day, :month, :year], include_blank: true, selected: nil, start_year: Time.now.year - 90, end_year: Time.now.year - 2
+
+                = f.input :dob, label: "Date of Birth", hint: "We just want this for anonymous data collection, it's no problem if you don't want to share it.", order: [:day, :month, :year], start_year: Time.now.year - 90, end_year: Time.now.year - 2, prompt: true, start_year: 2010, end_year: 1910
 
       %fieldset
         %legend Avatar
@@ -54,6 +57,6 @@
               .columns.large-12
                 = f.input :country_code, as: 'hidden'
                 = f.input :url, label: 'Website', hint: "Have you got a website/URL that you'd like to share?"
-                = f.input :twitter_username, input_html: { placeholder: 'e.g. @fabfoundation' }
+                -# = f.input :twitter_username, input_html: { placeholder: 'e.g. @fabfoundation' }
 
           = f.submit "Update", class: 'button'

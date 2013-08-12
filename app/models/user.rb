@@ -14,16 +14,21 @@ class User < ActiveRecord::Base
   validates :password,
     :presence     => true,
     :length       => { :minimum => 5 },
-    :on => :update
-    # :if           => :password
+    :on => :update,
+    :if           => :password
   # validates :password, allow_blank: true, on: :create
 
-  validates_presence_of :first_name, :last_name, :email, on: 'create'
+  validates_presence_of :first_name, :last_name, :email
   validates :email, uniqueness: true, format: /@/
+  validates :public_email, format: /@/, allow_blank: true
 
   before_save { generate_token(:action_token) }
   after_create :complete_registration
-  before_create { generate_token(:password_digest) }
+  before_create :check_password
+
+  def check_password
+    self.password ||= SecureRandom.urlsafe_base64
+  end
 
   def location
     "#{city}, #{country}"
