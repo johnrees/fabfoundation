@@ -11,7 +11,7 @@
   %meta{ :name => "viewport", :content => "width=device-width, initial-scale=1.0" }/
   %title= content_for?(:title) ? yield(:title) : "Fab Foundation World"
 
-  = stylesheet_link_tag "application", "http://fonts.googleapis.com/css?family=Cabin"
+  = stylesheet_link_tag "application"
   = javascript_include_tag "vendor/custom.modernizr"
   = csrf_meta_tag
 
@@ -30,4 +30,3 @@
           = link_to "×", "#", class: 'close'
 
   = yield
-  = javascript_include_tag "application"

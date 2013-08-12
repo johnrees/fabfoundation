@@ -69,7 +69,9 @@ private
       :bio,
       :avatar,
       :city,
-      :country_code
+      :country_code,
+      :time_zone,
+      referee_lab_ids: []
     )
   end
 

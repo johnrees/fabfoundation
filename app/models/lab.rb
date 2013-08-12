@@ -80,12 +80,12 @@ class Lab < ActiveRecord::Base
     :class_name => 'Lab',
     :join_table => 'referees'
 
-  validates_inclusion_of :time_zone, in: ActiveSupport::TimeZone.zones_map(&:name), allow_blank: true
-  validates_presence_of :name, :country_code, :city
-  validates_uniqueness_of :name
+  # validates_inclusion_of :time_zone, in: ActiveSupport::TimeZone.zones_map(&:name), allow_blank: true
+  # validates_presence_of :name, :country_code, :city
+  # validates_uniqueness_of :name
 
   def kind_string
-    Kinds[kind]
+    Kinds[kind] ? Kinds[kind] : ""
   end
 
   def address

@@ -383,7 +383,7 @@
       }
 
       if ($element.is(":input")){
-        $element.val(value);
+        $element.val(value).trigger('change');
       } else {
         $element.text(value);
       }

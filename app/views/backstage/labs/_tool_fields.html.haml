@@ -9,4 +9,5 @@
         = f.input :name, input_html: { placeholder: 'e.g. MakerBot 2', validate: false}
         = f.input :description
 
-    = link_to_remove_association "Remove tool", f, class: 'button small alert'
+    = link_to_remove_association f, class: 'remove' do
+      = fa_icon 'remove', text: "Remove tool"

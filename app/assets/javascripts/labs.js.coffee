@@ -24,7 +24,7 @@ jQuery ->
     markers = new L.MarkerClusterGroup
     map = L.map('map', { scrollWheelZoom: false }).setView([$('#map').data('lat'), $('#map').data('lng')], $('#map').data('zoom'))
     L.tileLayer('http://{s}.tile.cloudmade.com/384aceabcd0942189d0e93cf0e98cd31/90734/256/{z}/{x}/{y}.png', {}).addTo(map)
-    # L.marker([$('#map').data('lat'), $('#map').data('lng')]).addTo(map)
+    L.marker([$('#map').data('lat'), $('#map').data('lng')]).addTo(map)
 
     $.get "/labs.json", (labs) ->
       for lab in labs
@@ -55,8 +55,6 @@ jQuery ->
   $("#geocomplete").bind "geocode:dragged", (event, latLng) ->
     $("input#lab_latitude").val latLng.lat()
     $("input#lab_longitude").val latLng.lng()
-
-
 
   # $('.filter-button').hide()
   # $('input').change ->

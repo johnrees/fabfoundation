@@ -21,7 +21,7 @@
 
 //=// require selectize
 //=// require filter
-//=// require leaflet.markercluster
+//= require leaflet.markercluster
 
 //= require_tree .
 
