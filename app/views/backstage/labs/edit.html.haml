@@ -5,9 +5,7 @@
 .row
   .columns.large-12
     = simple_form_for [:backstage, @lab] do |f|
-      %ul
-        - @lab.errors.full_messages.each do |msg|
-          %li= msg
+      = render 'errors_for', resource: @lab
 
       %fieldset
         -# = f.input :ancestry

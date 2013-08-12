@@ -31,7 +31,7 @@ class User < ActiveRecord::Base
   end
 
   def location
-    "#{city}, #{country}"
+    "#{city}, #{country}" if city.present?
   end
 
   def country

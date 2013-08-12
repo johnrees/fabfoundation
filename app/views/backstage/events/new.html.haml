@@ -1,6 +1,7 @@
 .row
   .columns-12.large
     = simple_form_for [:backstage, @event] do |f|
+      = render 'errors_for', resource: @event
       = f.input :name
       = f.association :lab
       = f.input :starts_at

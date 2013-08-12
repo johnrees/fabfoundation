@@ -27,21 +27,6 @@ label a {
   color: #222;
 }
 
-.field_with_errors {
-  .hint {
-    color: #111;
-  }
-  .error {
-    padding: 0.3em;
-    display: block;
-  }
-  background: #FFBABA;
-  color: #A84545;
-  border-radius: 4px;
-  ul { padding: 10px 30px; margin: 0; }
-  text-shadow: 1px -1px 1px rgba(255,255,255,0.2);
-}
-
  legend i {
   color: #CCC;
  }
@@ -58,25 +43,6 @@ label a {
 
 fieldset {
   border-radius: 4px;
-}
-
-.hint {
-  display: block;
-  color: #CCC;
-  font-size: 0.9em;
-}
-
-.input span.hint {
-  font-size: 0.8em;
-  margin-top: 0;
-}
-.input {
-  input, textarea, select {
-    margin-bottom: 0.2em !important;
-  }
-}
-div.input {
-  margin-bottom: 1em;
 }
 
 body.c-users li.users a,
@@ -100,8 +66,6 @@ header {
     position: relative;
     top: 10px;
   }
-
-
 
   li a:hover {
     color: #FFF !important;
