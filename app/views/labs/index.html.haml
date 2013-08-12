@@ -22,16 +22,21 @@
             -#   - else
             -#     = image_tag lab.avatar, width: 80, height: 80
 
-            .columns.large-12.details
+            .columns.large-8.details
               .name
                 = link_to lab, lab
-                %span.kind
-                  - if lab.kind.present?
-                    = Lab::Kinds[lab.kind]
+                -# %span.kind
+                -#   - if lab.kind.present?
+                -#     = Lab::Kinds[lab.kind]
 
               .address.hint= fa_icon "map-marker", text: lab.short_address, class: 'icon-fixed-width'
               -# .times.hint= fa_icon "time", text: 'Open 10:00 - 14:00', class: 'icon-fixed-width'
-
+            .columns.large-4
+              - 3.times do |index|
+                - if lab.humans[index]
+                  = image_tag lab.humans[index].user.avatar_image, width: 70
+                - else
+                  = holder_tag 70
     = paginate @labs
 
 

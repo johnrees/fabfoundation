@@ -13,7 +13,7 @@
 #   FilterJS(services, "#service_list", view, settings)
 
 jQuery ->
-  $(".c-labs select, .backstage select").select2()
+  $(".c-labs select, .backstage select, .c-events select").select2()
   $('#flash_notice').delay(2000).slideUp('fast')
 
   # fJS = filterInit()

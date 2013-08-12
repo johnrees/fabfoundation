@@ -1,23 +1,24 @@
-= form_for event do |f|
+= simple_form_for event do |f|
   %fieldset
-    .field
-      = f.label :lab_id, "Lab"
-      = f.collection_select :lab_id, current_user.labs, :id, :name, include_blank: false
-    .field
-      - if @event.image.present?
-        = image_tag @event.image, width: 100
-    .field
-      = f.label :image
-      %input{:type => "filepicker-dragdrop", :"data-fp-multiple" => true, :name => "event[image]", :value => @event.image }
+    = f.association :lab
+    - if @event.image.present?
+      = image_tag @event.image, width: 100
 
-    .field
-      = f.label :name
-      = f.text_field :name
-    .field
-      = f.label :starts_at
-      = f.datetime_select :starts_at
-    .field
-      = f.label :details
-      = f.text_area :details
+
+    = f.input :name
+
+    = f.input :all_day
+
+    .row
+      .columns.large-6
+        = f.input :starts_at, minute_step: 5
+      .columns.large-6
+        = f.input :ends_at, include_blank: true
+
+
+    = f.label :image
+    %input{:type => "filepicker-dragdrop", :"data-fp-multiple" => true, :name => "event[image]", :value => @event.image }
+    = f.input :details
+
 
   = f.submit class: 'button'
