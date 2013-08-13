@@ -30,7 +30,7 @@ gem "font-awesome-rails", github: "bokmann/font-awesome-rails"
 gem 'jquery-rails'
 gem 'haml-rails'
 gem "figaro"
-gem 'rocket_pants', '~> 1.0'
+# gem 'rocket_pants', '~> 1.0'
 # gem 'turbolinks'
 
 gem 'bitmask_attributes', github: 'jigfox/bitmask_attributes', branch: 'rails4'
