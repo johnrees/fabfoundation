@@ -17,6 +17,7 @@
 //= require holder
 //= require jquery.geocomplete
 //= require cocoon
+//= require fullcalendar
 //= require select2
 
 //=// require selectize

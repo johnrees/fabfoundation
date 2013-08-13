@@ -1,6 +1,11 @@
 class EventsController < ApplicationController
   authorize_actions_for Event
 
+  def calendar
+    @events = Event.all
+  end
+  authority_actions calendar: 'read'
+
   def index
     @events = Event.all
     @event_days = @events.group_by { |e| e.starts_at.beginning_of_day }

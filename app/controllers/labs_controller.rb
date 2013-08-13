@@ -35,7 +35,7 @@ class LabsController < ApplicationController
       end
 
       @labs = @labs.page(params[:page])
-      @lab_countries = @labs.group_by { |l| l.country_code }
+      @lab_countries = @labs.group_by{ |l| l.country }.sort
 
     end
   end

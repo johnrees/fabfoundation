@@ -15,7 +15,12 @@ Fabfoundation::Application.routes.draw do
     end
   end
 
-  resources :events
+  resources :events do
+    collection do
+      get 'calendar'
+    end
+  end
+
   resources :users do
     member do
       patch 'register'

@@ -16,8 +16,9 @@
       %fieldset
         %legend
           .flag{class: "flag-#{country}"}
-          = Country.new(country.upcase).name
-        - labs.each do |lab|
+          -# = Country.new(country.upcase).name
+          = country
+        - labs.sort.each do |lab|
           = content_tag_for :div, lab, class: 'row' do
             .columns.large-12
               .row
