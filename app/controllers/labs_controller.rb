@@ -5,7 +5,7 @@ class LabsController < ApplicationController
 
   [:map, :index].each do |method|
     define_method method do
-      @q = Lab.includes(:tools => :tool_type).search(params[:q])
+      @q = Lab.order('name ASC').includes(:tools => :tool_type).search(params[:q])
       @labs = @q.result(distinct: true)
 
       @continents = Hash.new(0)
@@ -35,7 +35,7 @@ class LabsController < ApplicationController
       end
 
       @labs = @labs.page(params[:page])
-      @lab_countries = @labs.group_by{ |l| l.country }.sort
+      @lab_countries = @labs.group_by{ |l| l.country_code }
 
     end
   end
