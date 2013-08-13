@@ -7,6 +7,8 @@ Fabfoundation::Application.routes.draw do
   get "signin" => "sessions#new", :as => "signin"
   get "signup" => "users#new", :as => "signup"
 
+  resources :applications
+
   resources :labs do
     collection do
       get 'map'

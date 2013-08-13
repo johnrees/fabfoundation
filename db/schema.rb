@@ -11,7 +11,31 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20130810172705) do
+ActiveRecord::Schema.define(version: 20130813002808) do
+
+  create_table "applications", force: true do |t|
+    t.integer  "lab_id"
+    t.integer  "creator_id"
+    t.text     "state"
+    t.text     "notes"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "applications", ["creator_id"], name: "index_applications_on_creator_id"
+  add_index "applications", ["lab_id"], name: "index_applications_on_lab_id"
+
+  create_table "comments", force: true do |t|
+    t.string   "ancestry"
+    t.text     "content"
+    t.integer  "commentable_id"
+    t.string   "commentable_type"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "comments", ["ancestry"], name: "index_comments_on_ancestry"
+  add_index "comments", ["commentable_id", "commentable_type"], name: "index_comments_on_commentable_id_and_commentable_type"
 
   create_table "events", force: true do |t|
     t.integer  "lab_id"

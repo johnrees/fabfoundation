@@ -13,6 +13,7 @@ class LabsController < ApplicationController
       @tool_types = Hash.new(0)
       @lab_kinds = Hash.new(0)
 
+
       @labs.each do |lab|
 
         if Country[lab.country_code].try(:continent)
@@ -34,6 +35,8 @@ class LabsController < ApplicationController
       end
 
       @labs = @labs.page(params[:page])
+      @lab_countries = @labs.group_by { |l| l.country_code }
+
     end
   end
   authority_actions map: 'read'
