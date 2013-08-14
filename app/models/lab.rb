@@ -3,6 +3,8 @@ class Lab < ActiveRecord::Base
   include Authority::Abilities
   self.authorizer_name = 'LabAuthorizer'
 
+  has_one :lab_application
+
   state_machine :initial => :new do
     event :approve do
       transition :new => :approved

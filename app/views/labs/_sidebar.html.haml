@@ -1,4 +1,4 @@
-= link_to new_lab_path, class: 'button expand' do
+= link_to new_lab_application_path, class: 'button expand' do
   = fa_icon "plus", text: "Add a Lab"
 
 = search_form_for @q do |f|
@@ -8,7 +8,7 @@
       %legend
         = fa_icon "globe"
         = link_to "Region", map_labs_path
-      #map{"data-lat" => 51.505, "data-lng" => -0.09, "data-zoom" => 2}
+      #map
       %table
 
         %tr.all

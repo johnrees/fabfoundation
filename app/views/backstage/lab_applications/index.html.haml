@@ -1,0 +1,21 @@
+.row
+  .columns.large-12
+    %table
+      %thead
+        %tr
+          %th.id= sort_link @q, :id
+          %th= sort_link @q, :name
+          %th= sort_link @q, :state
+          %th= sort_link @q, :country_code, 'Country'
+          %th= sort_link @q, :created_at
+          %th= sort_link @q, :updated_at
+      %tbody
+      - @lab_applications.each do |lab_application|
+        = lab_application.inspect
+        %tr
+          %td= lab_application.id
+          %td= link_to lab_application, edit_backstage_lab_application_path(lab_application)
+          %td= lab_application.state
+          -# %td= "#{lab_application.lab.country_code} - #{lab.country}"
+          %td= lab_application.created_at.stamp('13 Jun 99')
+          %td= lab_application.updated_at.stamp('13 Jun 99')

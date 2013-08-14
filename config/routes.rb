@@ -1,6 +1,6 @@
 Fabfoundation::Application.routes.draw do
 
-  get "labs/thank_you"
+  get "lab_applications/thank_you"
   get "static/home"
   get "static/secret"
   get "signout" => "sessions#destroy", :as => "logout"
@@ -8,6 +8,9 @@ Fabfoundation::Application.routes.draw do
   get "signup" => "users#new", :as => "signup"
 
   resources :applications
+
+  resources :lab_applications do
+  end
 
   resources :labs do
     collection do
@@ -32,10 +35,11 @@ Fabfoundation::Application.routes.draw do
   get "complete_registration/:token" => 'users#complete_registration', :as => 'complete_registration'
 
   namespace "backstage" do
+    resources :lab_applications
     resources :labs
     resources :users
     resources :events
-    root "labs#index"
+    root "lab_applications#index"
   end
   root "labs#index"
 

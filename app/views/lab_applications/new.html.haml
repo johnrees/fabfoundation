@@ -1,0 +1,19 @@
+= javascript_include_tag "http://maps.googleapis.com/maps/api/js?sensor=false&libraries=places"
+
+.row
+  .columns.large-12
+    %h1 Add a Fab Lab
+    = simple_form_for @lab_application do |f|
+      = render 'errors_for', resource: @lab_application
+      = f.simple_fields_for :lab do |l|
+
+        = render 'labs/form_modules/basic_details', f: l
+        = render 'labs/form_modules/relationships', f: l
+        = render 'labs/form_modules/location', f: l
+        -# = render 'labs/form_modules/opening_hours', f: l
+        = render 'labs/form_modules/tools', f: l
+
+      %fieldset
+        %legend= fa_icon "comments", text: "Anything else?"
+        = f.input :notes, hint: "If you would like to add any more details or comments to your application then please include them here.", input_html: { rows: 5 }
+      .actions= f.submit "Submit Application", class: 'button large'

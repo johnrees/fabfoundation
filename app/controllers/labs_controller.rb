@@ -41,10 +41,6 @@ class LabsController < ApplicationController
   end
   authority_actions map: 'read'
 
-  def thank_you
-  end
-  authority_actions thank_you: 'create'
-
   def new
     @lab = Lab.new
     @lab.tools.build
@@ -64,15 +60,6 @@ class LabsController < ApplicationController
       redirect_to lab_url(@lab), notice: "Lab Updated"
     else
       render :edit
-    end
-  end
-
-  def create
-    @lab = current_user.labs.create lab_params
-    if @lab.save
-      redirect_to labs_thank_you_url
-    else
-      render :new
     end
   end
 
