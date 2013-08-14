@@ -1,1 +1,1 @@
-json.array! @labs, :id, :name, :address, :latitude, :longitude, :tools, :kind_string, :country, :region, :subregion
+json.array! @labs, :id, :name, :address, :latitude, :longitude, :tools, :country, :region, :subregion
