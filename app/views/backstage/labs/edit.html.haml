@@ -1,7 +1,7 @@
 .row
   .columns.large-12
     = link_to "View Lab", @lab, class: 'button'
-    = link_to "Delete Lab", [:backstage, @lab], method: 'delete', confirm: "Are you sure?", class: 'button alert'
+    = link_to "Delete Lab", [:backstage, @lab], method: 'delete', data: { confirm: "Are you sure?" }, class: 'button alert'
 .row
   .columns.large-12
     = simple_form_for [:backstage, @lab] do |f|

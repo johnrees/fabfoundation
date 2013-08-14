@@ -9,6 +9,15 @@ class Lab < ActiveRecord::Base
     end
   end
 
+  before_save :get_time_zone
+  def get_time_zone
+    if Rails.env.test?
+      self.time_zone = 'Europe/London'
+    else
+      self.time_zone = GoogleTimezone.fetch(latitude, longitude).time_zone_id
+    end
+  end
+
   # class BitwiseOpeningTimes
 
   #   def load(text)
@@ -76,6 +85,12 @@ class Lab < ActiveRecord::Base
   # geocoded_by :address
   # after_validation :geocode
 
+  # acts_as_mappable :default_units => :miles,
+  #                  :default_formula => :sphere,
+  #                  :distance_field_name => :distance,
+  #                  :lat_column_name => :latitude,
+  #                  :lng_column_name => :longitude
+
   before_save :country_stuff
 
   has_and_belongs_to_many :referee_labs,
@@ -84,7 +99,7 @@ class Lab < ActiveRecord::Base
     :join_table => 'referees'
 
   validates :email, format: /@/, allow_blank: true
-  validates_inclusion_of :time_zone, in: ActiveSupport::TimeZone.zones_map(&:name), allow_blank: true
+  # validates_inclusion_of :time_zone, in: ActiveSupport::TimeZone.zones_map(&:name), allow_blank: true
   validates_presence_of :name, :country_code, :city
   validates_uniqueness_of :name
 

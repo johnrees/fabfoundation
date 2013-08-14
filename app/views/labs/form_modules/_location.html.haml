@@ -27,4 +27,4 @@
 
       = f.input :address_notes, as: 'text', placeholder: 'e.g. Enter the building via the back door.', hint: 'Any extra details that can help people find your Fab Lab'
       = f.input :phone, hint: "A general enquiries phone number for your Fab Lab", placeholder: "e.g. +34 (0)1234 56789", input_html: { data: {geo: "international_phone_number"}}
-      = f.input :time_zone
+      = f.input :time_zone, as: 'string'

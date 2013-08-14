@@ -1,9 +1,7 @@
 = simple_form_for event do |f|
   %fieldset
 
-    = f.label :name, "What"
-    = f.input_field :name
-
+    = f.input :name, label: "What"
 
     - if @event.image.present?
       = image_tag @event.image, width: 100

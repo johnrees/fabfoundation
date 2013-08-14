@@ -37,7 +37,6 @@ Fabfoundation::Application.routes.draw do
     resources :events
     root "labs#index"
   end
-
   root "labs#index"
 
 end

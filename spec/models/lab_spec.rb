@@ -9,6 +9,10 @@ describe Lab do
   it { should have_many(:users).through(:humans) }
   it { should have_and_belong_to_many(:referee_labs) }
 
+  it "is valid" do
+    expect( FactoryGirl.build(:lab) ).to be_valid
+  end
+
   it "has country method"
 
   it "notifies creator after creation"
