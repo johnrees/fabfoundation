@@ -55,12 +55,12 @@
         = fa_icon "building"
         Fab Lab Type
       %table
-        %tr.all
-          %td
-            %label
-              = check_box_tag "q[kind_in][]", '', (params[:q].blank? or params[:q][:kind_in].reject(&:blank?).empty?)
-              All
-          %td.hint= @labs.try(:total_count) ? @labs.total_count : @labs.size
+        -# %tr.all
+        -#   %td
+        -#     %label
+        -#       = check_box_tag "q[kind_in][]", '', (params[:q].blank? or params[:q][:kind_in].reject(&:blank?).empty?)
+        -#       All
+        -#   %td.hint= @labs.try(:total_count) ? @labs.total_count : @labs.size
 
         - %w(supernode fab_lab mini_fab_lab planned_fab_lab).each do |kind, index|
           -# - if @lab_kinds[kind] > 0

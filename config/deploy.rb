@@ -23,6 +23,21 @@ ssh_options[:forward_agent] = true
 
 after "deploy", "deploy:cleanup" # keep only the last 5 releases
 
+
+namespace :logs do
+  %w(production unicorn).each do |word|
+    desc "tail #{word} log files"
+    task word.to_sym, :roles => :app do
+      trap("INT") { puts 'Interupted'; exit 0; }
+      run "tail -f #{shared_path}/log/#{word}.log" do |channel, stream, data|
+        puts  # for an extra line break before the host name
+        puts "#{channel[:host]}: #{data}"
+        break if stream == :err
+      end
+    end
+  end
+end
+
 namespace :deploy do
 
   namespace :figaro do
