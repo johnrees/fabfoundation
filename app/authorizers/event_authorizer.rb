@@ -4,14 +4,15 @@ class EventAuthorizer < ApplicationAuthorizer
   #   user and !user.labs.empty?
   # end
 
-  def creatable_by?(user)
-    user.admin?
-    # resource.lab.humans.include? user
+  def self.creatable_by?(user)
+    user.labs.any?
   end
 
-  def updatable_by?(user)
+  def self.updatable_by?(user)
     # resource.lab.humans.include? user
-    resource.creator == user
+    # resource.creator == user
+    # user.labs.include? resource.lab
+    true
   end
 
   def self.readable_by?(user)

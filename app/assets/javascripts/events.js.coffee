@@ -1,5 +1,15 @@
 jQuery ->
 
+  # $('[data-date]').each ->
+  #   $(this).text moment($(this).data('date')).calendar()
+
+  $('input.datepicker').datepicker
+    changeMonth: true
+    dateFormat: 'm M yy'
+
+  # $( "input.datepicker.from" ).datepicker( "option", "onClose", ((date)-> $( "input.to" ).datepicker( "option", "minDate", selectedDate )) )
+  # $( "input.datepicker.to" ).datepicker( "option", "onClose", ((date)-> $( "input.from" ).datepicker( "option", "maxDate", selectedDate )) )
+
   date = new Date()
   d = date.getDate()
   m = date.getMonth()

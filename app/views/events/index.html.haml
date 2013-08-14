@@ -1,48 +1,20 @@
 .row
   .columns.large-3
-    - if Event.creatable_by? current_user
-      = link_to new_event_path, class: 'button expand' do
-        = fa_icon "plus", text: "Add an Event"
-    .filters
-      %h5 Filter
-      %h6
-        = fa_icon "globe"
-        Region
-      %ul
-        %li All
-        - Country.all.map{|name,c| Country[c].continent.to_s }.reject!(&:blank?).uniq.sort.each do |continent|
-          %li= continent
-
-      %h6 Type
-      %ul
-        %li All
-        %li Workshop
-        %li Meeting
+    = render "sidebar", event: @event
 
   .columns.large-9
-    .row
-      .columns.large-12.text-right
-        %dl.sub-nav
-          %dt View as:
-          %dd.active
-            = link_to events_path do
-              = fa_icon "list"
-              List
-          %dd
-            = link_to calendar_events_path do
-              = fa_icon "calendar"
-              Calendar
+    = render "view_as"
+
     - @event_days.sort.each do |day, events|
       .row
         .columns.large-12
           .day
-            %h3= day.stamp("2nd August, 2013")
+            %h3{data: { date: day.iso8601 }}= day.stamp("2nd August, 2013")
           - events.each do |event|
 
             = content_tag_for :div, event, class: 'row' do
               .columns.large-12
                 .image
-                  -# = holder_tag 80
                   = image_tag event.image, width: 80, height: 80
                 .details{style: "float: left"}
                   %h5= link_to event, event

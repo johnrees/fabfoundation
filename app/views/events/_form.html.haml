@@ -1,24 +1,36 @@
 = simple_form_for event do |f|
   %fieldset
-    = f.association :lab
+
+    = f.label :name, "What"
+    = f.input_field :name
+
+
     - if @event.image.present?
       = image_tag @event.image, width: 100
 
 
-    = f.input :name
-
-    = f.input :all_day
-
     .row
-      .columns.large-6
-        = f.input :starts_at, minute_step: 5
-      .columns.large-6
-        = f.input :ends_at, include_blank: true
+      .columns.large-2= f.label :starts_at_date, "When"
+      .columns.large-1.text-right From
+      .columns.large-2= f.input_field :starts_at_date, as: 'string', class: 'datepicker'
+      .columns.large-2= f.input :starts_at_hour
+      .columns.large-1.text-right To
+      .columns.large-2= f.input_field :ends_at_date, as: 'string', class: 'datepicker'
+      .columns.large-2= f.input :ends_at_hour
+      .columns.large-2= f.input :all_day, inline_label: 'All Day?'
 
+    -# .row
+    -#   .columns.large-6
+    -#     = f.input :starts_at_hour#, minute_step: 5
+    -#   .columns.large-6
+    -#     = f.input :ends_at_hour
+    -#     -# = f.input :ends_at_time, minute_step: 5
+
+    = f.association :lab, collection: current_user.labs, label: "Where"
+    = f.input :details, input_html: { rows: 6 }
 
     = f.label :image
     %input{:type => "filepicker-dragdrop", :"data-fp-multiple" => true, :name => "event[image]", :value => @event.image }
-    = f.input :details
 
 
   = f.submit class: 'button'

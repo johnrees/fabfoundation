@@ -1,3 +1,22 @@
-Tests!
-Super Admin Area
-fix current_user to use nil and not false
+☐ Image Resizing and Caching
+  Dragonfly?
+  http://www.ovh.co.uk/dedicated_servers/kimsufi.xml
+
+☐ Tests! Tests! Tests!
+
+☐ CanCan?
+
+☐ API
+
+☐ Labs
+  ☐ Filters
+  ☐ Map View
+  ☐ Show page
+  ☐ Use Application Model
+    ☐ Change labs/new to lab_applications/new
+
+☐ Events
+   ☐ Comments
+   ☐ Calendar View
+   ☐ Date Formats
+   ☐ Filters

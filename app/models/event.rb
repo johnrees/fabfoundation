@@ -2,9 +2,20 @@ class Event < ActiveRecord::Base
   include Authority::Abilities
   self.authorizer_name = 'EventAuthorizer'
 
+  extend SplitDatetime::Accessors
+  accepts_split_datetime_for :starts_at, :ends_at
+
   belongs_to :lab
   belongs_to :creator, class_name: "User"
   validates_presence_of :name, :lab, :starts_at
+
+  before_save :set_time_in_utc
+
+  def set_time_in_utc
+    Time.zone = lab.time_zone
+    self.starts_at = Time.zone.local_to_utc starts_at
+    self.ends_at = Time.zone.local_to_utc ends_at
+  end
 
   def to_s
     name

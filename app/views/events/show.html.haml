@@ -11,6 +11,8 @@
 
         = image_tag @event.image
 
+        = @event.starts_at.stamp("13:30 on 11th August 2013")
+
         = simple_format @event.details
 
         %h4 Other events at #{@event.lab}

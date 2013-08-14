@@ -28,6 +28,7 @@ gem "ransack", github: "ernie/ransack"
 gem 'capistrano'
 gem "font-awesome-rails", github: "bokmann/font-awesome-rails"
 gem 'jquery-rails'
+gem 'jquery-ui-rails'
 gem 'haml-rails'
 gem "figaro"
 # gem 'rocket_pants', '~> 1.0'
@@ -51,7 +52,10 @@ group :development do
   gem "quiet_assets"
 end
 
+gem "split_datetime", github: "johnrees/split_datetime"
+
 group :development, :test do
+  gem "parallel"
   gem 'sqlite3'
   gem "rspec-rails"
   gem "timecop"

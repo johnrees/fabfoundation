@@ -12,7 +12,7 @@ class ApplicationAuthorizer < Authority::Authorizer
     # 'Whitelist' strategy for security: anything not explicitly allowed is
     # considered forbidden.
     # user.admin?
-    true
+    false
   end
 
 end

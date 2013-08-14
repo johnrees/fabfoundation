@@ -19,6 +19,7 @@
 //= require cocoon
 //= require fullcalendar
 //= require select2
+//= require jquery.ui.datepicker
 
 //=// require selectize
 //=// require filter
