@@ -14,7 +14,7 @@
         = lab_application.inspect
         %tr
           %td= lab_application.id
-          %td= link_to lab_application, edit_backstage_lab_application_path(lab_application)
+          %td= link_to lab_application.lab, edit_backstage_lab_application_path(lab_application)
           %td= lab_application.state
           -# %td= "#{lab_application.lab.country_code} - #{lab.country}"
           %td= lab_application.created_at.stamp('13 Jun 99')

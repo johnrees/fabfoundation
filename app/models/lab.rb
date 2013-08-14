@@ -3,8 +3,6 @@ class Lab < ActiveRecord::Base
   include Authority::Abilities
   self.authorizer_name = 'LabAuthorizer'
 
-  has_one :lab_application
-
   state_machine :initial => :new do
     event :approve do
       transition :new => :approved
@@ -72,6 +70,7 @@ class Lab < ActiveRecord::Base
   belongs_to :creator, class_name: "User"
   has_many :events
 
+  has_one :lab_application
   has_many :tools
   has_many :opening_times
   accepts_nested_attributes_for :tools,

@@ -284,23 +284,23 @@
 //     },
 
 //     search: function (search_config, filter_result) {
-//   		var val = $.trim($(search_config.input).val());
-// 	  	var search_in = search_config.search_in;
-// 		  var min_length = $.isNumeric(search_config.min_length) ? search_config.min_length : 1;
+//       var val = $.trim($(search_config.input).val());
+//       var search_in = search_config.search_in;
+//       var min_length = $.isNumeric(search_config.min_length) ? search_config.min_length : 1;
 
-// 		  if (val.length < min_length) return filter_result;
+//       if (val.length < min_length) return filter_result;
 
-// 		  var id_prefix = '#' + this.root + '_';
-// 		  val = val.toUpperCase();
+//       var id_prefix = '#' + this.root + '_';
+//       val = val.toUpperCase();
 
-// 		  return $.map(filter_result, function (id) {
-// 			  var $ele = $(id_prefix + id);
+//       return $.map(filter_result, function (id) {
+//         var $ele = $(id_prefix + id);
 
-// 			  if (search_in) $ele = $ele.find(search_in);
+//         if (search_in) $ele = $ele.find(search_in);
 
-// 	  		if ($ele.text().toUpperCase().indexOf(val) >= 0) return id;
-// 		  });
-// 	  },
+//         if ($ele.text().toUpperCase().indexOf(val) >= 0) return id;
+//       });
+//     },
 
 //     execCallBack: function(type, result){
 //       if(this.options.callbacks[type])

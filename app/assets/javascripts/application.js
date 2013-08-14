@@ -14,20 +14,15 @@
 //= require jquery_ujs
 //= require foundation
 //= require moment.min
+//= require mustache
 //= require holder
 //= require jquery.geocomplete
 //= require cocoon
 //= require fullcalendar
 //= require select2
 //= require jquery.ui.datepicker
-
-//=// require selectize
-//=// require filter
 //= require leaflet.markercluster
-
 //= require_tree .
 
 moment().format()
 $(document).foundation();
-
-// $('select').selectize();

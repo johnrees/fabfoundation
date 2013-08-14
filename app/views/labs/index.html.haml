@@ -1,4 +1,11 @@
 = render "header"
+
+:javascript
+  var people = [{person: {id: 1, name: 'Jiren', age:26, country: 'India', country_id: 1,
+                        states : [{ state : 'MH', state_id : 3 }, {state : 'HN', state_id : 4}] } },
+              {person: {id: 2, name: 'Joe', age:25, country: 'USA', country_id: 2,
+                        states : [{ state : 'MH', state_id : 3 }, {state : 'HN', state_id : 4}] } }
+             ]
 .row
   .columns.large-3.sidebar
     = render "sidebar"
@@ -45,6 +52,9 @@
                       = holder_tag 55
         = paginate @labs
 
-
--# %script#template{:type => "text/html"}
--#   <a title="" href="/labs/"><span class="fs_head"></span></a>
+%script#person_template{:type => "text/mustache"}
+  <a href="/demo/{{id}}" title="{{name}}">
+  <span class="name">{{name}}</span>
+  <span class="age">{{age}}</span>
+  <div class="country">{{country}}</div>
+  </a>

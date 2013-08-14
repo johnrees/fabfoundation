@@ -5,9 +5,10 @@
         %legend Description
         .description= simple_format lab.description
 
-  .columns.large-5
-    %fieldset
-      %legend Websites
-      %ul.websites
-        - lab.websites.each do |url|
-          %li= link_to url, url
+  - if lab.websites.any?
+    .columns.large-5
+      %fieldset
+        %legend Websites
+        %ul.websites
+          - lab.websites.each do |url|
+            %li= link_to url, url
