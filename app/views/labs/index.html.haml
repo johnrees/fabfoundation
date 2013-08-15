@@ -20,12 +20,12 @@
     -#         = sort_link @q, :created_at, "Date Added"
 
     - @lab_countries.sort.each do |country, labs|
-      %fieldset
+      %fieldset.country
         %legend
           .flag{class: "flag-#{country}"}
           = Country.new(country.upcase).name
         - labs.sort.each do |lab|
-          = content_tag_for :div, lab, class: 'row' do
+          = content_tag_for :div, lab, data: {name: lab.name}, class: 'row' do
             .columns.large-12
               .row
                 -# .columns.large-2
