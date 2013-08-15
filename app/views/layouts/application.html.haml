@@ -8,7 +8,7 @@
 %head
   %meta{ :charset => "utf-8" }/
   %meta{ "http-equiv" => "X-UA-Compatible", :content => "IE=7" }/
-  %meta{ :name => "viewport", :content => "width=device-width, initial-scale=1.0" }/
+  %meta{ :name => "viewport", :content => "width=device-width, initial-scale=1.0,maximum-scale=1.0,minimum-scale=1.0" }/
 
   %title= content_for?(:title) ? yield(:title) : "Fab Foundation"
 
@@ -26,9 +26,13 @@
     %nav.top-bar
       %ul.title-area
         %li.name
-          %h1#logo= link_to "Fab Foundation", root_path
+          %h1#logo
+            = link_to root_path do
+              %span.fab Fab
+              Foundation
         %li.toggle-topbar.menu-icon
-          %a{:href => "#"} menu
+          %a{:href => "#"}
+            %span menu
       %section.top-bar-section
         / Left Nav Section
         %ul.left
@@ -62,7 +66,7 @@
 
           - else
             %li= link_to "Sign In", signin_path
-            %li= link_to "Sign Up", signup_path
+            -# %li= link_to "Sign Up", signup_path
 
   #main{role: 'main'}
 

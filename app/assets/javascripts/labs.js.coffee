@@ -1,23 +1,34 @@
-# filterInit = ->
-#   template = Mustache.compile($.trim($("#template").html()))
-#   view = (service) ->
-#     return template(service)
-#   settings = {
-#     filter_criteria: {
-#       amount: ['#price_filter .TYPE.range', 'amount'],
-#       status: ['#status :checkbox', 'status']
-#     },
-#     search: {input: '#search_box' },
-#     and_filter_on: true,
-#   }
-#   FilterJS(services, "#service_list", view, settings)
-
 jQuery ->
-  $(".c-labs select, .backstage select, .c-events select").select2()
+
+  $('.c-labs.a-index form').submit ->
+    return false
+
+  count = 0
+  $('#q_name_or_city_cont').keyup ->
+    q = $('#q_name_or_city_cont').val()
+
+    if q == ""
+      $('.lab, fieldset.country').show()
+      count = 1
+    else
+      $('.lab').each ->
+        if $(this).data('name').contains(q)
+          count++
+          $(this).show()
+        else
+          $(this).hide()
+
+    $('#no-results').toggle(~count)
+    $('fieldset.country').each ->
+      $(this).toggle ($(this).hasAtLeastOneVisibleChild('.lab'))
+
+
+  # hide flash messages
   $('#flash_notice').delay(2000).slideUp('fast')
 
-  # fJS = filterInit()
+  $("select.enhanced").select2()
 
+  # map details
   if $('#map').length > 0
     markers = new L.MarkerClusterGroup
     map = L.map('map', { scrollWheelZoom: false }).setView([50, 0], 2 )
@@ -41,10 +52,11 @@ jQuery ->
   $('#humans').on 'cocoon:after-insert', (e, insertedItem) ->
     $(insertedItem).find("select").select2();
 
-
   $('tr .closed').change ->
     $(this).parents('tr').find('.hide-if-closed *').toggle( !$(this).is(":checked") )
   .trigger('change')
+
+  # GeoComplete
 
   $("input#geocomplete").geocomplete
     details: ".address"
@@ -56,10 +68,7 @@ jQuery ->
 
   $("#geocomplete").bind "geocode:result", (event, result) ->
     console.log result
+
   $("#geocomplete").bind "geocode:dragged", (event, latLng) ->
     $("input#lab_latitude").val latLng.lat()
     $("input#lab_longitude").val latLng.lng()
-
-  # $('.filter-button').hide()
-  # $('input').change ->
-  #   $(this).parents('form').submit()

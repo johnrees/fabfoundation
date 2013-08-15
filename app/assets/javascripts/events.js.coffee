@@ -15,19 +15,6 @@ String.prototype.contains = (it) -> return this.toLowerCase().indexOf(it.toLower
 
 jQuery ->
 
-  $('#q_name_or_city_cont').keyup ->
-    q = $('#q_name_or_city_cont').val()
-    if q == ""
-      $('.lab, fieldset.country').show()
-    else
-      $('.lab').each ->
-        $(this).toggle $(this).data('name').contains(q)
-        # fieldset = $(this).parent('fieldset.country')
-        # fieldset.toggle ($(this).siblings(':visible').length == 0)
-
-    $('fieldset.country').each ->
-      $(this).toggle ($(this).hasAtLeastOneVisibleChild('.lab'))
-
   # $('[data-date]').each ->
   #   $(this).text moment($(this).data('date')).calendar()
 

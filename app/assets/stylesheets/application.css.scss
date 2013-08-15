@@ -83,6 +83,12 @@ header {
   h1#logo {
     padding-left: 20px !important;
     background: image-url('logo.png') no-repeat 13px center;
+    a {
+      font-weight: normal;
+      span.fab {
+        font-weight: bold;
+      }
+    }
   }
 
   .dropdown {

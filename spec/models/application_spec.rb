@@ -1,5 +1,8 @@
 require 'spec_helper'
 
 describe Application do
-  pending "add some examples to (or delete) #{__FILE__}"
+  it { should validate_presence_of(:lab) }
+  it { should validate_presence_of(:creator) }
+  it { should belong_to(:lab)}
+  it { should belong_to(:creator)}
 end

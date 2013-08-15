@@ -1,4 +1,6 @@
 class LabApplication < ActiveRecord::Base
+  include Authority::Abilities
+  self.authorizer_name = 'LabApplicationAuthorizer'
 
   belongs_to :lab
   belongs_to :creator

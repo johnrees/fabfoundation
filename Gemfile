@@ -4,7 +4,6 @@ source 'https://rubygems.org'
 gem 'rails', '4.0.0'
 gem 'authority'
 gem 'whenever', require: false
-
 gem 'bitwise'
 gem "aws-ses", "~> 0.5.0", :require => 'aws/ses'
 gem 'closure_tree'

@@ -1,4 +1,5 @@
 class Event < ActiveRecord::Base
+
   include Authority::Abilities
   self.authorizer_name = 'EventAuthorizer'
 

@@ -1,5 +1,6 @@
-= link_to new_lab_application_path, class: 'button expand' do
-  = fa_icon "plus", text: "Add a Lab"
+- if LabApplication.creatable_by? authority_user
+  = link_to new_lab_application_path, class: 'button expand' do
+    = fa_icon "plus", text: "Add a Lab"
 
 = search_form_for @q do |f|
 
