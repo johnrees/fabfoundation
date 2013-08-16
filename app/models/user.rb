@@ -5,6 +5,22 @@ class User < ActiveRecord::Base
   self.authorizer_name = 'UserAuthorizer'
   has_secure_password validations: false
 
+  state_machine :initial => :new do
+
+    event :signup do
+      transition :new => :signed_up
+    end
+
+    event :invite do
+      transition :new => :invited
+    end
+
+    event :confirm do
+      transition [:signed_up, :invited] => :confirmed
+    end
+
+  end
+
   has_many :humans
   has_many :labs, through: :humans
 
@@ -15,8 +31,9 @@ class User < ActiveRecord::Base
   validates :password,
     :presence     => true,
     :length       => { :minimum => 5 },
-    :on => :update,
-    :if           => :password
+    :on => :update
+    # :if           => :password
+
   # validates :password, allow_blank: true, on: :create
 
   validates_presence_of :first_name, :last_name, :email

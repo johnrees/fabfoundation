@@ -107,7 +107,7 @@ GEM
       mail (> 2.2.5)
       mime-types
       xml-simple
-    bcrypt-ruby (3.1.1)
+    bcrypt-ruby (3.0.1)
     bitwise (0.6.0)
     builder (3.1.4)
     capistrano (2.15.5)
@@ -329,7 +329,7 @@ DEPENDENCIES
   ancestry
   authority
   aws-ses (~> 0.5.0)
-  bcrypt-ruby
+  bcrypt-ruby (~> 3.0.0)
   bitmask_attributes!
   bitwise
   capistrano

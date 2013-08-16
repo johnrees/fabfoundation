@@ -6,14 +6,14 @@
 
     = simple_form_for @user do |f|
       .row
-        .field
-          = f.input :first_name, placeholder: 'First Name', autofocus: true
-        .field
-          = f.text_field :last_name, placeholder: 'Last Name'
+        .columns.large-6
+          .field= f.input :first_name, placeholder: 'First Name', autofocus: true
+        .columns.large-6
+          .field= f.input :last_name, placeholder: 'Last Name'
       .row
-        .columns-12
-          .field
-            = f.input :email, placeholder: 'Email', autocapitalize: "off", autocorrect: "off"
+        .columns.large-12
+
+          .field= f.input :email, placeholder: 'Email', autocapitalize: "off", autocorrect: "off"
 
           -#   .field
           -#     = f.label :email

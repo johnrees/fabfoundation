@@ -16,6 +16,10 @@ describe User do
 
   it "has managed_labs scope"
 
+  it "has initial state" do
+    expect(FactoryGirl.build_stubbed(:user)).to be_new
+  end
+
   it "has full_name method" do
     expect(
       FactoryGirl.build_stubbed(:user, first_name: 'Donald', last_name: 'Duck').full_name

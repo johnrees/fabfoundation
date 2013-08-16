@@ -5,17 +5,20 @@
   .columns.large-5.large-centered
     = form_tag sessions_path do
       = hidden_field_tag :goto, params[:goto]
-      .field
-        = label_tag :email
-        = text_field_tag :email, params[:email], placeholder: 'Email', autofocus: true, autocapitalize: "off", autocorrect: "off"
-      .field
-        = label_tag :password
-        = password_field_tag :password, nil, placeholder: 'Password'
-      .row
-        .columns.large-6
+      .columns.large-12
+        .field
+          = label_tag :email
+          = text_field_tag :email, params[:email], placeholder: 'Email', autofocus: true, autocapitalize: "off", autocorrect: "off"
+      .columns.large-9
+        .field
+          = label_tag :password
+          = password_field_tag :password, nil, placeholder: 'Password'
+      .columns.large-3
+        .field.forgot
+          = link_to "Forgot?", "#"
           -# = label_tag :remember_me do
           -#   = check_box_tag :remember_me, 1, params[:remember_me]
           -#   Remember Me
 
-        .columns.large-6.text-right
-          .actions= submit_tag "Sign in", class: 'button'
+      .columns.large-12
+        .actions= submit_tag "Sign in", class: 'button'

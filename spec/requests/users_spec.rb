@@ -56,19 +56,50 @@ describe "Users" do
       expect(last_email.to).to include("john@bitsushi.com")
     end
 
-    it "can complete registration" do
-      user = FactoryGirl.create(:user,
-        first_name: "Fred",
-        last_name: "Flintstone",
-        email: "fred@bedrock.com")
-      visit complete_registration_url(user.action_token)
+    describe "updating" do
 
-      expect(page).to have_field('user_first_name', with: 'Fred')
-      expect(page).to have_field('user_last_name', with: 'Flintstone')
-      expect(page).to have_field('Email', with: 'fred@bedrock.com')
-      fill_in "Password", with: "hardrock"
-      click_button "Finish Registration"
-      page.should have_content("Registration complete!")
+      it "requires login" do
+        user = FactoryGirl.create(:user)
+        visit edit_user_url(user.id)
+        expect(current_path).to eq(root_path)
+      end
+
+      it "can update settings" do
+        user = FactoryGirl.create(:user)
+        user_signin user
+        visit edit_user_path(user)
+        fill_in "Email", with: "test@test.com"
+        click_button "Update"
+        save_and_open_page
+        expect(page).to have_content("updated")
+      end
+
+    end
+
+    describe "registration" do
+
+      it "can complete registration" do
+        user = FactoryGirl.create(:user,
+          first_name: "Fred",
+          last_name: "Flintstone",
+          email: "fred@bedrock.com")
+        visit complete_registration_url(user.action_token)
+
+        expect(page).to have_field('user_first_name', with: 'Fred')
+        expect(page).to have_field('user_last_name', with: 'Flintstone')
+        expect(page).to have_field('Email', with: 'fred@bedrock.com')
+        fill_in "Password", with: "hardrock"
+        click_button "Finish Registration"
+        expect(page).to have_content("Registration complete!")
+      end
+
+      it "requires password" do
+        user = FactoryGirl.create(:user, password: nil)
+        visit complete_registration_url(user.action_token)
+        click_button "Finish Registration"
+        expect(page).to have_content("can't be blank")
+      end
+
     end
 
   end
