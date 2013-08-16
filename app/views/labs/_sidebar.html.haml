@@ -5,34 +5,24 @@
 = search_form_for @q do |f|
 
   - if action_name == 'index' and !@continents.empty?
-    %fieldset
+    %fieldset{data: {type: 'region'}}
       %legend
         = fa_icon "globe"
         = link_to "Region", map_labs_path
       #map
       %table
 
-        %tr.all
-          %td
-            %label
-              = check_box_tag "q[region_in][]", '', (params[:q].blank? or params[:q][:region_in].reject(&:blank?).empty?)
-              All
-
-          %td.hint= @labs.total_count
-        -# - Country.all.map{|name,c| Country[c].continent.to_s }.reject!(&:blank?).uniq.sort.each do |continent|
-
-        -# - @continents.sort.each do |continent, count|
-        -#   %tr
-        -#     %td
-        -#       %label
-        -#         = check_box_tag continent
-        -#         = continent
-        -#     %td.hint= count
+        -# %tr.all
+        -#   %td
+        -#     %label
+        -#       = check_box_tag "q[region_in][]", '', (params[:q].blank? or params[:q][:region_in].reject(&:blank?).empty?)
+        -#       All
+        -#   %td.hint= @labs.total_count
         - @regions.each do |region, count|
           %tr
             %td
               %label
-                = check_box_tag "q[region_in][]", region, (params[:q][:region_in].include? region if params[:q])
+                = check_box_tag "q[region_in][]", region, true#(params[:q][:region_in].include? region if params[:q])
                 = region
             %td.hint= count
 
@@ -51,7 +41,7 @@
             %td.hint= count
 
   - unless @lab_kinds.empty?
-    %fieldset
+    %fieldset{data: {type: 'kind'}}
       %legend
         = fa_icon "building"
         Fab Lab Type
@@ -68,8 +58,8 @@
           %tr
             %td
               %label
-                = check_box_tag "q[kind_in][]", Lab::Kinds.index(kind), (params[:q][:kind_in].include? Lab::Kinds.index(kind).to_s if params[:q])
+                = check_box_tag "q[kind_in][]", Lab::Kinds.index(kind), true#(params[:q][:kind_in].include? Lab::Kinds.index(kind).to_s if params[:q])
                 %span.has-tip.tip-right{"data-tooltip" => true, :title => "A Supernode is a Fab Lab that helps to coordinate other Fab Labs associated with it"}= kind.humanize.titleize
             %td.hint= @lab_kinds[kind]
 
-  = f.submit "Filter", class: 'button expand filter-button'
+  -# = f.submit "Filter", class: 'button expand filter-button'

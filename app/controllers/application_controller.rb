@@ -13,6 +13,12 @@ class ApplicationController < ActionController::Base
     end
   end
 
+  def require_new_user
+    if current_user
+      redirect_to root_url, :alert => "You must sign out of your current session first"
+    end
+  end
+
 private
 
   def current_user

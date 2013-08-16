@@ -1,5 +1,6 @@
 require 'spec_helper'
 
 describe Referee do
-  pending "add some examples to (or delete) #{__FILE__}"
+  it { should belong_to(:applicant) }
+  it { should belong_to(:lab_application) }
 end

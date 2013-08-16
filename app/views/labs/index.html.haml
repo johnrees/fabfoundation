@@ -21,7 +21,7 @@
           .flag{class: "flag-#{country}"}
           = Country.new(country.upcase).name
         - labs.sort_by(&:name).each do |lab|
-          = content_tag_for :div, lab, data: {name: lab.name}, class: 'row' do
+          = content_tag_for :div, lab, data: {name: lab.name, region: lab.region, kind: lab.kind }, class: 'row' do
             .columns.large-12
               .row
                 -# .columns.large-2
@@ -44,8 +44,8 @@
                   - 3.times do |index|
                     - if lab.humans[index]
                       = image_tag lab.humans[index].user.avatar_image, width: 55, class: 'has-tip', data: {tooltip: true}, title: "#{lab.humans[index].user.full_name} - #{lab.humans[index].details}"
-                    - else
-                      = holder_tag 55
+                    -# - else
+                    -#   = holder_tag 55
         = paginate @labs
 
 %script#person_template{:type => "text/mustache"}

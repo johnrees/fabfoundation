@@ -7,5 +7,6 @@ FactoryGirl.define do
     city "Boston"
     country_code "US"
     kind [:supernode]
+    association :creator, factory: :user
   end
 end

@@ -19,8 +19,58 @@ describe "Users" do
     page.should have_content("check your email")
   end
 
-  it "cannot signup when signed in"
-  it "cannot signin when signed in"
-  it "can complete signup"
+  describe "signed in" do
+
+    it "cannot signup" do
+      user_signin(FactoryGirl.create(:user))
+      visit signup_path
+      expect(current_path).to eq(root_path)
+      expect(page).to_not have_link("Sign in")
+    end
+
+    it "cannot signin" do
+      user_signin(FactoryGirl.create(:user))
+      visit signin_path
+      expect(current_path).to eq(root_path)
+      expect(page).to_not have_link("Sign in")
+    end
+
+    it "can signout" do
+      user_signin(FactoryGirl.create(:user))
+      click_link "Sign out"
+      expect(current_path).to eq(root_path)
+      expect(page).to have_content("Signed out")
+    end
+
+  end
+
+  describe "signing up" do
+
+    it "can initiate registration" do
+      visit signup_path
+      fill_in "First Name", with: "John"
+      fill_in "Last Name", with: "Rees"
+      fill_in "Email", with: "john@bitsushi.com"
+      click_button "Sign up"
+      expect(page).to have_content("Thanks for signing up")
+      expect(last_email.to).to include("john@bitsushi.com")
+    end
+
+    it "can complete registration" do
+      user = FactoryGirl.create(:user,
+        first_name: "Fred",
+        last_name: "Flintstone",
+        email: "fred@bedrock.com")
+      visit complete_registration_url(user.action_token)
+
+      expect(page).to have_field('user_first_name', with: 'Fred')
+      expect(page).to have_field('user_last_name', with: 'Flintstone')
+      expect(page).to have_field('Email', with: 'fred@bedrock.com')
+      fill_in "Password", with: "hardrock"
+      click_button "Finish Registration"
+      page.should have_content("Registration complete!")
+    end
+
+  end
 
 end

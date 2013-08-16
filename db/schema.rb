@@ -125,14 +125,14 @@ ActiveRecord::Schema.define(version: 20130814214319) do
   add_index "opening_times", ["lab_id"], name: "index_opening_times_on_lab_id"
 
   create_table "referees", force: true do |t|
-    t.integer  "lab_id"
+    t.integer  "lab_application_id"
     t.integer  "applicant_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
   add_index "referees", ["applicant_id"], name: "index_referees_on_applicant_id"
-  add_index "referees", ["lab_id"], name: "index_referees_on_lab_id"
+  add_index "referees", ["lab_application_id"], name: "index_referees_on_lab_application_id"
 
   create_table "tool_types", force: true do |t|
     t.string   "name"

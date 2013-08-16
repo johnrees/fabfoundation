@@ -41,17 +41,11 @@ class LabsController < ApplicationController
   end
   authority_actions map: 'read'
 
-  def new
-    @lab = Lab.new
-    @lab.tools.build
-  end
-
   def edit
     @lab = current_user.labs.find(params[:id])
     @lab.tools.build
     @lab.humans.build
     authorize_action_for(@lab)
-
   end
 
   def update

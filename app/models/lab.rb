@@ -66,7 +66,6 @@ class Lab < ActiveRecord::Base
   has_paper_trail
   has_ancestry
 
-
   belongs_to :creator, class_name: "User"
   has_many :events
 

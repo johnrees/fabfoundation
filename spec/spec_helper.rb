@@ -44,6 +44,9 @@ RSpec.configure do |config|
   config.include Capybara::DSL
   # config.include Sorcery::TestHelpers::Rails
 
+  config.include(MailerMacros)
+  config.before(:each) { reset_email }
+
   def user_signin(user)
     visit signin_path
     fill_in "Email", with: user.email

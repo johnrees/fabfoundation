@@ -13,8 +13,8 @@ class UserAuthorizer < ApplicationAuthorizer
   end
 
   def self.creatable_by? user
-    # !user
-    user
+    # !user.persisted?
+    true
   end
 
 end

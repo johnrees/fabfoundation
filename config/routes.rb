@@ -9,8 +9,7 @@ Fabfoundation::Application.routes.draw do
 
   resources :applications
 
-  resources :lab_applications do
-  end
+  resources :lab_applications
 
   resources :labs do
     collection do

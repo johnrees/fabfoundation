@@ -15,5 +15,4 @@ module ApplicationHelper
     }, selected: default), include_blank: true
   end
 
-
 end

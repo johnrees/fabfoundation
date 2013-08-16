@@ -1,7 +1,7 @@
 class LabAuthorizer < ApplicationAuthorizer
 
   def self.creatable_by? user
-    user.persisted?
+    user.admin?
   end
 
   def self.readable_by?(user)

@@ -2,11 +2,6 @@ require 'spec_helper'
 
 describe Lab do
 
-  it { should belong_to :creator }
-  it { should have_many(:events) }
-  it { should have_many(:humans) }
-  it { should have_many(:users).through(:humans) }
-
   describe "map" do
     it "lists all labs" do
       visit root_path
@@ -30,7 +25,6 @@ describe Lab do
       user = FactoryGirl.create(:user, first_name: 'Bart', last_name: 'Simpson')
       lab = FactoryGirl.create(:lab, creator: user, state: 'approved')
       visit lab_url(lab)
-      save_and_open_page
       expect(page).to have_link('Bart Simpson')
     end
 
@@ -58,30 +52,6 @@ describe Lab do
       expect(current_path).to eq lab_path(lab)
       expect(page).to have_selector("h1", text: "New Name")
     end
-
-  end
-
-  describe "creating labs" do
-
-    it "requires authentication" do
-      visit new_lab_path
-      expect(current_path).to eq(signin_path)
-    end
-
-    it "authenticated user can add a lab" do
-      user = FactoryGirl.create(:user)
-      user_signin user
-      click_link "Add a Lab"
-      fill_in "Fab Lab Name", with: "New Lab"
-      fill_in "City", with: "A City"
-      fill_in "Address notes", with: "On the roof"
-      select "United Kingdom", from: "Country"
-      click_button "Add Lab"
-      expect(page).to have_selector("h1", text: "Thank you")
-    end
-
-    it "confirmation email to creator after creating lab"
-    it "notification email to admins after creating lab"
 
   end
 

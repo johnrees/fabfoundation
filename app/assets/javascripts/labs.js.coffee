@@ -1,4 +1,15 @@
+update = ->
+  $('fieldset.country').each ->
+    $(this).toggle ($(this).hasAtLeastOneVisibleChild('.lab'))
+
+
 jQuery ->
+
+  $('.c-labs.a-index input').change ->
+    # alert ".lab[data-#{$(this).parents('fieldset').data('type')}='#{$(this).val()}']"
+    $('fieldset').show()
+    $(".lab[data-#{$(this).parents('fieldset').data('type')}='#{$(this).val()}']").toggle $(this).is(':checked')
+    update()
 
   $('.c-labs.a-index form').submit ->
     return false
@@ -19,9 +30,6 @@ jQuery ->
           $(this).hide()
 
     $('#no-results').toggle(~count)
-    $('fieldset.country').each ->
-      $(this).toggle ($(this).hasAtLeastOneVisibleChild('.lab'))
-
 
   # hide flash messages
   $('#flash_notice').delay(2000).slideUp('fast')
