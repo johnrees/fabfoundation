@@ -24,7 +24,7 @@ gem 'paper_trail', github: 'airblade/paper_trail', branch: 'rails4'
 gem 'coffee-rails', '~> 4.0.0'
 gem 'stamp'
 gem 'state_machine'
-gem 'zurb-foundation', '~> 4.0.0'
+gem 'zurb-foundation'
 gem "ransack", github: "ernie/ransack"
 gem 'capistrano'
 gem "font-awesome-rails", github: "bokmann/font-awesome-rails"
@@ -70,7 +70,7 @@ group :development, :test do
   gem "factory_girl_rails"
 end
 # Use ActiveModel has_secure_password
-gem 'bcrypt-ruby', '~> 3.0.0'
+gem 'bcrypt-ruby'
 
 # Use unicorn as the app server
 gem 'unicorn'
