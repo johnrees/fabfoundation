@@ -23,8 +23,7 @@ gem 'paper_trail', github: 'airblade/paper_trail', branch: 'rails4'
 gem 'coffee-rails', '~> 4.0.0'
 gem 'stamp'
 gem 'state_machine'
-gem 'compass-rails'
-gem 'zurb-foundation'
+gem 'zurb-foundation', '>= 4.3.1'
 gem "ransack", github: "ernie/ransack"
 gem 'capistrano'
 gem "font-awesome-rails", github: "bokmann/font-awesome-rails"
