@@ -4,11 +4,14 @@ class CreateLabs < ActiveRecord::Migration
 
     create_table :labs do |t|
 
-      t.string :ancestry
-      t.string :state
-      t.string  :name
+      t.string  :name, index: true
+      t.string  :slug, index: true
+      t.string  :state, index: true
+      t.string  :ancestry
+      t.string  :state
       t.text    :description
       t.string  :phone
+      t.integer  :facilities
       t.string  :email
       t.integer :kind
 
@@ -33,15 +36,9 @@ class CreateLabs < ActiveRecord::Migration
       t.text :application_notes
       t.string :avatar
       t.text :urls
-      t.references :creator
+      t.references :creator, index: true
       t.timestamps
 
     end
-
-    add_index :labs, :name
-    add_index :labs, :state
-    add_index :labs, :creator_id
-    add_index :labs, :ancestry
-
   end
 end

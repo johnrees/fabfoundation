@@ -78,11 +78,13 @@ ActiveRecord::Schema.define(version: 20130814214319) do
   add_index "lab_applications", ["lab_id"], name: "index_lab_applications_on_lab_id"
 
   create_table "labs", force: true do |t|
-    t.string   "ancestry"
-    t.string   "state"
     t.string   "name"
+    t.string   "slug"
+    t.string   "state"
+    t.string   "ancestry"
     t.text     "description"
     t.string   "phone"
+    t.integer  "facilities"
     t.string   "email"
     t.integer  "kind"
     t.string   "street_address_1"
@@ -107,32 +109,17 @@ ActiveRecord::Schema.define(version: 20130814214319) do
     t.datetime "updated_at"
   end
 
-  add_index "labs", ["ancestry"], name: "index_labs_on_ancestry"
   add_index "labs", ["creator_id"], name: "index_labs_on_creator_id"
-  add_index "labs", ["name"], name: "index_labs_on_name"
-  add_index "labs", ["state"], name: "index_labs_on_state"
-
-  create_table "opening_times", force: true do |t|
-    t.integer  "lab_id"
-    t.time     "start_time"
-    t.time     "end_time"
-    t.integer  "start_day"
-    t.integer  "end_day"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  add_index "opening_times", ["lab_id"], name: "index_opening_times_on_lab_id"
 
   create_table "referees", force: true do |t|
     t.integer  "lab_application_id"
-    t.integer  "applicant_id"
+    t.integer  "lab_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  add_index "referees", ["applicant_id"], name: "index_referees_on_applicant_id"
   add_index "referees", ["lab_application_id"], name: "index_referees_on_lab_application_id"
+  add_index "referees", ["lab_id"], name: "index_referees_on_lab_id"
 
   create_table "tool_types", force: true do |t|
     t.string   "name"

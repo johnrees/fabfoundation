@@ -1,4 +1,32 @@
+.checkbox_container {
+  display: inline-block;
+  margin: 10px;
+ }
+.checkbox_container input {
+  display: inline;
+ }
+.checkbox_container .collection_check_boxes{
+  display: inline;
+ }
 
+ul.websites {
+  margin: 0;
+}
+.lab a {
+  vertical-align: top;
+}
+body.c-labs.a-map form#lab_search {
+  display: none !important;
+}
+
+fieldset.country {
+  padding: 0.5em 0.5em 1.5em;
+  margin: 0 0 1em;
+}
+
+table.opening-hours-chooser {
+  border: none;
+}
 .top-bar .name h1 a {
   width: auto;
   // min-width: 300px;
@@ -29,11 +57,33 @@ input#lab_name {
   font-size: 1.4em;
   font-weight: bold;
 }
-th {
-  text-align: right;
-}
 
 .c-labs #main {
+th.day {
+  font-weight: normal;
+}
+  legend {
+    color: #999;
+  }
+
+  h1 {
+    line-height: 1em;
+    padding-bottom: 0.2em;
+  }
+
+  img.image {
+    float: left;
+    width: 50px;
+    height: 50px;
+  }
+  .contact {
+    float: left;
+    font-size: 0.9em;
+    line-height: 1.1em;
+    .name a{
+      color: #111;
+    }
+  }
 
   .name a {
     // color: #111;
@@ -119,15 +169,17 @@ th {
   }
 
   .name {
-    line-height: 40px;
+    line-height: 1.5em;
   }
   #sticky {
     background: rgba(255,255,255,0.97);
   }
 
   .sidebar {
-    #map {
+    #minimap {
+      display: none;
       height: 200px;
+      background: #DDD;
     }
   }
 
@@ -174,8 +226,9 @@ th {
   }
   table.opening-hours {
     th {
-      text-align: right;
-      font-weight: bold;
+      text-align: left;
+      color: #999;
+      // font-weight: bold;
     }
   }
   .description {
@@ -237,9 +290,7 @@ th {
   .hint {
     color: #999;
   }
-  .name {
-    font-weight: bold;
-  }
+
   table {
     width: 100%;
   }

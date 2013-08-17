@@ -1,7 +1,7 @@
 class Event < ActiveRecord::Base
 
-  include Authority::Abilities
-  self.authorizer_name = 'EventAuthorizer'
+  # include Authority::Abilities
+  # self.authorizer_name = 'EventAuthorizer'
 
   extend SplitDatetime::Accessors
   accepts_split_datetime_for :starts_at, :ends_at

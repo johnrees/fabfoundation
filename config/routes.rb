@@ -1,5 +1,6 @@
 Fabfoundation::Application.routes.draw do
 
+  get "password_resets/new"
   get "lab_applications/thank_you"
   get "static/home"
   get "static/secret"
@@ -8,7 +9,7 @@ Fabfoundation::Application.routes.draw do
   get "signup" => "users#new", :as => "signup"
 
   resources :applications
-
+  resources :password_resets
   resources :lab_applications
 
   resources :labs do

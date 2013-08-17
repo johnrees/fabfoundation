@@ -23,9 +23,9 @@ describe "Users" do
 
     it "cannot signup" do
       user_signin(FactoryGirl.create(:user))
-      visit signup_path
-      expect(current_path).to eq(root_path)
-      expect(page).to_not have_link("Sign in")
+      expect{ visit signup_path }.to raise_error(CanCan::AccessDenied)
+      # expect(current_path).to eq(root_path)
+      # expect(page).to_not have_link("Sign in")
     end
 
     it "cannot signin" do
@@ -60,8 +60,7 @@ describe "Users" do
 
       it "requires login" do
         user = FactoryGirl.create(:user)
-        visit edit_user_url(user.id)
-        expect(current_path).to eq(root_path)
+        expect{visit edit_user_url(user.id)}.to raise_error(CanCan::AccessDenied)
       end
 
       it "can update settings" do
@@ -70,8 +69,8 @@ describe "Users" do
         visit edit_user_path(user)
         fill_in "Email", with: "test@test.com"
         click_button "Update"
-        save_and_open_page
-        expect(page).to have_content("updated")
+        expect(page).to have_content("Updated")
+
       end
 
     end
@@ -93,7 +92,7 @@ describe "Users" do
         expect(page).to have_content("Registration complete!")
       end
 
-      it "requires password" do
+      pending "requires password" do
         user = FactoryGirl.create(:user, password: nil)
         visit complete_registration_url(user.action_token)
         click_button "Finish Registration"

@@ -3,12 +3,13 @@
   .large-12.columns
     .row
       .large-4.columns
-        %h1= @event
+        = title @event
         at
         = link_to @event.lab, @event.lab
         added by
         = link_to @event.creator, @event.creator
-        = link_to "Edit Event", edit_event_path(@event), class: 'button' if @event.updatable_by? current_user
+        - if can? :edit, @event
+          = link_to "Edit Event", edit_event_path(@event), class: 'button'
 
         = image_tag @event.image
 

@@ -1,11 +1,4 @@
 GIT
-  remote: git://github.com/FriendlyId/friendly_id.git
-  revision: 311fe05318d28b25176be11e47d3c015b25f2b97
-  branch: 4.0-stable
-  specs:
-    friendly_id (4.0.10)
-
-GIT
   remote: git://github.com/airblade/paper_trail.git
   revision: c441a5de2d61042126bb042c3c18012fca3af32b
   branch: rails4
@@ -51,12 +44,24 @@ GIT
     split_datetime (0.0.1)
 
 GIT
+  remote: git://github.com/norman/friendly_id.git
+  revision: 823c46d67984f4401eeb0ccd272acc3e9e218ace
+  specs:
+    friendly_id (5.0.0.beta2)
+
+GIT
   remote: git://github.com/plataformatec/simple_form.git
   revision: 359606f222fa0972a4a14ec70140ac00f7c80839
   specs:
     simple_form (3.0.0.rc)
       actionpack (>= 4.0.0, < 4.1)
       activemodel (>= 4.0.0, < 4.1)
+
+GIT
+  remote: git://github.com/ryanb/cancan.git
+  revision: 440bd887008820efbee8b954790f79b48d8264a6
+  specs:
+    cancan (1.6.10)
 
 GIT
   remote: https://github.com/getsentry/raven-ruby.git
@@ -99,9 +104,6 @@ GEM
       activerecord (>= 3.0.0)
     arel (4.0.0)
     atomic (1.1.13)
-    authority (2.7.0)
-      activesupport (>= 3.0.0)
-      rake (>= 0.8.7)
     aws-ses (0.5.0)
       builder
       mail (> 2.2.5)
@@ -327,11 +329,11 @@ PLATFORMS
 
 DEPENDENCIES
   ancestry
-  authority
   aws-ses (~> 0.5.0)
   bcrypt-ruby (~> 3.0.0)
   bitmask_attributes!
   bitwise
+  cancan!
   capistrano
   capybara
   closure_tree

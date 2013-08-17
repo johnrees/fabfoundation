@@ -2,5 +2,3 @@
   %legend= fa_icon "sitemap", text: "Relationships"
 
   = f.input :parent_id, label: "Supernode Lab", as: 'select', collection: Lab.roots, hint: "Will you be connected with a Supernode? If so, which one?", input_html: { class: 'enhanced' }
-
-  = f.association :referee_labs, hint: "To apply to add your Lab into the Fab Foundation network, you must add at least one existing lab that can vouch for you. Type the lab name(s) in the box above.", input_html: { class: 'enhanced' }

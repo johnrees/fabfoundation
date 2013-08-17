@@ -1,7 +1,19 @@
 class Lab < ActiveRecord::Base
 
-  include Authority::Abilities
-  self.authorizer_name = 'LabAuthorizer'
+  extend FriendlyId
+  friendly_id :slug_candidates, use: :slugged
+
+  bitmask :facilities, :as => ['d_printing', :precision_milling, :routing, :circuit_production, :laser_engraving]
+
+  attr_accessor :thing
+
+  def slug_candidates
+    [
+      :name,
+      [:name, :country],
+      [:name, :city, :country]
+    ]
+  end
 
   state_machine :initial => :new do
     event :approve do
@@ -66,6 +78,16 @@ class Lab < ActiveRecord::Base
   has_paper_trail
   has_ancestry
 
+  attr_accessor :has_opening_hours
+
+  def opening_hours=(opening_hours)
+    self.opening_hours_bitmask = opening_hours[0][0]
+  end
+
+  def opening_hours
+    JSON.parse(media_raw) if opening_hours_bitmask.present?
+  end
+
   belongs_to :creator, class_name: "User"
   has_many :events
 
@@ -93,11 +115,6 @@ class Lab < ActiveRecord::Base
 
   before_save :country_stuff
 
-  has_and_belongs_to_many :referee_labs,
-    :association_foreign_key => 'referee_id',
-    :class_name => 'Lab',
-    :join_table => 'referees'
-
   validates :email, format: /@/, allow_blank: true
   # validates_inclusion_of :time_zone, in: ActiveSupport::TimeZone.zones_map(&:name), allow_blank: true
   validates_presence_of :name, :country_code, :city
@@ -122,10 +139,6 @@ class Lab < ActiveRecord::Base
   # after_create :new_lab_notification
   def to_s
     name
-  end
-
-  def to_param
-    "#{id} #{name}".parameterize
   end
 
   def country

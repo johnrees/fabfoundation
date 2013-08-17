@@ -24,7 +24,7 @@
     -#     = f.input :ends_at_hour
     -#     -# = f.input :ends_at_time, minute_step: 5
 
-    = f.association :lab, collection: current_user.labs, label: "Where"
+    = f.association :lab, collection: current_user.labs, label: "Where", input_html: { class: 'enhanced' }
     = f.input :details, input_html: { rows: 6 }
 
     = f.label :image

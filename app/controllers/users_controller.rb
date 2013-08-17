@@ -1,16 +1,21 @@
 class UsersController < ApplicationController
 
-  authorize_actions_for User
-  before_filter :require_new_user, only: [:new, :create]
+  # authorize_actions_for User
+  # before_filter :require_new_user, only: [:new, :create]
 
   def complete_registration
-    @user = User.where(action_token: params[:token]).first
+    begin
+      @user = User.find_by!(action_token: params[:token])
+    rescue ActiveRecord::RecordNotFound
+      redirect_to root_url, notice: "Not found"
+    end
   end
-  authority_actions :complete_registration => 'create'
+  # authority_actions :complete_registration => 'create'
 
   def new
     @user = User.new
     render layout: 'sessions'
+    authorize! :new, @user
   end
 
   def index
@@ -19,6 +24,7 @@ class UsersController < ApplicationController
 
   def edit
     @user = current_user
+    authorize! :edit, @user
   end
 
   def update
@@ -39,7 +45,7 @@ class UsersController < ApplicationController
       render :complete_registration
     end
   end
-  authority_actions :register => 'create'
+  # authority_actions :register => 'create'
 
   def show
     @user = User.find(params[:id])

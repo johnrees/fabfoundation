@@ -1,35 +1,60 @@
+<%
+imgs = {}
+Dir.chdir("#{Rails.root}/app/assets/images/") do
+  imgs = Dir["**"].inject({}) {|h,f| h.merge! f => image_path(f)}
+end
+%>
+
+window.image_path = (name) ->
+  <%= imgs.to_json %>[name]
+
 update = ->
   $('fieldset.country').each ->
     $(this).toggle ($(this).hasAtLeastOneVisibleChild('.lab'))
 
 
+# showMarker = (marker) ->
+#   window.markers.addLayer(marker)
+
+# hideMarker = (marker) ->
+#   window.markers.removeLayer(marker)
+
+# filter = ->
+#   for lab in window.labs
+#     showMarker(lab.marker)
+#     if window.kind and window.kind != lab.kind
+#       hideMarker(lab.marker)
+
 jQuery ->
+
+  $('.open_type').change ->
+    $(this).parents('tr').find('.hide-if-closed').toggle ($(this).val() == 'open_from')
 
   $('.c-labs.a-index input').change ->
     # alert ".lab[data-#{$(this).parents('fieldset').data('type')}='#{$(this).val()}']"
     $('fieldset').show()
     $(".lab[data-#{$(this).parents('fieldset').data('type')}='#{$(this).val()}']").toggle $(this).is(':checked')
-    update()
 
-  $('.c-labs.a-index form').submit ->
-    return false
+
+  $('.c-labs.a-index form').submit -> false
 
   count = 0
   $('#q_name_or_city_cont').keyup ->
-    q = $('#q_name_or_city_cont').val()
+    q = $('#q_name_or_city_cont').val().toLowerCase()
 
     if q == ""
       $('.lab, fieldset.country').show()
       count = 1
     else
       $('.lab').each ->
-        if $(this).data('name').contains(q)
+        if ~$(this).data('name').search(q)
           count++
           $(this).show()
         else
           $(this).hide()
+    update()
 
-    $('#no-results').toggle(~count)
+    # $('#no-results').toggle(~count)
 
   # hide flash messages
   $('#flash_notice').delay(2000).slideUp('fast')
@@ -41,16 +66,33 @@ jQuery ->
     markers = new L.MarkerClusterGroup
     map = L.map('map', { scrollWheelZoom: false }).setView([50, 0], 2 )
     L.tileLayer('http://{s}.tile.cloudmade.com/384aceabcd0942189d0e93cf0e98cd31/90734/256/{z}/{x}/{y}.png', {}).addTo(map)
+    navigator.geolocation.getCurrentPosition((position)->
+      map.setView([position.coords.latitude, position.coords.longitude], 6)
+    )
+
     if $('#map').data('lat')
       map.setView([$('#map').data('lat'), $('#map').data('lng')], $('#map').data('zoom') )
-      L.marker([$('#map').data('lat'), $('#map').data('lng')]).addTo(map)
+      icon = L.icon({
+        iconUrl: window.image_path("map-icon-#{lab.kind}.png")
+        iconSize:     [35, 35]
+        iconAnchor:   [17, 33]
+        popupAnchor:  [0, -20]
+      })
+      L.marker([$('#map').data('lat'), $('#map').data('lng')],{icon: icon}).addTo(map)
+    else
+      $.get "/labs.json", (labs) ->
+        for lab in labs
+          if lab.latitude
+            icon = L.icon({
+              iconUrl: window.image_path("map-icon-#{lab.kind}.png")
+              iconSize:     [35, 35]
+              iconAnchor:   [17, 33]
+              popupAnchor:  [0, -20]
+            })
+            lab.marker = L.marker([lab.latitude, lab.longitude],{icon: icon})
+            lab.marker.bindPopup("<a href='/labs/#{lab.id}'>#{lab.name} #{lab.kind}</a>")
+            markers.addLayer(lab.marker)
 
-    $.get "/labs.json", (labs) ->
-      for lab in labs
-        if lab.latitude
-          lab.marker = L.marker([lab.latitude, lab.longitude])
-          lab.marker.bindPopup("<a href='/labs/#{lab.id}'>#{lab.name}</a>")
-          markers.addLayer(lab.marker)
       map.addLayer(markers)
 
   $('#tools').on 'cocoon:after-insert', (e, insertedItem) ->

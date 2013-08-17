@@ -2,7 +2,7 @@
   %fieldset
     .row
       .columns.large-4
-        = f.association :user
+        = f.association :user, input_html: { class: 'enhanced' }
       .columns.large-8
         = f.input :details
         -# = f.input :roles

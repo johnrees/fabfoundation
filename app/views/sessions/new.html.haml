@@ -1,3 +1,5 @@
+- title "Sign in"
+
 - content_for("account-yet") do
   Don't have an account yet? #{link_to "Sign up", signup_path}
 
@@ -9,13 +11,13 @@
         .field
           = label_tag :email
           = text_field_tag :email, params[:email], placeholder: 'Email', autofocus: true, autocapitalize: "off", autocorrect: "off"
-      .columns.large-9
+      .columns.small-9
         .field
           = label_tag :password
           = password_field_tag :password, nil, placeholder: 'Password'
-      .columns.large-3
+      .columns.small-3
         .field.forgot
-          = link_to "Forgot?", "#"
+          = link_to "Forgot?", new_password_reset_path
           -# = label_tag :remember_me do
           -#   = check_box_tag :remember_me, 1, params[:remember_me]
           -#   Remember Me

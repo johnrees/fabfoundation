@@ -13,6 +13,11 @@
   = f.input :description, hint: "A brief overview of your Fab Lab", input_html: { rows: 5 }
 
   .row.collapse
-    .columns.large-5
-      = f.input :urls, placeholder: "e.g. http://twitter.com/fablabx", label: "Website URLs", hint: "Any websites for your fablab, enter one website URL per line"
-  = f.input :email, hint: "A general enquiries email address for your Fab Lab"
+    .columns.large-7
+      = f.input :urls, placeholder: "e.g. http://twitter.com/fablabx", label: "Website URLs", hint: "Any websites for your fablab, enter one website URL per line", input_html: { rows: 4 }
+
+  .row
+    .columns.large-6
+      = f.input :email, hint: "A general enquiries email address for your Fab Lab"
+    .columns.large-6
+      = f.input :phone, label: "Phone Number", hint: "A general enquiries phone number for your Fab Lab", placeholder: "e.g. +34 (0)1234 56789", input_html: { data: {geo: "international_phone_number"}}

@@ -1,6 +1,6 @@
 class Backstage::LabsController < Backstage::BackstageController
 
-  authorize_actions_for Lab
+  # authorize_actions_for Lab
 
   def show
   end
@@ -11,11 +11,11 @@ class Backstage::LabsController < Backstage::BackstageController
   end
 
   def edit
-    @lab = Lab.unscoped.find(params[:id])
+    @lab = Lab.unscoped.friendly.find(params[:id])
   end
 
   def update
-    @lab = Lab.unscoped.find(params[:id])
+    @lab = Lab.unscoped.friendly.find(params[:id])
     if @lab.update_attributes lab_params
       redirect_to backstage_labs_url, notice: "Lab Updated"
     else
@@ -24,7 +24,7 @@ class Backstage::LabsController < Backstage::BackstageController
   end
 
   def destroy
-    @lab = Lab.unscoped.find(params[:id])
+    @lab = Lab.unscoped.friendly.find(params[:id])
     @lab.delete
     redirect_to backstage_labs_url, notice: "Lab Deleted"
   end

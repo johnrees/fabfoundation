@@ -1,8 +1,10 @@
+include ActionView::Helpers::AssetTagHelper
+
 class User < ActiveRecord::Base
 
-  include Authority::UserAbilities
-  include Authority::Abilities
-  self.authorizer_name = 'UserAuthorizer'
+  # include Authority::UserAbilities
+  # include Authority::Abilities
+  # self.authorizer_name = 'UserAuthorizer'
   has_secure_password validations: false
 
   state_machine :initial => :new do
@@ -19,6 +21,10 @@ class User < ActiveRecord::Base
       transition [:signed_up, :invited] => :confirmed
     end
 
+    state :confirmed do
+      validates_length_of :password, minimum: 5
+    end
+
   end
 
   has_many :humans
@@ -28,21 +34,21 @@ class User < ActiveRecord::Base
   has_many :events, foreign_key: 'creator_id'
   has_many :lab_applications, foreign_key: 'creator_id'
 
-  validates :password,
-    :presence     => true,
-    :length       => { :minimum => 5 },
-    :on => :update
-    # :if           => :password
-
   # validates :password, allow_blank: true, on: :create
 
   validates_presence_of :first_name, :last_name, :email
   validates :email, uniqueness: true, format: /@/
   validates :public_email, format: /@/, allow_blank: true
 
-  before_save { generate_token(:action_token) }
+  before_create { generate_token(:action_token) }
   after_create :complete_registration
   before_create :check_password
+
+  def send_password_reset
+    generate_token(:action_token)
+    save!
+    UserMailer.password_reset(self).deliver
+  end
 
   def check_password
     self.password ||= SecureRandom.urlsafe_base64
@@ -69,7 +75,7 @@ class User < ActiveRecord::Base
   end
 
   def avatar_image
-    avatar || "http://www.murketing.com/journal/wp-content/uploads/2009/04/vimeo.jpg"
+    avatar || image_path('default-avatar.jpg')
   end
 
 private

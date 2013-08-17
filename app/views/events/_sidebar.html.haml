@@ -1,3 +1,3 @@
-- if Event.creatable_by? authority_user
+- if can? :create, Event
   = link_to new_event_path, class: 'button expand' do
     = fa_icon "plus", text: "Add an Event"

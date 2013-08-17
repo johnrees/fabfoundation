@@ -9,9 +9,10 @@ class ApplicationAuthorizer < Authority::Authorizer
   # @return [Boolean]
 
   def self.default(adjective, user)
-    # 'Whitelist' strategy for security: anything not explicitly allowed is
-    # considered forbidden.
-    # user.admin?
+    false
+  end
+
+  def default(adjective, user)
     false
   end
 

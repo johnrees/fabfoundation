@@ -1,5 +1,10 @@
+%fieldset#facilities
+  %legend= fa_icon "cogs", text: "Facilities"
+
+  = f.input :facilities, as: 'check_boxes', collection: Lab.values_for_facilities, inline_label: true,item_wrapper_class: 'checkbox_container'
+
 %fieldset#tools
-  %legend= fa_icon "cogs", text: "Lab Equipment"
+  %legend= fa_icon "wrench", text: "Lab Equipment"
   = f.simple_fields_for :tools do |tool|
     = render 'backstage/labs/tool_fields', :f => tool
   .links.text-right

@@ -5,11 +5,7 @@ class UserAuthorizer < ApplicationAuthorizer
   end
 
   def self.updatable_by? user
-    true
-  end
-
-  def updatable_by? user
-    user
+    user == resource
   end
 
   def self.creatable_by? user

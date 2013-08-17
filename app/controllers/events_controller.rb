@@ -1,10 +1,11 @@
 class EventsController < ApplicationController
-  authorize_actions_for Event
+
+  # authorize_actions_for Event
 
   def calendar
     @events = Event.all
   end
-  authority_actions calendar: 'read'
+  # authority_actions calendar: 'read'
 
   def index
     @events = Event.all

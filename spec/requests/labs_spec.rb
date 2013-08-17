@@ -28,6 +28,11 @@ describe Lab do
       expect(page).to have_link('Bart Simpson')
     end
 
+    it "can only view approved labs" do
+      lab = FactoryGirl.create(:lab)
+      expect{ visit lab_path(lab) }.to raise_error(ActiveRecord::RecordNotFound)
+    end
+
   end
 
   describe "updating labs" do
@@ -45,7 +50,7 @@ describe Lab do
       lab = FactoryGirl.create(:lab, creator: user, state: 'approved')
       user_signin user
       visit lab_path(lab)
-      click_link "Edit"
+      click_link "Edit Lab"
       fill_in "Fab Lab Name", with: "New Name"
       click_button "Update Lab"
       lab.reload

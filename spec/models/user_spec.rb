@@ -35,7 +35,7 @@ describe User do
   it "has default avatar_image" do
     expect(
       FactoryGirl.build_stubbed(:user).avatar_image
-    ).to eq("http://www.murketing.com/journal/wp-content/uploads/2009/04/vimeo.jpg")
+    ).to match('default-avatar')
   end
 
   pending "validates password" do

@@ -2,7 +2,7 @@
 
 .row
   .columns.large-12
-    %h1 Add a Fab Lab
+    = title "Add a Fab Lab"
     = simple_form_for @lab_application do |f|
       = render 'errors_for', resource: @lab_application
       = f.simple_fields_for :lab do |l|
@@ -10,10 +10,12 @@
         = render 'labs/form_modules/basic_details', f: l
         = render 'labs/form_modules/relationships', f: l
         = render 'labs/form_modules/location', f: l
-        -# = render 'labs/form_modules/opening_hours', f: l
+        = render 'labs/form_modules/opening_hours', f: l
         = render 'labs/form_modules/tools', f: l
 
       %fieldset
-        %legend= fa_icon "comments", text: "Anything else?"
+        %legend= fa_icon "comments", text: "Other Details"
+        = f.association :labs, hint: "To apply to add your Lab into the Fab Foundation network, you must add at least one existing lab that can vouch for you. Type the lab name(s) in the box above.", input_html: { class: 'enhanced' }, label: "Referee labs"
+
         = f.input :notes, hint: "If you would like to add any more details or comments to your application then please include them here.", input_html: { rows: 5 }
       .actions= f.submit "Submit Application", class: 'button large'

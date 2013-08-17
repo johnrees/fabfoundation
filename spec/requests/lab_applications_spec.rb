@@ -10,6 +10,7 @@ describe LabApplication do
     end
 
     it "authenticated user can add a lab" do
+      lab = FactoryGirl.create(:lab, name: 'ref', state: 'approved')
       user = FactoryGirl.create(:user)
       user_signin user
       click_link "Add a Lab"
@@ -17,13 +18,15 @@ describe LabApplication do
       fill_in "City", with: "A City"
       fill_in "Address notes", with: "On the roof"
       select "United Kingdom", from: "Country"
+      select "ref", from: "Referee labs"
       click_button "Submit Application"
+      # save_and_open_page
       expect(page).to have_selector("h1", text: "Thank you")
     end
 
     it "confirmation email to creator after creating lab"
     it "notification email to admins after creating lab"
-
+    it "has at least one referee"
   end
 
 end

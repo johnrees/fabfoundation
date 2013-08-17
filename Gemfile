@@ -2,14 +2,14 @@ source 'https://rubygems.org'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.0.0'
-gem 'authority'
+# gem 'authority'
 gem 'whenever', require: false
 gem 'bitwise'
 gem "aws-ses", "~> 0.5.0", :require => 'aws/ses'
 gem 'closure_tree'
 gem 'kaminari'
 gem 'cocoon'
-gem 'friendly_id', github: 'FriendlyId/friendly_id', branch: '4.0-stable'
+gem 'friendly_id', github: 'norman/friendly_id'#, branch: '4.0-stable'
 gem 'sass-rails', '~> 4.0.0'
 gem 'countries'
 gem 'country_select'
@@ -17,7 +17,6 @@ gem 'simple_form', github: 'plataformatec/simple_form'
 gem 'geocoder', github: 'alexreisner/geocoder'
 # gem "geokit-rails"
 gem 'google_timezone'
-gem "sentry-raven", :git => "https://github.com/getsentry/raven-ruby.git"
 gem 'ancestry'
 gem 'uglifier', '>= 1.3.0'
 gem 'paper_trail', github: 'airblade/paper_trail', branch: 'rails4'
@@ -32,6 +31,7 @@ gem 'jquery-rails'
 gem 'jquery-ui-rails'
 gem 'haml-rails'
 gem "figaro"
+gem "cancan", github: "ryanb/cancan"
 # gem 'rocket_pants', '~> 1.0'
 # gem 'turbolinks'
 
@@ -46,6 +46,7 @@ end
 
 group :production do
   gem 'pg'
+  gem "sentry-raven", :git => "https://github.com/getsentry/raven-ruby.git"
 end
 
 group :development do

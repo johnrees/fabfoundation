@@ -4,7 +4,7 @@
       %fieldset
         %legend
           Staff
-          %span.count= @lab.humans.count
+          -# %span.count= @lab.humans.count
         %ul.large-block-grid-7.small-block-grid-2.people
           - @lab.humans.each do |human|
             = content_tag_for :li, human do

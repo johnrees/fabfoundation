@@ -1,5 +1,10 @@
-.row
-  .columns.large-12
+- title @lab.name
+
+.row.collapse{style: 'padding-top: 10px;'}
+  .columns.small-3.large-2{style: 'padding: 10px 0.9em 10px 10px'}
+    = image_tag @lab.avatar #"fab.png"
+
+  .columns.small-9.large-10
     #head
       -# #image
       -#   = image_tag @lab.avatar, width: 110, height: 110
@@ -17,9 +22,13 @@
         -#   Open Today 10:00-14:00
 
     .buttons
-      = link_to "Edit", edit_lab_path(@lab), class: 'button small' if @lab.updatable_by? current_user
+      - if can? :update, @lab
+        = link_to edit_lab_path(@lab), class: 'button small' do
+          = fa_icon "edit", text: "Edit Lab"
+
       - if authority_user.admin?
-        = link_to "Edit Backstage", edit_backstage_lab_path(@lab), class: 'button small'
+        = link_to edit_backstage_lab_path(@lab), class: 'button small success' do
+          = fa_icon "edit", text: "Edit Backstage"
 
 .row
   .columns.large-12
@@ -31,13 +40,13 @@
         - @lab.children.each do |child|
           %li= link_to child, child
 
-.row
-  .columns.large-12
-    %div#sticky{"data-magellan-expedition" => "fixed"}
-      %dl.sub-nav
-        - @sections.each do |section|
-          %dd{"data-magellan-arrival" => section}
-            = link_to section.titleize, "##{section}"
+-# .row
+-#   .columns.large-12
+-#     %div#sticky{"data-magellan-expedition" => "fixed"}
+-#       %dl.sub-nav
+-#         - @sections.each do |section|
+-#           %dd{"data-magellan-arrival" => section}
+-#             = link_to section.titleize, "##{section}"
 
 = render 'description', lab: @lab
 

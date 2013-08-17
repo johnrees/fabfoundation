@@ -1,15 +1,19 @@
-- if LabApplication.creatable_by? authority_user
-  = link_to new_lab_application_path, class: 'button expand' do
-    = fa_icon "plus", text: "Add a Lab"
+-# - if LabApplication.creatable_by? authority_user
+-#   = link_to new_lab_application_path, class: 'button expand' do
+-#     = fa_icon "plus", text: "Add a Lab"
 
-= search_form_for @q do |f|
+-# - if can? :create, LabApplication
+= link_to new_lab_application_path, class: 'button expand' do
+  = fa_icon "plus", text: "Add a Lab"
+
+= search_form_for @q, id: 'side-filters' do |f|
 
   - if action_name == 'index' and !@continents.empty?
     %fieldset{data: {type: 'region'}}
       %legend
         = fa_icon "globe"
         = link_to "Region", map_labs_path
-      #map
+      #minimap
       %table
 
         -# %tr.all

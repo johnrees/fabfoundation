@@ -1,7 +1,7 @@
 class LabsController < ApplicationController
 
   before_filter :require_login, except: [:index, :show, :map]
-  authorize_actions_for Lab
+  # authorize_actions_for Lab
 
   [:map, :index].each do |method|
     define_method method do
@@ -39,17 +39,17 @@ class LabsController < ApplicationController
 
     end
   end
-  authority_actions map: 'read'
+  # authority_actions map: 'read'
 
   def edit
-    @lab = current_user.labs.find(params[:id])
+    @lab = current_user.labs.friendly.find(params[:id])
     @lab.tools.build
     @lab.humans.build
-    authorize_action_for(@lab)
+    # authorize_action_for(@lab)
   end
 
   def update
-    @lab = current_user.labs.find(params[:id])
+    @lab = current_user.labs.friendly.find(params[:id])
     if @lab.update_attributes lab_params
       redirect_to lab_url(@lab), notice: "Lab Updated"
     else
@@ -58,13 +58,13 @@ class LabsController < ApplicationController
   end
 
   def show
-    @lab = Lab.find(params[:id])
+    @lab = Lab.friendly.find(params[:id])
     @days = %w(monday tuesday wednesday thursday friday saturday sunday)
 
     @sections = %w(location)
-    @sections.push 'events' unless @lab.events.empty?
-    @sections.push 'equipment' unless @lab.tools.empty?
-    @sections.push 'people' unless @lab.humans.empty?
+    # @sections.push 'events' if @lab.events.any?
+    @sections.push 'equipment' if @lab.tools.any?
+    @sections.push 'people' if @lab.humans.any?
   end
 
 private
@@ -78,6 +78,7 @@ private
       :country_code, :street_address_1, :street_address_2,
       :city, :region, :postal_code, :address_notes, :phone,
       :latitude, :longitude, :opening_hours_notes, :application_notes, :time_zone,
+      :facilities,
       tools_attributes: [:id, :tool_type_id, :name, :description, :photo, :_destroy],
       humans_attributes: [:id, :user_id, :details, :_destroy]
     )

@@ -1,3 +1,5 @@
+- title "Sign up"
+
 - content_for("account-yet") do
   Already registered? #{link_to "Sign in", signin_path}
 
@@ -6,9 +8,9 @@
 
     = simple_form_for @user do |f|
       .row
-        .columns.large-6
+        .columns.small-6
           .field= f.input :first_name, placeholder: 'First Name', autofocus: true
-        .columns.large-6
+        .columns.small-6
           .field= f.input :last_name, placeholder: 'Last Name'
       .row
         .columns.large-12

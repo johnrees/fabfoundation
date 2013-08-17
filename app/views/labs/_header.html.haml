@@ -3,7 +3,7 @@
     .row
       .columns.large-7
         = search_form_for @q, class: 'hide-for-small' do |f|
-          = f.text_field :name_or_city_cont, placeholder: "Search..."
+          = f.text_field :name_or_city_cont, placeholder: "Search...", autocomplete: 'off'
       .columns.large-5.small-12.text-right
         %ul.button-group.radius.even-2
           %li
