@@ -125,6 +125,7 @@ GEM
       rack-test (>= 0.5.4)
       xpath (~> 2.0)
     chronic (0.9.1)
+    chunky_png (1.2.8)
     closure_tree (4.2.7)
       activerecord (>= 3.0.0)
       with_advisory_lock (>= 0.0.9)
@@ -137,6 +138,12 @@ GEM
       coffee-script-source
       execjs
     coffee-script-source (1.6.3)
+    compass (0.12.2)
+      chunky_png (~> 1.2)
+      fssm (>= 0.2.7)
+      sass (~> 3.1)
+    compass-rails (1.0.3)
+      compass (>= 0.12.2, < 0.14)
     countries (0.9.2)
       currencies (>= 0.4.0)
     country_select (1.2.0)
@@ -157,6 +164,7 @@ GEM
       bundler (~> 1.0)
       rails (>= 3, < 5)
     formatador (0.2.4)
+    fssm (0.2.10)
     google_timezone (0.0.1)
     guard (1.8.2)
       formatador (>= 0.2.4)
@@ -339,6 +347,7 @@ DEPENDENCIES
   closure_tree
   cocoon
   coffee-rails (~> 4.0.0)
+  compass-rails
   countries
   country_select
   factory_girl_rails
