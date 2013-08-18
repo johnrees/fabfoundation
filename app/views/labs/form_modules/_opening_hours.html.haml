@@ -6,7 +6,7 @@
       - [1,2,3,4,5,6,0].each_with_index do |index,count|
         %tr
           %th= I18n.t('date.abbr_day_names')[index]
-          %td.text-right
+          %td
             = f.input_field :thing, collection: %w(open_from 24hr closed), default: 'open_from', class: 'open_type', style: 'width: 90px'
 
             -# = label_tag do
@@ -17,8 +17,8 @@
             %span.hide-if-closed to
           %td= time_input :closing_time, (17.hours unless count > 4), class: 'hide-if-closed'
 
-          %td.hide-for-small
-            - if index == 1
-              = link_to "Apply to All ↓", "#"
+          -# %td.hide-for-small
+          -#   - if index == 1
+          -#     = link_to "Apply to All ↓", "#", id: 'apply-to-all'
 
   = f.input :opening_hours_notes, hint: "Any additions to the above", placeholder: "e.g. Closed on the first monday of each month"

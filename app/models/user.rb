@@ -75,7 +75,7 @@ class User < ActiveRecord::Base
   end
 
   def avatar_image
-    avatar || image_path('default-avatar.jpg')
+    avatar || asset_path('/assets/default-avatar.png')
   end
 
 private

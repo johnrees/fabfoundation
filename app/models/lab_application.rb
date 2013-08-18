@@ -3,7 +3,7 @@ class LabApplication < ActiveRecord::Base
   # self.authorizer_name = 'LabApplicationAuthorizer'
 
   belongs_to :lab
-  belongs_to :creator
+  belongs_to :creator, class_name: "User"
   accepts_nested_attributes_for :lab
 
   has_many :referees
@@ -14,7 +14,7 @@ class LabApplication < ActiveRecord::Base
 
   validate :has_referee_labs?
   def has_referee_labs?
-    errors.add(:base, 'must have at least one referee') if self.labs.blank?
+    errors.add(:base, 'Lab Application must have at least one referee') if self.labs.blank?
   end
 
   state_machine :initial => :new do

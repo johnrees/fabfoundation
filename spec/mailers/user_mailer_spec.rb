@@ -20,24 +20,24 @@ describe UserMailer do
     expect(mail.body.encoded).to match(complete_registration_url(token: user.action_token))
   end
 
-  pending "has lab_approval_notification" do
-    lab = FactoryGirl.create(:lab)
-    user = lab.creator
-    mail = UserMailer.lab_approval_notification lab
+  it "has lab_application_approval_notification" do
+    lab_application = FactoryGirl.create(:lab_application, labs: [FactoryGirl.create(:lab)])
+    user = lab_application.creator
+    mail = UserMailer.lab_application_approval_notification lab_application
     expect(mail.subject).to include("has been approved")
     expect(mail.to).to eq([user.email])
     expect(mail.from).to eq(["notifications@fabfoundationworld.org"])
-    expect(mail.body.encoded).to match(lab_url(lab))
+    expect(mail.body.encoded).to match(lab_path(lab_application.lab))
   end
 
-  pending "has lab_submission_confirmation" do
-    lab = FactoryGirl.create(:lab)
-    user = lab.creator
-    mail = UserMailer.lab_submission_confirmation lab
+  pending "has lab_application_submission_confirmation" do
+    lab_application = FactoryGirl.create(:lab_application)
+    user = lab_application.creator
+    mail = UserMailer.lab_application_submission_notification lab_application
     expect(mail.subject).to eq("Thank you for adding a Fab Lab")
     expect(mail.to).to eq([user.email])
     expect(mail.from).to eq(["notifications@fabfoundationworld.org"])
-    expect(mail.body.encoded).to match(lab_url(lab))
+    expect(mail.body.encoded).to match(lab_application_url(lab_application))
   end
 
 end

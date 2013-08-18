@@ -43,7 +43,12 @@ describe Lab do
       expect(current_path).to eq(signin_path)
     end
 
-    pending "can only be updated by lab manager"
+    it "cannot be updated unless creator" do
+      lab = FactoryGirl.create(:lab)
+      user = FactoryGirl.create(:user)
+      user_signin user
+      expect{ visit edit_lab_path(lab) }.to raise_error(ActiveRecord::RecordNotFound)
+    end
 
     it "can be updated" do
       user = FactoryGirl.create(:user)
@@ -57,13 +62,6 @@ describe Lab do
       expect(current_path).to eq lab_path(lab)
       expect(page).to have_selector("h1", text: "New Name")
     end
-
-  end
-
-  describe "approving labs" do
-
-    it "unapproved labs are not visible"
-    it "approved labs are visible"
 
   end
 

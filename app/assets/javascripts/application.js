@@ -22,7 +22,8 @@
 //= require select2
 //= require jquery.ui.datepicker
 //= require leaflet.markercluster
+//= require mailcheck
 //= require_tree .
 
 moment().format()
-$(document).foundation();
+$(document).foundation()

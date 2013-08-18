@@ -2,7 +2,7 @@
 
 FactoryGirl.define do
   factory :referee do
-    lab nil
-    applicant nil
+    association :lab
+    association :lab_application
   end
 end

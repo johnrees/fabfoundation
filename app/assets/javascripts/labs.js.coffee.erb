@@ -27,6 +27,9 @@ update = ->
 
 jQuery ->
 
+  # $('#apply-to-all').click ->
+  #   $('table.opening-hours-chooser').hide()
+
   $('.open_type').change ->
     $(this).parents('tr').find('.hide-if-closed').toggle ($(this).val() == 'open_from')
 
