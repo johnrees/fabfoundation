@@ -7,6 +7,8 @@ class User < ActiveRecord::Base
   # self.authorizer_name = 'UserAuthorizer'
   has_secure_password validations: false
 
+  attr_accessor :current_password
+
   state_machine :initial => :new do
 
     event :signup do
@@ -23,6 +25,8 @@ class User < ActiveRecord::Base
 
     state :confirmed do
       validates_length_of :password, minimum: 5
+      validates_confirmation_of :password, if: lambda { |m| m.password.present? }
+
     end
 
   end

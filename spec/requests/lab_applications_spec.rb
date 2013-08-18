@@ -22,11 +22,17 @@ describe LabApplication do
       click_button "Submit Application"
       # save_and_open_page
       expect(page).to have_selector("h1", text: "Thank you")
+      emails = ActionMailer::Base.deliveries.map(&:to).flatten
+      expect(emails).to include(user.email)
+      expect(emails).to include('john@bitsushi.com') #admin
     end
 
-    it "confirmation email to creator after creating lab"
-    it "notification email to admins after creating lab"
-    it "has at least one referee"
+    it "has at least one referee" do
+      expect(
+        FactoryGirl.build_stubbed(:lab_application, labs: nil).errors
+      ).to include("must have at least one referee")
+    end
+
   end
 
 end

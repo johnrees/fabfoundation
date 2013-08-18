@@ -72,7 +72,19 @@ describe "Users" do
         expect(page).to have_content("Updated")
 
       end
+    end
 
+    describe "changing password" do
+      it "can change password" do
+        user = FactoryGirl.create(:user)
+        user_signin user
+        visit edit_user_path(user)
+        click_link "Change Password"
+        fill_in "New Password", with: "NewPass"
+        fill_in "New Password Confirmation", with: "NewPass"
+        click_button "Change Password"
+        page.should have_content("Password updated")
+      end
     end
 
     describe "registration" do

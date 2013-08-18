@@ -12,6 +12,20 @@ class UsersController < ApplicationController
   end
   # authority_actions :complete_registration => 'create'
 
+  def change_password
+    @user = current_user
+    authorize! :edit, @user
+  end
+
+  def update_password
+    @user = current_user
+    if @user.authenticate(params[:user][:current_password]) and @user.update_attributes(user_params)
+      redirect_to edit_user_url(@user), notice: "Password updated"
+    else
+      render :change_password
+    end
+  end
+
   def new
     @user = User.new
     render layout: 'sessions'
@@ -65,6 +79,8 @@ private
   def user_params
     params.require(:user).permit(
       :password,
+      :current_password,
+      :password_confirmation,
       :email,
       :dob,
       :public_email,

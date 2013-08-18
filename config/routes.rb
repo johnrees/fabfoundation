@@ -27,6 +27,8 @@ Fabfoundation::Application.routes.draw do
   resources :users do
     member do
       patch 'register'
+      get 'change_password'
+      patch 'update_password'
     end
   end
 
