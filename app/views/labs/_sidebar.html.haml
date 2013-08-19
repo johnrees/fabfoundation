@@ -26,7 +26,7 @@
           %tr
             %td
               %label
-                = check_box_tag "q[region_in][]", region, true#(params[:q][:region_in].include? region if params[:q])
+                = check_box_tag "q[region_in][]", region.downcase, true#(params[:q][:region_in].include? region if params[:q])
                 = region
             %td.hint= count
 

@@ -26,49 +26,60 @@ class Lab < ActiveRecord::Base
     if Rails.env.test?
       self.time_zone = 'Europe/London'
     else
-      self.time_zone = GoogleTimezone.fetch(latitude, longitude).time_zone_id
+      # self.time_zone = GoogleTimezone.fetch(latitude, longitude).time_zone_id
     end
+  end
+
+  def opening_hours
+    b = Bitwise.new
+    b.raw = opening_hours_bitmask
+    b.indexes
+  end
+
+  def opening_hours=(opening_hours)
+    b = Bitwise.new
+    b.indexes = opening_hours.map(&:to_i)
+    self.opening_hours_bitmask = b.bits
   end
 
   # class BitwiseOpeningTimes
 
   #   def load(text)
   #     return unless text
-  #     text.unpack('m').first
+  #     b = Bitwise.new
+  #     b.raw = opening_hours_bitmask
+  #     b.indexes
   #   end
 
   #   def dump(text)
   #     b = Bitwise.new
-  #     %w(monday tuesday wednesday thursday friday saturday sunday).each do |day|
-  #       b.indexes << opening_hours[day][0]
-  #       b.indexes << opening_hours[day][1]
-  #     end
-  #     self.opening_hours_bitmask = b.bits
+  #     b.indexes = text.map(&:to_i)
+  #     b.bits
   #   end
 
   # end
 
   # serialize :opening_hours_bitmask, BitwiseHours.new
 
-  def opening_hours=(opening_hours)
-    b = Bitwise.new
-    %w(monday tuesday wednesday thursday friday saturday sunday).each do |day|
-      b.indexes << opening_hours[day][0]
-      b.indexes << opening_hours[day][1]
-    end
-    self.opening_hours_bitmask = b.bits
-  end
+  # def opening_hours=(opening_hours)
+  #   b = Bitwise.new
+  #   %w(monday tuesday wednesday thursday friday saturday sunday).each do |day|
+  #     b.indexes << opening_hours[day][0]
+  #     b.indexes << opening_hours[day][1]
+  #   end
+  #   self.opening_hours_bitmask = b.bits
+  # end
 
-  def opening_hours
-    if opening_hours
-      b = Bitwise.new
-      %w(monday tuesday wednesday thursday friday saturday sunday).each do |day|
-        opening_hours[day][0] =
-        b.indexes << opening_hours[day][1]
-      end
-      self.opening_hours_bitmask = b.bits
-    end
-  end
+  # def opening_hours
+  #   if opening_hours
+  #     b = Bitwise.new
+  #     %w(monday tuesday wednesday thursday friday saturday sunday).each do |day|
+  #       opening_hours[day][0] =
+  #       b.indexes << opening_hours[day][1]
+  #     end
+  #     self.opening_hours_bitmask = b.bits
+  #   end
+  # end
 
   default_scope { with_state(:approved) }
 
@@ -80,13 +91,13 @@ class Lab < ActiveRecord::Base
 
   attr_accessor :has_opening_hours
 
-  def opening_hours=(opening_hours)
-    self.opening_hours_bitmask = opening_hours[0][0]
-  end
+  # def opening_hours=(opening_hours)
+  #   self.opening_hours_bitmask = opening_hours[0][0]
+  # end
 
-  def opening_hours
-    JSON.parse(media_raw) if opening_hours_bitmask.present?
-  end
+  # def opening_hours
+  #   JSON.parse(media_raw) if opening_hours_bitmask.present?
+  # end
 
   belongs_to :creator, class_name: "User"
   has_many :events

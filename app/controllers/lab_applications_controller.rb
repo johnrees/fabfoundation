@@ -11,6 +11,7 @@ class LabApplicationsController < ApplicationController
     @lab_application = current_user.lab_applications.new
     lab = @lab_application.build_lab
     lab.tools.build
+
     authorize! :new, @lab_application
   end
 

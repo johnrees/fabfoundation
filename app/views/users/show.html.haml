@@ -23,8 +23,7 @@
     - if @user.url.present?
       %p.home
         = fa_icon "home"
-        = link_to @user.url do
-          = @user.url
+        = auto_link @user.url
 
     %ul
       - @user.humans.each do |human|

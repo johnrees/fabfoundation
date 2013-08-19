@@ -23,8 +23,9 @@ class User < ActiveRecord::Base
       transition [:signed_up, :invited] => :confirmed
     end
 
+
+
     state :confirmed do
-      validates_length_of :password, minimum: 5
       validates_confirmation_of :password, if: lambda { |m| m.password.present? }
 
     end
@@ -38,7 +39,11 @@ class User < ActiveRecord::Base
   has_many :events, foreign_key: 'creator_id'
   has_many :lab_applications, foreign_key: 'creator_id'
 
+  # validates_presence_of :password
+
   # validates :password, allow_blank: true, on: :create
+  validates :password, presence: true
+    validates_length_of :password, minimum: 5,  if: lambda { |m| m.password.present? }
 
   validates_presence_of :first_name, :last_name, :email
   validates :email, uniqueness: true, format: /@/
@@ -50,7 +55,7 @@ class User < ActiveRecord::Base
 
   def send_password_reset
     generate_token(:action_token)
-    save!
+    # save!
     UserMailer.password_reset(self).deliver
   end
 

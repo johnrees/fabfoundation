@@ -1,8 +1,10 @@
 .row
-  .columns-12.large
+  .columns.large-12
     %h1 Complete your Registration
 
     = simple_form_for @user, url: register_user_path(@user) do |f|
+      = render "errors_for", resource: @user
+
       %fieldset
         = f.label :first_name, "Name"
         = f.input_field :first_name

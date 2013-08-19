@@ -16,8 +16,8 @@
     = simple_form_for @lab do |f|
       = render 'labs/form_modules/basic_details', f: f
       = render 'labs/form_modules/location', f: f
-      = render 'labs/form_modules/opening_hours', f: f
+      -# = render 'labs/form_modules/opening_hours', f: f
       = render 'labs/form_modules/tools', f: f
-      = render 'labs/form_modules/humans', f: f
+      -# = render 'labs/form_modules/humans', f: f
 
       = f.submit class: 'button large'

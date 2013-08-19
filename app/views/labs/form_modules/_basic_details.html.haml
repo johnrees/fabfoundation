@@ -4,11 +4,11 @@
     .large-8.columns
       = f.input :name, label: 'Fab Lab Name'
 
-      = f.label :avatar
+      = f.label :avatar, "Picture"
       = f.input_field :avatar, :type => "filepicker-dragdrop", :value => f.object.avatar
 
     .large-3.columns
-      = f.input :kind, collection: Lab::Kinds, hint: "If you are unsure, leave this blank"
+      = f.input :kind, collection: Lab::Kinds.map{|m| [m.humanize.titleize, m]}, hint: "If you are unsure, leave this blank"
 
   = f.input :description, hint: "A brief overview of your Fab Lab", input_html: { rows: 5 }
 

@@ -10,8 +10,8 @@ window.image_path = (name) ->
 
 update = ->
   $('fieldset.country').each ->
-    $(this).toggle ($(this).hasAtLeastOneVisibleChild('.lab'))
-
+    $(this).toggle($(this).children('.lab:not(.hide-region,.hide-kind,.hide-search)').length > 0)
+    # ($(this).hasAtLeastOneVisibleChild('.lab'))
 
 # showMarker = (marker) ->
 #   window.markers.addLayer(marker)
@@ -27,6 +27,9 @@ update = ->
 
 jQuery ->
 
+  $('td.time-picker input').change ->
+    $(this).parents('td').toggleClass 'open', $(this).is(':checked')
+
   # $('#apply-to-all').click ->
   #   $('table.opening-hours-chooser').hide()
 
@@ -35,26 +38,20 @@ jQuery ->
 
   $('.c-labs.a-index input').change ->
     # alert ".lab[data-#{$(this).parents('fieldset').data('type')}='#{$(this).val()}']"
-    $('fieldset').show()
-    $(".lab[data-#{$(this).parents('fieldset').data('type')}='#{$(this).val()}']").toggle $(this).is(':checked')
-
+    type = $(this).parents('fieldset').data('type')
+    $(".lab[data-#{type}='#{$(this).val()}']").toggleClass "hide-#{type}", !$(this).is(':checked')
+    update()
 
   $('.c-labs.a-index form').submit -> false
 
-  count = 0
   $('#q_name_or_city_cont').keyup ->
-    q = $('#q_name_or_city_cont').val().toLowerCase()
-
-    if q == ""
-      $('.lab, fieldset.country').show()
-      count = 1
+    if $(this).val() == ""
+      $('.lab').removeClass('hide-search')
     else
+      q = $('#q_name_or_city_cont').val().toLowerCase()
       $('.lab').each ->
-        if ~$(this).data('name').search(q)
-          count++
-          $(this).show()
-        else
-          $(this).hide()
+        $(this).toggleClass 'hide-search', ($(this).data('name').search(q) <= 0)
+        # console.log $(this).data('name'), ($(this).data('name').search(q) > 0)
     update()
 
     # $('#no-results').toggle(~count)
@@ -69,19 +66,23 @@ jQuery ->
     markers = new L.MarkerClusterGroup
     map = L.map('map', { scrollWheelZoom: false }).setView([50, 0], 2 )
     L.tileLayer('http://{s}.tile.cloudmade.com/384aceabcd0942189d0e93cf0e98cd31/90734/256/{z}/{x}/{y}.png', {}).addTo(map)
-    navigator.geolocation.getCurrentPosition((position)->
-      map.setView([position.coords.latitude, position.coords.longitude], 6)
-    )
+
+    if $('body').hasClass 'c-labs a-map'
+      navigator.geolocation.getCurrentPosition((position)->
+        map.setView([position.coords.latitude, position.coords.longitude], 6)
+      )
 
     if $('#map').data('lat')
       map.setView([$('#map').data('lat'), $('#map').data('lng')], $('#map').data('zoom') )
+      kind = 'fab_lab'
       icon = L.icon({
-        iconUrl: window.image_path("map-icon-#{lab.kind}.png")
+        iconUrl: window.image_path("map-icon-#{kind}.png")
         iconSize:     [35, 35]
         iconAnchor:   [17, 33]
         popupAnchor:  [0, -20]
       })
       L.marker([$('#map').data('lat'), $('#map').data('lng')],{icon: icon}).addTo(map)
+
     else
       $.get "/labs.json", (labs) ->
         for lab in labs

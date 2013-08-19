@@ -32,6 +32,8 @@
             .columns.large-7.details
               .name
                 = link_to lab, lab
+                - if lab.kind
+                  = Lab::Kinds[lab.kind]
                 -# = Time.now.in_time_zone(lab.time_zone).stamp("15:00")
                 -# %span.kind
                 -#   - if lab.kind.present?
