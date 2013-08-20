@@ -1,7 +1,5 @@
 class Backstage::EventsController < Backstage::BackstageController
 
-  authorize_actions_for Event
-
   def new
     @event = Event.new
   end
