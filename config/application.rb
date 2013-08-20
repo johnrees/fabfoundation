@@ -21,6 +21,12 @@ module Fabfoundation
     # config.i18n.default_locale = :de
 
     config.action_mailer.delivery_method = :ses
+
+    # environment.context_class.class_eval do
+  def asset_path(path, options = {})
+  end
+# end
+
   end
 end
 

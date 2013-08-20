@@ -44,16 +44,16 @@
 
                   .address.hint
                     = fa_icon "map-marker", text: lab.short_address, class: 'icon-fixed-width'
-                    -# .email= mail_to "lab@lab.com"
-                    .contacts
-                      = link_to "#", class: 'contacts-toggle' do
-                        = fa_icon "group", text: (pluralize lab.humans.size, "Contact"), class: 'icon-fixed-width'
-                      %ul.contacts-list
-                        - User.all.each do |user|
-                          %li.user-contact
-                            = user
-                            .email= mail_to user.email, user.email
-                            .phone= fa_icon "phone", text: "02978923"
+                    - if lab.humans.any?
+                      .contacts
+                        = link_to "#", class: 'contacts-toggle' do
+                          = fa_icon "group", text: (pluralize lab.humans.size, "Contact"), class: 'icon-fixed-width'
+                        %ul.contacts-list
+                          - User.all.each do |user|
+                            %li.user-contact
+                              = user
+                              .email= mail_to user.email, user.email
+                              .phone= fa_icon "phone", text: "02978923"
 
 
                   %table.users

@@ -44,7 +44,7 @@ class UsersController < ApplicationController
   def update
     @user = current_user
     if @user.update_attributes user_params
-      redirect_to user_url(@user), notice: "User Updated"
+      redirect_to root_url, notice: "Settings Updated"
     else
       render :edit
     end
