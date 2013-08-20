@@ -5,12 +5,12 @@
     = title "Add a Fab Lab"
     = simple_form_for @lab_application do |f|
       = render 'errors_for', resource: @lab_application
-      = f.simple_fields_for :lab do |l|
 
+      = f.simple_fields_for :lab do |l|
         = render 'labs/form_modules/basic_details', f: l
         = render 'labs/form_modules/relationships', f: l
         = render 'labs/form_modules/location', f: l
-        = render 'labs/form_modules/opening_hours', f: l
+        -# = render 'labs/form_modules/opening_hours', f: l
         = render 'labs/form_modules/tools', f: l
 
       %fieldset

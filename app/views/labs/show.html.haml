@@ -1,18 +1,24 @@
-- title @lab.name
+.row
+  .columns.large-12
+    %ul.breadcrumbs
+      %li= link_to "Labs", labs_path
+      %li= link_to @lab.country, "#{labs_path}##{@lab.country.parameterize}"
+      %li.current= link_to @lab, @lab
 
-.row.collapse{style: 'padding-top: 10px;'}
+.row
   .columns.small-3.large-2{style: 'padding: 10px 0.9em 10px 10px'}
-    = image_tag @lab.avatar #"fab.png"
+    = image_tag @lab.avatar_image #"fab.png"
 
   .columns.small-9.large-10
+
     #head
       -# #image
       -#   = image_tag @lab.avatar, width: 110, height: 110
       .details
-        %h1= @lab.name
-        .country.hint
-          = fa_icon "map-marker"
-          = @lab.short_address
+        = title @lab.name
+        -# .country.hint
+        -#   = fa_icon "map-marker"
+        -#   = @lab.short_address
         - if @lab.phone.present?
           .phone.hint
             = fa_icon "phone"
@@ -30,15 +36,17 @@
         = link_to edit_backstage_lab_path(@lab), class: 'button small success' do
           = fa_icon "edit", text: "Edit Backstage"
 
-.row
-  .columns.large-12
-    - if @lab.parent.present?
-      Supernode: #{link_to @lab.parent, @lab.parent}
-    - if @lab.has_children?
-      Subnodes:
-      %ul
-        - @lab.children.each do |child|
-          %li= link_to child, child
+
+
+-# .row
+-#   .columns.large-12
+-#     - if @lab.parent.present?
+-#       Supernode: #{link_to @lab.parent, @lab.parent}
+-#     - if @lab.has_children?
+-#       Subnodes:
+-#       %ul
+-#         - @lab.children.each do |child|
+-#           %li= link_to child, child
 
 -# .row
 -#   .columns.large-12

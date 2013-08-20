@@ -3,7 +3,7 @@ class Lab < ActiveRecord::Base
   extend FriendlyId
   friendly_id :slug_candidates, use: :slugged
 
-  bitmask :facilities, :as => ['d_printing', :precision_milling, :routing, :circuit_production, :laser_engraving]
+  # bitmask :facilities, :as => [:three_d_printing, :precision_milling, :routing, :circuit_production, :laser_engraving]
 
   attr_accessor :thing
 
@@ -15,6 +15,8 @@ class Lab < ActiveRecord::Base
     ]
   end
 
+  has_and_belongs_to_many :facilities
+
   state_machine :initial => :new do
     event :approve do
       transition :new => :approved
@@ -24,9 +26,9 @@ class Lab < ActiveRecord::Base
   before_save :get_time_zone
   def get_time_zone
     if Rails.env.test?
-      self.time_zone = 'Europe/London'
+      self.time_zone ||= 'Europe/London'
     else
-      # self.time_zone = GoogleTimezone.fetch(latitude, longitude).time_zone_id
+      self.time_zone = GoogleTimezone.fetch(latitude, longitude).time_zone_id
     end
   end
 
@@ -81,7 +83,7 @@ class Lab < ActiveRecord::Base
   #   end
   # end
 
-  default_scope { with_state(:approved) }
+  # default_scope { with_state(:approved) }
 
   Kinds = %w[planned_fab_lab mini_fab_lab fab_lab supernode]
   # bitmask :kind, :as => [:planned_fab_lab, :mini_fab_lab, :fab_lab, :supernode]
@@ -115,8 +117,8 @@ class Lab < ActiveRecord::Base
     :reject_if => proc { |a| a['user_id'].blank? },
     :allow_destroy => true
 
-  # geocoded_by :address
-  # after_validation :geocode
+  geocoded_by :address
+  after_validation :geocode
 
   # acts_as_mappable :default_units => :miles,
   #                  :default_formula => :sphere,
@@ -132,7 +134,7 @@ class Lab < ActiveRecord::Base
   validates_uniqueness_of :name
 
   def kind_string
-    Kinds[kind] ? Kinds[kind] : ""
+    kind.present? ? Kinds[kind] : ""
   end
 
   def address
@@ -160,6 +162,9 @@ class Lab < ActiveRecord::Base
     end
   end
 
+  def avatar_image
+    avatar.present? ? avatar : asset_path('/assets/default-lab-image.jpg')
+  end
 private
 
   def new_lab_notification

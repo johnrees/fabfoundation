@@ -1,7 +1,5 @@
 class Backstage::UsersController < Backstage::BackstageController
 
-  authorize_actions_for User
-
   def show
   end
 

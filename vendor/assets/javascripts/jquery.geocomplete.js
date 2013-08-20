@@ -341,9 +341,12 @@
       // Create a simplified version of the address components.
       $.each(result.address_components, function(index, object){
         var name = object.types[0];
+        console.log(result);
 
         data[name] = object.long_name;
         data[name + "_short"] = object.short_name.toLowerCase();
+
+        data['street_address'] = result.name;
       });
 
       // Add properties of the places details.

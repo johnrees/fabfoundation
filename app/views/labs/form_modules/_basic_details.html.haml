@@ -4,8 +4,12 @@
     .large-8.columns
       = f.input :name, label: 'Fab Lab Name'
 
-      = f.label :avatar, "Picture"
-      = f.input_field :avatar, :type => "filepicker-dragdrop", :value => f.object.avatar
+      .input
+        = f.label :avatar, "Picture"
+        - if f.object.avatar.present?
+          = image_tag f.object.avatar, width: 100
+        = f.input_field :avatar, :type => "filepicker-dragdrop", :value => f.object.avatar
+        %span.hint This will be a small square image sometimes displayed next to the lab name on the site
 
     .large-3.columns
       = f.input :kind, collection: Lab::Kinds.map{|m| [m.humanize.titleize, m]}, hint: "If you are unsure, leave this blank"

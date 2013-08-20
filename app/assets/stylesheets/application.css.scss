@@ -25,6 +25,47 @@
 //     background-color: white;
 //   }
 // }
+#map-filters {
+  .hint {
+    display: none;
+  }
+  position: absolute;
+  z-index: 20;
+  background: none;
+  table,tr,td {
+    border: none;
+    background: none;
+    margin: 0;
+  }
+  legend {
+    display: none;
+  }
+  fieldset {
+    background: rgba(255,255,255,0.9);
+  }
+}
+.button {
+  border: none !important;
+  box-shadow: none !important;
+}
+input {
+  border-radius: 4px !important;
+}
+
+#main {
+  .leaflet-popup-content-wrapper {
+    background: #333333;
+    -webkit-border-radius: 0;
+    border-radius: 0;
+    a {
+      color: #FFF;
+      font-weight: bold;
+    }
+  }
+  .leaflet-popup-tip {
+    background: #333333;
+  }
+}
 
 .remove {
   &, &:hover { color: #A84545; }
@@ -60,7 +101,14 @@ body.c-labs li.labs a {
   color: #FFF !important;
 }
 
+.dropdown {
+  z-index: 10;
+}
+
 header {
+  position: relative;
+  z-index: 10;
+
   .top-bar-section .divider {
     border: 1px solid #353535 !important;
   }
@@ -70,10 +118,10 @@ header {
   }
 
   img#header-avatar {
+    vertical-align: middle;
+    display: inline-block;
     width: 30px;
     margin-right: 15px;
-    position: relative;
-    top: 10px;
   }
 
   li a:hover {
@@ -81,11 +129,14 @@ header {
   }
 
   h1#logo {
+    text-transform: uppercase;
     padding-left: 20px !important;
     background: image-url('logo.png') no-repeat 13px center;
     a {
       font-weight: normal;
+      max-width: 200px;
       span.fab {
+        padding-right: 3px;
         font-weight: bold;
       }
     }

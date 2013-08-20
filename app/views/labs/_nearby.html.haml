@@ -1,9 +1,15 @@
-- if lab.geocoded?
-  .row.nearby-labs#nearby-labs
-    .columns.large-12
+-# - if lab.geocoded?
+.row.nearby-labs#nearby-labs
+  .columns.large-12
+    %fieldset
+      %legend Nearby Labs
       - lab.nearbys(500).limit(5).each do |lab|
         .lab
-          = link_to lab, lab
-          .hint
-            = lab.bearing
-            = lab.distance.ceil
+          = link_to lab do
+            = image_tag lab.avatar_image, width: 50
+            .details
+              = lab
+              .hint
+                -# = lab.bearing
+                = lab.distance.ceil
+                miles away

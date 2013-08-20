@@ -1,8 +1,146 @@
-.lab.hide-region, .lab.hide-search, .lab-hide-kind {
-  a {
-  color: red !important;
+.contacts ul {
+  border: 1px solid #EEE;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  li {
+    padding: 5px;
+    font-size: 0.8em;
+    border-bottom: 1px solid #DDD;
+    &:last-child {
+      border: none;
+    }
   }
 }
+.lab_application_lab_facilities input {
+  margin-right: 5px;
+}
+span.time {
+  font-size: 8px;
+  padding: 0;
+  margin: 0;
+  display: block;
+  text-align: left;
+  /* Safari */
+-webkit-transform: rotate(-90deg);
+
+/* Firefox */
+-moz-transform: rotate(-90deg);
+
+/* IE */
+-ms-transform: rotate(-90deg);
+
+/* Opera */
+-o-transform: rotate(-90deg);
+}
+.c-labs.a-map #map {
+  background: none;
+}
+.hint a {
+  color: #CCC;
+}
+.avatar img {
+  max-width: 90%;
+}
+#map {
+background: #EEE;
+    }
+
+.c-labs .top-bar {
+  margin-bottom: 0;
+}
+ul.facilities li {
+  padding: 3px;
+}
+.facility {
+  padding: 10px;
+  line-height: 1.1em;
+  font-size: 0.8em;
+  background: #EEE;
+  color: #CCC;
+  overflow: hidden;
+  border-radius: 4px;
+
+  &.active {
+    background: #b8e296;
+    color: darken(#5DA423, 3%);
+    text-shadow: 1px 1px 1px lighten(#5DA423, 40%);
+    img {
+      opacity: 0.7;
+    }
+  }
+  img {
+    float: left;
+    opacity: 0.1;
+    width: 30px;
+  }
+}
+.flag-bar {
+  border-radius: 4px;
+  background: #F5F5F5;//lighten(yellow, 45%);
+  padding: 10px 20px;
+  margin-bottom: 1em;
+}
+body.c-labs {
+.lab {
+  // padding-bottom: 0.5em;
+  margin-top: 0.5em;
+  padding-bottom: 0;
+  // border-bottom: 1px solid #DDD;
+  overflow: hidden;
+  &:last-child {
+    border: none;
+  }
+}
+}
+
+.c-labs.a-show #main {
+  #map {
+    margin-bottom: 20px;
+    background: #EEE;
+  }
+  img {
+    float: left;
+    margin-right: 10px;
+  }
+  .details {
+    float: left;
+  }
+}
+body, html {
+  height: 100%;
+  min-width: 300px;
+}
+
+table.users {
+  border: none;
+  margin: 0.5em 0 1em 1em;
+  width: auto !important;
+  td {
+    padding: 0.2em;
+    &, a {
+      color: #AAA;
+    }
+  }
+}
+ul.users {
+  margin: 10px 0 0 10px;
+  font-size: 0.9em;
+  list-style: none;
+  padding: 0;
+  li {
+    padding: 0;
+    margin: 0;
+  }
+}
+
+.lab.hide-region, .lab.hide-search, .lab-hide-kind {
+  display: none;
+  // a {
+  //   color: red !important;
+  // }
+}
+
 #opening-hours {
   fieldset {
     margin: 0;
@@ -42,9 +180,6 @@
     width: 15px;
     padding: 0;
   }
-  .time {
-    rotation: 90;
-  }
 }
 input[type=filepicker-dragdrop] {
   width: 100px;
@@ -66,13 +201,16 @@ ul.websites {
 .lab a {
   vertical-align: top;
 }
-body.c-labs.a-map form#lab_search {
-  display: none !important;
-}
+// body.c-labs.a-map form#lab_search {
+//   display: none !important;
+// }
 
 fieldset.country {
-  padding: 0.5em 0.5em 1.5em;
+  padding: 0;
   margin: 0 0 1em;
+  legend {
+    margin-left: 10px;
+  }
 }
 
 table.opening-hours-chooser {
@@ -109,6 +247,15 @@ input#lab_name {
   font-weight: bold;
 }
 
+.search-box {
+  margin-top: -20px;
+}
+body.c-labs.a-index {
+  .search-box {
+    margin-bottom: 20px;
+  }
+}
+
 .c-labs #main {
 th.day {
   font-weight: normal;
@@ -138,8 +285,9 @@ th.day {
 
   .name a {
     // color: #111;
-    font-weight: normal;
+    // font-weight: bold;
     font-size: 1em;
+    line-height: 1.4em;
   }
 
   table.opening-hours {
@@ -164,9 +312,6 @@ th.day {
   //   font-weight: normal;
   //   font-size: 0.9em;
   // }
-  a.inactive {
-    background: #DDD;
-  }
   // img {
   //   float: right;
   // }
@@ -174,10 +319,20 @@ th.day {
     margin-left: 0.5em;
   }
   .search-box {
-    padding: 15px 10px 0;
-    background: #F6F6F6;
-    margin-bottom: 20px;
-    border-radius: 8px;
+    overflow: hidden;
+    height: 62px;
+    .button {
+      background: lighten(#209868, 20%);
+      color: #FFF;
+      &.inactive {
+        background: darken(#209868, 4%);
+        color: darken(#209868, 15%);
+      }
+    }
+    padding: 10px 10px 0;
+    background: #209868;
+    position: relative;
+    z-index: 8;
     input {
       border: none;
       font-size: 1.1em;
@@ -187,6 +342,12 @@ th.day {
     margin-bottom: 1em;
   }
   .sidebar {
+    .hint {
+      display: none;
+    }
+    td {
+      padding: 5px;
+    }
     label {
       font-weight: normal !important;
       display: inline;
@@ -200,6 +361,7 @@ th.day {
     }
     table {
       border: none;
+      margin: 0.5em 0;
     }
     tr {
       background: none;
@@ -241,8 +403,14 @@ th.day {
   }
 
   #map {
+    z-index: 0;
+    top: 0;
+    left: 0;
+    display: block;
     height: 400px;
-    margin-bottom: 20px;
+    width: 100%;
+    // 450px;
+    // margin-bottom: 20px;
   }
 
   .people {
@@ -250,7 +418,7 @@ th.day {
   }
 
   #head {
-    margin-bottom: 20px;
+    margin: 20px 0;
   }
 
   .image {
@@ -305,18 +473,17 @@ th.day {
     }
   }
 
-  span.country, span.hours, span.phone {
-    float: left;
-    margin-right: 20px;
-    margin-bottom: 0.5em;
-  }
-
-  .phone {
-    clear: left;
-  }
-
   #head {
     overflow: hidden;
+    span.country, span.hours, span.phone {
+      float: left;
+      margin-right: 20px;
+      margin-bottom: 0.5em;
+    }
+
+    .phone {
+      clear: left;
+    }
   }
 
   .websites {

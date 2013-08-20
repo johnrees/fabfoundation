@@ -1,7 +1,5 @@
 - title "Worldwide Map"
 = render "header"
-.row
-  .columns.large-3.sidebar.hide-for-small
-    = render "sidebar"
-  .columns.large-9
-    #map
+.sidebar
+  .columns.large-3.hide-for-small#map-filters= render "sidebar"
+#map

@@ -4,18 +4,26 @@
       %thead
         %tr
           %th.id= sort_link @q, :id
-          %th= sort_link @q, :name
-          %th= sort_link @q, :state
-          %th= sort_link @q, :country_code, 'Country'
+          %th= sort_link @q, :lab_name
+          %th Referees
+          %th= sort_link @q, :notes
           %th= sort_link @q, :created_at
-          %th= sort_link @q, :updated_at
+          -# %th Actions
       %tbody
       - @lab_applications.each do |lab_application|
-        = lab_application.inspect
         %tr
           %td= lab_application.id
-          %td= link_to lab_application.lab, edit_backstage_lab_application_path(lab_application)
-          %td= lab_application.state
-          -# %td= "#{lab_application.lab.country_code} - #{lab.country}"
+          %td
+            = link_to lab_application.lab, edit_backstage_lab_path(lab_application.lab)
+            .location.hint= lab_application.lab.short_address
+            .creator= link_to lab_application.creator, edit_backstage_user_path(lab_application.creator)
+          %td
+            %ul
+              - lab_application.referees.each do |ref|
+                %li= link_to ref.lab.name, ref.lab
+          %td= lab_application.notes
           %td= lab_application.created_at.stamp('13 Jun 99')
-          %td= lab_application.updated_at.stamp('13 Jun 99')
+          -# %td
+          -#   = link_to "#{}" do
+          -#     = fa_icon "check", text: "Approve"
+

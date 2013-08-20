@@ -2,11 +2,7 @@
 -#   = link_to new_lab_application_path, class: 'button expand' do
 -#     = fa_icon "plus", text: "Add a Lab"
 
--# - if can? :create, LabApplication
-= link_to new_lab_application_path, class: 'button expand' do
-  = fa_icon "plus", text: "Add a Lab"
-
-= search_form_for @q, id: 'side-filters' do |f|
+= search_form_for @q, id: 'side-filters', class: 'custom' do |f|
 
   - if action_name == 'index' and !@continents.empty?
     %fieldset{data: {type: 'region'}}
@@ -25,8 +21,8 @@
         - @regions.each do |region, count|
           %tr
             %td
-              %label
-                = check_box_tag "q[region_in][]", region.downcase, true#(params[:q][:region_in].include? region if params[:q])
+              %label{for: "region-#{count}"}
+                = check_box_tag "q[region_in][]", region.downcase, true, id: "region-#{count}"#(params[:q][:region_in].include? region if params[:q])
                 = region
             %td.hint= count
 
@@ -61,9 +57,16 @@
           -# - if @lab_kinds[kind] > 0
           %tr
             %td
-              %label
-                = check_box_tag "q[kind_in][]", Lab::Kinds.index(kind), true#(params[:q][:kind_in].include? Lab::Kinds.index(kind).to_s if params[:q])
-                %span.has-tip.tip-right{"data-tooltip" => true, :title => "A Supernode is a Fab Lab that helps to coordinate other Fab Labs associated with it"}= kind.humanize.titleize
+              %label{for: "kind-#{index}"}
+                = check_box_tag "q[kind_in][]", Lab::Kinds.index(kind), true, style: 'display: none', id: "kind-#{index}"
+                %span.custom.checkbox
+                = kind.humanize.titleize
+                -#(params[:q][:kind_in].include? Lab::Kinds.index(kind).to_s if params[:q])
+                %span.has-tip.tip-right{"data-tooltip" => true, :title => "A Supernode is a Fab Lab that helps to coordinate other Fab Labs associated with it"} [?]
             %td.hint= @lab_kinds[kind]
 
   -# = f.submit "Filter", class: 'button expand filter-button'
+
+-# - if can? :create, LabApplication
+= link_to new_lab_application_path, class: 'button expand small' do
+  = fa_icon "plus", text: "Add a Lab"

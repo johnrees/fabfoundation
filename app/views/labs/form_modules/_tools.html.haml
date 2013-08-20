@@ -1,7 +1,6 @@
 %fieldset#facilities
   %legend= fa_icon "cogs", text: "Facilities"
-
-  = f.input :facilities, as: 'check_boxes', collection: Lab.values_for_facilities, inline_label: true, item_wrapper_class: 'checkbox_container', label: false
+  = f.association :facilities, as: 'check_boxes', inline_label: true, item_wrapper_class: 'checkbox_container', label: false
 
 %fieldset#tools
   %legend= fa_icon "wrench", text: "Lab Equipment"

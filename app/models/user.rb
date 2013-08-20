@@ -42,8 +42,8 @@ class User < ActiveRecord::Base
   # validates_presence_of :password
 
   # validates :password, allow_blank: true, on: :create
-  validates :password, presence: true
-    validates_length_of :password, minimum: 5,  if: lambda { |m| m.password.present? }
+  # validates :password, presence: true
+  #   validates_length_of :password, minimum: 5,  if: lambda { |m| m.password.present? }
 
   validates_presence_of :first_name, :last_name, :email
   validates :email, uniqueness: true, format: /@/

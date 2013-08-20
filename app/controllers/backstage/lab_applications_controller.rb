@@ -1,11 +1,12 @@
 class Backstage::LabApplicationsController < Backstage::BackstageController
 
   def show
+    @lab_application = LabApplication.find(params[:id])
   end
 
   def index
-    @q = LabApplication.unscoped.search(params[:q])
-    @lab_applications = @q.result(distinct: true)
+    @q = LabApplication.unscoped.includes(:lab).search(params[:q])
+    @lab_applications = @q.result(distinct: true).order('id desc')
   end
 
   def edit

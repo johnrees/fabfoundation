@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20130814214319) do
+ActiveRecord::Schema.define(version: 20130819090914) do
 
   create_table "applications", force: true do |t|
     t.integer  "lab_id"
@@ -53,11 +53,30 @@ ActiveRecord::Schema.define(version: 20130814214319) do
   add_index "events", ["creator_id"], name: "index_events_on_creator_id"
   add_index "events", ["lab_id"], name: "index_events_on_lab_id"
 
+  create_table "facilities", force: true do |t|
+    t.string   "name"
+    t.string   "slug"
+    t.integer  "ordinal"
+    t.string   "ancestry"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "facilities_labs", id: false, force: true do |t|
+    t.integer "facility_id"
+    t.integer "lab_id"
+  end
+
+  add_index "facilities_labs", ["facility_id", "lab_id"], name: "index_facilities_labs_on_facility_id_and_lab_id"
+
   create_table "humans", force: true do |t|
     t.integer  "user_id"
     t.integer  "lab_id"
     t.integer  "ordinal"
+    t.string   "full_name"
     t.string   "details"
+    t.string   "phone"
+    t.string   "email"
     t.integer  "roles"
     t.datetime "created_at"
     t.datetime "updated_at"

@@ -15,6 +15,7 @@ gem 'countries'
 gem 'country_select'
 gem 'simple_form', github: 'plataformatec/simple_form'
 gem 'geocoder', github: 'alexreisner/geocoder'
+gem 'actionview-encoded_mail_to'
 # gem "geokit-rails"
 gem 'rails_autolink'
 gem 'google_timezone'

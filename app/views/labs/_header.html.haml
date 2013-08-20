@@ -1,16 +1,15 @@
-.row
-  .columns.large-10.search-box.large-centered
-    .row
-      .columns.large-7
-        = search_form_for @q, class: 'hide-for-small' do |f|
-          = f.text_field :name_or_city_cont, placeholder: "Search...", autocomplete: 'off'
-      .columns.large-5.small-12.text-right
-        %ul.button-group.radius.even-2
-          %li
-            = link_to labs_path, class: "button #{'inactive' unless action_name == 'index'}" do
-              = fa_icon "list"
-              List
-          %li
-            = link_to map_labs_path, class: "button #{'inactive' unless action_name == 'map'}" do
-              = fa_icon "globe"
-              Map
+.search-box.large-centered
+  .row
+    .columns.large-7
+      = search_form_for @q, class: 'hide-for-small' do |f|
+        = f.text_field :name_or_city_cont, placeholder: "Instant Search...", autocomplete: 'off'
+    .columns.large-4.small-12.text-right
+      %ul.button-group.radius.even-2
+        %li
+          = link_to labs_path, class: "button #{'inactive' unless action_name == 'index'}" do
+            = fa_icon "list"
+            List
+        %li
+          = link_to map_labs_path, class: "button #{'inactive' unless action_name == 'map'}" do
+            = fa_icon "globe"
+            Map

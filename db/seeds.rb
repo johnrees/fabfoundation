@@ -1,7 +1,7 @@
-ToolType.delete_all
-%w(laser_engraving 3d_printing cnc_router precision_cnc robot vinyl_cutting).each do |type|
-  ToolType.create!(name: type.humanize.capitalize, slug: type)
-end
+# ToolType.delete_all
+# %w(laser_engraving 3d_printing cnc_router precision_cnc robot vinyl_cutting).each do |type|
+#   ToolType.create!(name: type.humanize.capitalize, slug: type)
+# end
 
 User.delete_all
 User.create!(first_name: 'John', last_name: 'Rees', admin: true, email: 'john@bitsushi.com', password: 'password')
@@ -25,4 +25,9 @@ labs.each do |lab|
       state: :approved
     )
   end
+end
+
+Facility.delete_all
+['Laser Engraving', '3D Printing', 'CNC Milling', 'Precision Milling', 'Vinyl Cutting', 'Electronic Circuit Production'].each do |type|
+  Facility.create!(name: type, slug: type.parameterize)
 end
