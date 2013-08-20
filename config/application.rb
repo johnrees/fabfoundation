@@ -23,3 +23,5 @@ module Fabfoundation
     config.action_mailer.delivery_method = :ses
   end
 end
+
+ActionController::Base.config.relative_url_root = ''
