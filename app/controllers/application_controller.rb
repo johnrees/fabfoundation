@@ -34,9 +34,6 @@ private
     @current_user ||= User.find(session[:user_id]) if session[:user_id]
   end
 
-  def authority_user
-    current_user || User.new
-  end
 
   def body_classes
     "c-#{controller_name} a-#{action_name}"
@@ -46,7 +43,6 @@ private
   #   Time.use_zone(current_user.time_zone, &block)
   # end
 
-  helper_method :authority_user
   helper_method :current_user
   helper_method :body_classes
 
