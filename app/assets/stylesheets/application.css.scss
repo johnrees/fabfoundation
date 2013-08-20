@@ -129,12 +129,13 @@ header {
   }
 
   h1#logo {
-    text-transform: uppercase;
     padding-left: 20px !important;
+    text-transform: uppercase;
     background: image-url('logo.png') no-repeat 13px center;
     a {
-      font-weight: normal;
+
       max-width: 200px;
+      font-weight: normal;
       span.fab {
         padding-right: 3px;
         font-weight: bold;
