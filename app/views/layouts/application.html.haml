@@ -55,7 +55,7 @@
                 %li
                   = link_to edit_user_path(current_user) do
                     = fa_icon "cog", text: "Settings", class: 'icon-fixed-width'
-                - if current_user.admin?
+                - if current_user and current_user.admin?
                   %li
                     = link_to backstage_root_path do
                       = fa_icon "gamepad", text: "Backstage", class: 'icon-fixed-width'

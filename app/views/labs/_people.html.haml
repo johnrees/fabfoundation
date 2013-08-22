@@ -5,13 +5,16 @@
         %legend
           Staff
           -# %span.count= @lab.humans.count
-        %ul.large-block-grid-7.small-block-grid-2.people
+        %ul.large-block-grid-5.small-block-grid-2.people
           - @lab.humans.each do |human|
             = content_tag_for :li, human do
-              = link_to human.user do
-                = image_tag human.user.avatar_image, width: 90, height: 90
-                .name= human.user
-                .role.hint= human.details
-              -# .email= link_to user.email
-        -# - lab.humans.each do |human|
-        -#   = link_to human.user, human.user
+              - if human.user
+                = link_to human.user.present? do
+                  = image_tag human.avatar, width: 90, height: 90
+                  .name= human
+              - else
+                .name= human
+
+              .role.hint= human.details
+              .email= link_to human.email, human.email
+              .phone= human.phone

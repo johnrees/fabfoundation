@@ -15,7 +15,7 @@
 <% if current_user %>
   Signed in as <%= current_user.email %>.
   <%= link_to "Add a lab", new_lab_path %>
-  <% if current_user.admin? %>
+  <% if current_user and current_user.admin? %>
     <%= link_to "Backstage", backstage_root_path %>
   <% end %>
   <%= link_to "Log out", logout_path %>

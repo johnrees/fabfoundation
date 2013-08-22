@@ -32,7 +32,7 @@
         = link_to edit_lab_path(@lab), class: 'button small' do
           = fa_icon "edit", text: "Edit Lab"
 
-      - if current_user.admin?
+      - if current_user and current_user.admin?
         = link_to edit_backstage_lab_path(@lab), class: 'button small success' do
           = fa_icon "edit", text: "Edit Backstage"
 

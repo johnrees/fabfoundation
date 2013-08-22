@@ -70,7 +70,8 @@ jQuery ->
     else
       q = $('#q_name_or_city_cont').val().toLowerCase()
       $('.lab').each ->
-        $(this).toggleClass 'hide-search', ($(this).data('name').search(q) <= 0)
+        toQuery = "#{$(this).data('name')} #{$(this).data('city')}".toLowerCase()
+        $(this).toggleClass 'hide-search', (toQuery.search(q) <= 0)
         # console.log $(this).data('name'), ($(this).data('name').search(q) > 0)
     update()
 

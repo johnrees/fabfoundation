@@ -8,77 +8,37 @@
     #no-results
       Sorry, there are no labs that matched that search term
 
-    -# - if action_name == 'index'
-    -#   .row
-    -#     .columns.large-8.push-4.text-right
-    -#       .sort
-    -#         Sort by:
-    -#         = sort_link @q, :name
-    -#         = sort_link @q, :created_at, "Date Added"
-
     - @lab_countries.sort.each do |country, labs|
       .country{id: Country.new(country.upcase).name.parameterize}
         .flag-bar
           .flag{class: "flag-#{country}"}
           = Country.new(country.upcase).name
+          -# %span.size= labs.size
         %ul.large-block-grid-2.small-block-grid-1
           - labs.sort_by(&:name).each do |lab|
-            = content_tag_for :li, lab, data: {name: lab.name.downcase, region: lab.region.downcase, kind: lab.kind } do
+            = content_tag_for :li, lab, data: {name: lab.name.downcase, region: lab.region.downcase, city: lab.city, kind: lab.kind } do
               .row.collapse
-                .columns.small-2.large-3.avatar
-                  - if lab.avatar.blank?
-                    = holder_tag 70
-                  - else
-                    = image_tag lab.avatar, width: 70
+                -# .columns.small-2.large-3.avatar
+                -#   - if lab.avatar.blank?
+                -#     = holder_tag 70
+                -#   - else
+                -#     = image_tag lab.avatar, width: 70
 
                 .columns.small-10.large-9.details
                   .name
                     = link_to lab, lab
-                    -# - if lab.kind
-                    -#   = Lab::Kinds[lab.kind].humanize.titleize
-
-                    -# = Time.now.in_time_zone(lab.time_zone).stamp("15:00")
-                    -# %span.kind
-                    -#   - if lab.kind.present?
-                    -#     = Lab::Kinds[lab.kind]
-
-                  .address.hint
-                    = fa_icon "map-marker", text: lab.short_address, class: 'icon-fixed-width'
-                    - if lab.humans.any?
-                      .contacts
-                        = link_to "#", class: 'contacts-toggle' do
-                          = fa_icon "group", text: (pluralize lab.humans.size, "Contact"), class: 'icon-fixed-width'
-                        %ul.contacts-list
-                          - User.all.each do |user|
-                            %li.user-contact
-                              = user
-                              .email= mail_to user.email, user.email
-                              .phone= fa_icon "phone", text: "02978923"
-
-
-                  %table.users
-                    - lab.humans.each do |human|
-                      %tr
-                        %td.user
-                          -#= image_tag human.user.avatar_image, width: 20
-                          = human.user.full_name
-                        %td.email= fa_icon "envelope-alt", text: (mail_to "john@bitsushi.com", "john@bitsushi.com", class: 'email', encode: 'javascript')
-                        %td.phone.hide-for-small= fa_icon "phone", text: '0719813981983'
-
-
-
-                -# .times.hint= fa_icon "time", text: 'Open 10:00 - 14:00', class: 'icon-fixed-width'
-              -# .columns.large-4.hide-for-small
-              -#   - 3.times do |index|
-              -#     - if lab.humans[index]
-              -#       = image_tag lab.humans[index].user.avatar_image, width: 55, class: 'has-tip', data: {tooltip: true}, title: "#{lab.humans[index].user.full_name} - #{lab.humans[index].details}"
-              -#     -# - else
-              -#     -#   = holder_tag 55
-
-              -# .columns.large-5.hide-for-small
-              -#   - if lab.humans.any?
-              -#     = image_tag lab.humans.first.user.avatar_image, class: 'has-tip image', data: {tooltip: true}, title: "#{lab.humans.first.user.full_name} - #{lab.humans.first.details}"
-              -#     .contact
-              -#       .name= link_to lab.humans.first.user.full_name, lab.humans.first.user
-              -#       .phone.hint 0181819400913
-              -#       .email= mail_to "john@bitsushi.com"
+                  - if lab.city.present?
+                    .address.hint
+                      = fa_icon "map-marker", text: lab.short_address, class: 'icon-fixed-width'
+                  - if lab.humans.any?
+                    .contacts.hint
+                      = link_to "#", class: 'contacts-toggle' do
+                        = fa_icon "group", text: (pluralize lab.humans.size, "Contact"), class: 'icon-fixed-width'
+                      %ul.contacts-list
+                        - lab.humans.each do |human|
+                          %li.user-contact
+                            = human
+                            - if human.email.present?
+                              .email= fa_icon "envelope-alt", text: (mail_to human.email, human.email, class: 'email', encode: 'javascript')
+                            - if human.phone.present?
+                              .phone= fa_icon "phone", text: human.phone

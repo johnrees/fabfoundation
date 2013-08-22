@@ -28,7 +28,7 @@ class Lab < ActiveRecord::Base
     if Rails.env.test?
       self.time_zone ||= 'Europe/London'
     else
-      self.time_zone = GoogleTimezone.fetch(latitude, longitude).time_zone_id
+      # self.time_zone = GoogleTimezone.fetch(latitude, longitude).time_zone_id
     end
   end
 
@@ -118,7 +118,7 @@ class Lab < ActiveRecord::Base
     :allow_destroy => true
 
   geocoded_by :address
-  after_validation :geocode
+  # after_validation :geocode
 
   # acts_as_mappable :default_units => :miles,
   #                  :default_formula => :sphere,
@@ -130,7 +130,7 @@ class Lab < ActiveRecord::Base
 
   validates :email, format: /@/, allow_blank: true
   # validates_inclusion_of :time_zone, in: ActiveSupport::TimeZone.zones_map(&:name), allow_blank: true
-  validates_presence_of :name, :country_code, :city
+  validates_presence_of :name, :country_code#, :city
   validates_uniqueness_of :name
 
   def kind_string
