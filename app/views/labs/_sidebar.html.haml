@@ -2,8 +2,7 @@
 -#   = link_to new_lab_application_path, class: 'button expand' do
 -#     = fa_icon "plus", text: "Add a Lab"
 
-= search_form_for @q, id: 'side-filters', class: 'custom' do |f|
-
+= form_tag "", class: 'custom' do
   - if action_name == 'index' and !@continents.empty?
     %fieldset{data: {type: 'region'}}
       %legend
@@ -65,7 +64,7 @@
                 %span.has-tip.tip-right{"data-tooltip" => true, :title => "A Supernode is a Fab Lab that helps to coordinate other Fab Labs associated with it"} [?]
             %td.hint= @lab_kinds[kind]
 
-  -# = f.submit "Filter", class: 'button expand filter-button'
+-# = f.submit "Filter", class: 'button expand filter-button'
 
 -# - if can? :create, LabApplication
 = link_to new_lab_application_path, class: 'button expand small' do

@@ -1,8 +1,8 @@
 .search-box.large-centered
   .row
     .columns.large-7
-      = search_form_for @q, class: 'hide-for-small' do |f|
-        = f.text_field :name_or_city_cont, placeholder: "Instant Search...", autocomplete: 'off'
+      -# = form_for @labs, class: 'hide-for-small' do |f|
+      = text_field_tag :name_or_city_cont, "", placeholder: "Instant Search...", autocomplete: 'off'
     .columns.large-4.small-12.text-right
       %ul.button-group.radius.even-2
         %li
