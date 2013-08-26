@@ -4,6 +4,10 @@ Fabfoundation::Application.routes.draw do
   get "lab_applications/thank_you"
   get "static/home"
   get "static/secret"
+
+  get "developers" => "static#developers", as: 'developers'
+  get "privacy" => "static#privacy", as: 'privacy'
+
   get "signout" => "sessions#destroy", :as => "logout"
   get "signin" => "sessions#new", :as => "signin"
   get "signup" => "users#new", :as => "signup"
@@ -12,11 +16,8 @@ Fabfoundation::Application.routes.draw do
   resources :password_resets
   resources :lab_applications
 
-  resources :labs do
-    collection do
-      get 'map'
-    end
-  end
+  get "labs" => 'labs#index'
+
 
   resources :events do
     collection do
@@ -43,6 +44,13 @@ Fabfoundation::Application.routes.draw do
     resources :events
     root "lab_applications#index"
   end
+
+  resources :labs, path: '/' do
+    collection do
+      get 'map'
+    end
+  end
+
   root "labs#index"
 
 end

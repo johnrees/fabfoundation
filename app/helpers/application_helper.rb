@@ -20,4 +20,15 @@ module ApplicationHelper
     return content_tag(:h1, page_title, options)
   end
 
+  def cropped_image_path image, dimensions
+    "http://fugu.johnre.es/images/crop/#{dimensions}/#{image.gsub(/https?:\/\//, '')}.jpg"
+  end
+
+  def cropped_image_tag image, dimensions, options={}
+    image_tag(
+      cropped_image_path(image,dimensions),
+      options
+    )
+  end
+
 end

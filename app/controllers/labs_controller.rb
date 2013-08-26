@@ -5,13 +5,12 @@ class LabsController < ApplicationController
 
   [:map, :index].each do |method|
     define_method method do
-      @labs = Lab.order('name ASC').includes(:tools => :tool_type, :humans => :user)
+      @labs = Lab.order('name ASC').includes(:tools => :tool_type, :humans => :user).limit(10)
 
       @continents = Hash.new(0)
       @regions = Hash.new(0)
       @tool_types = Hash.new(0)
       @lab_kinds = Hash.new(0)
-
 
       @labs.each do |lab|
 
@@ -33,6 +32,7 @@ class LabsController < ApplicationController
 
       end
 
+
       # @labs = @labs.page(params[:page])
       @lab_countries = @labs.group_by{ |l| l.country_code }
 
@@ -41,14 +41,16 @@ class LabsController < ApplicationController
   # authority_actions map: 'read'
 
   def edit
-    @lab = current_user.labs.friendly.find(params[:id])
+    # @lab = current_user.labs.friendly.find(params[:id])
+    @lab = Lab.friendly.find(params[:id])
     @lab.tools.build
     @lab.humans.build
     # authorize_action_for(@lab)
   end
 
   def update
-    @lab = current_user.labs.friendly.find(params[:id])
+    # @lab = current_user.labs.friendly.find(params[:id])
+    @lab = Lab.friendly.find(params[:id])
     if @lab.update_attributes lab_params
       redirect_to lab_url(@lab), notice: "Lab Updated"
     else
@@ -58,13 +60,16 @@ class LabsController < ApplicationController
 
   def show
     @lab = Lab.friendly.find(params[:id])
-    @days = %w(monday tuesday wednesday thursday friday saturday sunday)
+    # @days = %w(monday tuesday wednesday thursday friday saturday sunday)
+    @related_labs = @lab.children
+    @nearby_labs = @lab.nearbys(500)
 
-    @sections = %w(location)
-    # @sections.push 'events' if @lab.events.any?
-    @sections.push 'nearby' if @lab.geocoded?
-    # @sections.push 'equipment' if @lab.tools.any?
+    @sections = []
     @sections.push 'people' if @lab.humans.any?
+    @sections.push 'location'
+    @sections.push 'related-labs' if @nearby_labs.any?
+    # @sections.push 'events' if @lab.events.any?
+    @sections.push 'equipment' if @lab.tools.any?
   end
 
 private

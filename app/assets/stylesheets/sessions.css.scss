@@ -17,12 +17,11 @@
 
 header {
 
-  &.contain-to-grid, .top-bar {
-    // background: none !important;
+  &.contain-to-grid {
     background: #333;
   }
-  &.contain-to-grid {
-    margin-bottom: 20px;
+  .top-bar {
+    background: none;
   }
   ul {
     background: none !important;
@@ -34,7 +33,7 @@ header {
     }
 
     .top-bar-section > ul > .divider {
-      border: none;
+      border: none !important;
     }
   }
 

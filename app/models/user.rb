@@ -23,11 +23,8 @@ class User < ActiveRecord::Base
       transition [:signed_up, :invited] => :confirmed
     end
 
-
-
     state :confirmed do
       validates_confirmation_of :password, if: lambda { |m| m.password.present? }
-
     end
 
   end
@@ -84,7 +81,7 @@ class User < ActiveRecord::Base
   end
 
   def avatar_image
-    avatar || asset_path('/assets/default-avatar.png')
+    avatar || "http://www.natcen.ac.uk/css-images/default_user.png"#asset_path('/assets/default-avatar.png')
   end
 
 private

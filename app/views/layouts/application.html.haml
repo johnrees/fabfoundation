@@ -12,75 +12,79 @@
 
   %title= content_for?(:title) ? "#{yield(:title)}, Fab Foundation" : "Fab Foundation"
 
-  = stylesheet_link_tag "application", "http://fonts.googleapis.com/css?family=Cabin", "http://cdn.leafletjs.com/leaflet-0.6.4/leaflet.css"
+  = stylesheet_link_tag "application", "http://cdn.leafletjs.com/leaflet-0.6.4/leaflet.css"
   = javascript_include_tag "vendor/custom.modernizr"
-  -# = favicon_link_tag "favicon.ico"
   = csrf_meta_tag
 
 %body{ class: body_classes }
 
-  - flash.each do |name, msg|
-    = content_tag :div, msg, id: "flash_#{name}", class: name
+  #wrap
+    #inner
+      - flash.each do |name, msg|
+        = content_tag :div, msg, id: "flash_#{name}", class: name
 
-  %header.contain-to-grid
-    %nav.top-bar
-      %ul.title-area
-        %li.name
-          %h1#logo
-            = link_to root_path do
-              %span.fab> Fab
-              Foundation
-        %li.toggle-topbar.menu-icon
-          %a{:href => "#"}
-            %span menu
-      %section.top-bar-section
-        / Left Nav Section
-        %ul.left
-          %li.divider
-          %li.labs= link_to "Labs", labs_path
-          %li.divider
-          -# %li.events= link_to "Events", events_path
-          -# %li.divider
-          -# %li.users= link_to "Users", users_path
-          -# %li.divider
-        %ul.right
-          %li.divider
-          -  if current_user
-            %li.has-dropdown
+      %header.contain-to-grid
+        %nav.top-bar
+          %ul.title-area
+            %li.name
+              %h1#logo
+                = link_to root_path do
+                  %span.fab> Fab
+                  Foundation
+            %li.toggle-topbar.menu-icon
+              %a{:href => "#"}
+                %span menu
+          %section.top-bar-section
+            -# %ul.left
+            -#   %li.divider
+            -#   %li.labs= link_to "Labs", labs_path
+            -#   %li.divider
+            -#   -# %li.events= link_to "Events", events_path
+            -#   -# %li.divider
+            -#   -# %li.users= link_to "Users", users_path
+            -#   -# %li.divider
+            %ul.right
+              %li.divider
+              -  if current_user
+                %li.has-dropdown
 
-              = link_to current_user do
-                = image_tag current_user.avatar_image, id: 'header-avatar'
-                = current_user
-              %ul.dropdown
-                %li
-                  = link_to edit_user_path(current_user) do
-                    = fa_icon "cog", text: "Settings", class: 'icon-fixed-width'
-                - if current_user and current_user.admin?
-                  %li
-                    = link_to backstage_root_path do
-                      = fa_icon "gamepad", text: "Backstage", class: 'icon-fixed-width'
-                %li.divider
-                %li
-                  = link_to logout_path, id: 'sign-out' do
-                    = fa_icon "power-off", text: "Sign out", class: 'icon-fixed-width'
+                  = link_to current_user do
+                    = cropped_image_tag(current_user.avatar_image, "50x50", id: 'header-avatar')
+                    = current_user
+                  %ul.dropdown
+                    %li
+                      = link_to edit_user_path(current_user) do
+                        = fa_icon "cog", text: "Settings", class: 'icon-fixed-width'
+                    - if current_user and current_user.admin?
+                      %li
+                        = link_to backstage_root_path do
+                          = fa_icon "gamepad", text: "Backstage", class: 'icon-fixed-width'
+                    %li.divider
+                    %li
+                      = link_to logout_path, id: 'sign-out' do
+                        = fa_icon "power-off", text: "Sign out", class: 'icon-fixed-width'
 
-          - else
-            %li= link_to "Sign In", signin_path
-            -# %li= link_to "Sign Up", signup_path
+              - else
+                %li= link_to "Sign In", signin_path
+                -# %li= link_to "Sign Up", signup_path
 
-  #main{role: 'main'}
+      #main{role: 'main'}
 
-    = yield
+        = yield
 
-    -# %footer
-    :javascript
-      (function(a){if(window.filepicker){return}var b=a.createElement("script");b.type="text/javascript";b.async=!0;b.src=("https:"===a.location.protocol?"https:":"http:")+"//api.filepicker.io/v1/filepicker.js";var c=a.getElementsByTagName("script")[0];c.parentNode.insertBefore(b,c);var d={};d._queue=[];var e="pick,pickMultiple,pickAndStore,read,write,writeUrl,export,convert,store,storeUrl,remove,stat,setKey,constructWidget,makeDropPane".split(",");var f=function(a,b){return function(){b.push([a,arguments])}};for(var g=0;g<e.length;g++){d[e[g]]=f(e[g],d._queue)}window.filepicker=d})(document);
-    = javascript_include_tag "http://cdn.leafletjs.com/leaflet-0.6.4/leaflet.js", "application"
+        :javascript
+          (function(a){if(window.filepicker){return}var b=a.createElement("script");b.type="text/javascript";b.async=!0;b.src=("https:"===a.location.protocol?"https:":"http:")+"//api.filepicker.io/v1/filepicker.js";var c=a.getElementsByTagName("script")[0];c.parentNode.insertBefore(b,c);var d={};d._queue=[];var e="pick,pickMultiple,pickAndStore,read,write,writeUrl,export,convert,store,storeUrl,remove,stat,setKey,constructWidget,makeDropPane".split(",");var f=function(a,b){return function(){b.push([a,arguments])}};for(var g=0;g<e.length;g++){d[e[g]]=f(e[g],d._queue)}window.filepicker=d})(document);
+        = javascript_include_tag "http://cdn.leafletjs.com/leaflet-0.6.4/leaflet.js", "application"
 
-  -# %footer.contain-to-grid
-  -#   %ul
-  -#     %li= link_to "Developers", "#"
-  -#     %li= link_to "Privacy", "#"
-  -#     %li= link_to "About", "#"
--# or
--#   \#{link_to "log in", login_path}.
+  %footer.contain-to-grid
+    .row
+      .columns.small-3.large-2
+        = image_tag "footerfab.png", class: 'footer-fab'
+      .columns.small-9.large-10
+        %ul
+          %li= link_to "Labs List", "/"
+          %li= link_to "World Map", "/map"
+          %li= link_to "Developers", "/developers"
+          %li= link_to "Privacy", "/privacy"
+        %ul
+          %li.fab-foundation= link_to "The Fab Foundation", "http://www.fabfoundation.org"

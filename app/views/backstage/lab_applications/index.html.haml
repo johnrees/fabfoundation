@@ -11,19 +11,20 @@
           -# %th Actions
       %tbody
       - @lab_applications.each do |lab_application|
-        %tr
-          %td= lab_application.id
-          %td
-            = link_to lab_application.lab, edit_backstage_lab_path(lab_application.lab)
-            .location.hint= lab_application.lab.short_address
-            .creator= link_to lab_application.creator, edit_backstage_user_path(lab_application.creator)
-          %td
-            %ul
-              - lab_application.referees.each do |ref|
-                %li= link_to ref.lab.name, ref.lab
-          %td= lab_application.notes
-          %td= lab_application.created_at.stamp('13 Jun 99')
-          -# %td
-          -#   = link_to "#{}" do
-          -#     = fa_icon "check", text: "Approve"
+        - if lab_application.lab_id.present?
+          %tr
+            %td= lab_application.id
+            %td
+              = link_to lab_application.lab, edit_backstage_lab_path(lab_application.lab)
+              .location.hint= lab_application.lab
+              .creator= link_to lab_application.creator, edit_backstage_user_path(lab_application.creator)
+            %td
+              -# %ul
+              -#   - lab_application.referees.each do |ref|
+              -#     %li= link_to ref.lab.name, ref.lab
+            %td= lab_application.notes
+            %td= lab_application.created_at.stamp('13 Jun 99')
+            -# %td
+            -#   = link_to "#{}" do
+            -#     = fa_icon "check", text: "Approve"
 

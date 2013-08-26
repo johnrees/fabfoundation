@@ -1,7 +1,3 @@
--# - if LabApplication.creatable_by? authority_user
--#   = link_to new_lab_application_path, class: 'button expand' do
--#     = fa_icon "plus", text: "Add a Lab"
-
 = form_tag "", class: 'custom' do
   - if action_name == 'index' and !@continents.empty?
     %fieldset{data: {type: 'region'}}
@@ -10,13 +6,6 @@
         = link_to "Region", map_labs_path
       #minimap
       %table
-
-        -# %tr.all
-        -#   %td
-        -#     %label
-        -#       = check_box_tag "q[region_in][]", '', (params[:q].blank? or params[:q][:region_in].reject(&:blank?).empty?)
-        -#       All
-        -#   %td.hint= @labs.total_count
         - @regions.each do |region, count|
           %tr
             %td
@@ -25,42 +14,19 @@
                 = region
             %td.hint= count
 
-  - unless @tool_types.empty?
-    %fieldset
-      %legend
-        = fa_icon "cogs"
-        Equipment
-      %table
-        - @tool_types.each do |tool_type, count|
-          %tr
-            %td
-              = check_box_tag tool_type
-              %label.has-tip.tip-right{"data-tooltip" => true, :title => 'tool.description' }
-                = tool_type
-            %td.hint= count
-
   - unless @lab_kinds.empty?
     %fieldset{data: {type: 'kind'}}
       %legend
         = fa_icon "building"
         Fab Lab Type
       %table
-        -# %tr.all
-        -#   %td
-        -#     %label
-        -#       = check_box_tag "q[kind_in][]", '', (params[:q].blank? or params[:q][:kind_in].reject(&:blank?).empty?)
-        -#       All
-        -#   %td.hint= @labs.try(:total_count) ? @labs.total_count : @labs.size
-
         - %w(supernode fab_lab mini_fab_lab planned_fab_lab).each do |kind, index|
-          -# - if @lab_kinds[kind] > 0
           %tr
             %td
               %label{for: "kind-#{index}"}
                 = check_box_tag "q[kind_in][]", Lab::Kinds.index(kind), true, style: 'display: none', id: "kind-#{index}"
                 %span.custom.checkbox
                 = kind.humanize.titleize
-                -#(params[:q][:kind_in].include? Lab::Kinds.index(kind).to_s if params[:q])
                 %span.has-tip.tip-right{"data-tooltip" => true, :title => "A Supernode is a Fab Lab that helps to coordinate other Fab Labs associated with it"} [?]
             %td.hint= @lab_kinds[kind]
 

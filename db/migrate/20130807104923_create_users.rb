@@ -33,7 +33,8 @@ class CreateUsers < ActiveRecord::Migration
       t.string :locale
       t.string :time_zone
 
-      t.string :action_token
+      t.string :invite_token
+      t.string :forgot_password_token
 
       t.boolean :admin, default: false, null: false
 

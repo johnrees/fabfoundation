@@ -15,6 +15,14 @@ class Lab < ActiveRecord::Base
     ]
   end
 
+  def self.supernodes
+    where(kind: 3)
+  end
+
+  def supernode?
+    has_children?
+  end
+
   has_and_belongs_to_many :facilities
 
   state_machine :initial => :new do
@@ -163,7 +171,7 @@ class Lab < ActiveRecord::Base
   end
 
   def avatar_image
-    avatar.present? ? avatar : asset_path('/assets/default-lab-image.jpg')
+    avatar.present? ? avatar : "http://i.imgur.com/K1EeMmp.jpg"#asset_path('/assets/default-lab-image.jpg')
   end
 private
 

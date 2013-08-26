@@ -11,7 +11,7 @@ class CreateLabs < ActiveRecord::Migration
       t.string  :state
       t.text    :description
       t.string  :phone
-      t.integer  :facilities
+      t.integer :facilities
       t.string  :email
       t.integer :kind
 
@@ -23,8 +23,8 @@ class CreateLabs < ActiveRecord::Migration
       t.string :country_code
       t.string :region
       t.string :subregion
-      t.float :latitude
-      t.float :longitude
+      t.float  :latitude
+      t.float  :longitude
 
       t.text :opening_hours_bitmask
 

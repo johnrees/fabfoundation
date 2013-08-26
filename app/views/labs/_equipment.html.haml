@@ -1,17 +1,27 @@
 - unless lab.tools.empty?
-  .row.equipment#equipment
+  .row.equipment#equipment{"data-magellan-destination" => "equipment"}
     .columns.large-12
-      %h4 Equipment
-      %ul.large-block-grid-3.small-block-grid-2.tools
+      %h4 Lab Facilities
+  .row
+    .columns.large-12
+      -# %fieldset
+      %ul.large-block-grid-4.small-block-grid-2.facilities
+        - Facility.all.each do |facility|
+          %li
+            .facility{ class: ('active' if @lab.facility_ids.include? facility.id) }
+              = image_tag facility.icon
+              = facility
+  .row
+    .columns.large-8
+      %h5 Equipment and Machinery
+      %ul.large-block-grid-3.tools
+
         - lab.tools.each do |tool|
           %li.tool
-            .details
-              = image_tag "tools/precision-milling.svg", width: 15, height: 15, style: 'float: left; width: 40px', class: 'tool-icon'
-              .name.has-top{"data-tooltip" => true, :title => "Tooltips are awesome, you should totally use them!"}= tool
-              %ul.clearing-thumbs.clearing-feature{"data-clearing" => true}
-                %li.clearing-featured-img
-                  = image_tag tool.photo
+            %ul.clearing-thumbs.clearing-feature{"data-clearing" => true}
+              %li.clearing-featured-img
+                = cropped_image_tag tool.photo, "400x300"
+                .details
+                  .name= tool.name
                   = simple_format tool.description
-                  -# %a{:href => "http://acmeindustrialthinking.com/shopbot5.jpg"}
-                  -#   %img{:src => "http://acmeindustrialthinking.com/shopbot5.jpg", "data-caption" => "caption here..."}/
-              -# %p.hint Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.
+

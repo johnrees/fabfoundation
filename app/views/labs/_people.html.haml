@@ -1,17 +1,17 @@
 - if lab.humans.any?
-  .row.staff#people
+  .row.staff#people{"data-magellan-destination" => "people"}
     .columns.large-12
-      %fieldset
-        %legend
-          Staff
-          -# %span.count= @lab.humans.count
-        %ul.large-block-grid-5.small-block-grid-2.people
-          - @lab.humans.each do |human|
-            = content_tag_for :li, human do
+      %h4 People
+      -# %span.count= @lab.humans.count
+      %ul.large-block-grid-4.small-block-grid-2.people
+        - @lab.humans.each do |human|
+          = content_tag_for :li, human do
+            -# = holder_tag "100"
+            .details
               - if human.user
                 = link_to human.user.present? do
-                  = image_tag human.avatar, width: 90, height: 90
-                  .name= human
+                  -# = image_tag human.avatar, width: 90, height: 90
+                  %p.name= human
               - else
                 .name= human
 

@@ -5,6 +5,12 @@ class StaticController < ApplicationController
   def home
   end
 
+  def developers
+  end
+
   def secret
+  end
+
+  def privacy
   end
 end

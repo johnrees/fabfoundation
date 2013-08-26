@@ -1,23 +1,36 @@
-.row.location#location
+.row.location#location{"data-magellan-destination" => "location"}
   .columns.large-12
-    %fieldset
-      %legend Location
-      .columns.large-8
-        #map{data: { lat: lab.latitude, lng: lab.longitude, zoom: 12 }}
-      .columns.large-4
-        .row
-          .columns.large-12
-            %h5= fa_icon "map-marker", class: 'icon-fixed-width', text: "Address"
-            .address= simple_format lab.address
-            -# .hint= simple_format lab.address_notes
+    %h4 Location
+.row
+  .columns.large-8
+    #map{data: { lat: lab.latitude, lng: lab.longitude, zoom: 14 }}
+  .columns.large-4
+    .row
+      .columns.large-12
+        %h5= fa_icon "map-marker", class: 'icon-fixed-width', text: "Address"
+        .address= simple_format lab.address
+        .hint= simple_format lab.address_notes
 
-          -# .columns.large-12
-          -#   %h5= fa_icon "time", class: 'icon-fixed-width', text: "Opening Hours"
-          -#   %table.opening-hours
-          -#     %tbody
-          -#       - @days.each do |day|
-          -#         %tr
-          -#           %th.day= day.capitalize
-          -#           %td 9:00
-          -#           %td -
-          -#           %td 17:00
+        - if @lab.phone.present?
+          %p.phone= fa_icon "phone", text: @lab.phone
+        - if @lab.email.present?
+          %p.email
+            = fa_icon "envelope-alt"
+            = link_to @lab.email do
+              = @lab.email
+
+        = link_to "View all labs in #{lab.country}", "#{labs_path}##{lab.country.parameterize}", class: 'button'
+        %br/
+        %br/
+
+
+      -# .columns.large-12
+      -#   %h5= fa_icon "time", class: 'icon-fixed-width', text: "Opening Hours"
+      -#   %table.opening-hours
+      -#     %tbody
+      -#       - @days.each do |day|
+      -#         %tr
+      -#           %th.day= day.capitalize
+      -#           %td 9:00
+      -#           %td -
+      -#           %td 17:00

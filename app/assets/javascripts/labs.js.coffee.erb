@@ -31,20 +31,25 @@ update = ->
 
 jQuery ->
 
+
+  $('#toggle-contacts a').click (e) ->
+    e.preventDefault()
+    $('ul.contacts-list').toggle()
+
   $('ul.contacts-list').hide()
 
   $('.contacts-toggle').click (e) ->
     e.preventDefault()
     $(this).parents('.lab').find('.contacts-list').toggle()
 
-  $(window).resize ->
-    if $('.c-labs.a-map #map').length > 0
+  if $('.c-labs.a-map #map').length > 0
+    $(window).resize ->
       height = $(window).height()
       if height < 400
-        $('.c-labs.a-map #map').height $(window).height()
+        $('#map').height $(window).height()
       else
-        $('.c-labs.a-map #map').height( height - $('.c-labs.a-map #map').offset().top )
-  .trigger 'resize'
+        $('#map').height( height - $('.c-labs.a-map #map').offset().top )
+    .trigger 'resize'
 
   $('td.time-picker input').change ->
     $(this).parents('td').toggleClass 'open', $(this).is(':checked')
@@ -70,7 +75,7 @@ jQuery ->
     else
       q = $('#name_or_city_cont').val().toLowerCase()
       $('.lab').each ->
-        toQuery = "#{$(this).data('name')} #{$(this).data('city')}".toLowerCase()
+        toQuery = "#{$(this).data('terms')}"
         $(this).toggleClass 'hide-search', (toQuery.search(q) < 0)
     update()
 
@@ -118,7 +123,7 @@ jQuery ->
               lab.marker = L.marker([lab.latitude, lab.longitude], {icon: icon})
             else
               lab.marker = L.marker([lab.latitude, lab.longitude])
-            lab.marker.bindPopup("<a href='/labs/#{lab.id}'>#{lab.name}</a>")
+            lab.marker.bindPopup("<a href='/#{lab.slug}'>#{lab.name}</a>")
             markers.addLayer(lab.marker)
       map.addLayer(markers)
 

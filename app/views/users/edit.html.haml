@@ -17,7 +17,7 @@
               = f.input :last_name
             .row
               .columns.large-12
-                = f.input :email, hint: "This will never be made public, we will only use it to contact you."
+                = f.input :email, hint: "This won't be public, we will only use it to contact you."
 
                 = f.input :dob, label: "Date of Birth", hint: "We use this for collecting statistics, it's no problem if you don't want to share it.", order: [:day, :month, :year], start_year: Time.now.year - 90, end_year: Time.now.year - 2, prompt: true, start_year: 2010, end_year: 1910
 
@@ -29,7 +29,7 @@
         %p.hint This is the image that will be appear next to your name on the site.
         .row
           .columns.large-2
-            = image_tag @user.avatar_image, width: 100
+            = cropped_image_tag @user.avatar_image, "200x200"
           .columns.large-10
             %input{:type => "filepicker-dragdrop", :name => "user[avatar]", :value => @user.avatar }
 
@@ -39,16 +39,16 @@
             %legend Profile Details
 
             = f.input :bio, hint: "A little bit about yourself. Perhaps why you joined the Fab Foundation network."
-            %fieldset
-              %legend Public Contact Details
-              %p.hint These can be different to your email and phone number above, they will be displayed publicly on your profile page. They are completely optional.
+            -# %fieldset
+            -#   %legend Public Contact Details
+            -#   %p.hint These can be different to your email and phone number above, they will be displayed publicly on your profile page. They are completely optional.
 
-              = f.input :public_email
-              -# = f.input :public_phone
-            -# .row.address
-            -#   .columns.large-12
-            -#     = label_tag :address, 'Location'
-            -#     -# = text_field_tag :address, "", placeholder: "City, Country", id: 'geocomplete', name: nil
+            -#   = f.input :public_email
+            -#   -# = f.input :public_phone
+            -# -# .row.address
+            -# -#   .columns.large-12
+            -# -#     = label_tag :address, 'Location'
+            -# -#     -# = text_field_tag :address, "", placeholder: "City, Country", id: 'geocomplete', name: nil
 
             -#   = f.input :city, label: 'City/Region', input_html: { data: {geo: "locality"}}, as: 'hidden'
             -#   = f.input :country_code, label: 'Country', input_html: { data: {geo: "country"}}, as: 'hidden'

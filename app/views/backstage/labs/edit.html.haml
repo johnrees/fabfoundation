@@ -10,9 +10,10 @@
 
       %fieldset
         -# = f.input :ancestry
-        = f.input :parent_id, label: 'Supernode', collection: Lab.all, include_blank: true
+        = f.input :parent_id, label: 'Supernode', collection: Lab.all, include_blank: true, input_html: { class: 'enhanced' }
         = f.input :state, collection: Lab.state_machine.states.map(&:name)
         = f.input :name
+        = f.input :slug
         = f.input :description
         = f.input :phone
         = f.input :email

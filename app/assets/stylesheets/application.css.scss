@@ -12,19 +12,33 @@
  *= require foundation_and_overrides
  *= require font-awesome
  *= require select2
-// *= require selectize
- *= require fullcalendar
  *= require MarkerCluster.Default
- *= require jquery.ui.datepicker
  *= require_tree .
  */
 
-// body {
-//   background-color: #F2F2F2 !important;
-//   #main .row {
-//     background-color: white;
-//   }
-// }
+ #toggle-contacts {
+  font-size: 0.8em;
+  display: block;
+  text-align: right;
+  margin-bottom: 1em;
+  a { color: #999; }
+ }
+
+legend {
+  font-weight: normal !important;
+}
+
+body {
+  color: #333;
+  -webkit-text-size-adjust:none;
+}
+body, h1,h2,h3,h4,h5 {
+  font-family: 'Ubuntu', sans-serif;
+}
+img {
+  max-width: 100%;
+}
+
 #map-filters {
   .hint {
     display: none;
@@ -144,19 +158,14 @@ header {
   }
 
   .dropdown {
-    background: #333 !important;
+    background: rgba(#333, 0.8) !important;
+    // background: #333 !important;
     border-radius: 0 0 4px 4px;
   }
 
   .top-bar .title-area .name h1 a {
     color: #F7F7F7;
   }
-}
-
-footer {
-  height: 200px;
-  margin-top: 50px;
-  background: #FFF;
 }
 
 
@@ -169,6 +178,10 @@ body a {
 }
 
 #flash_notice {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
   text-align: center;
   padding: 10px;
   background: #CAF2C7;

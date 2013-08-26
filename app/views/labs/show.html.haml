@@ -1,65 +1,35 @@
-.row
-  .columns.large-12
-    %ul.breadcrumbs
-      %li= link_to "Labs", labs_path
-      %li= link_to @lab.country, "#{labs_path}##{@lab.country.parameterize}"
-      %li.current= link_to @lab, @lab
-
-.row
-  -# .columns.small-3.large-2{style: 'padding: 10px 0.9em 10px 10px'}
-  -#   = image_tag @lab.avatar_image #"fab.png"
-
-  .columns.small-9.large-10
-
-    #head
-      -# #image
-      -#   = image_tag @lab.avatar, width: 110, height: 110
-      .details
-        = title @lab.name
-        -# .country.hint
-        -#   = fa_icon "map-marker"
-        -#   = @lab.short_address
-        - if @lab.phone.present?
-          .phone.hint
-            = fa_icon "phone"
-            = @lab.phone
-        -# .hours.hint
-        -#   = fa_icon "time"
-        -#   Open Today 10:00-14:00
-
-    .buttons
-      - if can? :update, @lab
-        = link_to edit_lab_path(@lab), class: 'button small' do
-          = fa_icon "edit", text: "Edit Lab"
-
-      - if current_user and current_user.admin?
-        = link_to edit_backstage_lab_path(@lab), class: 'button small success' do
-          = fa_icon "edit", text: "Edit Backstage"
+.top{style: ("background-image: url(#{@lab.avatar_image})" if @lab.avatar.present?) }
+  .fade
+  .row#lab-name
+    .columns.large-12
+      = title @lab.name
+      - if @lab.supernode?
+        %span.extra= fa_icon "sitemap", text: "Supernode"
 
 
+%div#sticky{"data-magellan-expedition" => "fixed"}
+  .row
+    .columns.large-12
+      %dl.sub-nav
+        %dd.active{"data-magellan-arrival" => 'details'}
+          = link_to "Details", "#details"
+        - @sections.each do |section|
+          %dd{"data-magellan-arrival" => section}
+            = link_to section.titleize, "##{section}"
+        - if can? :update, @lab
+          %dd.right
+            = link_to edit_lab_path(@lab) do
+              = fa_icon "edit", text: "Edit Lab"
 
--# .row
--#   .columns.large-12
--#     - if @lab.parent.present?
--#       Supernode: #{link_to @lab.parent, @lab.parent}
--#     - if @lab.has_children?
--#       Subnodes:
--#       %ul
--#         - @lab.children.each do |child|
--#           %li= link_to child, child
-
--# .row
--#   .columns.large-12
--#     %div#sticky{"data-magellan-expedition" => "fixed"}
--#       %dl.sub-nav
--#         - @sections.each do |section|
--#           %dd{"data-magellan-arrival" => section}
--#             = link_to section.titleize, "##{section}"
+        - if current_user and current_user.admin?
+          %dd.right
+            = link_to edit_backstage_lab_path(@lab) do
+              = fa_icon "edit", text: "Edit Backstage"
 
 = render 'description', lab: @lab
 
 - @sections.each do |section|
-  = render section, lab: @lab
+  = render section.parameterize.gsub('-','_'), lab: @lab
 
 -# %h4 History
 -# - @lab.versions.each do |version|

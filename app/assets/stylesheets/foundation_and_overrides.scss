@@ -52,7 +52,7 @@
 // $include-html-visibility-classes: $include-html-classes;
 // $include-html-button-classes: $include-html-classes;
 // $include-html-form-classes: $include-html-classes;
-// $include-html-media-classes: $include-html-classes;
+$include-html-media-classes: true;//$include-html-classes;
 // $include-html-section-classes: $include-html-classes;
 // $include-html-reveal-classes: $include-html-classes;
 // $include-html-alert-classes: $include-html-classes;
@@ -983,7 +983,7 @@ $topbar-margin-bottom: emCalc(20px);
 $topbar-title-font-size: emCalc(18px);
 
 // Set the link colors and styles for top-level nav
-$topbar-link-color: #D8D8D8;
+$topbar-link-color: #FFF;
 $topbar-link-weight: normal;
 $topbar-link-font-size: emCalc(14px);
 

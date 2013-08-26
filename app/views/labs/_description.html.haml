@@ -1,23 +1,8 @@
-
-.row
-
-
+.row#details{"data-magellan-destination" => "details"}
   .columns.large-7
-
-    .description
-      -# = simple_format lab.description
-      -# %p Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse.
+    .description= simple_format lab.description
+  .columns.large-5
     - if lab.websites.any?
       %ul.websites
         - lab.websites.each do |url|
           %li= link_to url, url
-
-  .columns.large-5
-    %fieldset
-      %legend Facilities
-      %ul.large-block-grid-2.small-block-grid-2.facilities
-        - Facility.all.each do |facility|
-          %li
-            .facility{ class: ('active' if @lab.facility_ids.include? facility.id) }
-              = image_tag facility.icon
-              = facility

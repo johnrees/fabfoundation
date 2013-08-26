@@ -1,0 +1,27 @@
+.row.nearby-labs#related-labs{"data-magellan-destination" => "related-labs"}
+  - if @related_labs.any?
+    .columns.large-6
+      %fieldset
+        %legend Associated Labs
+        - @related_labs.each do |llab|
+          .lab
+            = link_to llab, class: 'name' do
+              = cropped_image_tag llab.avatar_image, "50x50"
+              .details
+                = llab
+
+  -# - if lab.geocoded?
+  .columns.large-6
+    %fieldset
+      - if @nearby_labs.any?
+        %legend Nearby Labs
+        - @nearby_labs.limit(5).each do |lab|
+          .lab
+            = link_to lab, class: 'name' do
+              = cropped_image_tag lab.avatar_image, "50x50"
+              .details
+                = lab
+                .hint
+                  -# = lab.bearing
+                  = lab.distance.ceil
+                  miles away

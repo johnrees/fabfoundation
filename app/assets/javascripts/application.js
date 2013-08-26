@@ -13,17 +13,11 @@
 //= require jquery
 //= require jquery_ujs
 //= require foundation
-//= require moment.min
-//= require mustache
 //= require holder
 //= require jquery.geocomplete
 //= require cocoon
-//= require fullcalendar
 //= require select2
-//= require jquery.ui.datepicker
 //= require leaflet.markercluster
-//= require mailcheck
 //= require_tree .
 
-moment().format()
 $(document).foundation()
