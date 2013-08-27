@@ -21,8 +21,8 @@
 
                 = f.input :dob, label: "Date of Birth", hint: "We use this for collecting statistics, it's no problem if you don't want to share it.", order: [:day, :month, :year], start_year: Time.now.year - 90, end_year: Time.now.year - 2, prompt: true, start_year: 2010, end_year: 1910
 
-            = link_to change_password_user_path(@user), class: 'button small' do
-              = fa_icon "lock", text: "Change Password"
+            -# = link_to change_password_user_path(@user), class: 'button small' do
+            -#   = fa_icon "lock", text: "Change Password"
 
       %fieldset
         %legend Avatar
@@ -59,7 +59,7 @@
             .row
               .columns.large-12
                 = f.input :country_code, as: 'hidden'
-                = f.input :url, label: 'Website', hint: "Have you got a website/URL that you'd like to share?"
+                -# = f.input :url, label: 'Website', hint: "Have you got a website/URL that you'd like to share?"
                 -# = f.input :twitter_username, input_html: { placeholder: 'e.g. @fabfoundation' }
 
           = f.submit "Update", class: 'button'

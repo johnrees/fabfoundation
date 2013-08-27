@@ -5,7 +5,7 @@ class LabsController < ApplicationController
 
   [:map, :index].each do |method|
     define_method method do
-      @labs = Lab.order('name ASC').includes(:tools => :tool_type, :humans => :user).limit(10)
+      @labs = Lab.order('name ASC').includes(:tools => :tool_type, :humans => :user)
 
       @continents = Hash.new(0)
       @regions = Hash.new(0)
@@ -67,7 +67,7 @@ class LabsController < ApplicationController
     @sections = []
     @sections.push 'people' if @lab.humans.any?
     @sections.push 'location'
-    @sections.push 'related-labs' if @nearby_labs.any?
+    # @sections.push 'related-labs' if @nearby_labs.any?
     # @sections.push 'events' if @lab.events.any?
     @sections.push 'equipment' if @lab.tools.any?
   end

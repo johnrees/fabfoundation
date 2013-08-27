@@ -1,4 +1,4 @@
 %fieldset
   %legend= fa_icon "sitemap", text: "Relationships"
 
-  = f.input :parent_id, label: "Supernode Lab", as: 'select', collection: Lab.roots, hint: "Will you be connected with a Supernode? If so, which one?", input_html: { class: 'enhanced' }
+  = f.input :parent_id, label: "Supernode Lab (optional)", as: 'select', collection: Lab.supernodes, hint: "Will you be connected with a Supernode? If so, which one?", input_html: { class: 'enhanced' }

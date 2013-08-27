@@ -5,7 +5,7 @@ class UsersController < ApplicationController
 
   def complete_registration
     begin
-      @user = User.find_by!(action_token: params[:token])
+      @user = User.find_by!(invite_token: params[:token])
     rescue ActiveRecord::RecordNotFound
       redirect_to root_url, notice: "Not found"
     end
@@ -19,10 +19,14 @@ class UsersController < ApplicationController
 
   def update_password
     @user = current_user
-    if @user.authenticate(params[:user][:current_password]) and @user.update_attributes(user_params)
-      redirect_to edit_user_url(@user), notice: "Password updated"
+    if @user.authenticate(params[:user][:current_password])
+      if @user.update_attributes(user_params)
+        redirect_to edit_user_url(@user), notice: "Password updated"
+      else
+        render :change_password
+      end
     else
-      render :change_password
+      render :change_password, notice: "Incorrect current password"
     end
   end
 
