@@ -1,4 +1,6 @@
-require "bundler/capistrano"
+require 'bundler/capistrano'
+require 'sidekiq/capistrano'
+
 load 'deploy/assets'
 
 server "fabfoundation.johnre.es", :web, :app, :db, primary: true

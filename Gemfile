@@ -35,6 +35,7 @@ gem 'jquery-ui-rails'
 gem 'haml-rails'
 gem "figaro"
 gem "cancan", github: "ryanb/cancan"
+gem 'sidekiq'
 # gem 'rocket_pants', '~> 1.0'
 # gem 'turbolinks'
 
