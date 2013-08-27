@@ -9,11 +9,11 @@ class PasswordResetsController < ApplicationController
   end
 
   def edit
-    @user = User.find_by!(password_reset_token: params[:id])
+    @user = User.find_by!(forgot_password_token: params[:id])
   end
 
   def update
-    @user = User.find_by!(password_reset_token: params[:id])
+    @user = User.find_by!(forgot_password_token: params[:id])
     if @user.update_attributes password_reset_params
       session[:user_id] = @user.id
       redirect_to root_url, notice: "Password has been reset!"
