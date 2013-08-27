@@ -7,7 +7,7 @@ class Facility < ActiveRecord::Base
   end
 
   def icon
-    "/assets/facilities/#{name.parameterize}.svg"
+    "facilities/#{name.parameterize}.svg"
   end
 
 end
