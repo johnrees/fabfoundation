@@ -280,6 +280,13 @@ body.c-labs {
 
 header.contain-to-grid {
   position: relative;
+  margin-bottom: 20px;
+}
+
+.c-labs.a-index, .c-labs.a-map {
+  header.contain-to-grid {
+    margin-bottom: 0;
+  }
 }
 
 .c-labs.a-show {

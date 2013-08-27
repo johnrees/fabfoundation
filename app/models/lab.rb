@@ -146,7 +146,7 @@ class Lab < ActiveRecord::Base
   end
 
   def address
-    [street_address_1, street_address_2, city, postal_code, country].reject!(&:blank?).join("\n")
+    [street_address_1, street_address_2, city, postal_code, country].reject(&:blank?).join("\n")
   end
 
   def short_address
