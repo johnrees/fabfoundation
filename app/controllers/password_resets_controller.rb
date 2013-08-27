@@ -9,7 +9,11 @@ class PasswordResetsController < ApplicationController
   end
 
   def edit
-    @user = User.find_by!(forgot_password_token: params[:id])
+    begin
+      @user = User.find_by!(forgot_password_token: params[:id])
+    rescue ActiveRecord::RecordNotFound
+      redirect_to root_url, notice: "Sorry, that URL was incorrect or has expired."
+    end
   end
 
   def update

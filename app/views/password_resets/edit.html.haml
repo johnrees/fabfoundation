@@ -1,5 +1,6 @@
 .row
   .columns.large-12
+    = title "Reset Your Password"
     = form_for @user, :url => password_reset_path(params[:id]) do |f|
       - if @user.errors.any?
         .error_messages
@@ -8,7 +9,7 @@
             - for message in @user.errors.full_messages
               %li= message
       .field
-        = f.label :password
+        = f.label :password, "New Password"
         = f.password_field :password
       .field
         = f.label :password_confirmation

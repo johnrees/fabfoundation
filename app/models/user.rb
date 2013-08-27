@@ -7,24 +7,39 @@ class User < ActiveRecord::Base
   # self.authorizer_name = 'UserAuthorizer'
   has_secure_password validations: false
 
+  has_many :claims
+
   attr_accessor :current_password
 
   state_machine :initial => :new do
 
-    # event :signup do
-    #   transition :new => :signed_up
-    # end
+    event :signup do
+      transition :new => :signed_up
+    end
 
-    # event :invite do
-    #   transition :new => :invited
-    # end
+    event :invite do
+      transition :new => :invited
+    end
 
     event :confirm do
-      transition [:new] => :confirmed
+      transition [:new, :invited, :signed_up] => :confirmed
+    end
+
+    state :invited do
+      validates :password, presence: true
+      validates_length_of :password, minimum: 5
     end
 
     state :confirmed do
       validates_confirmation_of :password, if: lambda { |m| m.password.present? }
+    end
+
+    after_transition :new => :invited do |user|
+      UserMailer.complete_registration(user).deliver
+    end
+
+    after_transition :invited => :confirmed do |user|
+      UserMailer.welcome(user).deliver
     end
 
   end
@@ -38,9 +53,7 @@ class User < ActiveRecord::Base
 
   # validates_presence_of :password
 
-  # validates :password, allow_blank: true, on: :create
-  # validates :password, presence: true
-  #   validates_length_of :password, minimum: 5,  if: lambda { |m| m.password.present? }
+
 
   validates_presence_of :first_name, :last_name, :email
   validates :email, uniqueness: true, format: /@/
@@ -50,12 +63,12 @@ class User < ActiveRecord::Base
   before_create { generate_token(:invite_token) }
   before_update { generate_token(:invite_token) }
 
-  after_create :complete_registration
+  # after_create :complete_registration
   before_create :check_password
 
   def send_password_reset
     generate_token(:forgot_password_token)
-    # save!
+    save!
     UserMailer.password_reset(self).deliver
   end
 
@@ -96,7 +109,8 @@ private
   end
 
   def complete_registration
-    UserMailer.complete_registration(self).deliver
+    invite
+
   end
 
 end

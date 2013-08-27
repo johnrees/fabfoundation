@@ -26,6 +26,10 @@
             = link_to edit_backstage_lab_path(@lab) do
               = fa_icon "edit", text: "Edit Backstage"
 
+          %dd.right
+            = link_to claim_lab_path(@lab) do
+              = fa_icon "edit", text: "Claim Ownership of this Lab"
+
 = render 'description', lab: @lab
 
 - @sections.each do |section|

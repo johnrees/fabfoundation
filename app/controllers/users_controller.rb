@@ -57,6 +57,7 @@ class UsersController < ApplicationController
   def register
     @user = User.find(params[:id])
     if @user.update_attributes user_params
+      @user.confirm! if @user.can_confirm?
       session[:user_id] = @user.id
       redirect_to root_url, :notice => "Registration complete!"
     else
@@ -72,6 +73,7 @@ class UsersController < ApplicationController
   def create
     @user = User.new user_params
     if @user.save
+      @user.invite! if @user.can_invite?
       redirect_to root_path, notice: "Thanks for signing up. Please check your email to complete your registration."
     else
       render 'new', layout: 'sessions'

@@ -177,16 +177,24 @@ body a {
   border-radius: 5px;
 }
 
-#flash_notice {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  text-align: center;
-  padding: 10px;
-  background: #CAF2C7;
-  color: #527A4E;
-  z-index: 200;
+header {
+  #flash_notice, #flash_alert {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    text-align: center;
+    padding: 10px;
+    z-index: 200;
+  }
+  #flash_notice {
+    background: #CAF2C7;
+    color: #527A4E;
+  }
+  #flash_alert {
+    background: #FFA6A6;
+    color: #AD2121;
+  }
 }
 
 /*i {

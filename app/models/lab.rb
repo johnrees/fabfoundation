@@ -2,6 +2,7 @@ class Lab < ActiveRecord::Base
 
   extend FriendlyId
   friendly_id :slug_candidates, use: :slugged
+  has_many :claims
 
   # bitmask :facilities, :as => [:three_d_printing, :precision_milling, :routing, :circuit_production, :laser_engraving]
 
