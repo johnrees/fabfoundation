@@ -5,7 +5,7 @@ class LabsController < ApplicationController
 
   [:map, :index].each do |method|
     define_method method do
-      @labs = Lab.order('name ASC').includes(:tools => :tool_type, :humans => :user).limit(10)
+      @labs = Lab.order('name ASC').includes(:tools => :tool_type, :humans => :user)
 
       @continents = Hash.new(0)
       @regions = Hash.new(0)
