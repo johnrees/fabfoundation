@@ -85,7 +85,7 @@ private
       :latitude, :longitude, :opening_hours_notes, :application_notes, :time_zone,
       facility_ids: [], opening_hours: [],
       tools_attributes: [:id, :tool_type_id, :name, :description, :photo, :_destroy],
-      humans_attributes: [:id, :user_id, :details, :_destroy]
+      humans_attributes: [:id, :user_id, :details, :_destroy, :full_name, :phone, :email, :ordinal]
     )
   end
 

@@ -15,7 +15,11 @@
         -# = f.input :address, as: 'text', input_html: { rows: 6 }
         = f.input :country_code, label: 'Country', input_html: { data: {geo: "country_short"}, class: 'enhanced'}, iso_codes: true
         %hr/
-        = f.input :street_address_1, label: "Street Address", input_html: { data: {geo: "street_address"}}
+        - if @lab.new_record?
+          = f.input :street_address_1, label: "Street Address", input_html: { data: {geo: "street_address"}}
+        - else
+          = f.input :street_address_1, label: "Street Address"
+
         = f.input :street_address_2, label: false
 
         = f.input :latitude, input_html: { data: {geo: "lat"}}, as: 'hidden'
