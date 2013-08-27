@@ -12,7 +12,7 @@
         %span.hint This will be a small square image sometimes displayed next to the lab name on the site
 
     .large-3.columns
-      = f.input :kind, collection: Lab::Kinds.map{|m| [m.humanize.titleize, m]}, hint: "If you are unsure, leave this blank"
+      = f.input :kind, collection: Lab::Kinds.each_with_index.map{|m, index| [m.humanize.titleize, index]}, hint: "If you are unsure, leave this blank"
 
   = f.input :description, hint: "A brief overview of your Fab Lab", input_html: { rows: 5 }
 

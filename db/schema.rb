@@ -182,8 +182,9 @@ ActiveRecord::Schema.define(version: 20130819090914) do
     t.string   "avatar"
     t.string   "locale"
     t.string   "time_zone"
-    t.string   "action_token"
-    t.boolean  "admin",            default: false, null: false
+    t.string   "invite_token"
+    t.string   "forgot_password_token"
+    t.boolean  "admin",                 default: false, null: false
     t.datetime "created_at"
     t.datetime "updated_at"
   end

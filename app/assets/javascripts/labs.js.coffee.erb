@@ -1,101 +1,40 @@
+window.labs = []
+window.map = null
+
 <%
 imgs = {}
-
 Dir.chdir("#{Rails.root}/app/assets/images/") do
   imgs = Dir["**"].inject({}) {|h,f| h.merge! f => image_path(f)}
 end
-
 %>
-
 window.image_path = (name) ->
   <%= imgs.to_json %>[name]
 
 update = ->
   $('.country').each ->
     $(this).toggle($(this).find('.lab:not(.hide-region,.hide-kind,.hide-search)').length > 0)
-    # ($(this).hasAtLeastOneVisibleChild('.lab'))
 
+enable = (marker) ->
+  window.markers.addLayer(marker)
 
-
-# showMarker = (marker) ->
-#   window.markers.addLayer(marker)
-
-# hideMarker = (marker) ->
-#   window.markers.removeLayer(marker)
-
-# filter = ->
-#   for lab in window.labs
-#     showMarker(lab.marker)
-#     if window.kind and window.kind != lab.kind
-#       hideMarker(lab.marker)
+disable = (marker) ->
+  window.markers.removeLayer(marker)
 
 jQuery ->
 
-
-  $('#toggle-contacts a').click (e) ->
-    e.preventDefault()
-    $('ul.contacts-list').toggle()
-
-  $('ul.contacts-list').hide()
-
-  $('.contacts-toggle').click (e) ->
-    e.preventDefault()
-    $(this).parents('.lab').find('.contacts-list').toggle()
-
-  if $('.c-labs.a-map #map').length > 0
-    $(window).resize ->
-      height = $(window).height()
-      if height < 400
-        $('#map').height $(window).height()
-      else
-        $('#map').height( height - $('.c-labs.a-map #map').offset().top )
-    .trigger 'resize'
-
-  $('td.time-picker input').change ->
-    $(this).parents('td').toggleClass 'open', $(this).is(':checked')
-
-  # $('#apply-to-all').click ->
-  #   $('table.opening-hours-chooser').hide()
-
-  $('.open_type').change ->
-    $(this).parents('tr').find('.hide-if-closed').toggle ($(this).val() == 'open_from')
-
-  $('.c-labs.a-index input').change ->
-    # alert ".lab[data-#{$(this).parents('fieldset').data('type')}='#{$(this).val()}']"
-    type = $(this).parents('fieldset').data('type')
-    console.log ".lab[data-#{type}='#{$(this).val()}']"
-    $(".lab[data-#{type}='#{$(this).val()}']").toggleClass "hide-#{type}", !$(this).is(':checked')
-    update()
-
-  $('.c-labs.a-index form').submit -> false
-
-  $('#name_or_city_cont').keyup ->
-    if $(this).val() == ""
-      $('.lab').removeClass('hide-search')
-    else
-      q = $('#name_or_city_cont').val().toLowerCase()
-      $('.lab').each ->
-        toQuery = "#{$(this).data('terms')}"
-        $(this).toggleClass 'hide-search', (toQuery.search(q) < 0)
-    update()
-
-    # $('#no-results').toggle(~count)
-
-  # hide flash messages
-  $('.notice').delay(2000).slideUp('fast')
-
-  $("select.enhanced").select2()
-
   # map details
   if $('#map').length > 0
-    markers = new L.MarkerClusterGroup({spiderfyOnMaxZoom: true})
+    window.markers = new L.MarkerClusterGroup
+      spiderfyOnMaxZoom: true
+      showCoverageOnHover: true
     map = L.map('map', { scrollWheelZoom: false, zoomControl: false }).setView([50, 0], 2 )
+    window.map = map
     new L.Control.Zoom({ position: 'topright' }).addTo(map)
     L.tileLayer('http://{s}.tile.cloudmade.com/384aceabcd0942189d0e93cf0e98cd31/90734/256/{z}/{x}/{y}.png', {}).addTo(map)
 
     if $('body').hasClass 'c-labs a-map'
       navigator.geolocation.getCurrentPosition((position)->
-        map.setView([position.coords.latitude, position.coords.longitude], 5)
+        map.setView([position.coords.latitude, position.coords.longitude], 4)
       )
 
     if $('#map').data('lat')
@@ -113,30 +52,103 @@ jQuery ->
       $.get "/labs.json", (labs) ->
         for lab in labs
           if lab.latitude
-            if !lab.kind
-              icon = L.icon({
-                iconUrl: window.image_path("map-icon-fab_lab.png")
-                iconSize:     [35, 35]
-                iconAnchor:   [17, 33]
-                popupAnchor:  [0, -20]
-              })
-              lab.marker = L.marker([lab.latitude, lab.longitude], {icon: icon})
-            else
-              lab.marker = L.marker([lab.latitude, lab.longitude])
+            # if !lab.kind
+            icon = L.icon({
+              iconUrl: window.image_path("map-icon-#{lab.kind_string}.png")
+              iconSize:     [35, 35]
+              iconAnchor:   [17, 33]
+              popupAnchor:  [0, -20]
+            })
+            lab.marker = L.marker([lab.latitude, lab.longitude], {icon: icon})
+            # else
+            #   lab.marker = L.marker([lab.latitude, lab.longitude])
+
             lab.marker.bindPopup("<a href='/#{lab.slug}'>#{lab.name}</a>")
-            markers.addLayer(lab.marker)
-      map.addLayer(markers)
+            window.markers.addLayer(lab.marker)
+            window.labs.push(lab)
+
+      map.addLayer(window.markers)
+
+
+  $('.c-labs.a-map form.custom input').change ->
+    val = $(this).val()
+    show = $(this).prop('checked')
+    for lab in window.labs
+      if String(val) == String(lab.kind)
+        if show then enable(lab.marker) else disable(lab.marker)
+
+  $('#toggle-contacts a').click (e) ->
+    e.preventDefault()
+    $('ul.contacts-list').toggle()
+
+
+  $('ul.contacts-list').hide()
+
+
+  $('.contacts-toggle').click (e) ->
+    e.preventDefault()
+    $(this).parents('.lab').find('.contacts-list').toggle()
+
+
+  if $('.c-labs.a-map #map').length > 0
+    $(window).resize ->
+      height = $(window).height()
+      if height < 400
+        $('#map').height $(window).height()
+      else
+        $('#map').height( height - $('.c-labs.a-map #map').offset().top )
+    .trigger 'resize'
+
+
+  $('td.time-picker input').change ->
+    $(this).parents('td').toggleClass 'open', $(this).is(':checked')
+
+
+  $('.open_type').change ->
+    $(this).parents('tr').find('.hide-if-closed').toggle ($(this).val() == 'open_from')
+
+
+  $('.c-labs.a-index input').change ->
+    # alert ".lab[data-#{$(this).parents('fieldset').data('type')}='#{$(this).val()}']"
+    type = $(this).parents('fieldset').data('type')
+    console.log ".lab[data-#{type}='#{$(this).val()}']"
+    $(".lab[data-#{type}='#{$(this).val()}']").toggleClass "hide-#{type}", !$(this).is(':checked')
+    update()
+
+
+  $('.c-labs.a-index form').submit -> false
+
+
+  $('#name_or_city_cont').keyup ->
+    if $(this).val() == ""
+      $('.lab').removeClass('hide-search')
+    else
+      q = $('#name_or_city_cont').val().toLowerCase()
+      $('.lab').each ->
+        toQuery = "#{$(this).data('terms')}"
+        $(this).toggleClass 'hide-search', (toQuery.search(q) < 0)
+    update()
+
+
+  $('.notice').delay(1000).slideUp('fast')
+
+
+  $("select.enhanced").select2()
+
 
   $('#tools').on 'cocoon:after-insert', (e, insertedItem) ->
     filepicker.constructWidget $(insertedItem).find('input.photo-uploader')
     $(insertedItem).find("select").select2();
 
+
   $('#humans').on 'cocoon:after-insert', (e, insertedItem) ->
     $(insertedItem).find("select").select2();
+
 
   $('tr .closed').change ->
     $(this).parents('tr').find('.hide-if-closed *').toggle( !$(this).is(":checked") )
   .trigger('change')
+
 
   # GeoComplete
 
@@ -147,10 +159,6 @@ jQuery ->
     location: $('#geocomplete').data('latlng')
     markerOptions:
       draggable: true
-
-  # $("#geocomplete").bind "geocode:result", (event, result) ->
-  #   console.log result
-
   $("#geocomplete").bind "geocode:dragged", (event, latLng) ->
-    $("input#lab_latitude").val latLng.lat()
-    $("input#lab_longitude").val latLng.lng()
+    $("input#lab_application_lab_attributes_latitude").val latLng.lat()
+    $("input#lab_application_lab_attributes_longitude").val latLng.lng()

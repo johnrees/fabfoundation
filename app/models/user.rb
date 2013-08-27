@@ -46,7 +46,8 @@ class User < ActiveRecord::Base
   validates :email, uniqueness: true, format: /@/
   validates :public_email, format: /@/, allow_blank: true
 
-  before_create { generate_token(:forgot_password_token) }
+
+  before_create { generate_token(:invite_token) }
   after_create :complete_registration
   before_create :check_password
 
@@ -81,7 +82,7 @@ class User < ActiveRecord::Base
   end
 
   def avatar_image
-    avatar || "http://www.natcen.ac.uk/css-images/default_user.png"#asset_path('/assets/default-avatar.png')
+    avatar.present? ? avatar : "http://www.natcen.ac.uk/css-images/default_user.png"#asset_path('/assets/default-avatar.png')
   end
 
 private

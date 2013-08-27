@@ -284,6 +284,9 @@ header.contain-to-grid {
 
 .c-labs.a-show {
 
+  #main #map {
+    height: 280px;
+  }
   header.contain-to-grid {
     background: rgba(#333, 0.2);
     position: relative;

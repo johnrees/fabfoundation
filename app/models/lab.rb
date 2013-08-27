@@ -142,7 +142,7 @@ class Lab < ActiveRecord::Base
   validates_uniqueness_of :name
 
   def kind_string
-    kind.present? ? Kinds[kind] : ""
+    kind.present? ? Kinds[kind] : "fab_lab"
   end
 
   def address
