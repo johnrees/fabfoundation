@@ -18,7 +18,7 @@
     - if @user.public_email.present?
       %p.email
         = fa_icon "envelope-alt"
-        = mail_to @user.public_email
+        = mail_to @user.public_email, @user.public_email, encode: 'javascript'
 
     - if @user.url.present?
       %p.home

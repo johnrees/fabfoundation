@@ -16,8 +16,7 @@
         - if @lab.email.present?
           %p.email
             = fa_icon "envelope-alt"
-            = link_to @lab.email do
-              = @lab.email
+            = mail_to @lab.email, @lab.email, encode: 'javascript'
 
         = link_to "View all labs in #{lab.country}", "#{labs_path}##{lab.country.parameterize}", class: 'button'
         %br/

@@ -24,5 +24,5 @@
           %tr
             %td= user.id
             %td= link_to user.full_name, edit_backstage_user_path(user)
-            %td= mail_to user.email
+            %td= mail_to user.email, user.email, encode: 'javascript'
             %td= user.phone

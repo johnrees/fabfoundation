@@ -10,10 +10,9 @@
               .details
                 = llab
 
-  -# - if lab.geocoded?
-  .columns.large-6
-    %fieldset
-      - if @nearby_labs.any?
+  - if @nearby_labs.any?
+    .columns.large-6
+      %fieldset
         %legend Nearby Labs
         - @nearby_labs.limit(5).each do |lab|
           .lab
