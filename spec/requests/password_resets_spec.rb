@@ -20,7 +20,7 @@ describe "PasswordReset" do
       fill_in "Email", with: user.email
       click_button "Reset Password"
       user.reload
-      visit edit_password_reset_url(user.action_token)
+      visit edit_password_reset_url(user.password_reset_token)
       fill_in "Password", with: "newpassword"
       fill_in "Password confirmation", with: "newpassword"
       click_button "Update Password"

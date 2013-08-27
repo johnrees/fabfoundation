@@ -46,12 +46,12 @@ class User < ActiveRecord::Base
   validates :email, uniqueness: true, format: /@/
   validates :public_email, format: /@/, allow_blank: true
 
-  before_create { generate_token(:action_token) }
+  before_create { generate_token(:password_reset_token) }
   after_create :complete_registration
   before_create :check_password
 
   def send_password_reset
-    generate_token(:action_token)
+    generate_token(:password_reset_token)
     # save!
     UserMailer.password_reset(self).deliver
   end

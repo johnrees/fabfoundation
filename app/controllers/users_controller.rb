@@ -5,7 +5,7 @@ class UsersController < ApplicationController
 
   def complete_registration
     begin
-      @user = User.find_by!(action_token: params[:token])
+      @user = User.find_by!(password_reset_token: params[:token])
     rescue ActiveRecord::RecordNotFound
       redirect_to root_url, notice: "Not found"
     end
