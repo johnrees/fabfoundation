@@ -54,7 +54,7 @@ class User < ActiveRecord::Base
   def send_password_reset
     generate_token(:forgot_password_token)
     # save!
-    UserMailer.delay.password_reset(self).deliver
+    UserMailer.password_reset(self).deliver
   end
 
   def check_password
@@ -94,7 +94,7 @@ private
   end
 
   def complete_registration
-    UserMailer.delay.complete_registration(self).deliver
+    UserMailer.complete_registration(self).deliver
   end
 
 end
