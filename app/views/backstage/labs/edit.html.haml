@@ -11,7 +11,6 @@
       %fieldset
         -# = f.input :ancestry
         = f.input :parent_id, label: 'Supernode', collection: Lab.all, include_blank: true, input_html: { class: 'enhanced' }
-        = f.input :state, collection: Lab.state_machine.states.map(&:name)
         = f.input :name
         = f.input :slug
         = f.input :description
@@ -33,10 +32,11 @@
         = f.association :facilities, as: 'check_boxes'
 
         -# = render 'labs/form_modules/opening_hours_bitmask', f: f
-
         -# = f.input :opening_hours_notes
+
         = f.input :avatar
         = f.input :urls
         = f.association :creator
+        = f.input :state, collection: Lab.state_machine.states.map(&:name)
 
       = f.submit class: 'button'

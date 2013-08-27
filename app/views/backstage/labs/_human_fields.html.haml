@@ -3,10 +3,10 @@
     .row
       .columns.large-4
         = f.input :details, placeholder: 'e.g. Manager', label: "Job Role Details"
-      .columns.large-4
+      .columns.large-8
         = f.input :full_name
-      .columns.large-4
-        = f.association :user, input_html: { class: 'enhanced' }
+      -# .columns.large-4
+      -#   = f.association :user, input_html: { class: 'enhanced' }
 
     .row
       .columns.large-6
@@ -16,4 +16,4 @@
         -# = f.input :roles
 
     = link_to_remove_association f, class: 'remove' do
-      = fa_icon 'remove', text: "Remove human"
+      = fa_icon 'remove', text: "Remove this person"

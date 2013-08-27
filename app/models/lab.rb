@@ -36,7 +36,10 @@ class Lab < ActiveRecord::Base
     if Rails.env.test?
       self.time_zone ||= 'Europe/London'
     else
-      # self.time_zone = GoogleTimezone.fetch(latitude, longitude).time_zone_id
+      begin
+        self.time_zone = GoogleTimezone.fetch(latitude, longitude).time_zone_id
+      rescue
+      end
     end
   end
 
@@ -122,7 +125,7 @@ class Lab < ActiveRecord::Base
   has_many :humans
   has_many :users, through: :humans
   accepts_nested_attributes_for :humans,
-    :reject_if => proc { |a| a['user_id'].blank? },
+    :reject_if => proc { |a| a['full_name'].blank? },
     :allow_destroy => true
 
   geocoded_by :address

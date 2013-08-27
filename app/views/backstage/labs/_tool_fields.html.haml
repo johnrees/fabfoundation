@@ -8,7 +8,7 @@
         = f.input_field :photo, :type => "filepicker-dragdrop", "data-fp-multiple" => true, class: 'photo-uploader'
       .columns.large-8
         -# = f.association :tool_type, label: 'Type', input_html: { class: 'enhanced' }
-        = f.input :name, input_html: { placeholder: 'e.g. MakerBot 2', validate: false}
+        = f.input :name, input_html: { placeholder: 'e.g. Makerbot Replicator 2', validate: false}
         = f.input :description, hint: "A short description about the item"
 
     = link_to_remove_association f, class: 'remove' do

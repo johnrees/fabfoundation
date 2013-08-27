@@ -8,6 +8,7 @@
           %th Referees
           %th= sort_link @q, :notes
           %th= sort_link @q, :created_at
+          %th= sort_link @q, :lab_state
           -# %th Actions
       %tbody
       - @lab_applications.each do |lab_application|
@@ -16,14 +17,16 @@
             %td= lab_application.id
             %td
               = link_to lab_application.lab, edit_backstage_lab_path(lab_application.lab)
-              .location.hint= lab_application.lab
-              .creator= link_to lab_application.creator, edit_backstage_user_path(lab_application.creator)
+              .creator
+                by
+                = link_to lab_application.creator, edit_backstage_user_path(lab_application.creator)
             %td
-              -# %ul
-              -#   - lab_application.referees.each do |ref|
-              -#     %li= link_to ref.lab.name, ref.lab
+              %ul
+                - lab_application.referees.each do |ref|
+                  %li= link_to ref.lab.name, ref.lab
             %td= lab_application.notes
-            %td= lab_application.created_at.stamp('13 Jun 99')
+            %td= lab_application.created_at.stamp('13 Jun 99, 14:30')
+            %td= lab_application.lab.state
             -# %td
             -#   = link_to "#{}" do
             -#     = fa_icon "check", text: "Approve"

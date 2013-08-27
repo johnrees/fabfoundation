@@ -18,8 +18,8 @@
 
         - lab.tools.each do |tool|
           %li.tool
-            %ul.clearing-thumbs.clearing-feature{"data-clearing" => true}
-              %li.clearing-featured-img
+            %ul
+              %li
                 = cropped_image_tag tool.photo, "400x300"
                 .details
                   .name= tool.name

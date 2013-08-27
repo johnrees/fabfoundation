@@ -11,16 +11,16 @@ class User < ActiveRecord::Base
 
   state_machine :initial => :new do
 
-    event :signup do
-      transition :new => :signed_up
-    end
+    # event :signup do
+    #   transition :new => :signed_up
+    # end
 
-    event :invite do
-      transition :new => :invited
-    end
+    # event :invite do
+    #   transition :new => :invited
+    # end
 
     event :confirm do
-      transition [:signed_up, :invited] => :confirmed
+      transition [:new] => :confirmed
     end
 
     state :confirmed do
@@ -48,6 +48,8 @@ class User < ActiveRecord::Base
 
 
   before_create { generate_token(:invite_token) }
+  before_update { generate_token(:invite_token) }
+
   after_create :complete_registration
   before_create :check_password
 

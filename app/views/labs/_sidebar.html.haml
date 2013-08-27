@@ -27,7 +27,7 @@
                 = check_box_tag "q[kind_in][]", Lab::Kinds.index(kind), true, style: 'display: none', id: "kind-#{index}"
                 %span.custom.checkbox
                 = kind.humanize.titleize
-                %span.has-tip.tip-right{"data-tooltip" => true, :title => "A Supernode is a Fab Lab that helps to coordinate other Fab Labs associated with it"} [?]
+                -# %span.has-tip.tip-right{"data-tooltip" => true, :title => "A Supernode is a Fab Lab that helps to coordinate other Fab Labs associated with it"} [?]
             %td.hint= @lab_kinds[kind]
 
 -# = f.submit "Filter", class: 'button expand filter-button'

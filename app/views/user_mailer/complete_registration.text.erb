@@ -1,5 +1,9 @@
-Hey,
+Hi <%= @user.first_name %>,
 
-Almost there. Please click here to complete your registration at the Fab Foundation.
+Almost there. Please click here to complete your registration on the Fab Foundation platform.
 
 <%= complete_registration_url(token: @user.invite_token) %>
+
+Thanks,
+
+Fab Foundation
