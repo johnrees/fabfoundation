@@ -31,3 +31,19 @@
           = link_to "×", "#", class: 'close'
 
   = yield
+
+  :javascript
+    (function(){var uv=document.createElement('script');uv.type='text/javascript';uv.async=true;uv.src='//widget.uservoice.com/trbf0wTd05yUduFF9TyoxA.js';var s=document.getElementsByTagName('script')[0];s.parentNode.insertBefore(uv,s)})()
+  :javascript
+    UserVoice = window.UserVoice || [];
+    UserVoice.push(['showTab', 'classic_widget', {
+      mode: 'full',
+      primary_color: '#cc6d00',
+      link_color: '#007dbf',
+      default_mode: 'support',
+      forum_id: 220331,
+      tab_label: 'Feedback & Support',
+      tab_color: '#cc6d00',
+      tab_position: 'bottom-left',
+      tab_inverted: false
+    }]);

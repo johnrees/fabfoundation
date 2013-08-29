@@ -20,10 +20,10 @@
 
   #wrap
     #inner
-      - flash.each do |name, msg|
-        = content_tag :div, msg, id: "flash_#{name}", class: name
 
       %header.contain-to-grid
+        - flash.each do |name, msg|
+          = content_tag :div, msg, id: "flash_#{name}", class: name
         %nav.top-bar
           %ul.title-area
             %li.name
@@ -88,3 +88,21 @@
   :javascript
     (function(a){if(window.filepicker){return}var b=a.createElement("script");b.type="text/javascript";b.async=!0;b.src=("https:"===a.location.protocol?"https:":"http:")+"//api.filepicker.io/v1/filepicker.js";var c=a.getElementsByTagName("script")[0];c.parentNode.insertBefore(b,c);var d={};d._queue=[];var e="pick,pickMultiple,pickAndStore,read,write,writeUrl,export,convert,store,storeUrl,remove,stat,setKey,constructWidget,makeDropPane".split(",");var f=function(a,b){return function(){b.push([a,arguments])}};for(var g=0;g<e.length;g++){d[e[g]]=f(e[g],d._queue)}window.filepicker=d})(document);
   = javascript_include_tag "http://cdn.leafletjs.com/leaflet-0.6.4/leaflet.js", "application"
+
+
+
+  :javascript
+    (function(){var uv=document.createElement('script');uv.type='text/javascript';uv.async=true;uv.src='//widget.uservoice.com/trbf0wTd05yUduFF9TyoxA.js';var s=document.getElementsByTagName('script')[0];s.parentNode.insertBefore(uv,s)})()
+  :javascript
+    UserVoice = window.UserVoice || [];
+    UserVoice.push(['showTab', 'classic_widget', {
+      mode: 'full',
+      primary_color: '#cc6d00',
+      link_color: '#007dbf',
+      default_mode: 'support',
+      forum_id: 220331,
+      tab_label: 'Feedback & Support',
+      tab_color: '#cc6d00',
+      tab_position: 'bottom-left',
+      tab_inverted: false
+    }]);
