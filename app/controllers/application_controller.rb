@@ -10,13 +10,13 @@ class ApplicationController < ActionController::Base
 
   def require_login
     if current_user.nil?
-      redirect_to signin_url(goto: request.path), :alert => "You must first sign in to access this page"
+      redirect_to signin_url(goto: request.path), alert: "You must first sign in to access this page"
     end
   end
 
   def require_new_user
     if current_user
-      redirect_to root_url, :alert => "You must sign out of your current session first"
+      redirect_to root_url, alert: "You must sign out of your current session first"
     end
   end
 
@@ -26,6 +26,7 @@ private
     begin
       @current_user ||= User.find(session[:user_id]) if session[:user_id]
     rescue ActiveRecord::RecordNotFound
+      # Log out user if their id don't exist
       session[:user_id] = nil
     end
   end
