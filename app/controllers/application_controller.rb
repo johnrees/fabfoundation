@@ -1,4 +1,5 @@
 class ApplicationController < ActionController::Base
+  protect_from_forgery with: :exception
 
   # CanCan workaround
   # See: https://github.com/ryanb/cancan/issues/835#issuecomment-18663815
