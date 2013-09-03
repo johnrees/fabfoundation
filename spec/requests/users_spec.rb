@@ -24,8 +24,6 @@ describe "Users" do
     it "cannot signup" do
       user_signin(FactoryGirl.create(:user))
       expect{ visit signup_path }.to raise_error(CanCan::AccessDenied)
-      # expect(current_path).to eq(root_path)
-      # expect(page).to_not have_link("Sign in")
     end
 
     it "cannot signin" do
@@ -70,12 +68,11 @@ describe "Users" do
         fill_in "Email", with: "test@test.com"
         click_button "Update"
         expect(page).to have_content("Updated")
-
       end
     end
 
     describe "changing password" do
-      it "can change password" do
+      pending "can change password" do
         user = FactoryGirl.create(:user)
         user_signin user
         visit edit_user_path(user)
@@ -94,8 +91,7 @@ describe "Users" do
           first_name: "Fred",
           last_name: "Flintstone",
           email: "fred@bedrock.com")
-        visit complete_registration_url(user.action_token)
-
+        visit complete_registration_url(user.invite_token)
         expect(page).to have_field('user_first_name', with: 'Fred')
         expect(page).to have_field('user_last_name', with: 'Flintstone')
         expect(page).to have_field('Email', with: 'fred@bedrock.com')
@@ -104,11 +100,11 @@ describe "Users" do
         expect(page).to have_content("Registration complete!")
       end
 
-      pending "requires password" do
+      it "requires password" do
         user = FactoryGirl.create(:user, password: nil)
-        visit complete_registration_url(user.action_token)
+        visit complete_registration_url(user.invite_token)
         click_button "Finish Registration"
-        expect(page).to have_content("can't be blank")
+        expect(page).to have_content("password can't be blank")
       end
 
     end

@@ -10,7 +10,7 @@ describe LabApplication do
     end
 
     it "authenticated user can add a lab" do
-      lab = FactoryGirl.create(:lab, name: 'ref', state: 'approved')
+      referee = FactoryGirl.create(:lab, name: 'ref', state: 'approved')
       user = FactoryGirl.create(:user)
       user_signin user
       click_link "Add a Lab"

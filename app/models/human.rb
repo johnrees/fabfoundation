@@ -7,7 +7,7 @@ class Human < ActiveRecord::Base
   # validates_uniqueness_of :user_id, scope: :lab_id
 
   def name
-    user.present? ? user.name : full_name
+    user.present? ? user.full_name : full_name
   end
 
   def to_s

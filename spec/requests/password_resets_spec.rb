@@ -43,7 +43,7 @@ describe "PasswordReset" do
 
     it "validates email" do
       visit new_password_reset_path
-      fill_in "Email", with: "not and email"
+      fill_in "Email", with: "not an email address"
       click_button "Reset Password"
       expect(page).to have_content "valid email"
     end

@@ -17,7 +17,7 @@ describe UserMailer do
     expect(mail.subject).to eq("Complete your registration")
     expect(mail.to).to eq([user.email])
     expect(mail.from).to eq(["notifications@fabfoundationworld.org"])
-    expect(mail.body.encoded).to match(complete_registration_url(token: user.action_token))
+    expect(mail.body.encoded).to match(complete_registration_url(token: user.invite_token))
   end
 
   it "has lab_application_approval_notification" do

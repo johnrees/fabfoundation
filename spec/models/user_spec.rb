@@ -2,14 +2,17 @@ require 'spec_helper'
 
 describe User do
 
-  it { should have_many(:events)} #creator
-  it { should have_many(:labs)} #creator
-  # it { should have_many(:labs).through(:humans) }
+  describe "relationships" do
+    it { should have_many(:events)} #creator
+    it { should have_many(:labs)} #creator
+    # it { should have_many(:labs).through(:humans) }
 
-  it { should validate_presence_of :first_name }
-  it { should validate_presence_of :last_name }
-  it { should validate_presence_of :email }
-  it { should validate_uniqueness_of :email }
+    it { should validate_presence_of :first_name }
+    it { should validate_presence_of :last_name }
+    it { should validate_presence_of :email }
+    it { should validate_uniqueness_of :email }
+    it { should have_many :claims}
+  end
 
   it "generates token before creation"
   it "sends complete_registration mailer after creation"
@@ -35,7 +38,7 @@ describe User do
   it "has default avatar_image" do
     expect(
       FactoryGirl.build_stubbed(:user).avatar_image
-    ).to match('default-avatar')
+    ).to match('default_user')
   end
 
   pending "validates password" do

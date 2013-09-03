@@ -18,7 +18,6 @@ Fabfoundation::Application.routes.draw do
 
   get "labs" => 'labs#index'
 
-
   resources :events do
     collection do
       get 'calendar'
