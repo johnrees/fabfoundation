@@ -1,11 +1,6 @@
 class LabApplicationsController < ApplicationController
 
   before_filter :require_login
-  # authorize_actions_for LabApplication
-
-  def thank_you
-  end
-  # authority_actions thank_you: 'create'
 
   def new
     @lab_application = current_user.lab_applications.new
@@ -23,6 +18,9 @@ class LabApplicationsController < ApplicationController
     else
       render :new
     end
+  end
+
+  def thank_you
   end
 
 private

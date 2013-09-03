@@ -1,6 +1,5 @@
 class UsersController < ApplicationController
 
-  # authorize_actions_for User
   # before_filter :require_new_user, only: [:new, :create]
 
   def complete_registration
