@@ -35,4 +35,13 @@ describe LabApplication do
 
   end
 
+  describe "approving lab applications" do
+
+    pending "notifies creator" do
+      user = FactoryGirl.create(:user)
+      lab_application = FactoryGirl.create(:lab_application, creator: user)
+    end
+
+  end
+
 end

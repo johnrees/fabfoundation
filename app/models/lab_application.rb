@@ -1,6 +1,4 @@
 class LabApplication < ActiveRecord::Base
-  # include Authority::Abilities
-  # self.authorizer_name = 'LabApplicationAuthorizer'
 
   belongs_to :lab
   belongs_to :creator, class_name: "User"
@@ -8,11 +6,9 @@ class LabApplication < ActiveRecord::Base
 
   has_many :referees
   has_many :labs, through: :referees
-  # # :association_foreign_key => 'applicant_id',
-  # :class_name => 'Lab',
-  # :join_table => 'referees'
+  after_create :deliver_lab_application_notifications
 
-  validate :has_referee_labs?
+  # validate :has_referee_labs?
   def has_referee_labs?
     errors.add(:base, 'Lab Application must have at least one referee') if self.labs.blank?
   end
@@ -21,6 +17,17 @@ class LabApplication < ActiveRecord::Base
     event :approve do
       transition :new => :approved
     end
+
+    after_transition :new => :approved do |lab_application|
+      UserMailer.lab_application_approval(lab_application).deliver
+    end
+  end
+
+private
+
+  def deliver_lab_application_notifications
+    UserMailer.lab_application_submission(self).deliver
+    AdminMailer.lab_application_submission(self).deliver
   end
 
 end

@@ -121,11 +121,6 @@ class Lab < ActiveRecord::Base
 
 private
 
-  def new_lab_notification
-    UserMailer.lab_submission_confirmation(self).deliver
-    AdminMailer.new_lab_added(self).deliver
-  end
-
   def country_stuff
     self.country_code.downcase!
     self.region = Country[country_code].try(:region) ? Country[country_code].region : nil
