@@ -7,6 +7,7 @@ Dir.chdir("#{Rails.root}/app/assets/images/") do
   imgs = Dir["**"].inject({}) {|h,f| h.merge! f => image_path(f)}
 end
 %>
+
 window.image_path = (name) ->
   <%= imgs.to_json %>[name]
 
@@ -81,14 +82,11 @@ jQuery ->
     e.preventDefault()
     $('ul.contacts-list').toggle()
 
-
   $('ul.contacts-list').hide()
-
 
   $('.contacts-toggle').click (e) ->
     e.preventDefault()
     $(this).parents('.lab').find('.contacts-list').toggle()
-
 
   if $('.c-labs.a-map #map').length > 0
     $(window).resize ->
@@ -97,16 +95,14 @@ jQuery ->
         $('#map').height $(window).height()
       else
         $('#map').height( height - $('.c-labs.a-map #map').offset().top )
+      window.map.invalidateSize()
     .trigger 'resize'
-
 
   $('td.time-picker input').change ->
     $(this).parents('td').toggleClass 'open', $(this).is(':checked')
 
-
   $('.open_type').change ->
     $(this).parents('tr').find('.hide-if-closed').toggle ($(this).val() == 'open_from')
-
 
   $('.c-labs.a-index input').change ->
     # alert ".lab[data-#{$(this).parents('fieldset').data('type')}='#{$(this).val()}']"
@@ -115,9 +111,7 @@ jQuery ->
     $(".lab[data-#{type}='#{$(this).val()}']").toggleClass "hide-#{type}", !$(this).is(':checked')
     update()
 
-
   $('.c-labs.a-index form').submit -> false
-
 
   $('#name_or_city_cont').keyup ->
     if $(this).val() == ""
@@ -129,25 +123,20 @@ jQuery ->
         $(this).toggleClass 'hide-search', (toQuery.search(q) < 0)
     update()
 
-
   $('.notice,.alert').slideUp('fast')
 
   $("select.enhanced").select2()
-
 
   $('#tools').on 'cocoon:after-insert', (e, insertedItem) ->
     filepicker.constructWidget $(insertedItem).find('input.photo-uploader')
     $(insertedItem).find("select").select2();
 
-
   $('#humans').on 'cocoon:after-insert', (e, insertedItem) ->
     $(insertedItem).find("select").select2();
-
 
   $('tr .closed').change ->
     $(this).parents('tr').find('.hide-if-closed *').toggle( !$(this).is(":checked") )
   .trigger('change')
-
 
   # GeoComplete
 

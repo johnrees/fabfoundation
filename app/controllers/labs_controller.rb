@@ -39,6 +39,11 @@ class LabsController < ApplicationController
   end
   # authority_actions map: 'read'
 
+  def claim
+    @lab = Lab.friendly.find(params[:id])
+    @claim = current_user.claims.build(lab: @lab)
+  end
+
   def edit
     # @lab = current_user.labs.friendly.find(params[:id])
     @lab = Lab.friendly.find(params[:id])
@@ -66,9 +71,9 @@ class LabsController < ApplicationController
     @sections = []
     @sections.push 'people' if @lab.humans.any?
     @sections.push 'location'
+    @sections.push 'equipment' if @lab.tools.any?
     # @sections.push 'related-labs' if @nearby_labs.any?
     # @sections.push 'events' if @lab.events.any?
-    @sections.push 'equipment' if @lab.tools.any?
   end
 
 private

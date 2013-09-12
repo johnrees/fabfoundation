@@ -10,7 +10,7 @@
               .details
                 = llab
 
-  - if @nearby_labs.any?
+  - if @nearby_labs and @nearby_labs.any?
     .columns.large-6
       %fieldset
         %legend Nearby Labs

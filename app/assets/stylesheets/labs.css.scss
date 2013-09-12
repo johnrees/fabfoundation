@@ -616,7 +616,7 @@ th.day {
 
   .a-map {
     #map {
-      height: 550px;
+      height: 100%;
     }
   }
 
@@ -625,10 +625,9 @@ th.day {
     top: 0;
     left: 0;
     display: block;
-    height: 400px;
+    height: 100%;
     width: 100%;
-    // 450px;
-    // margin-bottom: 20px;
+    background: #8DCFF4;
   }
 
   .people {

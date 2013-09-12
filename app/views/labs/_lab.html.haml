@@ -1,0 +1,20 @@
+= content_tag_for :li, lab, data: {terms: [lab.name,lab.slug,lab.city,lab.region,lab.country,lab.country_code].join(' ').downcase, region: lab.region.downcase, kind: lab.kind } do
+  .row.collapse
+    -# .columns.small-2.large-3.avatar= cropped_image_tag lab.avatar_image, "70x70"
+    .columns.small-12.large-12.details
+      .name= link_to lab, lab
+      - if lab.city.present?
+        .address.hint
+          = fa_icon "map-marker", text: lab.short_address, class: 'icon-fixed-width'
+      - if lab.humans.any?
+        .contacts.hint
+          = link_to "#", class: 'contacts-toggle' do
+            = fa_icon "group", text: (pluralize lab.humans.size, "Contact"), class: 'icon-fixed-width'
+          %ul.contacts-list
+            - lab.humans.each do |human|
+              %li.user-contact
+                = human
+                - if human.email.present?
+                  .email= fa_icon "envelope-alt", text: (mail_to human.email, human.email, class: 'email', encode: 'javascript')
+                - if human.phone.present?
+                  .phone= fa_icon "phone", text: human.phone

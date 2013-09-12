@@ -6,7 +6,6 @@
       - if @lab.supernode?
         %span.extra= fa_icon "sitemap", text: "Supernode"
 
-
 %div#sticky{"data-magellan-expedition" => "fixed"}
   .row
     .columns.large-12
@@ -27,13 +26,18 @@
               = fa_icon "edit", text: "Edit Backstage"
 
           %dd.right
-            = link_to claim_lab_path(@lab) do
+            = link_to new_lab_claim_path(@lab) do
               = fa_icon "edit", text: "Claim Ownership of this Lab"
+
+= link_to "Claims", lab_claims_path(@lab)
+- if can? :create, Claim
+  = link_to "Claim this lab", new_lab_claim_path(@lab), class: 'button'
 
 = render 'description', lab: @lab
 
-- @sections.each do |section|
-  = render section.parameterize.gsub('-','_'), lab: @lab
+- if @sections
+  - @sections.each do |section|
+    = render section.parameterize.gsub('-','_'), lab: @lab
 
 -# %h4 History
 -# - @lab.versions.each do |version|

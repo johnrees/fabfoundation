@@ -4,6 +4,6 @@ FactoryGirl.define do
   factory :claim do
     user nil
     lab nil
-    state "MyString"
+    details "I work here"
   end
 end

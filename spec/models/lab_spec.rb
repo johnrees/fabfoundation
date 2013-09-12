@@ -10,6 +10,7 @@ describe Lab do
     it { should have_many(:users).through(:humans) }
     it { should have_many :claims }
     it { should have_and_belong_to_many :facilities }
+    it { should have_and_belong_to_many :users }
     it { should have_one :lab_application }
     it { should have_many :tools }
   end

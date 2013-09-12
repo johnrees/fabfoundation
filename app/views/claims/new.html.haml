@@ -1,0 +1,7 @@
+.row
+  .columns.large-12
+    = title "Claim #{@lab}"
+    = simple_form_for [@lab,@claim] do |f|
+      = f.association :lab, as: 'hidden'
+      = f.input :details, hint: "A brief explanation about your role or association with #{@lab}"
+      = f.submit "Submit", class: 'button'

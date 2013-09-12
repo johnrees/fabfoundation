@@ -4,7 +4,7 @@ class CreateClaims < ActiveRecord::Migration
       t.references :user, index: true
       t.references :lab, index: true
       t.string :state
-
+      t.text :details
       t.timestamps
     end
   end

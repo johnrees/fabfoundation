@@ -14,24 +14,21 @@
                 = region
             %td.hint= count
 
-  - unless @lab_kinds.empty?
-    %fieldset{data: {type: 'kind'}}
-      %legend
-        = fa_icon "building"
-        Fab Lab Type
-      %table
-        - %w(supernode fab_lab mini_fab_lab planned_fab_lab).each do |kind, index|
-          %tr
-            %td
-              %label{for: "kind-#{index}"}
-                = check_box_tag "q[kind_in][]", Lab::Kinds.index(kind), true, style: 'display: none', id: "kind-#{index}"
-                %span.custom.checkbox
-                = kind.humanize.titleize
-                -# %span.has-tip.tip-right{"data-tooltip" => true, :title => "A Supernode is a Fab Lab that helps to coordinate other Fab Labs associated with it"} [?]
-            %td.hint= @lab_kinds[kind]
+  -# - unless @lab_kinds.empty?
+  -#   %fieldset{data: {type: 'kind'}}
+  -#     %legend
+  -#       = fa_icon "building"
+  -#       Fab Lab Type
+  -#     %table
+  -#       - %w(supernode fab_lab mini_fab_lab planned_fab_lab).each do |kind, index|
+  -#         %tr
+  -#           %td
+  -#             %label{for: "kind-#{index}"}
+  -#               = check_box_tag "q[kind_in][]", Lab::Kinds.index(kind), true, style: 'display: none', id: "kind-#{index}"
+  -#               %span.custom.checkbox
+  -#               = kind.humanize.titleize
+  -#               -# %span.has-tip.tip-right{"data-tooltip" => true, :title => "A Supernode is a Fab Lab that helps to coordinate other Fab Labs associated with it"} [?]
+  -#           %td.hint= @lab_kinds[kind]
 
--# = f.submit "Filter", class: 'button expand filter-button'
-
--# - if can? :create, LabApplication
 = link_to new_lab_application_path, class: 'button expand small' do
   = fa_icon "plus", text: "Add a Lab"

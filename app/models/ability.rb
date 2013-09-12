@@ -5,9 +5,16 @@ class Ability
 
     user ||= User.new # guest user (not logged in)
 
+    # can :read, :all
+    can :read, Lab
     can :read, :all
 
+    #  do |claim|
+    #   claim.lab.creator == user
+    # end
+
     if user.persisted?
+      can :create, Claim
       can :update, Lab, creator: user
       can :update, User, id: user.id
       can :create, LabApplication
