@@ -27,12 +27,6 @@ describe LabApplication do
       expect(emails).to include('john@bitsushi.com') #admin
     end
 
-    it "has at least one referee" do
-      expect(
-        FactoryGirl.build_stubbed(:lab_application, labs: nil).errors
-      ).to include("must have at least one referee")
-    end
-
   end
 
   describe "approving lab applications" do

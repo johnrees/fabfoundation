@@ -13,7 +13,8 @@
   %title= content_for?(:title) ? "#{yield(:title)}, Fab Foundation" : "Fab Foundation"
 
   = stylesheet_link_tag "application", "http://cdn.leafletjs.com/leaflet-0.6.4/leaflet.css"
-  = javascript_include_tag "vendor/custom.modernizr"
+  = javascript_include_tag "http://cdn.leafletjs.com/leaflet-0.6.4/leaflet.js", "application", "vendor/custom.modernizr"
+  = yield(:head)
   = csrf_meta_tag
 
 %body{ class: body_classes }
@@ -35,14 +36,14 @@
               %a{:href => "#"}
                 %span menu
           %section.top-bar-section
-            %ul.left
-              %li.divider
-              %li.labs= link_to "Labs", labs_path
-              -# %li.divider
-              -# %li.events= link_to "Events", events_path
+            -# %ul.left
+            -#   %li.divider
+            -#   %li.labs= link_to "Labs", labs_path
             -#   -# %li.divider
-            -#   -# %li.users= link_to "Users", users_path
-            -#   -# %li.divider
+            -#   -# %li.events= link_to "Events", events_path
+            -# -#   -# %li.divider
+            -# -#   -# %li.users= link_to "Users", users_path
+            -# -#   -# %li.divider
             %ul.right
               %li.divider
               -  if current_user
@@ -65,8 +66,8 @@
                         = fa_icon "power-off", text: "Sign out", class: 'icon-fixed-width'
 
               - else
-                %li= link_to "Sign In", signin_path
                 %li= link_to "Sign Up", signup_path
+                %li= link_to "Sign In", signin_path
 
       #main{role: 'main'}
 
@@ -86,12 +87,8 @@
           %li.fab-foundation= link_to "The Fab Foundation", "http://www.fabfoundation.org"
 
   :javascript
-    (function(a){if(window.filepicker){return}var b=a.createElement("script");b.type="text/javascript";b.async=!0;b.src=("https:"===a.location.protocol?"https:":"http:")+"//api.filepicker.io/v1/filepicker.js";var c=a.getElementsByTagName("script")[0];c.parentNode.insertBefore(b,c);var d={};d._queue=[];var e="pick,pickMultiple,pickAndStore,read,write,writeUrl,export,convert,store,storeUrl,remove,stat,setKey,constructWidget,makeDropPane".split(",");var f=function(a,b){return function(){b.push([a,arguments])}};for(var g=0;g<e.length;g++){d[e[g]]=f(e[g],d._queue)}window.filepicker=d})(document);
-  = javascript_include_tag "http://cdn.leafletjs.com/leaflet-0.6.4/leaflet.js", "application"
-
-  :javascript
+    // UserVoice
     (function(){var uv=document.createElement('script');uv.type='text/javascript';uv.async=true;uv.src='//widget.uservoice.com/trbf0wTd05yUduFF9TyoxA.js';var s=document.getElementsByTagName('script')[0];s.parentNode.insertBefore(uv,s)})()
-  :javascript
     UserVoice = window.UserVoice || [];
     UserVoice.push(['showTab', 'classic_widget', {
       mode: 'full',

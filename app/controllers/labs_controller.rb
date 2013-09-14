@@ -5,10 +5,10 @@ class LabsController < ApplicationController
 
   [:map, :index].each do |method|
     define_method method do
-      @labs = Lab.order('name ASC').includes(:tools => :tool_type, :humans => :user).where(state: 'approved')
+      @labs = Lab.approved.order('name ASC').includes(:humans => :user)
       @continents = Hash.new(0)
       @regions = Hash.new(0)
-      @tool_types = Hash.new(0)
+      # @tool_types = Hash.new(0)
       @lab_kinds = Hash.new(0)
 
       @labs.each do |lab|
@@ -46,7 +46,7 @@ class LabsController < ApplicationController
 
   def edit
     # @lab = current_user.labs.friendly.find(params[:id])
-    @lab = Lab.friendly.find(params[:id])
+    @lab = current_user.labs.friendly.find(params[:id])
     @lab.tools.build
     @lab.humans.build
     # authorize_action_for(@lab)
@@ -54,7 +54,7 @@ class LabsController < ApplicationController
 
   def update
     # @lab = current_user.labs.friendly.find(params[:id])
-    @lab = Lab.friendly.find(params[:id])
+    @lab = current_user.labs.friendly.find(params[:id])
     if @lab.update_attributes lab_params
       redirect_to lab_url(@lab), notice: "Lab Updated"
     else
@@ -63,7 +63,7 @@ class LabsController < ApplicationController
   end
 
   def show
-    @lab = Lab.friendly.find(params[:id])
+    @lab = Lab.approved.friendly.find(params[:id])
     # @days = %w(monday tuesday wednesday thursday friday saturday sunday)
     @related_labs = @lab.children
     @nearby_labs = @lab.nearbys(500)

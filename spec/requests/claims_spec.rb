@@ -4,6 +4,7 @@ describe Claim do
 
   it "user can claim lab" do
     lab = FactoryGirl.create(:lab)
+    lab.approve!
     user = FactoryGirl.create(:user)
     user_signin(user)
     visit lab_path(lab)

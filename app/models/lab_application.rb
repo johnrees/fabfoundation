@@ -8,9 +8,9 @@ class LabApplication < ActiveRecord::Base
   has_many :labs, through: :referees
   after_create :deliver_lab_application_notifications
 
-  # validate :has_referee_labs?
+  validate :has_referee_labs?
   def has_referee_labs?
-    errors.add(:base, 'Lab Application must have at least one referee') if self.labs.blank?
+    errors.add(:base, 'Lab Application must have at least one referee') if self.labs.empty?
   end
 
   state_machine :initial => :new do
@@ -21,6 +21,10 @@ class LabApplication < ActiveRecord::Base
     after_transition :new => :approved do |lab_application|
       UserMailer.lab_application_approval(lab_application).deliver
     end
+  end
+
+  def to_s
+    "##{id} - #{lab}"
   end
 
 private

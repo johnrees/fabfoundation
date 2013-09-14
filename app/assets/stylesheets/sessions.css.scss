@@ -20,22 +20,23 @@ header {
   &.contain-to-grid {
     background: #333;
   }
-  .top-bar {
-    background: none;
-  }
+
   ul {
     background: none !important;
   }
 
-
-    .top-bar-section a {
-      background: none !important;
-    }
-
-    .top-bar-section > ul > .divider {
-      border: none !important;
-    }
+  .top-bar {
+    background: none;
   }
+
+  .top-bar-section a {
+    background: none !important;
+  }
+
+  .top-bar-section > ul > .divider {
+    border: none !important;
+  }
+}
 
 body.sessions {
 

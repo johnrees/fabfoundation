@@ -1,4 +1,6 @@
-= javascript_include_tag "http://maps.googleapis.com/maps/api/js?sensor=false&libraries=places"
+= content_for(:head) do
+  = javascript_include_tag "http://maps.googleapis.com/maps/api/js?sensor=false&libraries=places"
+  = javascript_include_tag "forms"
 
 .row
   .columns.large-12

@@ -23,6 +23,8 @@ class Lab < ActiveRecord::Base
   has_paper_trail
   has_ancestry
 
+  scope :approved, -> { where(state: 'approved') }
+
   Kinds = %w[planned_fab_lab mini_fab_lab fab_lab supernode]
 
   attr_accessor :thing

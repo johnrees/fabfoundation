@@ -12,7 +12,12 @@ describe LabApplication do
     expect(FactoryGirl.build_stubbed(:lab_application).state).to eq('new')
   end
 
-  it "has at least one referee lab"
+  it "has at least one referee" do
+    expect{
+      FactoryGirl.create(:lab_application, labs: [])
+    }.to raise_error(ActiveRecord::RecordInvalid)
+    #include("Lab Application must have at least one referee")
+  end
 
   it "notifies creator and admins when submitted" do
     user = FactoryGirl.create(:user)

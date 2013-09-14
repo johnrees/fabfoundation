@@ -26,8 +26,7 @@ class User < ActiveRecord::Base
     end
 
     state :invited do
-      validates :password, presence: true
-      validates_length_of :password, minimum: 5
+      validates :password, presence: true, length: { minimum: 5 }
     end
 
     state :confirmed do

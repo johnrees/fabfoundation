@@ -102,9 +102,10 @@ describe "Users" do
 
       it "requires password" do
         user = FactoryGirl.create(:user, password: nil)
+        user.invite!
         visit complete_registration_url(user.invite_token)
         click_button "Finish Registration"
-        expect(page).to have_content("password can't be blank")
+        expect(page).to have_content("Password can't be blank")
       end
 
     end

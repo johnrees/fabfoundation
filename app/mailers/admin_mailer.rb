@@ -5,7 +5,7 @@ class AdminMailer < ActionMailer::Base
   def lab_application_submission(lab)
     @lab = lab
     %w( john@bitsushi.com ).each do |admin|
-      mail(to: admin, subject: "New Lab Added")
+      mail(to: admin, subject: "New Lab Application")
     end
   end
 

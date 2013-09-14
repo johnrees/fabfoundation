@@ -4,7 +4,7 @@ FactoryGirl.define do
   factory :lab_application do
     association :lab
     association :creator, factory: :user
-    # referees {[FactoryGirl.create(:referee)]}
+    labs {[FactoryGirl.create(:lab)]}
     notes "MyText"
   end
 end
