@@ -9,11 +9,13 @@ class ClaimsController < ApplicationController
   def new
     @lab = Lab.friendly.find(params[:lab_id])
     @claim = current_user.claims.build(lab: @lab)
+    authorize! :create, @claim
   end
 
   def create
     @lab = Lab.friendly.find(params[:lab_id])
     @claim = current_user.claims.new(claim_params)
+    authorize! :create, @claim
     if @claim.save
       redirect_to lab_url(@lab), notice: "Thanks for submitting your claim."
     else
@@ -24,6 +26,7 @@ class ClaimsController < ApplicationController
   def destroy
     @lab = Lab.friendly.find(params[:lab_id])
     @claim = Claim.find(params[:id])
+    authorize! :destroy, @claim
     @claim.delete
     redirect_to lab_claims_path(@lab), notice: "Claim removed"
   end
