@@ -11,26 +11,27 @@
   %meta{ :name => "viewport", :content => "width=device-width, initial-scale=1.0" }/
   %title= content_for?(:title) ? "#{yield(:title)}, Fab Foundation" : "Fab Foundation"
 
-  = stylesheet_link_tag "application"
+  = stylesheet_link_tag "application", "http://fonts.googleapis.com/css?family=Raleway:400"
   = javascript_include_tag "vendor/custom.modernizr", "application"
   = csrf_meta_tag
 
 %body.sessions
-  .row
-    .columns.large-12.text-right.account-yet
-      %p= yield("account-yet")
-  .row
-    .columns.large-12.small-3.small-centered.large-centered.text-center
-      = link_to root_path do
-        = image_tag "small-fab.png", id: 'small-fab'
-  .row
-    .columns.large-5.large-centered
-      - flash.each do |name, msg|
-        = content_tag :div, "data-alert" => true, :id => "flash_#{name}", :class => "alert-box" do
-          = msg
-          = link_to "×", "#", class: 'close'
+  #inner
+    .row
+      .columns.large-12.text-right.account-yet
+        %p= yield("account-yet")
+    .row
+      .columns.large-12.small-3.small-centered.large-centered.text-center
+        = link_to root_path do
+          = image_tag "small-fab.png", id: 'small-fab'
+    .row
+      .columns.large-5.large-centered
+        - flash.each do |name, msg|
+          = content_tag :div, "data-alert" => true, :id => "flash_#{name}", :class => "alert-box" do
+            = msg
+            = link_to "×", "#", class: 'close'
 
-  = yield
+    = yield
 
   :javascript
     (function(){var uv=document.createElement('script');uv.type='text/javascript';uv.async=true;uv.src='//widget.uservoice.com/trbf0wTd05yUduFF9TyoxA.js';var s=document.getElementsByTagName('script')[0];s.parentNode.insertBefore(uv,s)})()

@@ -119,9 +119,20 @@ body.c-labs li.labs a {
   z-index: 10;
 }
 
+#inner {
+.button {
+  background-color: #46D89E;
+  font-family: Raleway !important;
+  text-transform: uppercase;
+}
+}
+
 header {
   position: relative;
+  letter-spacing: 1px;
   z-index: 10;
+  font-family: Raleway;
+  text-transform: uppercase;
 
   a#sign-out:hover i {
     color: red !important;

@@ -1,6 +1,7 @@
 .row
   .columns.large-12
     = title "Reset Your Password"
+    = @user.inspect
     = form_for @user, :url => password_reset_path(params[:id]) do |f|
       - if @user.errors.any?
         .error_messages
@@ -11,7 +12,7 @@
       .field
         = f.label :password, "New Password"
         = f.password_field :password
-      .field
-        = f.label :password_confirmation
-        = f.password_field :password_confirmation
+      -# .field
+      -#   = f.label :password_confirmation
+      -#   = f.password_field :password_confirmation
       .actions= f.submit "Update Password", class: 'button'

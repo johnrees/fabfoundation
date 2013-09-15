@@ -18,7 +18,7 @@
             = fa_icon "envelope-alt"
             = mail_to @lab.email, @lab.email, encode: 'javascript'
 
-        = link_to "View all labs in #{lab.country}", "#{labs_path}##{lab.country.parameterize}", class: 'button'
+        = link_to "View all labs in #{lab.country}", "#{labs_path}##{lab.country.parameterize}"
         %br/
         %br/
 

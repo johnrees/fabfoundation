@@ -26,12 +26,12 @@ class User < ActiveRecord::Base
     end
 
     state :invited do
-      validates :password, presence: true, length: { minimum: 5 }
+      validates :password, presence: true, length: { minimum: 6 }
     end
 
-    state :confirmed do
-      validates_confirmation_of :password, if: lambda { |m| m.password.present? }
-    end
+    # state :confirmed do
+    #   validates_confirmation_of :password, if: lambda { |m| m.password.present? }
+    # end
 
     after_transition :new => :invited do |user|
       UserMailer.complete_registration(user).deliver
@@ -57,6 +57,12 @@ class User < ActiveRecord::Base
   validates_presence_of :first_name, :last_name, :email
   validates :email, uniqueness: true, format: /@/
   validates :public_email, format: /@/, allow_blank: true
+
+  validates :password,
+    presence: true,
+    confirmation: true,
+    length: { :minimum => 6 },
+    if: :password_digest_changed?
 
 
   before_create { generate_token(:invite_token) }
