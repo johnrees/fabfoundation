@@ -2,17 +2,30 @@ require 'spec_helper'
 
 describe Lab do
 
+  belongs_to :creator, class_name: "User"
+  has_one :lab_application
+  has_many :claims
+  has_many :events
+  has_many :tools
+  has_many :humans
+  has_many :users, through: :humans
+  has_and_belongs_to_many :facilities
+
   describe "relationships" do
     it { should belong_to :creator }
-    it { should validate_presence_of :name }
+    it { should have_one :lab_application }
+    it { should have_many :claims }
     it { should have_many :events }
+    it { should have_many :tools }
     it { should have_many :humans }
     it { should have_many(:users).through(:humans) }
-    it { should have_many :claims }
     it { should have_and_belong_to_many :facilities }
-    # it { should have_and_belong_to_many :users }
-    it { should have_one :lab_application }
-    it { should have_many :tools }
+    it { should have_and_belong_to_many :users }
+  end
+
+  describe "validations" do
+    it { should validate_presence_of :name }
+    it { should validate_uniqueness_of :name }
   end
 
   it "is valid" do

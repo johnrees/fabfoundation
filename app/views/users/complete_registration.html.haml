@@ -6,11 +6,10 @@
       = render "errors_for", resource: @user
 
       %fieldset
+        = f.input :email, disabled: true
         = f.label :first_name, "Name"
         = f.input_field :first_name
         = f.input_field :last_name
-
-        = f.input :email
 
         = f.input :password
 
