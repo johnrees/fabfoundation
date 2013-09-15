@@ -3,19 +3,20 @@ class Lab < ActiveRecord::Base
   extend FriendlyId
 
   friendly_id :slug_candidates, use: :slugged
-  has_many :claims
-  has_and_belongs_to_many :facilities
-  belongs_to :creator, class_name: "User"
-  has_many :events
 
+  belongs_to :creator, class_name: "User"
   has_one :lab_application
+  has_many :claims
+  has_many :events
   has_many :tools
+  has_many :humans
+  has_many :users, through: :humans
+  has_and_belongs_to_many :facilities
+
   accepts_nested_attributes_for :tools,
     :reject_if => proc { |a| a['name'].blank? },
     :allow_destroy => true
 
-  has_many :humans
-  has_many :users, through: :humans
   accepts_nested_attributes_for :humans,
     :reject_if => proc { |a| a['full_name'].blank? },
     :allow_destroy => true
@@ -26,6 +27,16 @@ class Lab < ActiveRecord::Base
   scope :approved, -> { where(state: 'approved') }
 
   Kinds = %w[planned_fab_lab mini_fab_lab fab_lab supernode]
+
+  attr_accessor :has_opening_hours
+
+  geocoded_by :address
+
+  before_save :country_stuff
+
+  validates :email, format: /@/, allow_blank: true
+  validates_presence_of :name, :country_code
+  validates_uniqueness_of :name
 
   attr_accessor :thing
 
@@ -63,31 +74,6 @@ class Lab < ActiveRecord::Base
       end
     end
   end
-
-  def opening_hours
-    b = Bitwise.new
-    b.raw = opening_hours_bitmask
-    b.indexes
-  end
-
-  def opening_hours=(opening_hours)
-    b = Bitwise.new
-    b.indexes = opening_hours.map(&:to_i)
-    self.opening_hours_bitmask = b.bits
-  end
-
-  attr_accessor :has_opening_hours
-
-
-
-  geocoded_by :address
-
-  before_save :country_stuff
-
-  validates :email, format: /@/, allow_blank: true
-  # validates_inclusion_of :time_zone, in: ActiveSupport::TimeZone.zones_map(&:name), allow_blank: true
-  validates_presence_of :name, :country_code#, :city
-  validates_uniqueness_of :name
 
   def kind_string
     kind.present? ? Kinds[kind] : "fab_lab"
