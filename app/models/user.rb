@@ -44,25 +44,36 @@ class User < ActiveRecord::Base
   end
 
   has_many :humans
-  has_many :labs, through: :humans
+  # has_many :labs, through: :humans
 
   has_many :labs, foreign_key: 'creator_id'
   has_many :events, foreign_key: 'creator_id'
   has_many :lab_applications, foreign_key: 'creator_id'
 
+  has_and_belongs_to_many :labs
+
+
   # validates_presence_of :password
 
 
+  validate :password,
+    length: { minimum: 6 },
+    presence: true,
+    allow_nil: true,
+    on: :update
 
   validates_presence_of :first_name, :last_name, :email
   validates :email, uniqueness: true, format: /@/
   validates :public_email, format: /@/, allow_blank: true
 
-  validates :password,
-    presence: true,
-    confirmation: true,
-    length: { :minimum => 6 },
-    if: :password_digest_changed?
+  # validates :password,
+  #   presence: true,
+  #   # confirmation: true,
+  #   length: { minimum: 6 },
+  #   on: :update,
+  #   # allow_nil: true,
+  #   allow_nil: true
+  #   # if: lambda { password.present? }
 
 
   before_create { generate_token(:invite_token) }
@@ -73,7 +84,7 @@ class User < ActiveRecord::Base
 
   def send_password_reset
     generate_token(:forgot_password_token)
-    save!
+    save!(validate: false)
     UserMailer.password_reset(self).deliver
   end
 
@@ -115,7 +126,6 @@ private
 
   def complete_registration
     invite
-
   end
 
 end

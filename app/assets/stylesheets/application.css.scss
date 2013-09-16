@@ -32,9 +32,11 @@ body {
   color: #333;
   -webkit-text-size-adjust:none;
 }
+
 body, h1,h2,h3,h4,h5 {
   font-family: 'Ubuntu', sans-serif;
 }
+
 img {
   max-width: 100%;
 }
@@ -58,10 +60,12 @@ img {
     background: rgba(255,255,255,0.9);
   }
 }
+
 .button {
   border: none !important;
   box-shadow: none !important;
 }
+
 input {
   border-radius: 4px !important;
 }
@@ -85,21 +89,19 @@ input {
   &, &:hover { color: #A84545; }
 }
 
-
-
 label a {
   color: #222;
 }
 
- legend i {
-  color: #CCC;
- }
+legend i {
+color: #CCC;
+}
 
- .input.date {
+.input.date {
   select {
     width: 70px;
   }
- }
+}
 
 .selectize-control {
   width: 100%;
@@ -119,12 +121,10 @@ body.c-labs li.labs a {
   z-index: 10;
 }
 
-#inner {
-.button {
+#inner .button {
   background-color: #46D89E;
   font-family: Raleway !important;
   text-transform: uppercase;
-}
 }
 
 header {
@@ -171,10 +171,6 @@ header {
     border-radius: 0 0 4px 4px;
   }
 
-  .top-bar {
-    height: 70px;
-  }
-
   .top-bar .title-area .name h1 a {
     color: #F7F7F7;
   }
@@ -182,6 +178,21 @@ header {
     border: 1px solid #353535 !important;
   }
 }
+
+body #wrap .top-bar {
+  &.expanded a, ul.dropdown a {
+    min-height: 0 !important;
+    line-height: inherit !important;
+  }
+  &, .name, .name h1, .top-bar-section a {
+    min-height: 70px;
+    line-height: 70px;
+  }
+  .has-dropdown > a:after {
+    top: 50%;
+  }
+}
+
 
 
 body a {
@@ -211,7 +222,3 @@ header {
     color: #AD2121;
   }
 }
-
-/*i {
-  color: #888 !default;
-}*/

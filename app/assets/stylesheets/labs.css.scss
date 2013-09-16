@@ -28,6 +28,9 @@ $small: "only screen and (min-width:"#{$small-screen}")";
   #map {
     margin-bottom: 20px;
   }
+  h4 {
+    line-height: 60px;
+  }
 }
 
 li.tool {

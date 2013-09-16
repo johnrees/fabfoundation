@@ -7,6 +7,7 @@ FactoryGirl.define do
     first_name 'John'
     sequence(:last_name) { |n| "Rees#{n}" }
     password "password"
+    password_confirmation "password"
   end
 
   factory :admin, class: "User" do
@@ -14,6 +15,7 @@ FactoryGirl.define do
     first_name 'John'
     sequence(:last_name) { |n| "Rees#{n}" }
     password "password"
+    password_confirmation "password"
     admin true
   end
 

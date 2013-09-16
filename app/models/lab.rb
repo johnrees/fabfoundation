@@ -10,8 +10,10 @@ class Lab < ActiveRecord::Base
   has_many :events
   has_many :tools
   has_many :humans
-  has_many :users, through: :humans
+  # has_many :users, through: :humans
   has_and_belongs_to_many :facilities
+
+  has_and_belongs_to_many :users
 
   accepts_nested_attributes_for :tools,
     :reject_if => proc { |a| a['name'].blank? },
@@ -110,9 +112,11 @@ class Lab < ActiveRecord::Base
 private
 
   def country_stuff
-    self.country_code.downcase!
-    self.region = Country[country_code].try(:region) ? Country[country_code].region : nil
-    self.subregion = Country[country_code].try(:subregion) ? Country[country_code].subregion : nil
+    if country_code.present?
+      self.country_code.downcase!
+      self.region = Country[country_code].try(:region) ? Country[country_code].region : nil
+      self.subregion = Country[country_code].try(:subregion) ? Country[country_code].subregion : nil
+    end
   end
 
   def after_approve(lab, transition)

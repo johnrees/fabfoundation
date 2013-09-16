@@ -22,7 +22,7 @@ describe "PasswordReset" do
       user.reload
       visit edit_password_reset_url(user.forgot_password_token)
       fill_in "user_password", with: "newpassword"
-      fill_in "Password confirmation", with: "newpassword"
+      # fill_in "Password confirmation", with: "newpassword"
       click_button "Update Password"
       expect(page).to have_content("Password has been reset")
     end

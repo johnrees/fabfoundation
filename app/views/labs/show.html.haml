@@ -1,4 +1,4 @@
-.top{style: ("background-image: url(#{@lab.avatar_image})" if @lab.avatar.present?) }
+.top#details{"data-magellan-destination" => "details", :style => ("background-image: url(#{@lab.avatar_image})" if @lab.avatar.present?) }
   .fade
   .row#lab-name
     .columns.large-12
@@ -29,11 +29,11 @@
             = link_to new_lab_claim_path(@lab) do
               = fa_icon "edit", text: "Claim Ownership of this Lab"
 
-.row
-  .columns.large-12
-    = link_to "Claims", lab_claims_path(@lab)
-    - if can? :create, Claim
-      = link_to "Claim this lab", new_lab_claim_path(@lab), class: 'button'
+-# .row
+-#   .columns.large-12
+-#     -# = link_to "Claims", lab_claims_path(@lab)
+-#     - if can? :create, Claim
+-#       = link_to "Claim this lab", new_lab_claim_path(@lab), class: 'button'
 
 = render 'description', lab: @lab
 
