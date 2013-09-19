@@ -7,7 +7,7 @@
 jQuery ->
 
   $("input#geocomplete").geocomplete
-    details: ".address"
+    details: ".c-lab_applications .address"
     detailsAttribute: "data-geo"
     map: "#geocomplete-map"
     location: $('#geocomplete').data('latlng')
@@ -15,8 +15,8 @@ jQuery ->
       draggable: true
 
   $("#geocomplete").bind "geocode:dragged", (event, latLng) ->
-    $("input#lab_application_lab_attributes_latitude").val latLng.lat()
-    $("input#lab_application_lab_attributes_longitude").val latLng.lng()
+    $("input#lab_application_lab_attributes_latitude, input#lab_latitude").val latLng.lat()
+    $("input#lab_application_lab_attributes_longitude, input#lab_longitude").val latLng.lng()
 
   $("select.enhanced").select2()
 

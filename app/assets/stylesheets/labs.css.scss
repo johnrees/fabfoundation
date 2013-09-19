@@ -34,6 +34,9 @@ $small: "only screen and (min-width:"#{$small-screen}")";
 }
 
 li.tool {
+  li {
+    list-style: none;
+  }
     img {
       width: 100%;
     }
@@ -410,6 +413,7 @@ input[type=filepicker-dragdrop] {
  }
 .checkbox_container .collection_check_boxes{
   display: inline;
+  padding-left: 5px;
  }
 
 ul.websites {

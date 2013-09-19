@@ -5,7 +5,7 @@ class Backstage::LabApplicationsController < Backstage::BackstageController
   end
 
   def index
-    @q = LabApplication.unscoped.includes(:lab).search(params[:q])
+    @q = LabApplication.unscoped.order('id DESC').includes(:lab).search(params[:q])
     @lab_applications = @q.result(distinct: true)
   end
 

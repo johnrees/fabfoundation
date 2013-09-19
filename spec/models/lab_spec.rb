@@ -23,6 +23,8 @@ describe Lab do
     expect( FactoryGirl.build(:lab) ).to be_valid
   end
 
+  it "adds lab to creator's labs when created"
+
   describe "history" do
     it "stores changes"
   end

@@ -36,6 +36,7 @@ class Lab < ActiveRecord::Base
 
   before_save :country_stuff
 
+
   validates :email, format: /@/, allow_blank: true
   validates_presence_of :name, :country_code
   validates_uniqueness_of :name
@@ -79,6 +80,10 @@ class Lab < ActiveRecord::Base
 
   def kind_string
     kind.present? ? Kinds[kind] : "fab_lab"
+  end
+
+  def latlng
+    "#{latitude}, #{longitude}"
   end
 
   def address

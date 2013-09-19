@@ -26,7 +26,7 @@
         = f.input :longitude, input_html: { data: {geo: "lng"}}, as: 'hidden'
         .row
           .columns.large-4= f.input :city, label: 'City/Town', input_html: { data: {geo: "locality"}}
-          .columns.large-4= f.input :region, label: 'Region/State', input_html: { data: {geo: "state"}}
+          .columns.large-4= f.input :locality, label: 'Region/State', input_html: { data: {geo: "state"}}
           .columns.large-4= f.input :postal_code, label: 'Postal/ZIP Code', input_html: { data: {geo: "postal_code"}}
 
       = f.input :address_notes, as: 'text', placeholder: 'e.g. Enter the building via the back door.', hint: 'Any extra details that can help people find your Fab Lab'

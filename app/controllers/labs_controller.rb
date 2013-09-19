@@ -85,7 +85,7 @@ private
       :name, :kind, :description,
       :urls, :email, :parent_id,
       :country_code, :street_address_1, :street_address_2,
-      :city, :region, :postal_code, :address_notes, :phone,
+      :city, :locality, :postal_code, :address_notes, :phone,
       :latitude, :longitude, :opening_hours_notes, :application_notes, :time_zone,
       facility_ids: [], opening_hours: [],
       tools_attributes: [:id, :tool_type_id, :name, :description, :photo, :_destroy],

@@ -52,7 +52,8 @@ describe Lab do
 
     it "can be updated" do
       user = FactoryGirl.create(:user)
-      lab = FactoryGirl.create(:lab, creator: user, state: 'approved')
+      lab = FactoryGirl.create(:lab, state: 'approved')
+      user.labs << lab
       user_signin user
       visit lab_path(lab)
       click_link "Edit Lab"

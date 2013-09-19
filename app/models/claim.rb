@@ -9,6 +9,9 @@ class Claim < ActiveRecord::Base
     event :approve do
       transition :new => :approved
     end
+    before_transition :new => :approved do |claim, transition|
+      claim.user.labs << claim.lab
+    end
   end
 
 end

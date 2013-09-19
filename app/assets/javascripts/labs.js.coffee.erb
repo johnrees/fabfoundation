@@ -107,7 +107,7 @@ jQuery ->
   $('.c-labs.a-index input').change ->
     # alert ".lab[data-#{$(this).parents('fieldset').data('type')}='#{$(this).val()}']"
     type = $(this).parents('fieldset').data('type')
-    console.log ".lab[data-#{type}='#{$(this).val()}']"
+    # console.log ".lab[data-#{type}='#{$(this).val()}']"
     $(".lab[data-#{type}='#{$(this).val()}']").toggleClass "hide-#{type}", !$(this).is(':checked')
     update()
 

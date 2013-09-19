@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20130912143847) do
+ActiveRecord::Schema.define(version: 20130916151757) do
 
   create_table "applications", force: true do |t|
     t.integer  "lab_id"
@@ -138,6 +138,7 @@ ActiveRecord::Schema.define(version: 20130912143847) do
     t.integer  "creator_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "locality"
   end
 
   add_index "labs", ["creator_id"], name: "index_labs_on_creator_id"

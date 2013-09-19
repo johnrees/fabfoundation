@@ -15,12 +15,14 @@ class Ability
 
     if user.persisted?
       can :create, Claim
-      can :update, Lab, creator: user
+      can :update, Lab do |lab|
+        user.labs.include? lab
+      end
       can :update, User, id: user.id
       can :create, LabApplication
-      can :create, Event do |event|
-        user.labs.any?
-      end
+      # can :create, Event do |event|
+      #   user.labs.any?
+      # end
     else
       can :create, User
     end

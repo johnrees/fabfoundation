@@ -8,6 +8,8 @@ class LabApplication < ActiveRecord::Base
   has_many :labs, through: :referees
   after_create :deliver_lab_application_notifications
 
+  before_create :add_to_creators_labs
+
   validate :has_referee_labs?
   def has_referee_labs?
     errors.add(:base, 'Lab Application must have at least one referee') if self.labs.empty?
@@ -32,6 +34,10 @@ private
   def deliver_lab_application_notifications
     UserMailer.lab_application_submission(self).deliver
     AdminMailer.lab_application_submission(self).deliver
+  end
+
+  def add_to_creators_labs
+    creator.labs << lab
   end
 
 end
