@@ -15,19 +15,19 @@
         - @sections.each do |section|
           %dd{"data-magellan-arrival" => section}
             = link_to section.titleize, "##{section}"
-        - if can? :update, @lab
-          %dd.right
-            = link_to edit_lab_path(@lab) do
-              = fa_icon "edit", text: "Edit Lab"
 
-        - if current_user and current_user.admin?
+        - if current_user
           %dd.right
-            = link_to edit_backstage_lab_path(@lab) do
-              = fa_icon "edit", text: "Edit Backstage"
+            - if current_user.admin?
+              = link_to edit_backstage_lab_path(@lab) do
+                = fa_icon "edit", text: "Edit Backstage"
+            - elsif can? :update, @lab
+              = link_to edit_lab_path(@lab) do
+                = fa_icon "edit", text: "Edit Lab"
 
-          %dd.right
-            = link_to new_lab_claim_path(@lab) do
-              = fa_icon "edit", text: "Claim Ownership of this Lab"
+          -# %dd.right
+          -#   = link_to new_lab_claim_path(@lab) do
+          -#     = fa_icon "edit", text: "Claim Ownership of this Lab"
 
 -# .row
 -#   .columns.large-12

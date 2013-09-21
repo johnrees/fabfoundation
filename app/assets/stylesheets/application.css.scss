@@ -19,11 +19,12 @@
 body {
   color: #333;
   -webkit-text-size-adjust:none;
+  font-weight: 300;
   a {
     color: #008FD5;
   }
   &, h1,h2,h3,h4,h5 {
-    font-family: 'Ubuntu', sans-serif;
+    // font-family: 'Ubuntu', sans-serif;
   }
 }
 

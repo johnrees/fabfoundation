@@ -144,11 +144,13 @@ ActiveRecord::Schema.define(version: 20130916151757) do
   add_index "labs", ["creator_id"], name: "index_labs_on_creator_id"
 
   create_table "labs_users", id: false, force: true do |t|
-    t.integer "lab_id"
-    t.integer "user_id"
+    t.integer  "lab_id"
+    t.integer  "user_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
-  add_index "labs_users", ["lab_id", "user_id"], name: "index_labs_users_on_lab_id_and_user_id"
+  add_index "labs_users", ["lab_id", "user_id"], name: "index_labs_users_on_lab_id_and_user_id", unique: true
 
   create_table "referees", force: true do |t|
     t.integer  "lab_application_id"

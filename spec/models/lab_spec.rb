@@ -9,7 +9,8 @@ describe Lab do
     it { should have_many :events }
     it { should have_many :tools }
     it { should have_many :humans }
-    it { should have_many(:users).through(:humans) }
+    it { should have_many(:users).through(:labs_users) }
+    pending { should have_many(:users).through(:humans) }
     it { should have_and_belong_to_many :facilities }
     # it { should have_and_belong_to_many :users }
   end

@@ -27,14 +27,14 @@
             -# = link_to change_password_user_path(@user), class: 'button small' do
             -#   = fa_icon "lock", text: "Change Password"
 
-      %fieldset
+      %fieldset.avatar
         %legend Avatar
         %p.hint This is the image that will be appear next to your name on the site.
         .row
           .columns.large-2
             = cropped_image_tag @user.avatar_image, "200x200"
           .columns.large-10
-            %input{:type => "filepicker-dragdrop", :name => "user[avatar]", :value => @user.avatar }
+            %input{:type => "filepicker-dragdrop", :name => "user[avatar]", :value => @user.avatar, :onchange => "window.changeThumb(event.fpfiles[0].url);" }
 
       .row
         .columns.large-12

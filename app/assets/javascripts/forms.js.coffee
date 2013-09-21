@@ -4,6 +4,12 @@
 //= require select2
 //= require filepicker
 
+window.changeThumb = (url) ->
+  $('fieldset.avatar img').attr(
+    'src',
+    "http://fugu.johnre.es/images/crop/200x200/#{url.replace(/.*?:\/\//g, '')}.jpg"
+  )
+
 jQuery ->
 
   $("input#geocomplete").geocomplete

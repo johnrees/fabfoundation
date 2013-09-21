@@ -26,7 +26,11 @@ class User < ActiveRecord::Base
     end
 
     state :invited do
-      validates :password, presence: true, length: { minimum: 6 }
+      # validates :password, presence: true, length: { minimum: 6 }
+      validate :password,
+        length: { minimum: 6 },
+        presence: true
+        # allow_nil: true
     end
 
     # state :confirmed do
@@ -46,21 +50,17 @@ class User < ActiveRecord::Base
   has_many :humans
   # has_many :labs, through: :humans
 
-  has_many :labs, foreign_key: 'creator_id'
+  has_many :created_labs, foreign_key: 'creator_id', class_name: 'Lab'
   has_many :events, foreign_key: 'creator_id'
   has_many :lab_applications, foreign_key: 'creator_id'
-
-  has_and_belongs_to_many :labs
+  has_many :labs_users
+  has_many :labs, through: :labs_users
 
 
   # validates_presence_of :password
 
 
-  validate :password,
-    length: { minimum: 6 },
-    presence: true,
-    allow_nil: true,
-    on: :update
+
 
   validates_presence_of :first_name, :last_name, :email
   validates :email, uniqueness: true, format: /@/
@@ -77,7 +77,7 @@ class User < ActiveRecord::Base
 
 
   before_create { generate_token(:invite_token) }
-  before_update { generate_token(:invite_token) }
+  before_update { reset_tokens }
 
   # after_create :complete_registration
   before_create :check_password
@@ -117,6 +117,13 @@ class User < ActiveRecord::Base
   end
 
 private
+
+  def reset_tokens
+    if password_digest_changed?
+      generate_token(:invite_token)
+      generate_token(:forgot_password_token)
+    end
+  end
 
   def generate_token(column)
     begin

@@ -13,7 +13,8 @@ class Lab < ActiveRecord::Base
   # has_many :users, through: :humans
   has_and_belongs_to_many :facilities
 
-  has_and_belongs_to_many :users
+  has_many :labs_users
+  has_many :users, through: :labs_users
 
   accepts_nested_attributes_for :tools,
     :reject_if => proc { |a| a['name'].blank? },

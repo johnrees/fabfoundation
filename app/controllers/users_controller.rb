@@ -3,8 +3,9 @@ class UsersController < ApplicationController
   # before_filter :require_new_user, only: [:new, :create]
 
   def complete_registration
+    session[:user_id] = nil
     begin
-      @user = User.find_by!(invite_token: params[:token])
+      @user = User.where('state = ?', 'invited').find_by!(invite_token: params[:token])
     rescue ActiveRecord::RecordNotFound
       redirect_to root_url, notice: "Not found"
     end

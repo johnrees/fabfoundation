@@ -123,7 +123,7 @@ jQuery ->
         $(this).toggleClass 'hide-search', (toQuery.search(q) < 0)
     update()
 
-  $('.notice,.alert').slideUp('fast')
+  $('header .notice, header .alert').delay(1500).slideUp('fast')
 
   $('tr .closed').change ->
     $(this).parents('tr').find('.hide-if-closed *').toggle( !$(this).is(":checked") )
