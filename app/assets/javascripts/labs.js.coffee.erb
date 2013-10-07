@@ -1,5 +1,6 @@
 window.labs = []
 window.map = null
+window.showingContacts = false
 
 <%
 imgs = {}
@@ -80,7 +81,8 @@ jQuery ->
 
   $('#toggle-contacts a').click (e) ->
     e.preventDefault()
-    $('ul.contacts-list').toggle()
+    window.showingContacts = !window.showingContacts
+    $('ul.contacts-list').toggle(window.showingContacts)
 
   $('ul.contacts-list').hide()
 
