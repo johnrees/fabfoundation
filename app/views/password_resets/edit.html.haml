@@ -4,5 +4,5 @@
 
     = simple_form_for @user, :url => password_reset_path(params[:id]) do |f|
       = render "errors_for", resource: @user
-      = f.input :password, label: "New Password"
+      = f.input :password, label: "New Password", autofocus: true, autocapitalize: false
       = f.submit "Update Password", class: 'button'

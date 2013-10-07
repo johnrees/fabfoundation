@@ -15,6 +15,9 @@ class Ability
 
     if user.persisted?
       can :create, Claim
+      can :claim, Lab do |lab|
+        !user.claimed_lab?(lab) and !user.manages_lab?(lab)
+      end
       can :update, Lab do |lab|
         user.labs.include? lab
       end

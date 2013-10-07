@@ -2,8 +2,8 @@
 
 FactoryGirl.define do
   factory :claim do
-    user nil
-    lab nil
+    association :user
+    association :lab
     details "I work here"
   end
 end

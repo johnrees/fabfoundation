@@ -1,10 +1,12 @@
 = content_tag_for :tr, claim do
-  %td= claim.user
+  %td= link_to claim.user, claim.user
   %td= claim.details
   %td= claim.created_at.stamp("11th Dec 2012")
+
   %td
     - if claim.can_approve?
       = button_to "Approve", approve_lab_claim_path(claim.lab, claim), method: 'patch'
-      = link_to "Remove", lab_claim_path(claim.lab, claim), method: 'delete'
     - else
       Approved
+  %td
+    = link_to "Remove", lab_claim_path(claim.lab, claim), method: 'delete'

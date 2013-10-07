@@ -12,4 +12,9 @@ describe Claim do
     expect(FactoryGirl.build_stubbed(:claim).state).to eq('new')
   end
 
+  it "emails lab managers when a claim is made" do
+    claim = FactoryGirl.create(:claim)
+    expect(last_email.to).to include(claim.lab.users.first.email)
+  end
+
 end

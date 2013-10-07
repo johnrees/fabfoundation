@@ -14,4 +14,14 @@ class Claim < ActiveRecord::Base
     end
   end
 
+  after_create :notify_existing_users
+
+private
+
+  def notify_existing_users
+    lab.users.each do |user|
+      UserMailer.new_claimant(user).deliver
+    end
+  end
+
 end

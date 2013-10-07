@@ -82,6 +82,14 @@ class User < ActiveRecord::Base
   # after_create :complete_registration
   before_create :check_password
 
+  def manages_lab? lab
+    labs.exclude?(lab)
+  end
+
+  def claimed_lab? lab
+    !claims.where(lab: lab).exists?
+  end
+
   def send_password_reset
     generate_token(:forgot_password_token)
     save!(validate: false)

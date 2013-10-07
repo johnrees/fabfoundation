@@ -12,6 +12,11 @@ class UserMailer < ActionMailer::Base
     mail(to: "#{user} <#{user.email}>", subject: "Reset your password")
   end
 
+  def new_claimant(user)
+    @user = user
+    mail(to: "#{user} <#{user.email}>", subject: "New lab claimant")
+  end
+
   def complete_registration(user)
     @user = user
     mail(to: "#{user} <#{user.email}>", subject: "Complete your registration")

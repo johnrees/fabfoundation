@@ -3,19 +3,19 @@ class ClaimsController < ApplicationController
   def index
     @lab = Lab.friendly.find(params[:lab_id])
     @claims = @lab.claims
-    authorize! :read, @claims
+    authorize! :manage, @lab
   end
 
   def new
     @lab = Lab.friendly.find(params[:lab_id])
     @claim = current_user.claims.build(lab: @lab)
-    authorize! :create, @claim
+    authorize! :claim, @lab
   end
 
   def create
     @lab = Lab.friendly.find(params[:lab_id])
     @claim = current_user.claims.new(claim_params)
-    authorize! :create, @claim
+    authorize! :claim, @lab
     if @claim.save
       redirect_to lab_url(@lab), notice: "Thanks for submitting your claim."
     else
