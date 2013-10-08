@@ -5,7 +5,10 @@
         = f.input :name_or_city_cont, label: "Name"
         .row
           .columns.large-4
-            = f.input :country_code_eq, as: 'country', label: 'Country'
+            = f.input :country_code_eq, as: 'country', label: 'Country', iso_codes: true
+
+            -# = f.input :country_code, label: 'Country', input_html: { data: {geo: "country_short"}, class: 'enhanced'}, iso_codes: true
+
           -# .columns.large-4
             -# = f.input :state_eq, collection: Lab.state_machine.states.map(&:name), label: "State"
           .columns.large-4

@@ -70,7 +70,7 @@ class LabsController < ApplicationController
 
     @sections = []
     @sections.push 'people' if @lab.humans.any?
-    @sections.push 'location'
+    @sections.push 'location' if @lab.street_address_1.present?
     @sections.push 'equipment' if @lab.tools.any?
     # @sections.push 'related-labs' if @nearby_labs.any?
     # @sections.push 'events' if @lab.events.any?
