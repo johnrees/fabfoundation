@@ -37,6 +37,6 @@
         = f.input :avatar
         = f.input :urls, hint: "One URL per line", input_html: { rows: 6 }
         = f.association :creator, disabled: true
-        = f.input :state, collection: Lab.state_machine.states.map(&:name)
+        -# = f.input :state, collection: Lab.state_machine.states.map(&:name)
 
       = f.submit class: 'button'
