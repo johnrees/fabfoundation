@@ -2,6 +2,12 @@ class Backstage::LabsController < Backstage::BackstageController
 
   # authorize_actions_for Lab
 
+  def approve
+    @lab = Lab.unscoped.friendly.find(params[:id])
+    @lab.approve!
+    redirect_to backstage_labs_url, notice: "Lab Approved"
+  end
+
   def show
   end
 

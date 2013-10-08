@@ -38,7 +38,11 @@ Fabfoundation::Application.routes.draw do
 
   namespace "backstage" do
     resources :lab_applications
-    resources :labs
+    resources :labs do
+      member do
+        get 'approve'
+      end
+    end
     resources :users
     resources :events
     root "lab_applications#index"
