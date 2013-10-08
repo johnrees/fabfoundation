@@ -21,6 +21,32 @@ td,th {
 
 body.backstage {
   background: #555;
+
+  .top-bar-section a.active {
+    color: #2BA6CB;
+  }
+
+  #flash_notice, #flash_alert {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    text-align: center;
+    padding: 10px;
+    z-index: 200;
+  }
+  #flash_notice {
+    background: #CAF2C7;
+    color: #527A4E;
+  }
+  #flash_alert {
+    background: #FFA6A6;
+    color: #AD2121;
+  }
+
+  .expanded .top-bar-section ul li a {
+    background: #222;
+  }
   .panel form {
     background: none;
     padding: 0;

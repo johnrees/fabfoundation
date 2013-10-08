@@ -1,5 +1,6 @@
 class LabApplication < ActiveRecord::Base
 
+  has_paper_trail
   belongs_to :lab
   belongs_to :creator, class_name: "User"
   accepts_nested_attributes_for :lab
@@ -13,6 +14,10 @@ class LabApplication < ActiveRecord::Base
   validate :has_referee_labs?
   def has_referee_labs?
     errors.add(:base, 'Lab Application must have at least one referee') if self.labs.empty?
+  end
+
+  def self.to_moderate
+    includes(:lab).where("labs.state = 'new'").references(:lab)
   end
 
   state_machine :initial => :new do

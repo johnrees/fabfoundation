@@ -11,16 +11,13 @@
   %meta{ :name => "viewport", :content => "width=device-width, initial-scale=1.0" }/
   %title= content_for?(:title) ? yield(:title) : "Backstage"
   = stylesheet_link_tag "backstage"
-  = javascript_include_tag "vendor/custom.modernizr"
+  = javascript_include_tag "vendor/custom.modernizr", "backstage"
   = csrf_meta_tag
 
-%body.backstage
-
-  - flash.each do |name, msg|
-    = content_tag :div, msg, id: "flash_#{name}", class: name
-
-
+%body{ class: "#{body_classes} backstage" }
   %header.contain-to-grid
+    - flash.each do |name, msg|
+      = content_tag :div, msg, id: "flash_#{name}", class: name
     %nav.top-bar
       %ul.title-area
         %li.name
@@ -30,11 +27,11 @@
       %section.top-bar-section
         %ul.left
           %li.divider
-          %li.labs= link_to "Lab Applications", backstage_lab_applications_path
+          %li.labs= link_to "Lab Applications", backstage_lab_applications_path, class: ('active' if controller_name == "lab_applications")
           %li.divider
-          %li.labs= link_to "Labs", backstage_labs_path
+          %li.labs= link_to "Labs", backstage_labs_path, class: ('active' if controller_name == "labs")
           %li.divider
-          %li.users= link_to "Users", backstage_users_path
+          %li.users= link_to "Users", backstage_users_path, class: ('active' if controller_name == "users")
           %li.divider
           -# %li.events= link_to "Events", backstage_events_path
           -# %li.divider

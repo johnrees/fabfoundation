@@ -1,8 +1,8 @@
 .row
   .columns.large-12
     = title "Editing #{@lab}"
-    = link_to "View Lab", @lab, class: 'button'
-    = link_to "Delete Lab", [:backstage, @lab], method: 'delete', data: { confirm: "Are you sure?" }, class: 'button alert'
+    = link_to "View Lab", @lab, class: 'button small'
+    = link_to "Delete Lab", [:backstage, @lab], method: 'delete', data: { confirm: "Are you sure?" }, class: 'button alert small'
 .row
   .columns.large-12
     = simple_form_for [:backstage, @lab] do |f|
@@ -10,24 +10,24 @@
 
       %fieldset
         -# = f.input :ancestry
-        = f.input :parent_id, label: 'Supernode', collection: Lab.all, include_blank: true, input_html: { class: 'enhanced' }
+        -# = f.input :parent_id, label: 'Supernode', collection: Lab.all, include_blank: true, input_html: { class: 'enhanced' }
         = f.input :name
         = f.input :slug
         = f.input :description
         = f.input :phone
         = f.input :email
-        = f.input :kind
+        -# = f.input :kind
         = f.input :street_address_1
         = f.input :street_address_2
         = f.input :street_address_3
         = f.input :city
         = f.input :postal_code
-        = f.input :country_code, iso_codes: true
-        = f.input :region
-        = f.input :subregion
+        = f.input :country_code, iso_codes: true, label: "Country"
+        = f.input :region, disabled: true
+        = f.input :subregion, disabled: true
         = f.input :latitude
         = f.input :longitude
-        = f.input :time_zone
+        -# = f.input :time_zone
         = f.input :address_notes
         = f.association :facilities, as: 'check_boxes'
 
@@ -35,8 +35,8 @@
         -# = f.input :opening_hours_notes
 
         = f.input :avatar
-        = f.input :urls
-        = f.association :creator
+        = f.input :urls, hint: "One URL per line", input_html: { rows: 6 }
+        = f.association :creator, disabled: true
         = f.input :state, collection: Lab.state_machine.states.map(&:name)
 
       = f.submit class: 'button'

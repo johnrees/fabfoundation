@@ -1,5 +1,6 @@
 .row
   .columns.large-12
+    = title "Edit User ##{@user.id}"
     = simple_form_for [:backstage, @user] do |f|
       = render 'errors_for', resource: @user
       %fieldset
@@ -7,20 +8,21 @@
         = f.input :last_name
         = f.input :email
         = f.input :phone
-        = f.input :public_email
-        = f.input :public_phone
+        -# = f.input :public_email
+        -# = f.input :public_phone
         = f.input :city
-        = f.input :country_code
+        = f.input :country_code, label: "Country"
         = f.input :latitude
         = f.input :longitude
         = f.input :url
         = f.input :twitter_username
-        = f.input :dob
+        = f.input :dob, label: "Date of Birth", order: [:day, :month, :year], start_year: Time.now.year - 90, end_year: Time.now.year - 2, prompt: true, start_year: 2010, end_year: 1910
+
         = f.input :bio
         = f.input :avatar
         -# = f.input :locale
         -# = f.input :time_zone
         = f.input :forgot_password_token
-        = f.input :invite_token
-        = f.input :admin
+        = f.input :invite_token, disabled: true
+        = f.input :admin, hint: "Be VERY sure that you want to enable this."
       = f.submit class: 'button'
