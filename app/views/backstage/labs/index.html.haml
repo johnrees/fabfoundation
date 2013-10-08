@@ -6,12 +6,9 @@
         .row
           .columns.large-4
             = f.input :country_code_eq, as: 'country', label: 'Country'
-          .columns.large-4
-            = f.input :state_eq, collection: Lab.state_machine.states.map(&:name), label: "State"
           -# .columns.large-4
-          -#   = f.input :state_eq, collection: Lab::States, label: 'State'
+            -# = f.input :state_eq, collection: Lab.state_machine.states.map(&:name), label: "State"
           .columns.large-4
-
             = f.submit "Search", class: 'button expand'
 
 .row
@@ -21,7 +18,7 @@
         %tr
           %th.id= sort_link @q, :id
           %th= sort_link @q, :name
-          %th= sort_link @q, :state
+          -# %th= sort_link @q, :state
           %th= sort_link @q, :country_code, 'Country'
           %th= sort_link @q, :created_at
           %th= sort_link @q, :updated_at
@@ -30,7 +27,7 @@
         %tr
           %td= lab.id
           %td= link_to lab, edit_backstage_lab_path(lab)
-          %td= lab.state
+          -# %td= lab.state
           %td= "#{lab.country_code} - #{lab.country}"
           %td= lab.created_at.stamp('13 Jun 99')
           %td= lab.updated_at.stamp('13 Jun 99')
