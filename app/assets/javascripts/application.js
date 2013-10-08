@@ -5,7 +5,6 @@
 //= require events
 //= require labs
 
-
 $(document).ready(function(){
   $(document).foundation()
 })

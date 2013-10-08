@@ -1,7 +1,11 @@
 .row
   .columns.large-12
     = title "Editing #{@lab}"
-    = link_to "View Lab", @lab, class: 'button small'
+
+    - @lab.state_paths.events.each do |event|
+      = link_to "#{event.capitalize} Lab", "#{event}_lab_path(@lab)", class: "button"
+
+    = link_to "Preview Lab", @lab, class: 'button small'
     = link_to "Delete Lab", [:backstage, @lab], method: 'delete', data: { confirm: "Are you sure?" }, class: 'button alert small'
 .row
   .columns.large-12
@@ -39,4 +43,7 @@
         = f.association :creator, disabled: true
         -# = f.input :state, collection: Lab.state_machine.states.map(&:name)
 
-      = f.submit class: 'button'
+      = f.submit class: 'button success'
+      - @lab.state_paths.events.each do |event|
+        = link_to "#{event.capitalize} Lab", "#{event}_lab_path(@lab)", class: "button"
+

@@ -6,7 +6,7 @@ class Backstage::LabsController < Backstage::BackstageController
   end
 
   def index
-    @q = Lab.unscoped.search(params[:q])
+    @q = Lab.unscoped.order('id desc').with_state(:approved).search(params[:q])
     @labs = @q.result(distinct: true)
   end
 
