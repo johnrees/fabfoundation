@@ -3,7 +3,7 @@ require 'sidekiq/capistrano'
 
 load 'deploy/assets'
 
-server "fabfoundation.johnre.es", :web, :app, :db, primary: true
+server "labs.fabfoundation.org", :web, :app, :db, primary: true
 
 set :application, "fabfoundation"
 set :user, "deployer"
@@ -40,7 +40,17 @@ namespace :logs do
   end
 end
 
+namespace :rails do
+    desc "Open the rails console on one of the remote servers"
+    task :console, :roles => :app do
+      hostname = find_servers_for_task(current_task).first
+      exec "ssh -l #{user} #{hostname} -t 'source ~/.profile && cd #{deploy_to}/current && bundle exec rails console -e #{rails_env}'"
+    end
+  end
+
 namespace :deploy do
+
+
 
   namespace :figaro do
     desc "SCP transfer figaro configuration to the shared folder"

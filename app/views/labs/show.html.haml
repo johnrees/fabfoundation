@@ -25,10 +25,10 @@
               = link_to edit_lab_path(@lab) do
                 = fa_icon "edit", text: "Edit Lab"
 
-          - if can? :claim, @lab
-            %dd.right
-              = link_to new_lab_claim_path(@lab) do
-                = fa_icon "edit", text: "Claim Ownership of this Lab"
+          -# - if can? :claim, @lab
+          -#   %dd.right
+          -#     = link_to new_lab_claim_path(@lab) do
+          -#       = fa_icon "edit", text: "Claim Ownership of this Lab"
 
 -# .row
 -#   .columns.large-12
