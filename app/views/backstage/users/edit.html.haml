@@ -22,7 +22,7 @@
         = f.input :avatar
         -# = f.input :locale
         -# = f.input :time_zone
-        = f.input :forgot_password_token
-        = f.input :invite_token, disabled: true
+        = f.input :forgot_password_token, as: 'hidden'
+        = f.input :invite_token, as: 'hidden'
         = f.input :admin, hint: "Be VERY sure that you want to enable this."
       = f.submit class: 'button'
