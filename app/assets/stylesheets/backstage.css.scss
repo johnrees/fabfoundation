@@ -20,7 +20,7 @@
   margin: 1em 0;
   text-align: right;
 
-  .page a, .page.current, .page.gap, .next, .last, .first, .prev {
+  .page a, .page.current, .page.gap, .next a, .last a, .first a, .prev a {
     display: inline-block;
     padding: 5px 8px;
     background: #000;

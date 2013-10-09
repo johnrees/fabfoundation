@@ -16,6 +16,8 @@ class Lab < ActiveRecord::Base
   has_many :labs_users
   has_many :users, through: :labs_users
 
+  default_scope -> { where(state: 'approved') }
+
   accepts_nested_attributes_for :tools,
     :reject_if => proc { |a| a['name'].blank? },
     :allow_destroy => true

@@ -3,8 +3,8 @@
   .row#lab-name
     .columns.large-12
       = title @lab.name
-      - if @lab.supernode?
-        %span.extra= fa_icon "sitemap", text: "Supernode"
+      -# - if @lab.supernode?
+      -#   %span.extra= fa_icon "sitemap", text: "Supernode"
 
 %div#sticky{"data-magellan-expedition" => "fixed"}
   .row
