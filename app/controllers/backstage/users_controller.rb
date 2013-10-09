@@ -24,12 +24,13 @@ class Backstage::UsersController < Backstage::BackstageController
 private
 
   def user_params
-    params.require(:user).permit(
-      :first_name, :last_name, :admin,
-      :email, :public_email, :phone, :public_phone,
-      :location, :country_code,
-      :latitude, :longitude, :url, :bio,
-      :avatar, :locale, :timezone)
+    params.require(:user).permit!
+    # (
+    #   :first_name, :last_name, :admin,
+    #   :email, :public_email, :phone, :public_phone,
+    #   :location, :country_code,
+    #   :latitude, :longitude, :url, :bio,
+    #   :avatar, :locale, :timezone)
   end
 
 end
