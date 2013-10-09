@@ -6,7 +6,8 @@ class Backstage::LabApplicationsController < Backstage::BackstageController
 
   def index
     @q = LabApplication.unscoped.to_moderate.order('lab_applications.id desc').includes(:referees, :creator).search(params[:q])
-    @lab_applications = @q.result(distinct: true)
+    @lab_applications = @q.result.page(params[:page])
+    # (distinct: true)
   end
 
   def edit

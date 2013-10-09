@@ -13,7 +13,7 @@ class Backstage::LabsController < Backstage::BackstageController
 
   def index
     @q = Lab.unscoped.order('id desc').with_state(:approved).search(params[:q])
-    @labs = @q.result(distinct: true)
+    @labs = @q.result(distinct: true).page(params[:page])
   end
 
   def edit

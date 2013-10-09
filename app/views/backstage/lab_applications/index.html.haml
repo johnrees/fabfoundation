@@ -1,5 +1,6 @@
 .row
   .columns.large-12
+    = paginate @lab_applications
     %table
       %thead
         %tr
@@ -32,3 +33,4 @@
             -#   = link_to "#{}" do
             -#     = fa_icon "check", text: "Approve"
 
+    = paginate @lab_applications

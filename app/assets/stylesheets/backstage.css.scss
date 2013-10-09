@@ -15,6 +15,24 @@
  *= require both
  */
 
+ nav.pagination {
+  display: block;
+  margin: 1em 0;
+  text-align: right;
+
+  .page a, .page.current, .page.gap, .next, .last, .first, .prev {
+    display: inline-block;
+    padding: 5px 8px;
+    background: #000;
+
+  }
+
+  span.page {
+    color: #FFF;
+    margin-bottom: 5px;
+  }
+}
+
 td,th {
   vertical-align: top;
 }

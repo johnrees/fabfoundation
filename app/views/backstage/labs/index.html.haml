@@ -14,6 +14,7 @@
           .columns.large-4
             = f.submit "Search", class: 'button expand'
 
+    = paginate @labs
 .row
   .columns.large-12
     %table
@@ -34,3 +35,4 @@
           %td= "#{lab.country_code} - #{lab.country}"
           %td= lab.created_at.stamp('13 Jun 99')
           %td= lab.updated_at.stamp('13 Jun 99')
+    = paginate @labs

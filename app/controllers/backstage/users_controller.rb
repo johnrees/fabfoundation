@@ -5,7 +5,7 @@ class Backstage::UsersController < Backstage::BackstageController
 
   def index
     @q = User.search params[:q]
-    @users = @q.result(distinct: true)
+    @users = @q.result(distinct: true).page(params[:page])
   end
 
   def edit

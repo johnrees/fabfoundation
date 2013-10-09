@@ -7,6 +7,7 @@
             = f.input :first_name_or_last_name_cont, label: "Name"
           .columns.large-4
             = f.submit "Search", class: 'button expand'
+    = paginate @users
 
 .row
   .columns.large-12
@@ -26,3 +27,4 @@
             %td= link_to user.full_name, edit_backstage_user_path(user)
             %td= mail_to user.email, user.email, encode: 'javascript'
             %td= user.phone
+    = paginate @users
