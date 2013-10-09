@@ -17,7 +17,7 @@ class LabApplication < ActiveRecord::Base
   end
 
   def self.to_moderate
-    includes(:lab).where("labs.state = 'new'").references(:lab)
+    Lab.unscoped { includes(:lab).where("labs.state = 'new'").references(:lab) }
   end
 
   state_machine :initial => :new do
