@@ -25,7 +25,8 @@
             %td
               %ul
                 - lab_application.referees.each do |ref|
-                  %li= link_to ref.lab.name, ref.lab
+                  - if ref.lab.present?
+                    %li= link_to ref.lab.name, ref.lab
             %td= lab_application.notes
             %td= lab_application.created_at.stamp('13 Jun 99, 14:30')
             %td= lab_application.lab.state
