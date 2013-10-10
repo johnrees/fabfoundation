@@ -65,8 +65,8 @@ class LabsController < ApplicationController
   def show
     @lab = Lab.approved.friendly.find(params[:id])
     # @days = %w(monday tuesday wednesday thursday friday saturday sunday)
-    @related_labs = @lab.children
-    @nearby_labs = @lab.nearbys(500)
+    @related_labs = @lab.children.approved
+    @nearby_labs = @lab.nearbys(500).approved
 
     @sections = []
     @sections.push 'people' if @lab.humans.any?

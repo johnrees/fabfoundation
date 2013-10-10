@@ -16,8 +16,6 @@ class Lab < ActiveRecord::Base
   has_many :labs_users
   has_many :users, through: :labs_users
 
-  default_scope -> { where(state: 'approved') }
-
   accepts_nested_attributes_for :tools,
     :reject_if => proc { |a| a['name'].blank? },
     :allow_destroy => true
@@ -29,6 +27,7 @@ class Lab < ActiveRecord::Base
   has_paper_trail
   has_ancestry
 
+  # default_scope -> { where(state: 'approved') }
   scope :approved, -> { where(state: 'approved') }
 
   Kinds = %w[planned_fab_lab mini_fab_lab fab_lab supernode]
@@ -38,7 +37,6 @@ class Lab < ActiveRecord::Base
   geocoded_by :address
 
   before_save :country_stuff
-
 
   validates :email, format: /@/, allow_blank: true
   validates_presence_of :name, :country_code
