@@ -64,6 +64,9 @@ class Lab < ActiveRecord::Base
     event :approve do
       transition :new => :approved
     end
+    after_transition :new => :approved do |lab|
+      UserMailer.lab_application_approval(lab).deliver
+    end
   end
   # after_create :new_lab_notification
 

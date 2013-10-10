@@ -3,13 +3,12 @@ class LabApplication < ActiveRecord::Base
   has_paper_trail
   belongs_to :lab
   belongs_to :creator, class_name: "User"
+  before_create :add_to_creators_labs
   accepts_nested_attributes_for :lab
 
   has_many :referees
   has_many :labs, through: :referees
   after_create :deliver_lab_application_notifications
-
-  before_create :add_to_creators_labs
 
   validate :has_referee_labs?
   def has_referee_labs?
@@ -25,9 +24,9 @@ class LabApplication < ActiveRecord::Base
       transition :new => :approved
     end
 
-    after_transition :new => :approved do |lab_application|
-      UserMailer.lab_application_approval(lab_application).deliver
-    end
+    # after_transition :new => :approved do |lab_application|
+    #   UserMailer.lab_application_approval(lab_application).deliver
+    # end
   end
 
   def to_s

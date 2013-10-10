@@ -22,10 +22,10 @@ class UserMailer < ActionMailer::Base
     mail(to: "#{user} <#{user.email}>", subject: "Complete your registration")
   end
 
-  def lab_application_approval(lab_application)
-    @lab_application = lab_application
-    @user = lab_application.creator
-    mail(to: "#{@user} <#{@user.email}>", subject: "#{@lab_application} has been approved")
+  def lab_application_approval(lab)
+    @lab = lab
+    @user = lab.lab_application.creator
+    mail(to: "#{@user} <#{@user.email}>", subject: "#{@lab} has been approved")
   end
 
   def lab_application_submission(lab_application)
