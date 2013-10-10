@@ -6,7 +6,7 @@
       = link_to "#{event.capitalize} Lab", { controller: 'backstage/labs', action: event}, class: "button"
 
     = link_to "Preview Lab", @lab, class: 'button small'
-    = link_to "Delete Lab", [:backstage, @lab], method: 'delete', data: { confirm: "Are you sure?" }, class: 'button alert small', method: 'patch'
+    = link_to "Delete Lab", [:backstage, @lab], method: 'delete', data: { confirm: "Are you sure?" }, class: 'button alert small'
 .row
   .columns.large-12
     = simple_form_for [:backstage, @lab] do |f|
